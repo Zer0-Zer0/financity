@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InteracaoNPC : MonoBehaviour
+public class GenericInteraction : MonoBehaviour
 {
     /*
     Para isto funcionar o player tem que está com a tag de player
