@@ -16,6 +16,13 @@ public class InteracaoNPC : MonoBehaviour
     public float distanciaMaxima = 2f;
     public KeyCode teclaInteracao = KeyCode.E;
     public string[] mensagens;
+    public Carteira carteira;
+    public float valor;
+    public bool financeiro;
+    public bool empréstimo = false;
+    public sliderempre slider;
+
+    public string operador;
 
     bool interacaoPossivel = false;
 
@@ -27,6 +34,22 @@ public class InteracaoNPC : MonoBehaviour
             {
                 mensagens = new string[] { "Mensagem padrão 1", "Mensagem padrão 2" };
             }
+
+            if (empréstimo == true) {
+                slider.toggleslide();
+            }
+
+            if (financeiro == true) {
+                if (operador == "+") {
+                    carteira.Adicionar(valor);
+                }
+
+                if (operador == "-") {
+                    carteira.Subtrair(valor);
+                }
+                
+            }
+            
 
             dialogo.IniciarDialogo(mensagens);
         }
