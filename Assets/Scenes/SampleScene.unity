@@ -393,6 +393,11 @@ PrefabInstance:
       addedObject: {fileID: 578052193}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 184794cefbeed96439ae5e552ba91d23, type: 3}
+--- !u!1 &334976131 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1495819072468084683, guid: 184794cefbeed96439ae5e552ba91d23, type: 3}
+  m_PrefabInstance: {fileID: 334976130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &413442095
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +680,7 @@ GameObject:
   m_Component:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
+  - component: {fileID: 705507996}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -759,6 +765,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &705507996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705507993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &822516777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,15 +1046,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroiAnim: {fileID: 911455333}
   morto: 0
-  areaPegarItemCollider: {fileID: 931830109}
+  areaPegarItemCollider: {fileID: 0}
   parede: {fileID: 703854075}
   item: {fileID: 174884722}
-  mao: {fileID: 1597593065}
+  mao: {fileID: 0}
   velRot: 100
   moveX: 0
   moveY: 0
-  projectilePrefab: {fileID: 3285417319455554714, guid: 024a2aa8bd3b5744e92d49af3339e0b5, type: 3}
-  muzzleTransform: {fileID: 578052193}
+  projectilePrefab: {fileID: 334976131}
+  muzzleTransform: {fileID: 0}
   shootForce: 700
 --- !u!114 &911455338
 MonoBehaviour:
@@ -1098,7 +1127,7 @@ MonoBehaviour:
   jumpAnimation: {fileID: 911455333}
   layerGround:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   groundChecker: {fileID: 1824869628}
   radiusChecker: 0.1
   maxHeight: 0.005

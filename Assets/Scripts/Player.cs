@@ -23,7 +23,13 @@ public class Player : MonoBehaviour
 
     public float moveX, moveY;
 
+    private bool botaoDireitoPressionado = false;
+    private bool estavaMovendo = false; 
 
+    // Variáveis para o sistema de tiro
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private Transform muzzleTransform; // Referência ao pivô de tiro
+    public float shootForce = 700f;
 
     void Start()
     {
@@ -50,81 +56,107 @@ public class Player : MonoBehaviour
     }
 
     void Update()
-{
-    moveY = Input.GetAxis("Vertical");
-    moveX = Input.GetAxis("Horizontal");
-    heroiAnim.SetFloat("X", moveX, 0.1f, Time.deltaTime);
-    heroiAnim.SetFloat("Y", moveY, 0.1f, Time.deltaTime);
-
-    float move = Input.GetAxis("Vertical");
-    float rotacao = Input.GetAxis("Horizontal") * velRot;
-
-    if (move != 0 && Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
     {
-        heroiAnim.SetBool("Running", true);
-    }
-    else
-    {
-        heroiAnim.SetBool("Running", false);
-    }
+        moveY = Input.GetAxis("Vertical");
+        moveX = Input.GetAxis("Horizontal");
+        heroiAnim.SetFloat("X", moveX, 0.1f, Time.deltaTime);
+        heroiAnim.SetFloat("Y", moveY, 0.1f, Time.deltaTime);
 
-    if (!morto && !estaPendurado)
-    {
-        rotacao *= Time.deltaTime;
-        transform.Rotate(0, rotacao, 0);
-    }
+        float move = Input.GetAxis("Vertical");
+        float rotacao = Input.GetAxis("Horizontal") * velRot;
 
-    if (estaPendurado)
-    {
-        if (rotacao > 1)
+        // Lógica de tiro
+        if (Input.GetMouseButtonDown(1))
         {
-            heroiAnim.SetBool("HangingRight", true);
+            botaoDireitoPressionado = true;
+            estavaMovendo = heroiAnim.GetBool("Andar"); // Armazena se estava em movimento
+            heroiAnim.SetBool("Andar", false); // Para o movimento
+            heroiAnim.SetBool("MovimentoTiro", true); // Ativa o movimento de tiro
         }
-        else if (rotacao < -1)
+
+        if (Input.GetMouseButtonUp(1))
         {
-            heroiAnim.SetBool("HangingLeft", true);
+            botaoDireitoPressionado = false;
+        }
+
+        if (botaoDireitoPressionado && Input.GetMouseButtonDown(0)) // Botão esquerdo do mouse
+        {
+            Shoot();
+        }
+
+        if (!botaoDireitoPressionado && !estavaMovendo)
+        {
+            heroiAnim.SetBool("Andar", false);
+            heroiAnim.SetBool("MovimentoTiro", false);
+        }
+
+        // Corrida
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            heroiAnim.SetBool("Running", true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            heroiAnim.SetBool("Running", false);
+        }
+
+        if (!morto && !estaPendurado)
+        {
+            rotacao *= Time.deltaTime;
+            transform.Rotate(0, rotacao, 0);
+        }
+
+        if (estaPendurado)
+        {
+            if (rotacao > 1)
+            {
+                heroiAnim.SetBool("HangingRight", true);
+            }
+            else if (rotacao < -1)
+            {
+                heroiAnim.SetBool("HangingLeft", true);
+            }
+            else
+            {
+                heroiAnim.SetBool("HangingRight", false);
+                heroiAnim.SetBool("HangingLeft", false);
+            }
+        }
+
+        if (move != 0)
+        {
+            heroiAnim.SetBool("Andar", true);
         }
         else
         {
-            heroiAnim.SetBool("HangingRight", false);
-            heroiAnim.SetBool("HangingLeft", false);
+            heroiAnim.SetBool("Andar", false);
+        }
+
+        if (morto && Input.GetKeyDown(KeyCode.Z))
+        {
+            heroiAnim.SetTrigger("StandUp");
+            morto = false;
+        }
+
+        if (estaPendurado && Input.GetKeyDown(KeyCode.Z))
+        {
+            StartCoroutine("Subindo");
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && estaDentroDaArea)
+        {
+            pegarTriggerAtivado = true;
+            heroiAnim.SetTrigger("Pegar");
         }
     }
 
-    if (move != 0)
+    void Shoot()
     {
-        heroiAnim.SetBool("Andar", true);
+        GameObject projectile = Instantiate(projectilePrefab, muzzleTransform.position, muzzleTransform.rotation);
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        rb.AddForce(muzzleTransform.forward * shootForce);
     }
-    else
-    {
-        heroiAnim.SetBool("Andar", false);
-    }
-
-    if (morto && Input.GetKeyDown(KeyCode.Z))
-    {
-        heroiAnim.SetTrigger("StandUp");
-        morto = false;
-    }
-
-    // Verifica se o jogador não está morto e não está pendurado e se pressionou a tecla de espaço para pular
-    if (!morto && !estaPendurado && Input.GetKeyDown(KeyCode.Space))
-    {
-        heroiAnim.SetTrigger("Jump");
-    }
-
-    // Verifica se o jogador está pendurado e pressionou a tecla Z para soltar
-    if (estaPendurado && Input.GetKeyDown(KeyCode.Z))
-    {
-        StartCoroutine("Subindo");
-    }
-
-    if (Input.GetKeyDown(KeyCode.E) && estaDentroDaArea)
-    {
-        pegarTriggerAtivado = true;
-        heroiAnim.SetTrigger("Pegar");
-    }
-}
-
 
     public void Pendurado(Transform alv)
     {
@@ -138,8 +170,6 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-
-
         if (other == areaPegarItemCollider)
         {
             estaDentroDaArea = true;
