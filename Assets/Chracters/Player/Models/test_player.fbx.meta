@@ -1,9 +1,39 @@
 fileFormatVersion: 2
-guid: 2e2916b6f3a48f9448d950dfaa84590e
+guid: 70b2cb2261cd32c499305ae335f7d212
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ch28_body
+    second: {fileID: 2100000, guid: ef7be9f3ad5c3b342be4fc205a249fa1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ch28_hair
+    second: {fileID: 2100000, guid: fada0162d365e7d4e81c5ff68555bc17, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ch28_1001_Diffuse
+    second: {fileID: 2800000, guid: a1f86c1996461e34dbf2d9063b334425, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ch28_1001_Glossiness
+    second: {fileID: 2800000, guid: 4048e324b5af30c4cad49f480a190421, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ch28_1001_Normal
+    second: {fileID: 2800000, guid: a8608d8f76351c6489165f60b495f097, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ch28_1001_Specular
+    second: {fileID: 2800000, guid: 177899f16352aa944ad90320547c2fe1, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -33,11 +63,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle
+      name: Walking
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 250
+      lastFrame: 31
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -82,7 +112,7 @@ ModelImporter:
     keepQuads: 0
     weldVertices: 1
     bakeAxisConversion: 0
-    preserveHierarchy: 0
+    preserveHierarchy: 1
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
@@ -900,11 +930,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 70b2cb2261cd32c499305ae335f7d212, type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 2
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
