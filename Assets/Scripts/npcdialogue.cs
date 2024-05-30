@@ -13,7 +13,7 @@ public class InteracaoNPC : MonoBehaviour
 
 
     public Dialogo dialogo;
-    public float distanciaMaxima = 2f;
+    public float distanciaMaxima = 10f;
     public KeyCode teclaInteracao = KeyCode.E;
     public string[] mensagens;
     public Carteira carteira;
