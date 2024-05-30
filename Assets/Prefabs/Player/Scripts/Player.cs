@@ -13,11 +13,11 @@ public class Player : MonoBehaviour
     private Transform rootAlvo;
 
     private bool gatilho;
-    //public Transform parede;
+    public Transform parede;
     bool pegarTriggerAtivado = false;
 
-    //[SerializeField] private Transform item;
-    //[SerializeField] private Transform mao;
+    [SerializeField] private Transform item;
+    [SerializeField] private Transform mao;
 
     [SerializeField] private float velRot = 100;
 
@@ -37,13 +37,13 @@ public class Player : MonoBehaviour
         gatilho = true;
     }
 
-   /* void AjustaRotacao()
+   void AjustaRotacao()
     {
         if (Vector3.Distance(transform.position, parede.position) <= 3.1f)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, parede.rotation, 1f);
         }
-    }*/
+    }
 
     void FixedUpdate()
     {
@@ -198,7 +198,7 @@ public class Player : MonoBehaviour
         gatilho = true;
         GetComponent<Rigidbody>().isKinematic = false;
     }
-/*
+
     private void OnAnimatorIK(int layerIndex)
     {
         heroiAnim.SetLookAtWeight(heroiAnim.GetFloat("IK_Val"));
@@ -213,5 +213,5 @@ public class Player : MonoBehaviour
 
         heroiAnim.SetIKPositionWeight(AvatarIKGoal.RightHand, heroiAnim.GetFloat("IK_Val"));
         heroiAnim.SetIKPosition(AvatarIKGoal.RightHand, item.position);
-    }*/
+    }
 }
