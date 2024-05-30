@@ -18,7 +18,7 @@ public class Dialogo : MonoBehaviour
 
     public sliderempre slider2;
 
-    public AnimaObjeto payanim;
+    //public AnimaObjeto payanim;
 
     void Update()
     {
@@ -80,7 +80,7 @@ public class Dialogo : MonoBehaviour
             if (slider2.feito)
             {
                 slider2.feito = false;
-                payanim.animação(slider2.value, "Solicitando\nao banco...", "EMPRESTIMO\nCONCEDIDO!", true);
+                //payanim.animação(slider2.value, "Solicitando\nao banco...", "EMPRESTIMO\nCONCEDIDO!", true);
             }
 
         }

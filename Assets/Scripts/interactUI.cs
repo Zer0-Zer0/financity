@@ -3,38 +3,38 @@ using UnityEngine;
 public class Interacao : MonoBehaviour
 {
     public GameObject uiInteracao;
-    public float distanciaMaxima = 2f;
+    public float raioDetecao = 2f;
+
+    private GameObject objetoInteracao;
 
     void FixedUpdate()
     {
-        GameObject objetoInteracao = EncontrarObjetoInteracao();
 
-        if (objetoInteracao != null)
+        Collider[] colliders = Physics.OverlapSphere(transform.position, raioDetecao);
+
+        foreach (Collider collider in colliders)
         {
-            Vector3 posicaoTela = Camera.main.WorldToScreenPoint(objetoInteracao.transform.position);
-
-            uiInteracao.transform.position = posicaoTela + Vector3.up * 80f;
-            uiInteracao.SetActive(true);
-        }
-        else
-        {
-            uiInteracao.SetActive(false);
-        }
-    }
-
-    GameObject EncontrarObjetoInteracao()
-    {
-        RaycastHit hit;
-        Vector3 posicaoOrigem = transform.position;
-
-        if (Physics.Raycast(posicaoOrigem, transform.forward, out hit, distanciaMaxima))
-        {
-            if (hit.collider.CompareTag("Interact"))
+            if (collider.CompareTag("Interact"))
             {
-                return hit.collider.gameObject;
+                objetoInteracao = collider.gameObject;
+                MostrarUIInteracao();
+                return;
             }
         }
 
-        return null;
+        objetoInteracao = null;
+        OcultarUIInteracao();
+    }
+
+    void MostrarUIInteracao()
+    {
+        Vector3 posicaoTela = Camera.main.WorldToScreenPoint(objetoInteracao.transform.position);
+        uiInteracao.transform.position = posicaoTela + Vector3.up * 80f;
+        uiInteracao.SetActive(true);
+    }
+
+    void OcultarUIInteracao()
+    {
+        uiInteracao.SetActive(false);
     }
 }
