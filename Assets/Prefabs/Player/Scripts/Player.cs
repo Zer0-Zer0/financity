@@ -4,54 +4,54 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Animator heroiAnim;
-    [SerializeField] private bool morto = false;
-    [SerializeField] private Collider areaPegarItemCollider; // Collider da área onde o jogador pode pegar o item
-    private bool estaDentroDaArea = false;
+    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private bool isDead = false;
+    [SerializeField] private Collider itemPickupAreaCollider; // Collider of the area where the player can pick up the item
+    private bool isInsidePickupArea = false;
 
-    private bool estaPendurado = false;
-    private Transform rootAlvo;
+    private bool isHanging = false;
+    private Transform targetRoot;
 
-    private bool gatilho;
-    public Transform parede;
-    bool pegarTriggerAtivado = false;
+    private bool trigger;
+    public Transform wall;
+    bool pickupTriggerActivated = false;
 
-    [SerializeField] private Transform item;
-    [SerializeField] private Transform mao;
+    [SerializeField] private Transform itemToPickup;
+    [SerializeField] private Transform hand;
 
-    [SerializeField] private float velRot = 100;
+    [SerializeField] private float rotationSpeed = 100;
 
     public float moveX, moveY;
 
-    private bool botaoDireitoPressionado = false;
-    private bool estavaMovendo = false; 
+    private bool rightButtonPressed = false;
+    private bool wasMoving = false; 
 
-    // Variáveis para o sistema de tiro
+    // Variables for the shooting system
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private Transform muzzleTransform; // Referência ao pivô de tiro
+    [SerializeField] private Transform muzzleTransform; // Reference to the shooting pivot
     public float shootForce = 700f;
 
     void Start()
     {
-        rootAlvo = null;
-        gatilho = true;
+        targetRoot = null;
+        trigger = true;
     }
 
-   void AjustaRotacao()
+    void AdjustRotation()
     {
-        if (Vector3.Distance(transform.position, parede.position) <= 3.1f)
+        if (Vector3.Distance(transform.position, wall.position) <= 3.1f)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, parede.rotation, 1f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, wall.rotation, 1f);
         }
     }
 
     void FixedUpdate()
     {
-        if (!rootAlvo) return;
-        if (estaPendurado && gatilho)
+        if (!targetRoot) return;
+        if (isHanging && trigger)
         {
-            transform.position = new Vector3(transform.position.x, rootAlvo.position.y, rootAlvo.position.z);
-            gatilho = false;
+            transform.position = new Vector3(transform.position.x, targetRoot.position.y, targetRoot.position.z);
+            trigger = false;
         }
     }
 
@@ -59,95 +59,95 @@ public class Player : MonoBehaviour
     {
         moveY = Input.GetAxis("Vertical");
         moveX = Input.GetAxis("Horizontal");
-        heroiAnim.SetFloat("X", moveX, 0.1f, Time.deltaTime);
-        heroiAnim.SetFloat("Y", moveY, 0.1f, Time.deltaTime);
+        playerAnimator.SetFloat("X", moveX, 0.1f, Time.deltaTime);
+        playerAnimator.SetFloat("Y", moveY, 0.1f, Time.deltaTime);
 
         float move = Input.GetAxis("Vertical");
-        float rotacao = Input.GetAxis("Horizontal") * velRot;
+        float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
 
-        // Lógica de tiro
+        // Shooting logic
         if (Input.GetMouseButtonDown(1))
         {
-            botaoDireitoPressionado = true;
-            estavaMovendo = heroiAnim.GetBool("Andar"); // Armazena se estava em movimento
-            heroiAnim.SetBool("Andar", false); // Para o movimento
-            heroiAnim.SetBool("MovimentoTiro", true); // Ativa o movimento de tiro
+            rightButtonPressed = true;
+            wasMoving = playerAnimator.GetBool("Walk"); // Store if it was moving
+            playerAnimator.SetBool("Walk", false); // Stop movement
+            playerAnimator.SetBool("ShootMovement", true); // Activate shooting movement
         }
 
         if (Input.GetMouseButtonUp(1))
         {
-            botaoDireitoPressionado = false;
+            rightButtonPressed = false;
         }
 
-        if (botaoDireitoPressionado && Input.GetMouseButtonDown(0)) // Botão esquerdo do mouse
+        if (rightButtonPressed && Input.GetMouseButtonDown(0)) // Left mouse button
         {
             Shoot();
         }
 
-        if (!botaoDireitoPressionado && !estavaMovendo)
+        if (!rightButtonPressed && !wasMoving)
         {
-            heroiAnim.SetBool("Andar", false);
-            heroiAnim.SetBool("MovimentoTiro", false);
+            playerAnimator.SetBool("Walk", false);
+            playerAnimator.SetBool("ShootMovement", false);
         }
 
-        // Corrida
+        // Running
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            heroiAnim.SetBool("Running", true);
+            playerAnimator.SetBool("Running", true);
         }
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            heroiAnim.SetBool("Running", false);
+            playerAnimator.SetBool("Running", false);
         }
 
-        if (!morto && !estaPendurado)
+        if (!isDead && !isHanging)
         {
-            rotacao *= Time.deltaTime;
-            transform.Rotate(0, rotacao, 0);
+            rotation *= Time.deltaTime;
+            transform.Rotate(0, rotation, 0);
         }
 
-        if (estaPendurado)
+        if (isHanging)
         {
-            if (rotacao > 1)
+            if (rotation > 1)
             {
-                heroiAnim.SetBool("HangingRight", true);
+                playerAnimator.SetBool("HangingRight", true);
             }
-            else if (rotacao < -1)
+            else if (rotation < -1)
             {
-                heroiAnim.SetBool("HangingLeft", true);
+                playerAnimator.SetBool("HangingLeft", true);
             }
             else
             {
-                heroiAnim.SetBool("HangingRight", false);
-                heroiAnim.SetBool("HangingLeft", false);
+                playerAnimator.SetBool("HangingRight", false);
+                playerAnimator.SetBool("HangingLeft", false);
             }
         }
 
         if (move != 0)
         {
-            heroiAnim.SetBool("Andar", true);
+            playerAnimator.SetBool("Walk", true);
         }
         else
         {
-            heroiAnim.SetBool("Andar", false);
+            playerAnimator.SetBool("Walk", false);
         }
 
-        if (morto && Input.GetKeyDown(KeyCode.Z))
+        if (isDead && Input.GetKeyDown(KeyCode.Z))
         {
-            heroiAnim.SetTrigger("StandUp");
-            morto = false;
+            playerAnimator.SetTrigger("StandUp");
+            isDead = false;
         }
 
-        if (estaPendurado && Input.GetKeyDown(KeyCode.Z))
+        if (isHanging && Input.GetKeyDown(KeyCode.Z))
         {
-            StartCoroutine("Subindo");
+            StartCoroutine("Climbing");
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && estaDentroDaArea)
+        if (Input.GetKeyDown(KeyCode.E) && isInsidePickupArea)
         {
-            pegarTriggerAtivado = true;
-            heroiAnim.SetTrigger("Pegar");
+            pickupTriggerActivated = true;
+            playerAnimator.SetTrigger("Pickup");
         }
     }
 
@@ -158,60 +158,60 @@ public class Player : MonoBehaviour
         rb.AddForce(muzzleTransform.forward * shootForce);
     }
 
-    public void Pendurado(Transform alv)
+    public void Hang(Transform target)
     {
-        if (estaPendurado) return;
+        if (isHanging) return;
 
-        heroiAnim.SetTrigger("Hanging");
+        playerAnimator.SetTrigger("Hanging");
         GetComponent<Rigidbody>().isKinematic = true;
-        estaPendurado = true;
-        rootAlvo = alv;
+        isHanging = true;
+        targetRoot = target;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other == areaPegarItemCollider)
+        if (other == itemPickupAreaCollider)
         {
-            estaDentroDaArea = true;
+            isInsidePickupArea = true;
         }
 
-        if (other.gameObject.CompareTag("caixa"))
+        if (other.gameObject.CompareTag("box"))
         {
-            heroiAnim.SetTrigger("Death");
-            morto = true;
+            playerAnimator.SetTrigger("Death");
+            isDead = true;
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other == areaPegarItemCollider)
+        if (other == itemPickupAreaCollider)
         {
-            estaDentroDaArea = false;
+            isInsidePickupArea = false;
         }
     }
 
-    IEnumerator Subindo()
+    IEnumerator Climbing()
     {
-        heroiAnim.SetTrigger("subindo");
+        playerAnimator.SetTrigger("climbing");
         yield return new WaitForSeconds(3.24f);
-        estaPendurado = false;
-        gatilho = true;
+        isHanging = false;
+        trigger = true;
         GetComponent<Rigidbody>().isKinematic = false;
     }
 
     private void OnAnimatorIK(int layerIndex)
     {
-        heroiAnim.SetLookAtWeight(heroiAnim.GetFloat("IK_Val"));
-        heroiAnim.SetLookAtPosition(item.position);
+        playerAnimator.SetLookAtWeight(playerAnimator.GetFloat("IK_Value"));
+        playerAnimator.SetLookAtPosition(itemToPickup.position);
 
-        if (pegarTriggerAtivado && heroiAnim.GetFloat("IK_Val") > 0.9f)
+        if (pickupTriggerActivated && playerAnimator.GetFloat("IK_Value") > 0.9f)
         {
-            item.parent = mao;
-            item.localPosition = new Vector3(-0.0003f, 0.1112f, 0.0518f);
-            pegarTriggerAtivado = false; // Desativa o trigger após pegar o item
+            itemToPickup.parent = hand;
+            itemToPickup.localPosition = new Vector3(-0.0003f, 0.1112f, 0.0518f);
+            pickupTriggerActivated = false; // Deactivate trigger after picking up the item
         }
 
-        heroiAnim.SetIKPositionWeight(AvatarIKGoal.RightHand, heroiAnim.GetFloat("IK_Val"));
-        heroiAnim.SetIKPosition(AvatarIKGoal.RightHand, item.position);
+        playerAnimator.SetIKPositionWeight(AvatarIKGoal.RightHand, playerAnimator.GetFloat("IK_Value"));
+        playerAnimator.SetIKPosition(AvatarIKGoal.RightHand, itemToPickup.position);
     }
 }

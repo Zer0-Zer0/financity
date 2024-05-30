@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class HangingCode : MonoBehaviour
 {
+    public GameObject rootPoint;
 
-    public GameObject rootP;
-
-    void OnTriggerEnter (Collider col ){
-
-            if (col.gameObject.CompareTag("mao")){
-
-                col.GetComponentInParent<Player> ().Pendurado(rootP.transform);
-            }
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("hand"))
+        {
+            col.GetComponentInParent<Player>().Hang(rootPoint.transform);
+        }
     }
-
 }
