@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed = 20f;
+    public float speed = 2000f;
     public float lifeTime = 2f;
-
+    public GameObject Flash;
+    public float flashLifeTime = 0.016f;
     void Start()
     {
         Destroy(gameObject, lifeTime);
+        Destroy(gameObject, 0.016f);
     }
 
     void Update()

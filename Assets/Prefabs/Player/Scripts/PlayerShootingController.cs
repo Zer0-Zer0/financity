@@ -7,6 +7,11 @@ public class PlayerShootingController : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform muzzleTransform;
+    [SerializeField] private AudioSource bulletNoise;
+
+    [SerializeField] private AudioClip Aim;
+    [SerializeField] private AudioClip StopAim;
+    [SerializeField] private AudioClip shootClip;
     public float shootForce = 700f;
 
     private bool rightButtonPressed = false;
@@ -21,11 +26,13 @@ public class PlayerShootingController : MonoBehaviour
             wasMoving = playerAnimator.GetBool("Walk");
             playerAnimator.SetBool("Walk", false);
             playerAnimator.SetBool("ShootMovement", true);
+            bulletNoise.PlayOneShot(Aim);
         }
 
         if (Input.GetMouseButtonUp(1))
         {
             rightButtonPressed = false;
+            bulletNoise.PlayOneShot(StopAim);
         }
 
         if (rightButtonPressed && Input.GetMouseButtonDown(0))
@@ -45,5 +52,6 @@ public class PlayerShootingController : MonoBehaviour
         GameObject projectile = Instantiate(projectilePrefab, muzzleTransform.position, muzzleTransform.rotation);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.AddForce(muzzleTransform.forward * shootForce);
+        bulletNoise.PlayOneShot(shootClip);
     }
 }
