@@ -192,7 +192,7 @@ public class Player : MonoBehaviour
 
     IEnumerator Climbing()
     {
-        playerAnimator.SetTrigger("climbing");
+        playerAnimator.SetTrigger("Climbing");
         yield return new WaitForSeconds(3.24f);
         isHanging = false;
         trigger = true;
