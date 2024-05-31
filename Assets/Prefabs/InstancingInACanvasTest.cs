@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CandleManager : MonoBehaviour
 {
     public Canvas canvas;
     public GameObject CandlePrefab;
-    public float CandleWidth = 100f;
-    public int maxCandles = 5;
+    public float CandleWidth = 30f;
+    public int maxCandles = 25;
 
     private List<GameObject> candles = new List<GameObject>();
 
