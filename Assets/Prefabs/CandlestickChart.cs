@@ -8,7 +8,7 @@ public class CandlestickChart : MonoBehaviour
     public List<CandleRender> candles = new List<CandleRender>();
     public Stock representedStock;
 
-    public float lowest = -1f, highest = -1f;
+    public float lowest = -1f, highest = 1f;
 
     public float maxCandleHeight = 160f, maxcandleY = 200f;
 
@@ -69,6 +69,7 @@ public class CandlestickChart : MonoBehaviour
         }
         // Do something with the updated stock data
         Debug.Log($"Received stock update - Stock: {stockName}, Open: ${open}, Close: ${close}, HighShadow: ${high}, LowShadow: ${low}");
+
 
         // Instantiate a new CandleRender and add it to the list
         CandleRender newCandle = Instantiate(candleInstance, new Vector3(candles.Count * 30f, transform.position.y, transform.position.z), transform.rotation);
