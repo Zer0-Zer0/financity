@@ -1,25 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CandlestickChart : MonoBehaviour
 {
-    public CandleRender candleInstance;
+    public CandleRender candlePrefab;
     public List<CandleRender> candles = new List<CandleRender>();
     public Stock representedStock;
 
-    public float lowest = -1f, highest = 1f;
+    public float CandlePadding = 30f;
+    public int maxCandles = 25;
 
-    public float maxCandleHeight = 160f, maxcandleY = 200f;
+    public float lowest = -1f, highest = -1f;
+    public float maxCandleHeight = 160f, maxCandleY = 200f;
 
     void Start()
     {
         representedStock.OnStockUpdate += HandleStockUpdate;
     }
 
-    void RefreshcandleScale()
+    void RefreshCandleScale()
     {
-
+        ArrangeCandles();
         foreach (CandleRender candle in candles)
         {
             RectTransform candleTransform = candle.GetComponent<RectTransform>();
@@ -36,19 +39,42 @@ public class CandlestickChart : MonoBehaviour
             //handling the candle Y position
 
             float candleYRatio = (((candle.min + candle.max) / 2) - lowest) / (highest - lowest);
-            candle.transform.position = new Vector3(candle.transform.position.x, candleYRatio * maxcandleY, candle.transform.position.z);
-            /*
-            float candleScale, candleY;
-            highLowRatio = lowest / highest;
-
-            candleScale = highLowRatio;
-
-            candleY = candle.min - lowest * maxcandleY;
-
-            candleTransform.localScale = new Vector2(1f, candleScale);
-
-            candle.transform.position = new Vector3(candle.transform.position.x, candle.transform.position.y + candleY, candle.transform.position.z);*/
+            candleTransform.anchoredPosition = new Vector2(candleTransform.anchoredPosition.x, candleTransform.anchoredPosition.y + candleYRatio * maxCandleY);
         }
+        
+    }
+
+    CandleRender InstantiateCandle()
+    {
+        CandleRender newCandle = Instantiate(candlePrefab, transform.position, transform.rotation);
+        candles.Add(newCandle);
+
+        ArrangeCandles();
+        return newCandle;
+    }
+
+    void ArrangeCandles()
+    {
+        float totalWidth = candles.Count * CandlePadding;
+
+        if (totalWidth > maxCandles * CandlePadding)
+        {
+            DestroyOldestCandle();
+        }
+
+        for (int i = 0; i < candles.Count; i++)
+        {
+            RectTransform CandleTransform = candles[i].GetComponent<RectTransform>();
+            CandleTransform.anchoredPosition = new Vector2(i * CandlePadding, 0);
+        }
+    }
+
+    void DestroyOldestCandle()
+    {
+        CandleRender oldestCandle = candles[0];
+        Destroy(oldestCandle);
+        candles.RemoveAt(0);
+        oldestCandle.gameObject.SetActive(false);
     }
 
     void HandleStockUpdate(string stockName, float open, float close, float high, float low)
@@ -72,7 +98,7 @@ public class CandlestickChart : MonoBehaviour
 
 
         // Instantiate a new CandleRender and add it to the list
-        CandleRender newCandle = Instantiate(candleInstance, new Vector3(candles.Count * 30f, transform.position.y, transform.position.z), transform.rotation);
+        CandleRender newCandle = InstantiateCandle();
 
         newCandle.open = open;
         newCandle.close = close;
@@ -81,8 +107,6 @@ public class CandlestickChart : MonoBehaviour
 
         newCandle.transform.SetParent(transform);
 
-        candles.Add(newCandle);
-
-        RefreshcandleScale();
+        RefreshCandleScale();
     }
 }
