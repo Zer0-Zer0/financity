@@ -34,6 +34,7 @@ public class InteracaoNPC : MonoBehaviour
             {
                 mensagens = new string[] { "Mensagem padrão 1", "Mensagem padrão 2" };
             }
+            dialogo.IniciarDialogo(mensagens);
 
             if (empréstimo == true) {
                 slider.toggleslide();
@@ -49,9 +50,6 @@ public class InteracaoNPC : MonoBehaviour
                 }
                 
             }
-            
-
-            dialogo.IniciarDialogo(mensagens);
         }
     }
 

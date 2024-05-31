@@ -5,8 +5,8 @@ using TMPro;
 public class Dialogo : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
-    public GameObject botaoPular;
-    public GameObject botaoAutomatico;
+    //public GameObject botaoPular;
+    //public GameObject botaoAutomatico;
     public float velocidade;
     public float delayParaProximaFala = 1f; // Alterado para delay para próxima fala
 
@@ -18,7 +18,7 @@ public class Dialogo : MonoBehaviour
 
     public sliderempre slider2;
 
-    //public AnimaObjeto payanim;
+    //public AnimaObjeto payanim;  
 
     void Update()
     {
@@ -40,8 +40,8 @@ public class Dialogo : MonoBehaviour
             StopCoroutine(typingCoroutine);
         typingCoroutine = StartCoroutine(TypeLine());
 
-        botaoPular.SetActive(true);
-        botaoAutomatico.SetActive(true);
+       // botaoPular.SetActive(true);
+        //botaoAutomatico.SetActive(true);
     }
 
     IEnumerator TypeLine()
@@ -73,15 +73,15 @@ public class Dialogo : MonoBehaviour
         {
             LimparTexto();
             dialogoAtivo = false;
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
 
-            botaoPular.SetActive(false);
-            botaoAutomatico.SetActive(false);
-            if (slider2.feito)
+            //botaoPular.SetActive(false);
+            //botaoAutomatico.SetActive(false);
+            /*if (slider2.feito)
             {
                 slider2.feito = false;
                 //payanim.animação(slider2.value, "Solicitando\nao banco...", "EMPRESTIMO\nCONCEDIDO!", true);
-            }
+            }//*/
 
         }
     }
@@ -91,10 +91,10 @@ public class Dialogo : MonoBehaviour
         StopCoroutine(typingCoroutine);
         LimparTexto();
         dialogoAtivo = false;
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
 
-        botaoPular.SetActive(false);
-        botaoAutomatico.SetActive(false);
+        //botaoPular.SetActive(false);
+        //botaoAutomatico.SetActive(false);
     }
 
     public void AtivarAutomatico()

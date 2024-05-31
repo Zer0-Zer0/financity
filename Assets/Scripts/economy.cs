@@ -3,7 +3,7 @@ using TMPro;
 
 public class Carteira : MonoBehaviour
 {
-    private float saldo = 80f;
+    private float saldo = 800f;
     public TextMeshProUGUI textoSaldo;
 
     public float Saldo => saldo;
