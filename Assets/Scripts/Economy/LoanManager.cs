@@ -31,10 +31,10 @@ public class LoanManager : MonoBehaviour
     /// <param name="loanType">The type of loan.</param>
     [System.Serializeable]
     public struct LoanData{
-        internal readonly float TotalValue;
-        internal readonly float PrincipalValue;
-        internal readonly float RateValue;
-        internal readonly int TimeValue;
+        internal float TotalValue;
+        internal float PrincipalValue;
+        internal float RateValue;
+        internal int TimeValue;
         internal readonly LoanType loanType;
 
         /// <summary>
@@ -78,17 +78,39 @@ public class LoanManager : MonoBehaviour
     /// </summary>
     /// <param name="Wallet">The wallet manager of the player.</param>
     /// <param name="loanData">The data of the loan to be made.</param>
-    /// <param name="loanType">The type of loan to be made.</param>
     /// <remarks>
     /// If the new debt exceeds the current maximum debt, an error is logged.
     /// </remarks>
-    public static void MakeALoan(WalletManager Wallet, LoanData loanData, LoanType loanType){
+    public static void MakeALoan(WalletManager Wallet, LoanData loanData){
         float newDebt = Wallet.CurrentDebt + loanData.TotalValue;
         if(newDebt > Wallet.CurrentMaxDebt){
             Debug.LogError("ERRO! Tentativa de fazer empréstimo quando débito máximo é menor que o débito atual, adicione mais condicionais");
         }else{
             Wallet.CurrentDebt = newDebt;
             Wallet.CurrentDigitalMoney += LoanData.PrincipalValue; 
+        }
+    }
+
+    /// <summary>
+    /// Pays a single installment of a loan from the wallet's digital money.
+    /// </summary>
+    /// <param name="Wallet">The wallet from which the installment will be paid.</param>
+    /// <param name="loanData">The loan data containing information about the installment to be paid.</param>
+    /// <remarks>
+    /// This method checks if the current digital money in the wallet is sufficient to pay the installment of the loan.
+    /// If the digital money is enough, it deducts the installment amount from the current debt in the wallet and updates the total loan value and remaining time.
+    /// If the digital money is insufficient, an error message is logged.
+    /// </remarks>
+    public static void PayAInstallment(WalletManager Wallet, LoanData loanData){
+        if (loanData.GetInstallment > Wallet.CurrentDigitalMoney){
+            Debug.LogError("ERRO! Tentativa de pagar parcela de empréstimo quando valor digital atual é menor que a parcela, adicione mais condicionais");
+        }else{
+            float newDebt = Wallet.CurrentDebt - loanData.GetInstallment;
+            float newTotal = loanData.TotalValue - loanData.GetInstallment
+            float newTime = loanData.TimeValue - 1;
+            LoanData.TotalValue = newTotal;
+            LoanData.TimeValue = newTime;
+            Wallet.CurrentDebt = newDebt;
         }
     }
 }
