@@ -29,13 +29,22 @@ public class LoanManager : MonoBehaviour
     /// <param name="RateValue">The interest rate of the loan, in percent.</param>
     /// <param name="TimeValue">The time duration of the loan.</param>
     /// <param name="loanType">The type of loan.</param>
-    [System.Serializeable]
+    [System.Serializable]
     public struct LoanData{
         internal float TotalValue;
         internal float PrincipalValue;
         internal float RateValue;
         internal int TimeValue;
         internal readonly LoanType loanType;
+
+        public LoanData(float totalValue, float principalValue, float rateValue, int timeValue, LoanType type)
+        {
+            TotalValue = totalValue;
+            PrincipalValue = principalValue;
+            RateValue = rateValue;
+            TimeValue = timeValue;
+            loanType = type;
+        }
 
         /// <summary>
         /// Calculates the installment amount for the loan.
@@ -57,7 +66,7 @@ public class LoanManager : MonoBehaviour
         rate += 1;
         float _compoundInterest = Mathf.Pow(rate, time);
         float _totalValue = principal * _compoundInterest;
-        return new LoanData(_totalValue, principal, rate, time);
+        return new LoanData(_totalValue, principal, rate, time, LoanType.CompoundInterest);
     }
 
     /// <summary>
@@ -70,7 +79,7 @@ public class LoanManager : MonoBehaviour
     public static LoanData CalculateSimpleInterest(float principal, float rate, int time){
         rate += 1;
         float _totalValue = principal * rate;
-        return new LoanData(_totalValue, principal, rate, time);
+        return new LoanData(_totalValue, principal, rate, time, LoanType.SimpleInterest);
     }
 
     /// <summary>
@@ -87,7 +96,7 @@ public class LoanManager : MonoBehaviour
             Debug.LogError("ERRO! Tentativa de fazer empréstimo quando débito máximo é menor que o débito atual, adicione mais condicionais");
         }else{
             Wallet.CurrentDebt = newDebt;
-            Wallet.CurrentDigitalMoney += LoanData.PrincipalValue; 
+            Wallet.CurrentDigitalMoney += loanData.PrincipalValue; 
         }
     }
 
@@ -102,14 +111,14 @@ public class LoanManager : MonoBehaviour
     /// If the digital money is insufficient, an error message is logged.
     /// </remarks>
     public static void PayAInstallment(WalletManager Wallet, LoanData loanData){
-        if (loanData.GetInstallment > Wallet.CurrentDigitalMoney){
+        if (loanData.GetInstallment() > Wallet.CurrentDigitalMoney){
             Debug.LogError("ERRO! Tentativa de pagar parcela de empréstimo quando valor digital atual é menor que a parcela, adicione mais condicionais");
         }else{
-            float newDebt = Wallet.CurrentDebt - loanData.GetInstallment;
-            float newTotal = loanData.TotalValue - loanData.GetInstallment
-            float newTime = loanData.TimeValue - 1;
-            LoanData.TotalValue = newTotal;
-            LoanData.TimeValue = newTime;
+            float newDebt = Wallet.CurrentDebt - loanData.GetInstallment();
+            float newTotal = loanData.TotalValue - loanData.GetInstallment();
+            int newTime = loanData.TimeValue - 1;
+            loanData.TotalValue = newTotal;
+            loanData.TimeValue = newTime;
             Wallet.CurrentDebt = newDebt;
         }
     }
