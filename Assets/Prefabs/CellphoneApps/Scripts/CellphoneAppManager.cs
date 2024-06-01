@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class CellphoneAppManager : MonoBehaviour
 {
     [SerializeField] Transform AppsParent;
     List<GenericApp> _appsList;
-
-    public Action MenuButtonPressed;
+    public UnityEvent OnMenuButtonPress;
 
     void Awake()
     {
@@ -19,14 +19,8 @@ public class CellphoneAppManager : MonoBehaviour
             _appsList.Add(app);
         }
     }
-
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-        
+    public void MenuButtonPressed(){
+        OnMenuButtonPress?.Invoke();
     }
 
     public void HideAllApps(){

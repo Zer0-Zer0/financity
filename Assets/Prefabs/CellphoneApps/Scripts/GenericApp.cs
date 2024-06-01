@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class GenericApp : MonoBehaviour
 {
-    RectTransform _rect;
+    [SerializeField] CellphoneAppManager _appManager;
     public GameObject AppPanel;
 
     void Awake(){
-        _rect = transform.GetComponent<RectTransform>();
+        _appManager.OnMenuButtonPress.AddListener(HideAppPanel);
     }
 
     public void ShowAppPanel(){
         AppPanel.SetActive(true);
+    }
+
+    public void HideAppPanel(){
+        AppPanel.SetActive(false);
     }
 }
