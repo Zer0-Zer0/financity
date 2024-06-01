@@ -31,10 +31,10 @@ public class LoanManager : MonoBehaviour
     /// <param name="loanType">The type of loan.</param>
     [System.Serializable]
     public struct LoanData{
-        internal float TotalValue;
-        internal float PrincipalValue;
-        internal float RateValue;
-        internal int TimeValue;
+        internal readonly float TotalValue;
+        internal readonly float PrincipalValue;
+        internal readonly float RateValue;
+        internal readonly int TimeValue;
         internal readonly LoanType loanType;
 
         public LoanData(float totalValue, float principalValue, float rateValue, int timeValue, LoanType type)
@@ -63,8 +63,8 @@ public class LoanManager : MonoBehaviour
     /// <param name="time">The number of periods the interest is applied.</param>
     /// <returns>A LoanData struct with the calculated values after applying compound interest.</returns>
     public static LoanData CalculateCompoundInterest(float principal, float rate, int time){
-        rate += 1;
-        float _compoundInterest = Mathf.Pow(rate, time);
+        float _calculatedRate = rate + 1;
+        float _compoundInterest = Mathf.Pow(_calculatedRate, time);
         float _totalValue = principal * _compoundInterest;
         return new LoanData(_totalValue, principal, rate, time, LoanType.CompoundInterest);
     }
@@ -77,13 +77,13 @@ public class LoanManager : MonoBehaviour
     /// <param name="time">The number of periods the interest is applied.</param>
     /// <returns>A LoanData struct with the calculated values after applying simple interest.</returns>
     public static LoanData CalculateSimpleInterest(float principal, float rate, int time){
-        rate += 1;
-        float _totalValue = principal * rate;
+        float _calculatedRate = rate + 1;
+        float _totalValue = principal * _calculatedRate;
         return new LoanData(_totalValue, principal, rate, time, LoanType.SimpleInterest);
     }
 
     /// <summary>
-    /// Makes a loan for the player.
+    /// Makes a loan for the player, by adding money and debt to it's account
     /// </summary>
     /// <param name="Wallet">The wallet manager of the player.</param>
     /// <param name="loanData">The data of the loan to be made.</param>
@@ -110,16 +110,16 @@ public class LoanManager : MonoBehaviour
     /// If the digital money is enough, it deducts the installment amount from the current debt in the wallet and updates the total loan value and remaining time.
     /// If the digital money is insufficient, an error message is logged.
     /// </remarks>
-    public static void PayAInstallment(WalletManager Wallet, LoanData loanData){
+    public static LoanData PayAInstallment(WalletManager Wallet, LoanData loanData){
         if (loanData.GetInstallment() > Wallet.CurrentDigitalMoney){
             Debug.LogError("ERRO! Tentativa de pagar parcela de empréstimo quando valor digital atual é menor que a parcela, adicione mais condicionais");
         }else{
             float newDebt = Wallet.CurrentDebt - loanData.GetInstallment();
             float newTotal = loanData.TotalValue - loanData.GetInstallment();
             int newTime = loanData.TimeValue - 1;
-            loanData.TotalValue = newTotal;
-            loanData.TimeValue = newTime;
             Wallet.CurrentDebt = newDebt;
+
+            return new LoanData(newTotal, loanData.PrincipalValue, loanData.RateValue, newTime, loanData.LoanType);
         }
     }
 }
