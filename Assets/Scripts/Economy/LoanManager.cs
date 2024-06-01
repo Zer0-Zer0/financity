@@ -96,12 +96,12 @@ public class LoanManager : MonoBehaviour
         float newDebt = wallet.CurrentDebt + loanData.TotalValue;
 
         if(newDebt > wallet.CurrentMaxDebt){
-            throw new Exception("New debt exceeds the current maximum debt");
+            throw new UnassignedReferenceException("New debt exceeds the current maximum debt");
         }
 
         wallet.CurrentDebt = newDebt;
         wallet.CurrentDigitalMoney += loanData.PrincipalValue; 
-        }catch (Exception ex){
+        }catch (UnassignedReferenceException ex){
             Debug.LogError("Error making a loan: " + ex.Message);
         }
     }
@@ -120,16 +120,18 @@ public class LoanManager : MonoBehaviour
     public static LoanData PayAInstallment(WalletManager wallet, LoanData loanData){
         try{
             if (loanData.GetInstallment() > wallet.CurrentDigitalMoney){
-                throw new Exception("Insufficient digital money to pay the installment");
+                throw new UnassignedReferenceException("Insufficient digital money to pay the installment");
             }
             float newDebt = wallet.CurrentDebt - loanData.GetInstallment();
             float newTotal = loanData.TotalValue - loanData.GetInstallment();
             int newTime = loanData.TimeValue - 1;
             wallet.CurrentDebt = newDebt;
 
-            return new LoanData(newTotal, loanData.PrincipalValue, loanData.RateValue, newTime, loanData.LoanType);
-            }catch (Exception ex){
+            return new LoanData(newTotal, loanData.PrincipalValue, loanData.RateValue, newTime, loanData.loanType);
+            }catch (UnassignedReferenceException ex){
             Debug.LogError("Error paying a installment: " + ex.Message);
         }
+
+        return loanData;
     }
 }
