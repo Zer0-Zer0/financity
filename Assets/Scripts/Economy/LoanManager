@@ -5,7 +5,10 @@ using UnityEngine.Events;
 
 public class LoanManager : MonoBehaviour
 {
-    [Engine.SerializeField]
+    /// <summary>
+    /// Represents data for a loan, including total value, principal value, interest rate, installment value, and time value.
+    /// </summary>
+    [System.Serializeable]
     public struct LoanData{
         internal readonly float TotalValue;
         internal readonly float PrincipalValue;
