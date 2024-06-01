@@ -13,7 +13,9 @@ class WalletManager : MonoBehaviour
     float _currentDigitalMoney;
 
     public float CurrentDigitalMoney{
-        get;
+        get{
+            return _currentDigitalMoney;
+        }
         set{
             OnDigitalMoneyUpdate.Invoke();
 
@@ -31,7 +33,9 @@ class WalletManager : MonoBehaviour
     float _currentPhysicalMoney;
 
     public float CurrentPhysicalMoney{
-        get; 
+        get{
+            return _currentPhysicalMoney;
+        } 
         set{
             OnPhysicalMoneyUpdate.Invoke();
             if(value < 0f){
@@ -51,7 +55,9 @@ class WalletManager : MonoBehaviour
     float _currentDebt;
 
     public float CurrentDebt{
-        get; 
+        get{
+            return _currentDebt;
+        } 
         set{
             OnDebtUpdate.Invoke();
             if(value < 0f){
@@ -73,7 +79,9 @@ class WalletManager : MonoBehaviour
     float _currentMaxDebt;
 
     public float CurrentMaxDebt{
-        get; 
+        get{
+            return _currentMaxDebt;
+        } 
         set{
             OnMaxDebtUpdate.Invoke();
             if(value < 0f){
