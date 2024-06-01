@@ -1,0 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+
+class LoanManager : MonoBehaviour
+{
+    public UnityEvent OnLoanMade;
+
+    public static Tuple<float> CalculateMortgage(float MortgageValue, int NumberOfInstallments, float DownPayment = 0f, float Insterest = 0f){
+        float _principalValue = MortgageValue - DownPayment;
+        float _installmentValue = _principalValue / NumberOfInstallments;
+        return (_principalValue, _installmentValue);
+    }
+}
