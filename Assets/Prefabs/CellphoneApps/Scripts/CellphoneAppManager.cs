@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class CellphoneAppManager : MonoBehaviour
+class CellphoneAppManager : MonoBehaviour
 {
     [SerializeField] Transform AppsParent;
     List<GenericApp> _appsList;
@@ -15,8 +15,10 @@ public class CellphoneAppManager : MonoBehaviour
         MoveAppsToList();
     }
 
+    ///<summary>
+    ///Transfers all children from the given object to the _appsList (they NEED to have the GenericApp script)
+    ///</summary>
     void MoveAppsToList(){
-        //Transfers all children (they NEED to have the GenericApp script)from the given object to a list
         foreach (Transform child in AppsParent)
         {
             GenericApp app = child.GetComponent<GenericApp>();

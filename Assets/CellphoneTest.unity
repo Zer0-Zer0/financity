@@ -638,8 +638,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1852148759}
-        m_TargetAssemblyTypeName: Cellphone, Assembly-CSharp
-        m_MethodName: HideAllApps
+        m_TargetAssemblyTypeName: CellphoneAppManager, Assembly-CSharp
+        m_MethodName: MenuButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1221,7 +1221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AppsParent: {fileID: 954275228}
-  AppsList: []
+  MenuButton: {fileID: 1016308323}
 --- !u!1001 &1953681119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1234,6 +1234,10 @@ PrefabInstance:
       propertyPath: AppPanel
       value: 
       objectReference: {fileID: 1643571752}
+    - target: {fileID: 703400623295289189, guid: 14d76c7ab49fa21e5b582140f7732c4f, type: 3}
+      propertyPath: _appManager
+      value: 
+      objectReference: {fileID: 1852148759}
     - target: {fileID: 2024692369381173748, guid: 14d76c7ab49fa21e5b582140f7732c4f, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -1455,6 +1459,10 @@ PrefabInstance:
       propertyPath: AppPanel
       value: 
       objectReference: {fileID: 1418353732}
+    - target: {fileID: 703400623295289189, guid: 14d76c7ab49fa21e5b582140f7732c4f, type: 3}
+      propertyPath: _appManager
+      value: 
+      objectReference: {fileID: 1852148759}
     - target: {fileID: 2535728284003359388, guid: 14d76c7ab49fa21e5b582140f7732c4f, type: 3}
       propertyPath: m_Name
       value: GenericApp
