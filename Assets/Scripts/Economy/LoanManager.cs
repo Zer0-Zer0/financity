@@ -50,7 +50,7 @@ public class LoanManager : MonoBehaviour
         /// Calculates the installment amount for the loan.
         /// </summary>
         /// <returns>The installment amount for the loan.</returns>
-        internal readonly float GetInstallment(){
+        internal float GetInstallment(){
             return TotalValue/TimeValue;
         }
     }
@@ -85,31 +85,31 @@ public class LoanManager : MonoBehaviour
     /// <summary>
     /// Makes a loan for the player, by adding money and debt to it's account
     /// </summary>
-    /// <param name="Wallet">The wallet manager of the player.</param>
+    /// <param name="wallet">The wallet manager of the player.</param>
     /// <param name="loanData">The data of the loan to be made.</param>
     /// <remarks>
     /// If the new debt exceeds the current maximum debt, an error is logged.
     /// </remarks>
-    public static void MakeALoan(WalletManager Wallet, LoanData loanData){
+    public static void MakeALoan(WalletManager wallet, LoanData loanData){
         try
         {
-        float newDebt = Wallet.CurrentDebt + loanData.TotalValue;
+        float newDebt = wallet.CurrentDebt + loanData.TotalValue;
 
-        if(newDebt > Wallet.CurrentMaxDebt){
+        if(newDebt > wallet.CurrentMaxDebt){
             throw new Exception("New debt exceeds the current maximum debt");
         }
 
-        Wallet.CurrentDebt = newDebt;
-        Wallet.CurrentDigitalMoney += loanData.PrincipalValue; 
+        wallet.CurrentDebt = newDebt;
+        wallet.CurrentDigitalMoney += loanData.PrincipalValue; 
         }catch (Exception ex){
-            Debug.LogError("Error making a loan: " + ex.Message)
+            Debug.LogError("Error making a loan: " + ex.Message);
         }
     }
 
     /// <summary>
     /// Pays a single installment of a loan from the wallet's digital money.
     /// </summary>
-    /// <param name="Wallet">The wallet from which the installment will be paid.</param>
+    /// <param name="wallet">The wallet from which the installment will be paid.</param>
     /// <param name="loanData">The loan data containing information about the installment to be paid.</param>
     /// <remarks>
     /// This method checks if the current digital money in the wallet is sufficient to pay the installment of the loan.
@@ -117,19 +117,19 @@ public class LoanManager : MonoBehaviour
     /// If the digital money is insufficient, an error message is logged.
     /// </remarks>
     /// <returns>A LoanData struct with the calculated values after paying the installment.</returns>
-    public static LoanData PayAInstallment(WalletManager Wallet, LoanData loanData){
+    public static LoanData PayAInstallment(WalletManager wallet, LoanData loanData){
         try{
-            if (loanData.GetInstallment() > Wallet.CurrentDigitalMoney){
+            if (loanData.GetInstallment() > wallet.CurrentDigitalMoney){
                 throw new Exception("Insufficient digital money to pay the installment");
             }
-            float newDebt = Wallet.CurrentDebt - loanData.GetInstallment();
+            float newDebt = wallet.CurrentDebt - loanData.GetInstallment();
             float newTotal = loanData.TotalValue - loanData.GetInstallment();
             int newTime = loanData.TimeValue - 1;
-            Wallet.CurrentDebt = newDebt;
+            wallet.CurrentDebt = newDebt;
 
             return new LoanData(newTotal, loanData.PrincipalValue, loanData.RateValue, newTime, loanData.LoanType);
             }catch (Exception ex){
-            Debug.LogError("Error making a loan: " + ex.Message)
+            Debug.LogError("Error paying a installment: " + ex.Message);
         }
     }
 }
