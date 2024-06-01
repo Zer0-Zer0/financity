@@ -1,28 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 class CellphoneAppManager : MonoBehaviour
 {
-    [SerializeField] Transform AppsParent;
-    List<GenericApp> _appsList;
-    public Button MenuButton;
+    [System.Serializable]
+    struct GenericApp{
+        [SerializeField] GameObject AppPanel;
+        [SerializeField] internal Button AppButton;
+
+        internal void ShowAppPanel(){
+            AppPanel.SetActive(true);
+        }
+
+        internal void HideAppPanel(){
+            AppPanel.SetActive(false);
+        }
+    }
+
+    [SerializeField] List<GenericApp> _appsList;
+    [SerializeField] Button MenuButton;
 
     void Awake()
     {
-        MoveAppsToList();
+        SubscribeAppsToEvents();
     }
 
     ///<summary>
-    ///Transfers all children from the given object to the _appsList (they NEED to have the GenericApp script)
+    ///Subscribes the functions from the struct GenericApp to Button's events
     ///</summary>
-    void MoveAppsToList(){
-        foreach (Transform child in AppsParent)
+    void SubscribeAppsToEvents(){
+        foreach (GenericApp app in _appsList)
         {
-            GenericApp app = child.GetComponent<GenericApp>();
-            _appsList.Add(app);
+            app.AppButton.onClick.AddListener(app.ShowAppPanel);
+            MenuButton.onClick.AddListener(app.HideAppPanel);
         }
     }
 }
