@@ -6,10 +6,8 @@ using TMPro;
 
 public class GenericApp : MonoBehaviour
 {
-    public RectTransform rectTransform;
-
+    private RectTransform rectTransform;
     public GameObject AppPanel;
-    public Button AppButton;
 
     void Awake(){
         rectTransform = transform.GetComponent<RectTransform>();
@@ -25,5 +23,9 @@ public class GenericApp : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ShowAppPanel(){
+        AppPanel.SetActive(true);
     }
 }

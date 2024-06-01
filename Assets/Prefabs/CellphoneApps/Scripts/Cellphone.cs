@@ -22,14 +22,6 @@ public class Cellphone : MonoBehaviour
         }
     }
 
-    //Hides all the app panels
-    public void HideAllApps(){
-        foreach (GenericApp app in AppsList)
-        {
-            app.AppPanel.SetActive(false);
-        }
-    }
-
     void Start()
     {
     }
@@ -38,4 +30,13 @@ public class Cellphone : MonoBehaviour
     {
         
     }
+
+        //Hides all the app panels
+    public void HideAllApps(){
+        foreach (GenericApp app in AppsList)
+        {
+            app.AppPanel.SetActive(false);
+        }
+    }
+
 }
