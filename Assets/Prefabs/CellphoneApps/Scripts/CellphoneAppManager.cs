@@ -7,8 +7,8 @@ class CellphoneAppManager : MonoBehaviour
 {
     [System.Serializable]
     struct GenericApp{
-        [SerializeField] GameObject AppPanel;
         [SerializeField] internal Button AppButton;
+        [SerializeField] GameObject AppPanel;
 
         internal void ShowAppPanel(){
             AppPanel.SetActive(true);
