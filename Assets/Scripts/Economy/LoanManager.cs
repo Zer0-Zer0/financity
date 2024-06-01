@@ -91,12 +91,18 @@ public class LoanManager : MonoBehaviour
     /// If the new debt exceeds the current maximum debt, an error is logged.
     /// </remarks>
     public static void MakeALoan(WalletManager Wallet, LoanData loanData){
+        try
+        {
         float newDebt = Wallet.CurrentDebt + loanData.TotalValue;
+
         if(newDebt > Wallet.CurrentMaxDebt){
-            Debug.LogError("ERRO! Tentativa de fazer empréstimo quando débito máximo é menor que o débito atual, adicione mais condicionais");
-        }else{
-            Wallet.CurrentDebt = newDebt;
-            Wallet.CurrentDigitalMoney += loanData.PrincipalValue; 
+            throw new Exception("New debt exceeds the current maximum debt");
+        }
+
+        Wallet.CurrentDebt = newDebt;
+        Wallet.CurrentDigitalMoney += loanData.PrincipalValue; 
+        }catch (Exception ex){
+            Debug.LogError("Error making a loan: " + ex.Message)
         }
     }
 
@@ -112,15 +118,18 @@ public class LoanManager : MonoBehaviour
     /// </remarks>
     /// <returns>A LoanData struct with the calculated values after paying the installment.</returns>
     public static LoanData PayAInstallment(WalletManager Wallet, LoanData loanData){
-        if (loanData.GetInstallment() > Wallet.CurrentDigitalMoney){
-            Debug.LogError("ERRO! Tentativa de pagar parcela de empréstimo quando valor digital atual é menor que a parcela, adicione mais condicionais");
-        }else{
+        try{
+            if (loanData.GetInstallment() > Wallet.CurrentDigitalMoney){
+                throw new Exception("Insufficient digital money to pay the installment");
+            }
             float newDebt = Wallet.CurrentDebt - loanData.GetInstallment();
             float newTotal = loanData.TotalValue - loanData.GetInstallment();
             int newTime = loanData.TimeValue - 1;
             Wallet.CurrentDebt = newDebt;
 
             return new LoanData(newTotal, loanData.PrincipalValue, loanData.RateValue, newTime, loanData.LoanType);
+            }catch (Exception ex){
+            Debug.LogError("Error making a loan: " + ex.Message)
         }
     }
 }
