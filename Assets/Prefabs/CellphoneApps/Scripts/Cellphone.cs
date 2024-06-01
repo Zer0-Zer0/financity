@@ -9,7 +9,7 @@ public class Cellphone : MonoBehaviour
 
     [SerializeField] private Button MenuButton;
 
-    public List<GenericApp> AppsList;
+    private List<GenericApp> AppsList;
 
     void Awake()
     {
