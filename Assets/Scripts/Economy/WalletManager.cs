@@ -18,12 +18,13 @@ class WalletManager : MonoBehaviour
         }
         set{
             OnDigitalMoneyUpdate.Invoke();
-
-            if(value > _currentDigitalMoney){
+            if(value < 0f){
+                Debug.LogError("ERRO! Tentativa de comprar algo com dinheiro digital e valor ficou negativado, alguém esqueceu de um if em algum lugar <-<");
+            }
+            else if(value > _currentDigitalMoney){
                 OnDigitalMoneyIncrease.Invoke();
             }
-            else if (value < _currentDigitalMoney)
-            {
+            else if (value < _currentDigitalMoney){
                 OnDigitalMoneyReduce.Invoke();
             }
             _currentDigitalMoney = value;
@@ -41,11 +42,10 @@ class WalletManager : MonoBehaviour
             if(value < 0f){
                 Debug.LogError("ERRO! Tentativa de comprar algo com dinheiro físico e valor ficou negativado, alguém esqueceu de um if em algum lugar <-<");
             }
-            if(value > _currentPhysicalMoney){
+            else if(value > _currentPhysicalMoney){
                 OnPhysicalMoneyIncrease.Invoke();
             }
-            else if (value < _currentPhysicalMoney)
-            {
+            else if (value < _currentPhysicalMoney){
                 OnPhysicalMoneyReduce.Invoke();
             }
             _currentPhysicalMoney = value;
@@ -62,14 +62,14 @@ class WalletManager : MonoBehaviour
             OnDebtUpdate.Invoke();
             if(value < 0f){
                 Debug.LogError("ERRO! Tentativa de ter um débito negativo, alguém esqueceu de um if em algum lugar <-<");
-            }else if (value > CurrentMaxDebt){
+            }
+            else if (value > CurrentMaxDebt){
                 Debug.LogError("ERRO! Tentativa de ter um débito maior que o permitido, alguém esqueceu de um if em algum lugar <-<");
             }
             if(value > _currentDebt){
                 OnDebtIncrease.Invoke();
             }
-            else if (value < _currentDebt)
-            {
+            else if (value < _currentDebt){
                 OnDebtReduce.Invoke();
             }
             _currentDebt = value;
@@ -90,8 +90,7 @@ class WalletManager : MonoBehaviour
             if(value > _currentMaxDebt){
                 OnMaxDebtIncrease.Invoke();
             }
-            else if (value < _currentMaxDebt)
-            {
+            else if (value < _currentMaxDebt){
                 OnMaxDebtReduce.Invoke();
             }
             _currentMaxDebt = value;
