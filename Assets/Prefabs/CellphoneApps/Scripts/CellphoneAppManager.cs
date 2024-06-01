@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Cellphone : MonoBehaviour
+public class CellphoneAppManager : MonoBehaviour
 {
     [SerializeField] Transform AppsParent;
     List<GenericApp> _appsList;
+
+    public Action MenuButtonPressed;
 
     void Awake()
     {
