@@ -5,11 +5,8 @@ using UnityEngine.UI;
 
 public class Cellphone : MonoBehaviour
 {
-    public Transform AppsParent;
-
-    [SerializeField] private Button MenuButton;
-
-    private List<GenericApp> AppsList;
+    [SerializeField] Transform AppsParent;
+    List<GenericApp> _appsList;
 
     void Awake()
     {
@@ -18,7 +15,7 @@ public class Cellphone : MonoBehaviour
         foreach (Transform child in AppsParent)
         {
             GenericApp app = child.GetComponent<GenericApp>();
-            AppsList.Add(app);
+            _appsList.Add(app);
         }
     }
 
@@ -33,7 +30,7 @@ public class Cellphone : MonoBehaviour
 
         //Hides all the app panels
     public void HideAllApps(){
-        foreach (GenericApp app in AppsList)
+        foreach (GenericApp app in _appsList)
         {
             app.AppPanel.SetActive(false);
         }
