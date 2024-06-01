@@ -6,21 +6,21 @@ using UnityEngine.UI;
 class CellphoneAppManager : MonoBehaviour
 {
     [System.Serializable]
-    struct GenericApp{
-        [SerializeField] internal Button AppButton;
-        [SerializeField] GameObject AppPanel;
+    readonly struct GenericApp{
+        [SerializeField] readonly internal Button _appButton;
+        [SerializeField] readonly GameObject _appPanel;
 
-        internal void ShowAppPanel(){
-            AppPanel.SetActive(true);
+        internal readonly void ShowAppPanel(){
+            _appPanel.SetActive(true);
         }
 
-        internal void HideAppPanel(){
-            AppPanel.SetActive(false);
+        internal readonly void HideAppPanel(){
+            _appPanel.SetActive(false);
         }
     }
 
-    [SerializeField] List<GenericApp> _appsList;
-    [SerializeField] Button MenuButton;
+    [SerializeField] readonly List<GenericApp> _appsList;
+    [SerializeField] readonly Button MenuButton;
 
     void Awake()
     {
@@ -33,7 +33,7 @@ class CellphoneAppManager : MonoBehaviour
     void SubscribeAppsToEvents(){
         foreach (GenericApp app in _appsList)
         {
-            app.AppButton.onClick.AddListener(app.ShowAppPanel);
+            app._appButton.onClick.AddListener(app.ShowAppPanel);
             MenuButton.onClick.AddListener(app.HideAppPanel);
         }
     }
