@@ -7,9 +7,12 @@ using UnityEngine;
 public class Stock : MonoBehaviour
 {
     public string stockName = "Stock";
-    public float currentValue, currentDelay;//I do not want this visible in the editor, change to higher level of protection
-    public float initialValue, instability, delay, maxValue, minValue;
-    public int minTendency = 1, maxTendency = 1;
+    
+    [HideInInspector] public float currentValue, currentDelay;
+    [SerializeField] private float initialValue, instability, delay, maxValue, minValue;
+
+
+    [SerializeField] private int minTendency = 1, maxTendency = 1;
     int tendencyAmount;
 
     private float highShadow, lowShadow, openValue, closeValue, tendency;
