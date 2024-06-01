@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System;
 
 public class CandlestickChart : MonoBehaviour
 {
     public CandleRender candlePrefab;
     public List<CandleRender> candles = new List<CandleRender>();
     public Stock representedStock;
+
+    public TMP_Text CurrentValueText;
 
     public float CandlePadding = 30f;
     public int maxCandles = 25;
@@ -18,6 +22,10 @@ public class CandlestickChart : MonoBehaviour
     void Start()
     {
         representedStock.OnStockUpdate += HandleStockUpdate;
+    }
+
+    void Update(){
+        CurrentValueText.text = string.Format("BRL {0:N4}", representedStock.currentValue);
     }
 
     void RefreshCandleScale()

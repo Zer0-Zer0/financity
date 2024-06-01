@@ -7,7 +7,7 @@ using UnityEngine;
 public class Stock : MonoBehaviour
 {
     public string stockName = "Stock";
-    float currentValue, currentDelay;
+    public float currentValue, currentDelay;//I do not want this visible in the editor, change to higher level of protection
     public float initialValue, instability, delay, maxValue, minValue;
     public int minTendency = 1, maxTendency = 1;
     int tendencyAmount;
