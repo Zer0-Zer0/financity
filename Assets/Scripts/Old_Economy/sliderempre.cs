@@ -29,7 +29,7 @@ public class sliderempre : MonoBehaviour
 
     public bancocobrar banco;
 
-    public AnimaObjeto celular;
+    //public AnimaObjeto celular;
 
     private string metodo;
 
