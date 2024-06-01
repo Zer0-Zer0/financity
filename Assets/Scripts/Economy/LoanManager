@@ -5,7 +5,14 @@ using UnityEngine.Events;
 
 public class LoanManager : MonoBehaviour
 {
-    public UnityEvent OnLoanMade;
+    [Engine.SerializeField]
+    public struct LoanData{
+        internal readonly float TotalValue;
+        internal readonly float PrincipalValue;
+        internal readonly float RateValue;
+        internal readonly float InstallmentValue;
+        internal readonly int TimeValue;
+    }
 
     /// <summary>
     /// Calculates the compound interest based on the principal, rate, and time.
@@ -14,11 +21,12 @@ public class LoanManager : MonoBehaviour
     /// <param name="rate">The interest rate per period.</param>
     /// <param name="time">The number of periods the interest is applied.</param>
     /// <returns>The total value after applying compound interest.</returns>
-    public static float CalculateCompoundInterest(float principal, float rate, int time){
+    public static LoanData CalculateCompoundInterest(float principal, float rate, int time){
         rate += 1;
         float _compoundInterest = Mathf.Pow(rate, time);
         float _totalValue = principal * _compoundInterest;
-        return _totalValue;
+        float _installmentValue = _totalValue/time;
+        return new LoanData(_totalValue, principal, rate, _installmentValue, time);
     }
 
     /// <summary>
@@ -27,9 +35,10 @@ public class LoanManager : MonoBehaviour
     /// <param name="principal">The initial amount of money.</param>
     /// <param name="rate">The interest rate per period.</param>
     /// <returns>The total value after applying simple interest.</returns>
-    public static float CalculateSimpleInterest(float principal, float rate){
+    public static LoanData CalculateSimpleInterest(float principal, float rate, float time){
         rate += 1;
         float _totalValue = principal * rate;
-        return _totalValue
+        float _installmentValue = _totalValue/time;
+        return new LoanData(_totalValue, principal, rate, _installmentValue, time);
     }
 }
