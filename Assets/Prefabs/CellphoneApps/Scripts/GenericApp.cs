@@ -8,7 +8,7 @@ public class GenericApp : MonoBehaviour
     public GameObject AppPanel;
 
     void Awake(){
-        _appManager.OnMenuButtonPress.AddListener(HideAppPanel);
+        _appManager.MenuButton.onClick.AddListener(HideAppPanel);
     }
 
     public void ShowAppPanel(){

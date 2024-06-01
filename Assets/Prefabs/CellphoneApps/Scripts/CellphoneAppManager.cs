@@ -8,10 +8,14 @@ public class CellphoneAppManager : MonoBehaviour
 {
     [SerializeField] Transform AppsParent;
     List<GenericApp> _appsList;
-    public UnityEvent OnMenuButtonPress;
+    public Button MenuButton;
 
     void Awake()
     {
+        MoveAppsToList();
+    }
+
+    void MoveAppsToList(){
         //Transfers all children (they NEED to have the GenericApp script)from the given object to a list
         foreach (Transform child in AppsParent)
         {
@@ -19,15 +23,4 @@ public class CellphoneAppManager : MonoBehaviour
             _appsList.Add(app);
         }
     }
-    public void MenuButtonPressed(){
-        OnMenuButtonPress?.Invoke();
-    }
-
-    public void HideAllApps(){
-        foreach (GenericApp app in _appsList)
-        {
-            app.AppPanel.SetActive(false);
-        }
-    }
-
 }
