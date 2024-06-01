@@ -110,6 +110,7 @@ public class LoanManager : MonoBehaviour
     /// If the digital money is enough, it deducts the installment amount from the current debt in the wallet and updates the total loan value and remaining time.
     /// If the digital money is insufficient, an error message is logged.
     /// </remarks>
+    /// <returns>A LoanData struct with the calculated values after paying the installment.</returns>
     public static LoanData PayAInstallment(WalletManager Wallet, LoanData loanData){
         if (loanData.GetInstallment() > Wallet.CurrentDigitalMoney){
             Debug.LogError("ERRO! Tentativa de pagar parcela de empréstimo quando valor digital atual é menor que a parcela, adicione mais condicionais");
