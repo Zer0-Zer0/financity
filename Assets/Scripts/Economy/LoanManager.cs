@@ -11,7 +11,6 @@ public class LoanManager : MonoBehaviour
     /// <param name="TotalValue">The total value of the loan.</param>
     /// <param name="PrincipalValue">The principal value of the loan.</param>
     /// <param name="RateValue">The interest rate of the loan, in percent.</param>
-    /// <param name="InstallmentValue">The installment value of the loan.</param>
     /// <param name="TimeValue">The time duration of the loan.</param>
     [System.Serializeable]
     public struct LoanData{
@@ -19,7 +18,14 @@ public class LoanManager : MonoBehaviour
         internal readonly float PrincipalValue;
         internal readonly float RateValue;
         internal readonly int TimeValue;
-        internal readonly float InstallmentValue;
+        internal readonly float GetInstallment(){
+            return TotalValue/TimeValue;
+        }
+    }
+
+    public static enum LoanType{
+        SimpleInterest,
+        CompountInterest
     }
 
     /// <summary>
@@ -33,8 +39,7 @@ public class LoanManager : MonoBehaviour
         rate += 1;
         float _compoundInterest = Mathf.Pow(rate, time);
         float _totalValue = principal * _compoundInterest;
-        float _installmentValue = _totalValue/time;
-        return new LoanData(_totalValue, principal, rate, _installmentValue, time);
+        return new LoanData(_totalValue, principal, rate, time);
     }
 
     /// <summary>
@@ -47,7 +52,16 @@ public class LoanManager : MonoBehaviour
     public static LoanData CalculateSimpleInterest(float principal, float rate, int time){
         rate += 1;
         float _totalValue = principal * rate;
-        float _installmentValue = _totalValue/time;
-        return new LoanData(_totalValue, principal, rate, _installmentValue, time);
+        return new LoanData(_totalValue, principal, rate, time);
+    }
+
+    public static void MakeALoan(WalletManager Wallet, LoanData loanData, LoanType loanType){
+        switch (loanType){
+            case LoanType.SimpleInterest:
+            
+            break;
+            case LoanType.CompountInterest:
+            break;
+        }
     }
 }
