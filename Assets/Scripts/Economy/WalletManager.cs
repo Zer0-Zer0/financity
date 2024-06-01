@@ -3,15 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-class WalletManager : MonoBehaviour
+/// <summary>
+/// Manages digital and physical money, debt, and debt limits.
+/// </summary>
+public class WalletManager : MonoBehaviour
 {
+    /// <summary>
+    /// Initial value for digital money.
+    /// </summary>
     [SerializeField] float _initialDigitalMoney = 800f;
+
+    /// <summary>
+    /// Initial value for physical money.
+    /// </summary>
     [SerializeField] float _initialPhysicalMoney = 0f;
+
+    /// <summary>
+    /// Initial value for debt.
+    /// </summary>
     [SerializeField] float _initialDebt = 800f;
+
+    /// <summary>
+    /// Initial value for maximum debt.
+    /// </summary>
     [SerializeField] float _initialMaxDebt = 800f;
 
     float _currentDigitalMoney;
 
+    /// <summary>
+    /// Gets or sets the current digital money.
+    /// </summary>
     public float CurrentDigitalMoney{
         get{
             return _currentDigitalMoney;
@@ -33,6 +54,9 @@ class WalletManager : MonoBehaviour
 
     float _currentPhysicalMoney;
 
+    /// <summary>
+    /// Gets or sets the current physical money.
+    /// </summary>
     public float CurrentPhysicalMoney{
         get{
             return _currentPhysicalMoney;
@@ -54,6 +78,9 @@ class WalletManager : MonoBehaviour
 
     float _currentDebt;
 
+    /// <summary>
+    /// Gets or sets the current debt.
+    /// </summary>
     public float CurrentDebt{
         get{
             return _currentDebt;
@@ -77,7 +104,10 @@ class WalletManager : MonoBehaviour
     }
 
     float _currentMaxDebt;
-
+    
+    /// <summary>
+    /// Gets or sets the current maximum debt.
+    /// </summary>
     public float CurrentMaxDebt{
         get{
             return _currentMaxDebt;
@@ -97,22 +127,29 @@ class WalletManager : MonoBehaviour
         }
     }
 
+    // Events for digital money
     public UnityEvent OnDigitalMoneyIncrease;
     public UnityEvent OnDigitalMoneyUpdate;
     public UnityEvent OnDigitalMoneyReduce;
 
+    // Events for physical money
     public UnityEvent OnPhysicalMoneyIncrease;
     public UnityEvent OnPhysicalMoneyUpdate;
     public UnityEvent OnPhysicalMoneyReduce;
 
+    // Events for debt
     public UnityEvent OnDebtIncrease;
     public UnityEvent OnDebtUpdate;
     public UnityEvent OnDebtReduce;
 
+    // Events for max debt
     public UnityEvent OnMaxDebtIncrease;
     public UnityEvent OnMaxDebtUpdate;
     public UnityEvent OnMaxDebtReduce;
 
+    /// <summary>
+    /// Initializes the wallet with initial values.
+    /// </summary>
     void Start(){
         CurrentDigitalMoney = _initialDigitalMoney;
         CurrentPhysicalMoney = _initialPhysicalMoney;

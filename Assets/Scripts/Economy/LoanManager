@@ -3,13 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-class LoanManager : MonoBehaviour
+public class LoanManager : MonoBehaviour
 {
     public UnityEvent OnLoanMade;
 
-    public static Tuple<float> CalculateMortgage(float MortgageValue, int NumberOfInstallments, float DownPayment = 0f, float Insterest = 0f){
-        float _principalValue = MortgageValue - DownPayment;
-        float _installmentValue = _principalValue / NumberOfInstallments;
-        return (_principalValue, _installmentValue);
+    /// <summary>
+    /// Calculates the compound interest based on the principal, rate, and time.
+    /// </summary>
+    /// <param name="principal">The initial amount of money.</param>
+    /// <param name="rate">The interest rate per period.</param>
+    /// <param name="time">The number of periods the interest is applied.</param>
+    /// <returns>The total value after applying compound interest.</returns>
+    public static float CalculateCompoundInterest(float principal, float rate, int time){
+        rate += 1;
+        float _compoundInterest = Mathf.Pow(rate, time);
+        float _totalValue = principal * _compoundInterest;
+        return _totalValue;
+    }
+
+    /// <summary>
+    /// Calculates the simple interest based on the principal and rate.
+    /// </summary>
+    /// <param name="principal">The initial amount of money.</param>
+    /// <param name="rate">The interest rate per period.</param>
+    /// <returns>The total value after applying simple interest.</returns>
+    public static float CalculateSimpleInterest(float principal, float rate){
+        rate += 1;
+        float _totalValue = principal * rate;
+        return _totalValue
     }
 }
