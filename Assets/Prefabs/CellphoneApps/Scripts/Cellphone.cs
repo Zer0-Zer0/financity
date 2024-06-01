@@ -11,7 +11,6 @@ public class Cellphone : MonoBehaviour
     void Awake()
     {
         //Transfers all children (they NEED to have the GenericApp script)from the given object to a list
-        
         foreach (Transform child in AppsParent)
         {
             GenericApp app = child.GetComponent<GenericApp>();
@@ -28,7 +27,6 @@ public class Cellphone : MonoBehaviour
         
     }
 
-        //Hides all the app panels
     public void HideAllApps(){
         foreach (GenericApp app in _appsList)
         {

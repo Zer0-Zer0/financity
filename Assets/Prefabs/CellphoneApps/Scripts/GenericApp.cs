@@ -6,23 +6,11 @@ using TMPro;
 
 public class GenericApp : MonoBehaviour
 {
-    private RectTransform rectTransform;
+    RectTransform _rect;
     public GameObject AppPanel;
 
     void Awake(){
-        rectTransform = transform.GetComponent<RectTransform>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _rect = transform.GetComponent<RectTransform>();
     }
 
     public void ShowAppPanel(){
