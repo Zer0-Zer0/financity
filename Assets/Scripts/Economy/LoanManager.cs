@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class LoanManager : MonoBehaviour
 {
@@ -32,55 +29,86 @@ public class LoanManager : MonoBehaviour
     /// <param name="loanType">The type of loan.</param>
     [System.Serializable]
     public struct LoanData{
-        internal readonly float Total;
-        internal readonly float Principal;
-        internal readonly float Rate;
-        internal readonly int Installments;
-        internal readonly LoanType loanType;
+        public readonly float Total;
+        public readonly float Principal;
+        public readonly float Rate;
+        public readonly int Installments;
+        public readonly LoanType loanType;
 
-        public LoanData(float total, float principal, float rate, int installments, LoanType type)
+        private float _remainingValue;
+        public float RemainingValue{
+            get{
+                return _remainingValue;
+            }
+            set{
+                _remainingValue = value;
+            }
+        }
+
+        private float _remainingInstallments;
+        public float RemainingInstallments{
+            get{
+                return _remainingInstallments;
+            }
+            set{
+                _remainingInstallments = value;
+            }
+        }
+
+        public LoanData(float principal, float rate, int installments, LoanType type, float total = 0)
         {
             Total = total;
+            if (total == 0){
+                switch(type){
+                    case LoanType.SimpleInterest:
+                    Total = CalculateSimpleInterest(principal, rate);
+                    break;
+                    case LoanType.CompoundInterest:
+                    Total = CalculateCompoundInterest(principal, rate, installments);
+                    break;
+                }
+            }
+            _remainingValue = total;
             Principal = principal;
             Rate = rate;
             Installments = installments;
             loanType = type;
+            _remainingInstallments= installments;
         }
 
         /// <summary>
         /// Calculates the installment amount for the loan.
         /// </summary>
         /// <returns>The installment amount for the loan.</returns>
-        internal float GetInstallment(){
+        internal float GetInstallmentValue(){
             return Total/Installments;
         }
-    }
 
-    /// <summary>
-    /// Calculates the compound interest based on the principal, rate, and installments.
-    /// </summary>
-    /// <param name="principal">The loaned amount of money, without the interest.</param>
-    /// <param name="rate">The interest rate per period, in percent.</param>
-    /// <param name="installments">The number of periods the interest is applied.</param>
-    /// <returns>A LoanData struct with the calculated values after applying compound interest.</returns>
-    public static LoanData CalculateCompoundInterest(float principal, float rate, int installments){
-        float _calculatedRate = rate + 1;
-        float _compoundInterest = Mathf.Pow(_calculatedRate, installments);
-        float _total = principal * _compoundInterest;
-        return new LoanData(_total, principal, rate, installments, LoanType.CompoundInterest);
-    }
+        /// <summary>
+        /// Calculates the compound interest based on the principal, rate, and installments.
+        /// </summary>
+        /// <param name="principal">The loaned amount of money, without the interest.</param>
+        /// <param name="rate">The interest rate per period, in percent.</param>
+        /// <param name="installments">The number of periods the interest is applied.</param>
+        /// <returns>A LoanData struct with the calculated values after applying compound interest.</returns>
+        public static float CalculateCompoundInterest(float principal, float rate, int installments){
+            float _calculatedRate = rate + 1;
+            float _compoundInterest = Mathf.Pow(_calculatedRate, installments);
+            float _total = principal * _compoundInterest;
+            return _total;
+        }
 
-    /// <summary>
-    /// Calculates the simple interest based on the principal and rate.
-    /// </summary>
-    /// <param name="principal">The loaned amount of money, without the interest.</param>
-    /// <param name="rate">The interest rate per period, in percent.</param>
-    /// <param name="installments">The number of periods the interest is applied.</param>
-    /// <returns>A LoanData struct with the calculated values after applying simple interest.</returns>
-    public static LoanData CalculateSimpleInterest(float principal, float rate, int installments){
-        float _calculatedRate = rate + 1;
-        float _total = principal * _calculatedRate;
-        return new LoanData(_total, principal, rate, installments, LoanType.SimpleInterest);
+        /// <summary>
+        /// Calculates the simple interest based on the principal and rate.
+        /// </summary>
+        /// <param name="principal">The loaned amount of money, without the interest.</param>
+        /// <param name="rate">The interest rate per period, in percent.</param>
+        /// <returns>A LoanData struct with the calculated values after applying simple interest.</returns>
+        public static float CalculateSimpleInterest(float principal, float rate){
+            float _calculatedRate = rate + 1;
+            float _total = principal * _calculatedRate;
+            return _total;
+        }
     }
 
     /// <summary>
@@ -120,19 +148,36 @@ public class LoanManager : MonoBehaviour
     /// <returns>A LoanData struct with the calculated values after paying the installment.</returns>
     public static LoanData PayAInstallment(WalletManager wallet, LoanData loanData){
         try{
-            if (loanData.GetInstallment() > wallet.CurrentDigitalMoney){
+            if (loanData.GetInstallmentValue() > wallet.CurrentDigitalMoney){
                 throw new Exception("Insufficient digital money to pay the installment");
             }
-            float newDebt = wallet.CurrentDebt - loanData.GetInstallment();
-            float newTotal = loanData.Total - loanData.GetInstallment();
-            int newInstallments = loanData.Installments - 1;
-            wallet.CurrentDebt = newDebt;
 
-            return new LoanData(newTotal, loanData.Principal, loanData.Rate, newInstallments, loanData.loanType);
+            wallet.CurrentDebt -= loanData.GetInstallmentValue();
+            loanData.RemainingValue -= loanData.GetInstallmentValue();
+            loanData.RemainingInstallments --;
             }catch (Exception ex){
             Debug.LogError("Error paying a installment: " + ex.Message);
         }
 
         return loanData;
+    }
+
+    /// <summary>
+    /// Generates a random loan with specified parameters.
+    /// </summary>
+    /// <param name="minPrincipal">The minimum principal amount for the loan.</param>
+    /// <param name="maxPrincipal">The maximum principal amount for the loan.</param>
+    /// <param name="minRate">The minimum interest rate for the loan.</param>
+    /// <param name="maxRate">The maximum interest rate for the loan.</param>
+    /// <param name="minInstallments">The minimum number of installments for the loan.</param>
+    /// <param name="maxInstallments">The maximum number of installments for the loan.</param>
+    /// <param name="type">The type of the loan.</param>
+    /// <returns>A new LoanData object with randomly generated principal, rate, installments, and type.</returns>
+    public static LoanData RandomLoan(LoanType type, float minPrincipal = 300, float maxPrincipal = 800, float minRate = 5, float maxRate = 15, int minInstallments = 1, int maxInstallments = 3){
+        float _principal = UnityEngine.Random.Range(minPrincipal, maxPrincipal);
+        float _rate = UnityEngine.Random.Range(minRate,maxRate);
+        int _installments = UnityEngine.Random.Range(minInstallments, maxInstallments);
+
+        return new LoanData(_principal, _rate, _installments, type);
     }
 }

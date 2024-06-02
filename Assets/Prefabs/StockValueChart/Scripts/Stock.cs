@@ -29,7 +29,6 @@ public class Stock : MonoBehaviour
     {
         currentValue = openValue = lowShadow = initialValue;
         currentDelay = delay;
-        //instability = Mathf.Sqrt(instability); Não ative :(
     }
     private void FixedUpdate()
     {
