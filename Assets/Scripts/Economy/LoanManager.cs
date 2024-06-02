@@ -22,27 +22,27 @@ public class LoanManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Represents data for a loan, including total value, principal value, interest rate, installment value, and time value.
+    /// Represents data for a loan, including total value, principal value, interest rate, installment value, and installments value.
     /// </summary>
-    /// <param name="TotalValue">The total value of the loan.</param>
-    /// <param name="PrincipalValue">The principal value of the loan.</param>
-    /// <param name="RateValue">The interest rate of the loan, in percent.</param>
-    /// <param name="TimeValue">The time duration of the loan.</param>
+    /// <param name="Total">The total value of the loan.</param>
+    /// <param name="Principal">The principal value of the loan.</param>
+    /// <param name="Rate">The interest rate of the loan, in percent.</param>
+    /// <param name="Installments">The installments duration of the loan.</param>
     /// <param name="loanType">The type of loan.</param>
     [System.Serializable]
     public struct LoanData{
-        internal readonly float TotalValue;
-        internal readonly float PrincipalValue;
-        internal readonly float RateValue;
-        internal readonly int TimeValue;
+        internal readonly float Total;
+        internal readonly float Principal;
+        internal readonly float Rate;
+        internal readonly int Installments;
         internal readonly LoanType loanType;
 
-        public LoanData(float totalValue, float principalValue, float rateValue, int timeValue, LoanType type)
+        public LoanData(float total, float principal, float rate, int installments, LoanType type)
         {
-            TotalValue = totalValue;
-            PrincipalValue = principalValue;
-            RateValue = rateValue;
-            TimeValue = timeValue;
+            Total = total;
+            Principal = principal;
+            Rate = rate;
+            Installments = installments;
             loanType = type;
         }
 
@@ -51,22 +51,22 @@ public class LoanManager : MonoBehaviour
         /// </summary>
         /// <returns>The installment amount for the loan.</returns>
         internal float GetInstallment(){
-            return TotalValue/TimeValue;
+            return Total/Installments;
         }
     }
 
     /// <summary>
-    /// Calculates the compound interest based on the principal, rate, and time.
+    /// Calculates the compound interest based on the principal, rate, and installments.
     /// </summary>
     /// <param name="principal">The loaned amount of money, without the interest.</param>
     /// <param name="rate">The interest rate per period, in percent.</param>
-    /// <param name="time">The number of periods the interest is applied.</param>
+    /// <param name="installments">The number of periods the interest is applied.</param>
     /// <returns>A LoanData struct with the calculated values after applying compound interest.</returns>
-    public static LoanData CalculateCompoundInterest(float principal, float rate, int time){
+    public static LoanData CalculateCompoundInterest(float principal, float rate, int installments){
         float _calculatedRate = rate + 1;
-        float _compoundInterest = Mathf.Pow(_calculatedRate, time);
-        float _totalValue = principal * _compoundInterest;
-        return new LoanData(_totalValue, principal, rate, time, LoanType.CompoundInterest);
+        float _compoundInterest = Mathf.Pow(_calculatedRate, installments);
+        float _total = principal * _compoundInterest;
+        return new LoanData(_total, principal, rate, installments, LoanType.CompoundInterest);
     }
 
     /// <summary>
@@ -74,12 +74,12 @@ public class LoanManager : MonoBehaviour
     /// </summary>
     /// <param name="principal">The loaned amount of money, without the interest.</param>
     /// <param name="rate">The interest rate per period, in percent.</param>
-    /// <param name="time">The number of periods the interest is applied.</param>
+    /// <param name="installments">The number of periods the interest is applied.</param>
     /// <returns>A LoanData struct with the calculated values after applying simple interest.</returns>
-    public static LoanData CalculateSimpleInterest(float principal, float rate, int time){
+    public static LoanData CalculateSimpleInterest(float principal, float rate, int installments){
         float _calculatedRate = rate + 1;
-        float _totalValue = principal * _calculatedRate;
-        return new LoanData(_totalValue, principal, rate, time, LoanType.SimpleInterest);
+        float _total = principal * _calculatedRate;
+        return new LoanData(_total, principal, rate, installments, LoanType.SimpleInterest);
     }
 
     /// <summary>
@@ -93,14 +93,14 @@ public class LoanManager : MonoBehaviour
     public static void MakeALoan(WalletManager wallet, LoanData loanData){
         try
         {
-        float newDebt = wallet.CurrentDebt + loanData.TotalValue;
+        float newDebt = wallet.CurrentDebt + loanData.Total;
 
         if(newDebt > wallet.CurrentMaxDebt){
             throw new UnassignedReferenceException("New debt exceeds the current maximum debt");
         }
 
         wallet.CurrentDebt = newDebt;
-        wallet.CurrentDigitalMoney += loanData.PrincipalValue; 
+        wallet.CurrentDigitalMoney += loanData.Principal; 
         }catch (UnassignedReferenceException ex){
             Debug.LogError("Error making a loan: " + ex.Message);
         }
@@ -113,7 +113,7 @@ public class LoanManager : MonoBehaviour
     /// <param name="loanData">The loan data containing information about the installment to be paid.</param>
     /// <remarks>
     /// This method checks if the current digital money in the wallet is sufficient to pay the installment of the loan.
-    /// If the digital money is enough, it deducts the installment amount from the current debt in the wallet and updates the total loan value and remaining time.
+    /// If the digital money is enough, it deducts the installment amount from the current debt in the wallet and updates the total loan value and remaining installments.
     /// If the digital money is insufficient, an error message is logged.
     /// </remarks>
     /// <returns>A LoanData struct with the calculated values after paying the installment.</returns>
@@ -123,11 +123,11 @@ public class LoanManager : MonoBehaviour
                 throw new UnassignedReferenceException("Insufficient digital money to pay the installment");
             }
             float newDebt = wallet.CurrentDebt - loanData.GetInstallment();
-            float newTotal = loanData.TotalValue - loanData.GetInstallment();
-            int newTime = loanData.TimeValue - 1;
+            float newTotal = loanData.Total - loanData.GetInstallment();
+            int newInstallments = loanData.Installments - 1;
             wallet.CurrentDebt = newDebt;
 
-            return new LoanData(newTotal, loanData.PrincipalValue, loanData.RateValue, newTime, loanData.loanType);
+            return new LoanData(newTotal, loanData.Principal, loanData.Rate, newInstallments, loanData.loanType);
             }catch (UnassignedReferenceException ex){
             Debug.LogError("Error paying a installment: " + ex.Message);
         }
