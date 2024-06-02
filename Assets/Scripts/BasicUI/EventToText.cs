@@ -4,17 +4,12 @@ using UnityEngine;
 using TMPro;
 using System;
 
-[RequireComponent(typeof(TMP_Text))]
 public class EventToText : MonoBehaviour
 {
+    [SerializeField] TMP_Text _text;
     [SerializeField] string _textFormmating = "";
-    TMP_Text text;
-    void Awake(){
-        text = GetComponent<TMP_Text>();
-    }
-
     public void FloatToText(float value){
-        text.text = String.Format(_textFormmating, value);
+        _text.text = String.Format(_textFormmating, value);
     }
 
 }
