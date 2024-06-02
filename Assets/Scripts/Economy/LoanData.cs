@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Represents data for a loan, including total value, principal value, interest rate, installment value, and installments value.
@@ -19,6 +20,9 @@ public struct LoanData
     public readonly int Installments;
     public readonly LoanData.Type LoanType;
 
+    public static UnityEvent<LoanData> OnLoanPaymentComplete;
+    public static UnityEvent<LoanData> OnInstallmentPayment;
+
     private float _remainingValue;
     public float RemainingValue
     {
@@ -28,7 +32,22 @@ public struct LoanData
         }
         set
         {
-            _remainingValue = value;
+            try
+            {
+                if (value > 0)
+                {
+                    throw new Exception("Remaining loan value got netagive");
+                }
+                else if (value != 0)
+                {
+                    OnInstallmentPayment.Invoke(this);
+                }
+                _remainingInstallments = value;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("Error updating remaining loan value; " + ex.Message);
+            }
         }
     }
 
@@ -41,7 +60,22 @@ public struct LoanData
         }
         set
         {
-            _remainingInstallments = value;
+            try
+            {
+                if (value > 0)
+                {
+                    throw new Exception("Remaining Installments got netagive");
+                }
+                else if (value == 0)
+                {
+                    OnLoanPaymentComplete.Invoke(this);
+                }
+                _remainingInstallments = value;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("Error updating remaining installments; " + ex.Message);
+            }
         }
     }
 
@@ -126,7 +160,7 @@ public struct LoanData
         return $"Loan Data:\n" +
             $"Total Value: {Total}\n" +
             $"Principal Value: {Principal}\n" +
-            $"Interest Rate: {Rate*100}%\n" +
+            $"Interest Rate: {Rate * 100}%\n" +
             $"Installments: {Installments}\n" +
             $"Loan Type: {LoanType}\n" +
             $"Remaining Value: {_remainingValue}\n" +
