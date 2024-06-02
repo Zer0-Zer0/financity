@@ -15,11 +15,11 @@ using UnityEngine.Events;
 [System.Serializable]
 public struct LoanData
 {
-    public readonly float Total;
-    public readonly float Principal;
-    public readonly float Rate;
-    public readonly int Installments;
-    public readonly LoanData.Type LoanType;
+    public float Total;
+    public float Principal;
+    public float Rate;
+    public int Installments;
+    public LoanData.Type LoanType;
 
     public static UnityEvent<LoanData> OnLoanPaymentComplete;
     public static UnityEvent<LoanData> OnInstallmentPayment;
@@ -80,6 +80,11 @@ public struct LoanData
         }
     }
 
+    public float InstallmentValue{
+    get {
+        return Total / Installments;
+    }}
+
     /// <summary>
     /// Represents the type of loan, which can be Simple Interest or Compound Interest.
     /// </summary>
@@ -96,36 +101,51 @@ public struct LoanData
         CompoundInterest
     }
 
-    public LoanData(float principal, float rate, int installments, LoanData.Type type, float total = 0)
+    public LoanData(float principal, float rate, int installments, LoanData.Type type)
     {
-        Total = total;
-        if (total == 0)
+        switch (type)
         {
-            switch (type)
-            {
-                case LoanData.Type.SimpleInterest:
-                    Total = CalculateSimpleInterest(principal, rate);
-                    break;
-                case LoanData.Type.CompoundInterest:
-                    Total = CalculateCompoundInterest(principal, rate, installments);
-                    break;
-            }
+            case LoanData.Type.SimpleInterest:
+                this.Total = CalculateTotalFromSimpleInterest(principal, rate);
+                break;
+            default:
+                this.Total = CalculateTotalFromCompoundInterest(principal, rate, installments);
+                break;
         }
-        _remainingValue = Total;
-        Principal = principal;
-        Rate = rate;
-        Installments = installments;
-        LoanType = type;
-        _remainingInstallments = installments;
+
+        this._remainingValue = Total;
+        this.Principal = principal;
+        this.Rate = rate;
+        this.Installments = installments;
+        this.LoanType = type;
+        this._remainingInstallments = installments;
     }
 
     /// <summary>
-    /// Calculates the installment amount for the loan.
+    /// Calculates the principal amount from a given total amount and simple interest rate.
     /// </summary>
-    /// <returns>The installment amount for the loan.</returns>
-    internal float GetInstallmentValue()
+    /// <param name="total">The total amount.</param>
+    /// <param name="rate">The simple interest rate.</param>
+    /// <returns>The principal amount.</returns>
+    private static float CalculatePrincipalFromSimpleInterest(float total, float rate)
     {
-        return Total / Installments;
+        float _calculatedRate = rate + 1;
+        float _principal = total / _calculatedRate;
+        return _principal;
+    }
+
+    /// <summary>
+    /// Calculates the principal amount from a given total amount, compound interest rate, and number of installments.
+    /// </summary>
+    /// <param name="total">The total amount.</param>
+    /// <param name="rate">The compound interest rate.</param>
+    /// <param name="installments">The number of i
+    private static float CalculatePrincipalFromCompoundInterest(float total, float rate, int installments)
+    {
+        float _calculatedRate = rate + 1;
+        float _compoundInterest = Mathf.Pow(_calculatedRate, installments);
+        float _principal = total / _compoundInterest;
+        return _principal;
     }
 
     /// <summary>
@@ -135,7 +155,7 @@ public struct LoanData
     /// <param name="rate">The interest rate per period, in percent.</param>
     /// <param name="installments">The number of periods the interest is applied.</param>
     /// <returns>A LoanData struct with the calculated values after applying compound interest.</returns>
-    public static float CalculateCompoundInterest(float principal, float rate, int installments)
+    private static float CalculateTotalFromCompoundInterest(float principal, float rate, int installments)
     {
         float _calculatedRate = rate + 1;
         float _compoundInterest = Mathf.Pow(_calculatedRate, installments);
@@ -149,7 +169,7 @@ public struct LoanData
     /// <param name="principal">The loaned amount of money, without the interest.</param>
     /// <param name="rate">The interest rate per period, in percent.</param>
     /// <returns>A LoanData struct with the calculated values after applying simple interest.</returns>
-    public static float CalculateSimpleInterest(float principal, float rate)
+    private static float CalculateTotalFromSimpleInterest(float principal, float rate)
     {
         float _calculatedRate = rate + 1;
         float _total = principal * _calculatedRate;
