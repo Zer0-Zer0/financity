@@ -6,24 +6,24 @@ using UnityEngine.UI;
 public class CellphoneAppManager : MonoBehaviour
 {
     [System.Serializable]
-    readonly internal struct GenericApp
+    internal struct GenericApp
     {
-        [SerializeField] readonly internal Button _appButton;
-        [SerializeField] readonly GameObject _appPanel;
+        [SerializeField] internal Button _appButton;
+        [SerializeField] GameObject _appPanel;
 
-        internal readonly void ShowAppPanel()
+        internal void ShowAppPanel()
         {
             _appPanel.SetActive(true);
         }
 
-        internal readonly void HideAppPanel()
+        internal void HideAppPanel()
         {
             _appPanel.SetActive(false);
         }
     }
 
     [SerializeField] List<GenericApp> _appsList;
-    [SerializeField] Button MenuButton;
+    [SerializeField] Button _menuButton;
 
     void Awake()
     {
@@ -38,7 +38,7 @@ public class CellphoneAppManager : MonoBehaviour
         foreach (GenericApp app in _appsList)
         {
             app._appButton.onClick.AddListener(app.ShowAppPanel);
-            MenuButton.onClick.AddListener(app.HideAppPanel);
+            _menuButton.onClick.AddListener(app.HideAppPanel);
         }
     }
 }
