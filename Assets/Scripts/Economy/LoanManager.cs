@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
-public static class LoanManager
+public class LoanManager: MonoBehaviour
 {
     public static UnityEvent<LoanData> OnMakeALoan;
     public static UnityEvent<LoanData> OnPayAInstallment;
+
+    public LoanData Loan;
 
     /// <summary>
     /// Generates a random loan with specified parameters.
@@ -26,5 +28,13 @@ public static class LoanManager
         int _installments = UnityEngine.Random.Range(minInstallments, maxInstallments + 1);
 
         return new LoanData(_principal, _rate, _installments, type);
+    }
+
+    public void NewRandomLoan(){
+        Loan = RandomLoan(Loan.LoanType);
+    }
+
+    public void OnLoanMade(){
+
     }
 }

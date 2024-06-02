@@ -12,6 +12,7 @@ using UnityEngine.Events;
 /// <param name="Rate">The interest rate of the loan, in percent.</param>
 /// <param name="Installments">The installments duration of the loan.</param>
 /// <param name="LoanData.Type">The type of loan.</param>
+[System.Serializable]
 public struct LoanData
 {
     public readonly float Total;
