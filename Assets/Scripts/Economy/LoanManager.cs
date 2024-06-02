@@ -77,7 +77,7 @@ public class LoanManager : MonoBehaviour
     {
         float _principal = UnityEngine.Random.Range(minPrincipal, maxPrincipal);
         float _rate = UnityEngine.Random.Range(minRate, maxRate);
-        int _installments = UnityEngine.Random.Range(minInstallments, maxInstallments);
+        int _installments = UnityEngine.Random.Range(minInstallments, maxInstallments + 1);
 
         return new LoanData(_principal, _rate, _installments, type);
     }

@@ -87,6 +87,35 @@ public class WalletManager : MonoBehaviour
         }
     }
 
+    float _currentMaxDebt;
+
+    /// <summary>
+    /// Gets or sets the current maximum debt.
+    /// </summary>
+    public float CurrentMaxDebt
+    {
+        get
+        {
+            return _currentMaxDebt;
+        }
+        set
+        {
+            try
+            {
+                if (value < 0f)
+                {
+                    throw new Exception("Attempted to input a negative max debt value.");
+                }
+                _currentMaxDebt = value;
+                OnMaxDebtUpdate.Invoke(_currentMaxDebt);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("Error changing max debt value: " + ex.Message);
+            }
+        }
+    }
+
     float _currentDebt;
 
     /// <summary>
@@ -120,35 +149,6 @@ public class WalletManager : MonoBehaviour
         }
     }
 
-    float _currentMaxDebt;
-
-    /// <summary>
-    /// Gets or sets the current maximum debt.
-    /// </summary>
-    public float CurrentMaxDebt
-    {
-        get
-        {
-            return _currentMaxDebt;
-        }
-        set
-        {
-            try
-            {
-                if (value < 0f)
-                {
-                    throw new Exception("Attempted to input a negative max debt value.");
-                }
-                _currentMaxDebt = value;
-                OnMaxDebtUpdate.Invoke(_currentMaxDebt);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError("Error changing max debt value: " + ex.Message);
-            }
-        }
-    }
-
     public UnityEvent<float> OnDigitalMoneyUpdate;
     public UnityEvent<float> OnPhysicalMoneyUpdate;
     public UnityEvent<float> OnDebtUpdate;
@@ -161,7 +161,7 @@ public class WalletManager : MonoBehaviour
     {
         CurrentDigitalMoney = _initialDigitalMoney;
         CurrentPhysicalMoney = _initialPhysicalMoney;
-        CurrentDebt = _initialDebt;
         CurrentMaxDebt = _initialMaxDebt;
+        CurrentDebt = _initialDebt;
     }
 }
