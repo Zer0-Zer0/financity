@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.Events;
 public class LoanManager: MonoBehaviour
 {
-    public static UnityEvent<LoanData> OnMakeALoan;
-    public static UnityEvent<LoanData> OnPayAInstallment;
+    public static UnityEvent<LoanData> OnAcceptALoan;
+    public static UnityEvent<LoanData> OnPayAInstallment; 
 
-    public LoanData Loan;
+    LoanData _loan;
 
     /// <summary>
     /// Generates a random loan with specified parameters.
@@ -30,11 +30,12 @@ public class LoanManager: MonoBehaviour
         return new LoanData(_principal, _rate, _installments, type);
     }
 
-    public void NewRandomLoan(){
-        Loan = RandomLoan(Loan.LoanType);
+    public void NewLocalRandomLoan(){
+        _loan = RandomLoan(_loan.LoanType);
+        Debug.Log(_loan.ToString());
     }
 
-    public void OnLoanMade(){
+    public void OnLoanAccepted(){
 
     }
 }

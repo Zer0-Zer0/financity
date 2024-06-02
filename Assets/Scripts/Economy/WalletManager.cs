@@ -10,7 +10,7 @@ using UnityEngine.Events;
 public class WalletManager : MonoBehaviour
 {
     [SerializeField] WalletData _wallet;
-    
+
     /// <summary>
     /// Makes a loan for the player, by adding money and debt to it's account
     /// </summary>
@@ -19,7 +19,7 @@ public class WalletManager : MonoBehaviour
     /// <remarks>
     /// If the new debt exceeds the current maximum debt, an error is logged.
     /// </remarks>
-    public void MakeALoan(LoanData loanData)
+    void _onAcceptALoan(LoanData loanData)
     {
         try
         {
@@ -50,24 +50,28 @@ public class WalletManager : MonoBehaviour
     /// If the digital money is insufficient, an error message is logged.
     /// </remarks>
     /// <returns>A LoanData struct with the calculated values after paying the installment.</returns>
-    public LoanData PayAInstallment(LoanData loanData)
+    void _onPayAInstallment(LoanData loanData)
     {
         try
         {
-            if (loanData.GetInstallmentValue() > _wallet.CurrentDigitalMoney)
+            if (loanData.InstallmentValue > _wallet.CurrentDigitalMoney)
             {
                 throw new Exception("Insufficient digital money to pay the installment");
             }
 
-            _wallet.CurrentDebt -= loanData.GetInstallmentValue();
-            loanData.RemainingValue -= loanData.GetInstallmentValue();
+            _wallet.CurrentDebt -= loanData.InstallmentValue;
+            loanData.RemainingValue -= loanData.InstallmentValue;
             loanData.RemainingInstallments--;
         }
         catch (Exception ex)
         {
             Debug.LogError("Error paying a installment: " + ex.Message);
         }
+    }
 
-        return loanData;
+    void Awake()
+    {
+        LoanManager.OnAcceptALoan.AddListener(_onAcceptALoan);
+        LoanManager.OnPayAInstallment.AddListener(_onPayAInstallment);
     }
 }
