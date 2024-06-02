@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -96,12 +97,12 @@ public class LoanManager : MonoBehaviour
         float newDebt = wallet.CurrentDebt + loanData.Total;
 
         if(newDebt > wallet.CurrentMaxDebt){
-            throw new UnassignedReferenceException("New debt exceeds the current maximum debt");
+            throw new Exception("New debt exceeds the current maximum debt");
         }
 
         wallet.CurrentDebt = newDebt;
         wallet.CurrentDigitalMoney += loanData.Principal; 
-        }catch (UnassignedReferenceException ex){
+        }catch (Exception ex){
             Debug.LogError("Error making a loan: " + ex.Message);
         }
     }
@@ -120,7 +121,7 @@ public class LoanManager : MonoBehaviour
     public static LoanData PayAInstallment(WalletManager wallet, LoanData loanData){
         try{
             if (loanData.GetInstallment() > wallet.CurrentDigitalMoney){
-                throw new UnassignedReferenceException("Insufficient digital money to pay the installment");
+                throw new Exception("Insufficient digital money to pay the installment");
             }
             float newDebt = wallet.CurrentDebt - loanData.GetInstallment();
             float newTotal = loanData.Total - loanData.GetInstallment();
@@ -128,7 +129,7 @@ public class LoanManager : MonoBehaviour
             wallet.CurrentDebt = newDebt;
 
             return new LoanData(newTotal, loanData.Principal, loanData.Rate, newInstallments, loanData.loanType);
-            }catch (UnassignedReferenceException ex){
+            }catch (Exception ex){
             Debug.LogError("Error paying a installment: " + ex.Message);
         }
 

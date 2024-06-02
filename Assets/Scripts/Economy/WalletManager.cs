@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,11 +41,11 @@ public class WalletManager : MonoBehaviour
         set{
             try{
                 if(value < 0f){
-                    throw new UnassignedReferenceException("Attempted to spend digital money and the value in the account got negative.");
+                    throw new Exception("Attempted to spend digital money and the value in the account got negative.");
                 }
                 _currentDigitalMoney = value;
                 OnDigitalMoneyUpdate.Invoke(_currentDigitalMoney);
-            } catch (UnassignedReferenceException ex) {
+            } catch (Exception ex) {
                 Debug.LogError("Error changing digital money value: " + ex.Message);
             }
         }
@@ -62,11 +63,11 @@ public class WalletManager : MonoBehaviour
         set{
             try{
                 if(value < 0f){
-                    throw new UnassignedReferenceException("Attempted to spend physical money and the value in the account got negative.");
+                    throw new Exception("Attempted to spend physical money and the value in the account got negative.");
                 }
                 _currentPhysicalMoney = value;
                 OnPhysicalMoneyUpdate.Invoke(_currentPhysicalMoney);
-            } catch (UnassignedReferenceException ex) {
+            } catch (Exception ex) {
                 Debug.LogError("Error changing physical money value: " + ex.Message);
             }
         }
@@ -84,14 +85,14 @@ public class WalletManager : MonoBehaviour
         set{
             try{
                 if(value < 0f){
-                    throw new UnassignedReferenceException("Attempted to input a negative debt value.");
+                    throw new Exception("Attempted to input a negative debt value.");
                 }
                 else if (value > CurrentMaxDebt){
-                    throw new UnassignedReferenceException("Attempted to input a bigger than allowed debt value.");
+                    throw new Exception("Attempted to input a bigger than allowed debt value.");
                 }
                 _currentDebt = value;
                 OnDebtUpdate.Invoke(_currentDebt);
-            } catch (UnassignedReferenceException ex) {
+            } catch (Exception ex) {
                 Debug.LogError("Error changing debt value: " + ex.Message);
             }
         }
@@ -109,11 +110,11 @@ public class WalletManager : MonoBehaviour
         set{
             try{
                 if(value < 0f){
-                    throw new UnassignedReferenceException("Attempted to input a negative max debt value.");
+                    throw new Exception("Attempted to input a negative max debt value.");
                 }
                 _currentMaxDebt = value;
                 OnMaxDebtUpdate.Invoke(_currentMaxDebt);
-            } catch (UnassignedReferenceException ex) {
+            } catch (Exception ex) {
                 Debug.LogError("Error changing max debt value: " + ex.Message);
             }
         }
