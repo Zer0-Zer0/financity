@@ -3,24 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-class CellphoneAppManager : MonoBehaviour
+public class CellphoneAppManager : MonoBehaviour
 {
     [System.Serializable]
-    readonly struct GenericApp{
+    readonly internal struct GenericApp
+    {
         [SerializeField] readonly internal Button _appButton;
         [SerializeField] readonly GameObject _appPanel;
 
-        internal readonly void ShowAppPanel(){
+        internal readonly void ShowAppPanel()
+        {
             _appPanel.SetActive(true);
         }
 
-        internal readonly void HideAppPanel(){
+        internal readonly void HideAppPanel()
+        {
             _appPanel.SetActive(false);
         }
     }
 
-    [SerializeField] readonly List<GenericApp> _appsList;
-    [SerializeField] readonly Button MenuButton;
+    [SerializeField] List<GenericApp> _appsList;
+    [SerializeField] Button MenuButton;
 
     void Awake()
     {
@@ -30,7 +33,8 @@ class CellphoneAppManager : MonoBehaviour
     ///<summary>
     ///Subscribes the functions from the struct GenericApp to Button's events
     ///</summary>
-    void SubscribeAppsToEvents(){
+    void SubscribeAppsToEvents()
+    {
         foreach (GenericApp app in _appsList)
         {
             app._appButton.onClick.AddListener(app.ShowAppPanel);
