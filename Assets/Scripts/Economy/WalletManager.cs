@@ -9,159 +9,65 @@ using UnityEngine.Events;
 /// </summary>
 public class WalletManager : MonoBehaviour
 {
+    [SerializeField] WalletData _wallet;
+    
     /// <summary>
-    /// Initial value for digital money.
+    /// Makes a loan for the player, by adding money and debt to it's account
     /// </summary>
-    [SerializeField] const float _initialDigitalMoney = 800f;
-
-    /// <summary>
-    /// Initial value for physical money.
-    /// </summary>
-    [SerializeField] const float _initialPhysicalMoney = 0f;
-
-    /// <summary>
-    /// Initial value for debt.
-    /// </summary>
-    [SerializeField] const float _initialDebt = 800f;
-
-    /// <summary>
-    /// Initial value for maximum debt.
-    /// </summary>
-    [SerializeField] const float _initialMaxDebt = 800f;
-
-    float _currentDigitalMoney;
-
-    /// <summary>
-    /// Gets or sets the current digital money.
-    /// </summary>
-    public float CurrentDigitalMoney
+    /// <param name="wallet">The wallet manager of the player.</param>
+    /// <param name="loanData">The data of the loan to be made.</param>
+    /// <remarks>
+    /// If the new debt exceeds the current maximum debt, an error is logged.
+    /// </remarks>
+    public void MakeALoan(LoanData loanData)
     {
-        get
+        try
         {
-            return _currentDigitalMoney;
+            float newDebt = _wallet.CurrentDebt + loanData.Total;
+
+            if (newDebt > _wallet.CurrentMaxDebt)
+            {
+                throw new Exception("New debt exceeds the current maximum debt");
+            }
+
+            _wallet.CurrentDebt = newDebt;
+            _wallet.CurrentDigitalMoney += loanData.Principal;
         }
-        set
+        catch (Exception ex)
         {
-            try
-            {
-                if (value < 0f)
-                {
-                    throw new Exception("Attempted to spend digital money and the value in the account got negative.");
-                }
-                _currentDigitalMoney = value;
-                OnDigitalMoneyUpdate.Invoke(_currentDigitalMoney);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError("Error changing digital money value: " + ex.Message);
-            }
+            Debug.LogError("Error making a loan: " + ex.Message);
         }
     }
 
-    float _currentPhysicalMoney;
-
     /// <summary>
-    /// Gets or sets the current physical money.
+    /// Pays a single installment of a loan from the wallet's digital money.
     /// </summary>
-    public float CurrentPhysicalMoney
+    /// <param name="wallet">The wallet from which the installment will be paid.</param>
+    /// <param name="loanData">The loan data containing information about the installment to be paid.</param>
+    /// <remarks>
+    /// This method checks if the current digital money in the wallet is sufficient to pay the installment of the loan.
+    /// If the digital money is enough, it deducts the installment amount from the current debt in the wallet and updates the total loan value and remaining installments.
+    /// If the digital money is insufficient, an error message is logged.
+    /// </remarks>
+    /// <returns>A LoanData struct with the calculated values after paying the installment.</returns>
+    public LoanData PayAInstallment(LoanData loanData)
     {
-        get
+        try
         {
-            return _currentPhysicalMoney;
+            if (loanData.GetInstallmentValue() > _wallet.CurrentDigitalMoney)
+            {
+                throw new Exception("Insufficient digital money to pay the installment");
+            }
+
+            _wallet.CurrentDebt -= loanData.GetInstallmentValue();
+            loanData.RemainingValue -= loanData.GetInstallmentValue();
+            loanData.RemainingInstallments--;
         }
-        set
+        catch (Exception ex)
         {
-            try
-            {
-                if (value < 0f)
-                {
-                    throw new Exception("Attempted to spend physical money and the value in the account got negative.");
-                }
-                _currentPhysicalMoney = value;
-                OnPhysicalMoneyUpdate.Invoke(_currentPhysicalMoney);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError("Error changing physical money value: " + ex.Message);
-            }
+            Debug.LogError("Error paying a installment: " + ex.Message);
         }
-    }
 
-    float _currentMaxDebt;
-
-    /// <summary>
-    /// Gets or sets the current maximum debt.
-    /// </summary>
-    public float CurrentMaxDebt
-    {
-        get
-        {
-            return _currentMaxDebt;
-        }
-        set
-        {
-            try
-            {
-                if (value < 0f)
-                {
-                    throw new Exception("Attempted to input a negative max debt value.");
-                }
-                _currentMaxDebt = value;
-                OnMaxDebtUpdate.Invoke(_currentMaxDebt);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError("Error changing max debt value: " + ex.Message);
-            }
-        }
-    }
-
-    float _currentDebt;
-
-    /// <summary>
-    /// Gets or sets the current debt.
-    /// </summary>
-    public float CurrentDebt
-    {
-        get
-        {
-            return _currentDebt;
-        }
-        set
-        {
-            try
-            {
-                if (value < 0f)
-                {
-                    throw new Exception("Attempted to input a negative debt value.");
-                }
-                else if (value > CurrentMaxDebt)
-                {
-                    throw new Exception("Attempted to input a bigger than allowed debt value.");
-                }
-                _currentDebt = value;
-                OnDebtUpdate.Invoke(_currentDebt);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError("Error changing debt value: " + ex.Message);
-            }
-        }
-    }
-
-    public UnityEvent<float> OnDigitalMoneyUpdate;
-    public UnityEvent<float> OnPhysicalMoneyUpdate;
-    public UnityEvent<float> OnDebtUpdate;
-    public UnityEvent<float> OnMaxDebtUpdate;
-
-    /// <summary>
-    /// Initializes the wallet with initial values.
-    /// </summary>
-    void Start()
-    {
-        CurrentDigitalMoney = _initialDigitalMoney;
-        CurrentPhysicalMoney = _initialPhysicalMoney;
-        CurrentMaxDebt = _initialMaxDebt;
-        CurrentDebt = _initialDebt;
+        return loanData;
     }
 }
