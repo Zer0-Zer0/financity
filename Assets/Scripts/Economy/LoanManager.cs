@@ -73,7 +73,7 @@ public class LoanManager : MonoBehaviour
     /// <param name="maxInstallments">The maximum number of installments for the loan.</param>
     /// <param name="type">The type of the loan.</param>
     /// <returns>A new LoanData object with randomly generated principal, rate, installments, and type.</returns>
-    public static LoanData RandomLoan(LoanData.Type type, float minPrincipal = 300, float maxPrincipal = 800, float minRate = 5, float maxRate = 15, int minInstallments = 1, int maxInstallments = 3)
+    public static LoanData RandomLoan(LoanData.Type type, float minPrincipal = 300, float maxPrincipal = 800, float minRate = 0.05f, float maxRate = 0.15f, int minInstallments = 1, int maxInstallments = 3)
     {
         float _principal = UnityEngine.Random.Range(minPrincipal, maxPrincipal);
         float _rate = UnityEngine.Random.Range(minRate, maxRate);

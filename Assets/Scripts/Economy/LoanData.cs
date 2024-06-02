@@ -124,7 +124,7 @@ public struct LoanData
         return $"Loan Data:\n" +
             $"Total Value: {Total}\n" +
             $"Principal Value: {Principal}\n" +
-            $"Interest Rate: {Rate}%\n" +
+            $"Interest Rate: {Rate*100}%\n" +
             $"Installments: {Installments}\n" +
             $"Loan Type: {LoanType}\n" +
             $"Remaining Value: {_remainingValue}\n" +
