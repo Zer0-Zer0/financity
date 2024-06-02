@@ -12,22 +12,22 @@ public class WalletManager : MonoBehaviour
     /// <summary>
     /// Initial value for digital money.
     /// </summary>
-    [SerializeField] readonly float _initialDigitalMoney = 800f;
+    [SerializeField] private float _initialDigitalMoney = 800f;
 
     /// <summary>
     /// Initial value for physical money.
     /// </summary>
-    [SerializeField] readonly float _initialPhysicalMoney = 0f;
+    [SerializeField] private float _initialPhysicalMoney = 0f;
 
     /// <summary>
     /// Initial value for debt.
     /// </summary>
-    [SerializeField] readonly float _initialDebt = 800f;
+    [SerializeField] private float _initialDebt = 800f;
 
     /// <summary>
     /// Initial value for maximum debt.
     /// </summary>
-    [SerializeField] readonly float _initialMaxDebt = 800f;
+    [SerializeField] private float _initialMaxDebt = 800f;
 
     float _currentDigitalMoney;
 
