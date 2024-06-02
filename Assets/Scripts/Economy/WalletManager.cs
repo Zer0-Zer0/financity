@@ -38,17 +38,21 @@ public class WalletManager : MonoBehaviour
             return _currentDigitalMoney;
         }
         set{
-            OnDigitalMoneyUpdate.Invoke();
-            if(value < 0f){
-                Debug.LogError("ERRO! Tentativa de comprar algo com dinheiro digital e valor ficou negativado, alguém esqueceu de um if em algum lugar <-<");
+            try{
+                OnDigitalMoneyUpdate.Invoke();
+                if(value < 0f){
+                    throw new Exception("Atempted to spend digital money and the value in the account got negative.");
+                }
+                else if(value > _currentDigitalMoney){
+                    OnDigitalMoneyIncrease.Invoke();
+                }
+                else if (value < _currentDigitalMoney){
+                    OnDigitalMoneyReduce.Invoke();
+                }
+                _currentDigitalMoney = value;
+            } catch (UnassignedReferenceException ex) {
+                Debug.LogError("Error changing digital money value: "ex.Message);
             }
-            else if(value > _currentDigitalMoney){
-                OnDigitalMoneyIncrease.Invoke();
-            }
-            else if (value < _currentDigitalMoney){
-                OnDigitalMoneyReduce.Invoke();
-            }
-            _currentDigitalMoney = value;
         }
     }
 
@@ -62,17 +66,21 @@ public class WalletManager : MonoBehaviour
             return _currentPhysicalMoney;
         } 
         set{
-            OnPhysicalMoneyUpdate.Invoke();
-            if(value < 0f){
-                Debug.LogError("ERRO! Tentativa de comprar algo com dinheiro físico e valor ficou negativado, alguém esqueceu de um if em algum lugar <-<");
+            try{
+                OnPhysicalMoneyUpdate.Invoke();
+                if(value < 0f){
+                    throw new Exception("Atempted to spend physical money and the value in the account got negative.");
+                }
+                else if(value > _currentPhysicalMoney){
+                    OnPhysicalMoneyIncrease.Invoke();
+                }
+                else if (value < _currentPhysicalMoney){
+                    OnPhysicalMoneyReduce.Invoke();
+                }
+                _currentPhysicalMoney = value;
+            } catch (UnassignedReferenceException ex) {
+                Debug.LogError("Error changing physical money value: " + ex.Message);
             }
-            else if(value > _currentPhysicalMoney){
-                OnPhysicalMoneyIncrease.Invoke();
-            }
-            else if (value < _currentPhysicalMoney){
-                OnPhysicalMoneyReduce.Invoke();
-            }
-            _currentPhysicalMoney = value;
         }
     }
 
@@ -86,20 +94,24 @@ public class WalletManager : MonoBehaviour
             return _currentDebt;
         } 
         set{
+            try{
             OnDebtUpdate.Invoke();
             if(value < 0f){
-                Debug.LogError("ERRO! Tentativa de ter um débito negativo, alguém esqueceu de um if em algum lugar <-<");
+                throw new Exception("Atempted to input a negative debt value.");
             }
             else if (value > CurrentMaxDebt){
-                Debug.LogError("ERRO! Tentativa de ter um débito maior que o permitido, alguém esqueceu de um if em algum lugar <-<");
+                throw new Exception("Atempted to input a bigger than allowed debt value.");
             }
-            if(value > _currentDebt){
+            else if(value > _currentDebt){
                 OnDebtIncrease.Invoke();
             }
             else if (value < _currentDebt){
                 OnDebtReduce.Invoke();
             }
             _currentDebt = value;
+            } catch (UnassignedReferenceException ex) {
+                Debug.LogError("Error changing debt value: " + ex.Message);
+            }
         }
     }
 
@@ -113,9 +125,10 @@ public class WalletManager : MonoBehaviour
             return _currentMaxDebt;
         } 
         set{
+            try{
             OnMaxDebtUpdate.Invoke();
             if(value < 0f){
-                Debug.LogError("ERRO! Tentativa de ter um débito máximo negativo, alguém esqueceu de um if em algum lugar <-<");
+                throw new Exception("Atempted to input a negative max debt value.");
             }
             if(value > _currentMaxDebt){
                 OnMaxDebtIncrease.Invoke();
@@ -124,6 +137,9 @@ public class WalletManager : MonoBehaviour
                 OnMaxDebtReduce.Invoke();
             }
             _currentMaxDebt = value;
+            } catch (UnassignedReferenceException ex) {
+                Debug.LogError("Error changing max debt value: " + ex.Message);
+            }
         }
     }
 
