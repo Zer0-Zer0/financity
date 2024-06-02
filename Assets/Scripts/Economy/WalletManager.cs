@@ -39,19 +39,13 @@ public class WalletManager : MonoBehaviour
         }
         set{
             try{
-                OnDigitalMoneyUpdate.Invoke();
                 if(value < 0f){
-                    throw new Exception("Atempted to spend digital money and the value in the account got negative.");
-                }
-                else if(value > _currentDigitalMoney){
-                    OnDigitalMoneyIncrease.Invoke();
-                }
-                else if (value < _currentDigitalMoney){
-                    OnDigitalMoneyReduce.Invoke();
+                    throw new UnassignedReferenceException("Attempted to spend digital money and the value in the account got negative.");
                 }
                 _currentDigitalMoney = value;
+                OnDigitalMoneyUpdate.Invoke(_currentDigitalMoney);
             } catch (UnassignedReferenceException ex) {
-                Debug.LogError("Error changing digital money value: "ex.Message);
+                Debug.LogError("Error changing digital money value: " + ex.Message);
             }
         }
     }
@@ -67,17 +61,11 @@ public class WalletManager : MonoBehaviour
         } 
         set{
             try{
-                OnPhysicalMoneyUpdate.Invoke();
                 if(value < 0f){
-                    throw new Exception("Atempted to spend physical money and the value in the account got negative.");
-                }
-                else if(value > _currentPhysicalMoney){
-                    OnPhysicalMoneyIncrease.Invoke();
-                }
-                else if (value < _currentPhysicalMoney){
-                    OnPhysicalMoneyReduce.Invoke();
+                    throw new UnassignedReferenceException("Attempted to spend physical money and the value in the account got negative.");
                 }
                 _currentPhysicalMoney = value;
+                OnPhysicalMoneyUpdate.Invoke(_currentPhysicalMoney);
             } catch (UnassignedReferenceException ex) {
                 Debug.LogError("Error changing physical money value: " + ex.Message);
             }
@@ -95,20 +83,14 @@ public class WalletManager : MonoBehaviour
         } 
         set{
             try{
-            OnDebtUpdate.Invoke();
-            if(value < 0f){
-                throw new Exception("Atempted to input a negative debt value.");
-            }
-            else if (value > CurrentMaxDebt){
-                throw new Exception("Atempted to input a bigger than allowed debt value.");
-            }
-            else if(value > _currentDebt){
-                OnDebtIncrease.Invoke();
-            }
-            else if (value < _currentDebt){
-                OnDebtReduce.Invoke();
-            }
-            _currentDebt = value;
+                if(value < 0f){
+                    throw new UnassignedReferenceException("Attempted to input a negative debt value.");
+                }
+                else if (value > CurrentMaxDebt){
+                    throw new UnassignedReferenceException("Attempted to input a bigger than allowed debt value.");
+                }
+                _currentDebt = value;
+                OnDebtUpdate.Invoke(_currentDebt);
             } catch (UnassignedReferenceException ex) {
                 Debug.LogError("Error changing debt value: " + ex.Message);
             }
@@ -126,42 +108,21 @@ public class WalletManager : MonoBehaviour
         } 
         set{
             try{
-            OnMaxDebtUpdate.Invoke();
-            if(value < 0f){
-                throw new Exception("Atempted to input a negative max debt value.");
-            }
-            if(value > _currentMaxDebt){
-                OnMaxDebtIncrease.Invoke();
-            }
-            else if (value < _currentMaxDebt){
-                OnMaxDebtReduce.Invoke();
-            }
-            _currentMaxDebt = value;
+                if(value < 0f){
+                    throw new UnassignedReferenceException("Attempted to input a negative max debt value.");
+                }
+                _currentMaxDebt = value;
+                OnMaxDebtUpdate.Invoke(_currentMaxDebt);
             } catch (UnassignedReferenceException ex) {
                 Debug.LogError("Error changing max debt value: " + ex.Message);
             }
         }
     }
 
-    // Events for digital money
-    public UnityEvent OnDigitalMoneyIncrease;
-    public UnityEvent OnDigitalMoneyUpdate;
-    public UnityEvent OnDigitalMoneyReduce;
-
-    // Events for physical money
-    public UnityEvent OnPhysicalMoneyIncrease;
-    public UnityEvent OnPhysicalMoneyUpdate;
-    public UnityEvent OnPhysicalMoneyReduce;
-
-    // Events for debt
-    public UnityEvent OnDebtIncrease;
-    public UnityEvent OnDebtUpdate;
-    public UnityEvent OnDebtReduce;
-
-    // Events for max debt
-    public UnityEvent OnMaxDebtIncrease;
-    public UnityEvent OnMaxDebtUpdate;
-    public UnityEvent OnMaxDebtReduce;
+    public UnityEvent<float> OnDigitalMoneyUpdate;
+    public UnityEvent<float> OnPhysicalMoneyUpdate;
+    public UnityEvent<float> OnDebtUpdate;
+    public UnityEvent<float> OnMaxDebtUpdate;
 
     /// <summary>
     /// Initializes the wallet with initial values.
