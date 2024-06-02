@@ -8,15 +8,14 @@ using UnityEngine;
 /// <param name="Principal">The principal value of the loan.</param>
 /// <param name="Rate">The interest rate of the loan, in percent.</param>
 /// <param name="Installments">The installments duration of the loan.</param>
-/// <param name="loanType">The type of loan.</param>
-[CreateAssetMenu(fileName = "LoanData", menuName = "LoanData", order = 0)]
-public class LoanData : ScriptableObject
+/// <param name="LoanData.Type">The type of loan.</param>
+public struct LoanData
 {
     public readonly float Total;
     public readonly float Principal;
     public readonly float Rate;
     public readonly int Installments;
-    public readonly LoanType loanType;
+    public readonly LoanData.Type LoanType;
 
     private float _remainingValue;
     public float RemainingValue
@@ -44,26 +43,42 @@ public class LoanData : ScriptableObject
         }
     }
 
-    public LoanData(float principal, float rate, int installments, LoanType type, float total = 0)
+    /// <summary>
+    /// Represents the type of loan, which can be Simple Interest or Compound Interest.
+    /// </summary>
+    public enum Type
+    {
+        /// <summary>
+        /// Represents a loan with simple interest calculation.
+        /// </summary>
+        SimpleInterest,
+
+        /// <summary>
+        /// Represents a loan with compound interest calculation.
+        /// </summary>
+        CompoundInterest
+    }
+
+    public LoanData(float principal, float rate, int installments, LoanData.Type type, float total = 0)
     {
         Total = total;
         if (total == 0)
         {
             switch (type)
             {
-                case LoanType.SimpleInterest:
+                case LoanData.Type.SimpleInterest:
                     Total = CalculateSimpleInterest(principal, rate);
                     break;
-                case LoanType.CompoundInterest:
+                case LoanData.Type.CompoundInterest:
                     Total = CalculateCompoundInterest(principal, rate, installments);
                     break;
             }
         }
-        _remainingValue = total;
+        _remainingValue = Total;
         Principal = principal;
         Rate = rate;
         Installments = installments;
-        loanType = type;
+        LoanType = type;
         _remainingInstallments = installments;
     }
 
@@ -103,20 +118,16 @@ public class LoanData : ScriptableObject
         float _total = principal * _calculatedRate;
         return _total;
     }
-}
 
-/// <summary>
-/// Represents the type of loan, which can be Simple Interest or Compound Interest.
-/// </summary>
-public enum LoanType
-{
-    /// <summary>
-    /// Represents a loan with simple interest calculation.
-    /// </summary>
-    SimpleInterest,
-
-    /// <summary>
-    /// Represents a loan with compound interest calculation.
-    /// </summary>
-    CompoundInterest
+    public override string ToString()
+    {
+        return $"Loan Data:\n" +
+            $"Total Value: {Total}\n" +
+            $"Principal Value: {Principal}\n" +
+            $"Interest Rate: {Rate}%\n" +
+            $"Installments: {Installments}\n" +
+            $"Loan Type: {LoanType}\n" +
+            $"Remaining Value: {_remainingValue}\n" +
+            $"Remaining Installments: {_remainingInstallments}";
+    }
 }
