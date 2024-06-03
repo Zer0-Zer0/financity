@@ -24,62 +24,6 @@ public struct LoanData
     public static UnityEvent<LoanData> OnLoanPaymentComplete;
     public static UnityEvent<LoanData> OnInstallmentPayment;
 
-    private float _remainingValue;
-    public float RemainingValue
-    {
-        get
-        {
-            return _remainingValue;
-        }
-        set
-        {
-            try
-            {
-                if (value > 0)
-                {
-                    throw new Exception("Remaining loan value got netagive");
-                }
-                else if (value != 0)
-                {
-                    OnInstallmentPayment.Invoke(this);
-                }
-                _remainingInstallments = value;
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError("Error updating remaining loan value; " + ex.Message);
-            }
-        }
-    }
-
-    private float _remainingInstallments;
-    public float RemainingInstallments
-    {
-        get
-        {
-            return _remainingInstallments;
-        }
-        set
-        {
-            try
-            {
-                if (value > 0)
-                {
-                    throw new Exception("Remaining Installments got netagive");
-                }
-                else if (value == 0)
-                {
-                    OnLoanPaymentComplete.Invoke(this);
-                }
-                _remainingInstallments = value;
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError("Error updating remaining installments; " + ex.Message);
-            }
-        }
-    }
-
     public float InstallmentValue{
     get {
         return Total / Installments;
@@ -113,12 +57,10 @@ public struct LoanData
                 break;
         }
 
-        this._remainingValue = Total;
         this.Principal = principal;
         this.Rate = rate;
         this.Installments = installments;
         this.LoanType = type;
-        this._remainingInstallments = installments;
     }
 
     /// <summary>
@@ -183,8 +125,6 @@ public struct LoanData
             $"Principal Value: {Principal}\n" +
             $"Interest Rate: {Rate * 100}%\n" +
             $"Installments: {Installments}\n" +
-            $"Loan Type: {LoanType}\n" +
-            $"Remaining Value: {_remainingValue}\n" +
-            $"Remaining Installments: {_remainingInstallments}";
+            $"Loan Type: {LoanType}\n";
     }
 }
