@@ -5,10 +5,57 @@ using UnityEngine;
 using UnityEngine.Events;
 public class LoanManager: MonoBehaviour
 {
-    public static UnityEvent<LoanData> OnAcceptALoan;
-    public static UnityEvent<LoanData> OnPayAInstallment; 
+    public static UnityEvent<LoanData> LoanAccepted;
+    public static UnityEvent<LoanData> LoanPaid;
+    public static UnityEvent<LoanData> InstallmentPaid;
+    public static UnityEvent<LoanData> InstallmentArrived;
+    public static UnityEvent<LoanData> InstallmentLate;
+    public UnityEvent PersistenseChanged;
 
     LoanData _loan;
+
+    float _remainingValue;
+    float _remainingInstallments;
+    float _installmentValue{
+        get{
+            return _remainingValue / _remainingInstallments;
+        }
+    }
+
+    float _remainingFine;
+    float _remainingLateInstallments;
+    float _lateInstallmentRate;
+
+    public void SetLoanData(LoanData Loan){
+        _loan = Loan;
+    }
+
+    public void OnInstallmentArrival(WalletData wallet){
+        if (wallet.CurrentDigitalMoney >= _installmentValue){
+            OnInstallmentPaid(wallet);
+        }else{
+            OnInstallmentLate(wallet);
+        }
+    }
+
+    public void OnInstallmentPaid(WalletData wallet){
+        //Lógica de quando parcela é paga com sucesso
+        if ()
+        wallet.CurrentDigitalMoney -= _installmentValue;
+        _remainingInstallments--;
+    }
+
+    public void OnInstallmentLate(WalletData wallet){
+        //Lógica de quando há falha no pagamento da parcela
+    }
+
+    public void OnLoanPaid(WalletData wallet){
+        //Lógica de quando empréstimo é pago com sucesso
+    }
+
+    public void OnLoanAccepted(WalletData wallet){
+        //Lógica de quando empréstimo é aceito
+    }
 
     /// <summary>
     /// Generates a random loan with specified parameters.
@@ -33,9 +80,5 @@ public class LoanManager: MonoBehaviour
     public void NewLocalRandomLoan(){
         _loan = RandomLoan(_loan.LoanType);
         Debug.Log(_loan.ToString());
-    }
-
-    public void OnLoanAccepted(){
-
     }
 }

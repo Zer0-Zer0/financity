@@ -19,7 +19,7 @@ public class WalletManager : MonoBehaviour
     /// <remarks>
     /// If the new debt exceeds the current maximum debt, an error is logged.
     /// </remarks>
-    void _onAcceptALoan(LoanData loanData)
+    void _loanAccepted(LoanData loanData)
     {
         try
         {
@@ -50,7 +50,7 @@ public class WalletManager : MonoBehaviour
     /// If the digital money is insufficient, an error message is logged.
     /// </remarks>
     /// <returns>A LoanData struct with the calculated values after paying the installment.</returns>
-    void _onPayAInstallment(LoanData loanData)
+    void _InstallmentPaid(LoanData loanData)
     {
         try
         {
@@ -71,7 +71,7 @@ public class WalletManager : MonoBehaviour
 
     void Awake()
     {
-        LoanManager.OnAcceptALoan.AddListener(_onAcceptALoan);
-        LoanManager.OnPayAInstallment.AddListener(_onPayAInstallment);
+        LoanManager.LoanAccepted.AddListener(_loanAccepted);
+        LoanManager.InstallmentPaid.AddListener(_InstallmentPaid);
     }
 }
