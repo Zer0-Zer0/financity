@@ -24,7 +24,7 @@ public struct LoanData
     public static UnityEvent<LoanData> OnLoanPaymentComplete;
     public static UnityEvent<LoanData> OnInstallmentPayment;
 
-    public float InstallmentValue{
+    public readonly float InstallmentValue{
     get {
         return Total / Installments;
     }}

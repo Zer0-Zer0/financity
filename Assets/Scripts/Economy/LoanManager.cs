@@ -22,7 +22,7 @@ public class LoanManager : MonoBehaviour
 
     float _remainingValue;
     float _remainingInstallments;
-    float _installmentValue
+    float InstallmentValue
     {
         get
         {
@@ -33,26 +33,26 @@ public class LoanManager : MonoBehaviour
     int _remainingPenaltyInstallments;
     float _rawRemainingPenalty;
 
-    float _calculatedRemainingPenalty
+    float CalculatedRemainingPenalty
     {
         get
         {
             return LoanData.CalculateTotalFromCompoundInterest(_rawRemainingPenalty, _loan.Rate, _remainingPenaltyInstallments);
         }
     }
-    float _remainingPenaltyInstallmentsValue
+    float RemainingPenaltyInstallmentsValue
     {
         get
         {
-            return _calculatedRemainingPenalty / _remainingPenaltyInstallments;
+            return CalculatedRemainingPenalty / _remainingPenaltyInstallments;
         }
     }
 
-    float _totalToPay
+    float TotalToPay
     {
         get
         {
-            return _calculatedRemainingPenalty + _remainingValue;
+            return CalculatedRemainingPenalty + _remainingValue;
         }
     }
 
@@ -69,7 +69,7 @@ public class LoanManager : MonoBehaviour
     /// <param name="wallet">The player's wallet data.</param>
     public void InstallmentArrivalOccurredHandler(WalletData wallet)
     {
-        if (wallet.CurrentDigitalMoney >= _installmentValue)
+        if (wallet.CurrentDigitalMoney >= InstallmentValue)
         {
             InstallmentPaymentMadeHandler(wallet);
         }
@@ -88,14 +88,14 @@ public class LoanManager : MonoBehaviour
     {
         if (_remainingPenaltyInstallments != 0)
         {
-            wallet.CurrentDigitalMoney -= _remainingPenaltyInstallmentsValue;
-            _rawRemainingPenalty -= _remainingPenaltyInstallmentsValue;
+            wallet.CurrentDigitalMoney -= RemainingPenaltyInstallmentsValue;
+            _rawRemainingPenalty -= RemainingPenaltyInstallmentsValue;
             _remainingPenaltyInstallments--;
         }
         else
         {
-            wallet.CurrentDigitalMoney -= _installmentValue;
-            _remainingValue -= _installmentValue;
+            wallet.CurrentDigitalMoney -= InstallmentValue;
+            _remainingValue -= InstallmentValue;
             _remainingInstallments--;
         }
         InstallmentPaymentMade?.Invoke(_loan);
@@ -110,10 +110,10 @@ public class LoanManager : MonoBehaviour
         if (_remainingInstallments != 0)
         {
             //Moves the installment value from normal to the penalty one
-            _rawRemainingPenalty += _installmentValue;
+            _rawRemainingPenalty += InstallmentValue;
             _remainingPenaltyInstallments++;
 
-            _remainingValue -= _installmentValue;
+            _remainingValue -= InstallmentValue;
             _remainingInstallments--;
         }
         else
@@ -129,7 +129,7 @@ public class LoanManager : MonoBehaviour
     /// <param name="wallet">The player's wallet data.</param>
     public void LoanFullyRepaidEventHandler(WalletData wallet)
     {
-        wallet.CurrentDigitalMoney -= _totalToPay;
+        wallet.CurrentDigitalMoney -= TotalToPay;
         ResetLoanManager();
 
         PersistenceChanged?.Invoke();
