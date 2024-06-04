@@ -69,7 +69,7 @@ public struct LoanData
     /// <param name="total">The total amount.</param>
     /// <param name="rate">The simple interest rate.</param>
     /// <returns>The principal amount.</returns>
-    private static float CalculatePrincipalFromSimpleInterest(float total, float rate)
+    public static float CalculatePrincipalFromSimpleInterest(float total, float rate)
     {
         float _calculatedRate = rate + 1;
         float _principal = total / _calculatedRate;
@@ -82,7 +82,7 @@ public struct LoanData
     /// <param name="total">The total amount.</param>
     /// <param name="rate">The compound interest rate.</param>
     /// <param name="installments">The number of i
-    private static float CalculatePrincipalFromCompoundInterest(float total, float rate, int installments)
+    public static float CalculatePrincipalFromCompoundInterest(float total, float rate, int installments)
     {
         float _calculatedRate = rate + 1;
         float _compoundInterest = Mathf.Pow(_calculatedRate, installments);
@@ -97,7 +97,7 @@ public struct LoanData
     /// <param name="rate">The interest rate per period, in percent.</param>
     /// <param name="installments">The number of periods the interest is applied.</param>
     /// <returns>A LoanData struct with the calculated values after applying compound interest.</returns>
-    private static float CalculateTotalFromCompoundInterest(float principal, float rate, int installments)
+    public static float CalculateTotalFromCompoundInterest(float principal, float rate, int installments)
     {
         float _calculatedRate = rate + 1;
         float _compoundInterest = Mathf.Pow(_calculatedRate, installments);
@@ -111,7 +111,7 @@ public struct LoanData
     /// <param name="principal">The loaned amount of money, without the interest.</param>
     /// <param name="rate">The interest rate per period, in percent.</param>
     /// <returns>A LoanData struct with the calculated values after applying simple interest.</returns>
-    private static float CalculateTotalFromSimpleInterest(float principal, float rate)
+    public static float CalculateTotalFromSimpleInterest(float principal, float rate)
     {
         float _calculatedRate = rate + 1;
         float _total = principal * _calculatedRate;
