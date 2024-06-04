@@ -3,58 +3,131 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
-public class LoanManager: MonoBehaviour
+public class LoanManager : MonoBehaviour
 {
-    public static UnityEvent<LoanData> LoanAccepted;
-    public static UnityEvent<LoanData> LoanPaid;
-    public static UnityEvent<LoanData> InstallmentPaid;
-    public static UnityEvent<LoanData> InstallmentArrived;
-    public static UnityEvent<LoanData> InstallmentLate;
-    public UnityEvent PersistenseChanged;
+    public UnityEvent<LoanData> LoanGranted;
+    public UnityEvent<LoanData> LoanFullyRepaid;
+    public UnityEvent<LoanData> InstallmentPaid;
+    public UnityEvent<LoanData> InstallmentArrived;
+    public UnityEvent<LoanData> InstallmentLate;
+    public UnityEvent PersistenceChanged;
 
     LoanData _loan;
 
     float _remainingValue;
     float _remainingInstallments;
-    float _installmentValue{
-        get{
+    float _installmentValue
+    {
+        get
+        {
             return _remainingValue / _remainingInstallments;
         }
     }
 
-    float _remainingFine;
-    float _remainingLateInstallments;
-    float _lateInstallmentRate;
+    int _remainingPenaltyInstallments;
+    float _rawRemainingPenalty;
 
-    public void SetLoanData(LoanData Loan){
-        _loan = Loan;
+    float _calculatedRemainingPenalty
+    {
+        get
+        {
+            return LoanData.CalculateTotalFromCompoundInterest(_rawRemainingPenalty, _loan.Rate, _remainingPenaltyInstallments);
+        }
     }
-
-    public void OnInstallmentArrival(WalletData wallet){
-        if (wallet.CurrentDigitalMoney >= _installmentValue){
-            OnInstallmentPaid(wallet);
-        }else{
-            OnInstallmentLate(wallet);
+    float _remainingPenaltyInstallmentsValue
+    {
+        get
+        {
+            return _calculatedRemainingPenalty / _remainingPenaltyInstallments;
         }
     }
 
-    public void OnInstallmentPaid(WalletData wallet){
-        //Lógica de quando parcela é paga com sucesso
-        if ()
-        wallet.CurrentDigitalMoney -= _installmentValue;
-        _remainingInstallments--;
+    float _totalToPay
+    {
+        get
+        {
+            return _calculatedRemainingPenalty + _remainingValue;
+        }
     }
 
-    public void OnInstallmentLate(WalletData wallet){
-        //Lógica de quando há falha no pagamento da parcela
+    bool _isPersistent;
+
+    public void SetLoanData(LoanData Loan)
+    {
+        _loan = Loan;
     }
 
-    public void OnLoanPaid(WalletData wallet){
-        //Lógica de quando empréstimo é pago com sucesso
+    public void OnInstallmentArrival(WalletData wallet)
+    {
+        if (wallet.CurrentDigitalMoney >= _installmentValue)
+        {
+            OnInstallmentPaid(wallet);
+        }
+        else
+        {
+            OnInstallmentLate(wallet);
+        }
+        InstallmentArrived.Invoke(_loan);
     }
 
-    public void OnLoanAccepted(WalletData wallet){
-        //Lógica de quando empréstimo é aceito
+    public void OnInstallmentPaid(WalletData wallet)
+    {
+        if (_remainingPenaltyInstallments != 0)
+        {
+            wallet.CurrentDigitalMoney -= _remainingPenaltyInstallmentsValue;
+            _rawRemainingPenalty -= _remainingPenaltyInstallmentsValue;
+            _remainingPenaltyInstallments--;
+        }
+        else
+        {
+            wallet.CurrentDigitalMoney -= _installmentValue;
+            _remainingValue -= _installmentValue;
+            _remainingInstallments--;
+        }
+        InstallmentPaid.Invoke(_loan);
+    }
+
+    public void OnInstallmentLate(WalletData wallet)
+    {
+        if (_remainingInstallments != 0)
+        {
+            _rawRemainingPenalty += _installmentValue;
+            _remainingPenaltyInstallments++;
+
+            _remainingValue -= _installmentValue;
+            _remainingInstallments--;
+        }
+        else
+        {
+            _remainingPenaltyInstallments++;
+        }
+        InstallmentLate.Invoke(_loan);
+    }
+
+    public void OnLoanFullyRepaid(WalletData wallet)
+    {
+        wallet.CurrentDigitalMoney -= _totalToPay;
+        _remainingValue = 0;
+        _remainingInstallments = 0;
+        _remainingPenaltyInstallments = 0;
+        _rawRemainingPenalty = 0;
+        _isPersistent = false;
+
+        NewLocalRandomLoan();
+        PersistenceChanged.Invoke();
+        LoanFullyRepaid.Invoke(_loan);
+    }
+
+    public void OnLoanGranted(WalletData wallet)
+    {
+        wallet.CurrentDigitalMoney += _loan.Principal;
+        wallet.CurrentDebt += _loan.Total;
+
+        _remainingValue = _loan.Total;
+        _remainingInstallments = _loan.Installments;
+        _isPersistent = true;
+        PersistenceChanged.Invoke();
+        LoanGranted.Invoke(_loan);
     }
 
     /// <summary>
@@ -77,8 +150,12 @@ public class LoanManager: MonoBehaviour
         return new LoanData(_principal, _rate, _installments, type);
     }
 
-    public void NewLocalRandomLoan(){
-        _loan = RandomLoan(_loan.LoanType);
-        Debug.Log(_loan.ToString());
+    public void NewLocalRandomLoan()
+    {
+        if (!_isPersistent)
+        {
+            LoanData _newLoan = RandomLoan(_loan.LoanType);
+            SetLoanData(_newLoan);
+        }
     }
 }
