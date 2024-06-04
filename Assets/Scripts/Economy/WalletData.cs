@@ -50,7 +50,7 @@ public class WalletData : ScriptableObject
                     throw new Exception("Attempted to spend digital money and the value in the account got negative.");
                 }
                 _currentDigitalMoney = value;
-                OnDigitalMoneyUpdate.Invoke(_currentDigitalMoney);
+                OnDigitalMoneyUpdate?.Invoke(_currentDigitalMoney);
             }
             catch (Exception ex)
             {
@@ -79,7 +79,7 @@ public class WalletData : ScriptableObject
                     throw new Exception("Attempted to spend physical money and the value in the account got negative.");
                 }
                 _currentPhysicalMoney = value;
-                OnPhysicalMoneyUpdate.Invoke(_currentPhysicalMoney);
+                OnPhysicalMoneyUpdate?.Invoke(_currentPhysicalMoney);
             }
             catch (Exception ex)
             {
@@ -108,7 +108,7 @@ public class WalletData : ScriptableObject
                     throw new Exception("Attempted to input a negative max debt value.");
                 }
                 _currentMaxDebt = value;
-                OnMaxDebtUpdate.Invoke(_currentMaxDebt);
+                OnMaxDebtUpdate?.Invoke(_currentMaxDebt);
             }
             catch (Exception ex)
             {
@@ -141,7 +141,7 @@ public class WalletData : ScriptableObject
                     throw new Exception("Attempted to input a bigger than allowed debt value.");
                 }
                 _currentDebt = value;
-                OnDebtUpdate.Invoke(_currentDebt);
+                OnDebtUpdate?.Invoke(_currentDebt);
             }
             catch (Exception ex)
             {

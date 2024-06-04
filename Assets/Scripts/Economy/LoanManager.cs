@@ -77,7 +77,7 @@ public class LoanManager : MonoBehaviour
         {
             OnInstallmentLate(wallet);
         }
-        InstallmentArrived.Invoke(_loan);
+        InstallmentArrived?.Invoke(_loan);
     }
 
     /// <summary>
@@ -98,7 +98,7 @@ public class LoanManager : MonoBehaviour
             _remainingValue -= _installmentValue;
             _remainingInstallments--;
         }
-        InstallmentPaid.Invoke(_loan);
+        InstallmentPaid?.Invoke(_loan);
     }
 
     /// <summary>
@@ -119,7 +119,7 @@ public class LoanManager : MonoBehaviour
         {
             _remainingPenaltyInstallments++;
         }
-        InstallmentLate.Invoke(_loan);
+        InstallmentLate?.Invoke(_loan);
     }
 
     /// <summary>
@@ -131,8 +131,8 @@ public class LoanManager : MonoBehaviour
         wallet.CurrentDigitalMoney -= _totalToPay;
         resetLoan();
 
-        PersistenceChanged.Invoke();
-        LoanFullyRepaid.Invoke(_loan);
+        PersistenceChanged?.Invoke();
+        LoanFullyRepaid?.Invoke(_loan);
     }
 
     /// <summary>
@@ -160,8 +160,8 @@ public class LoanManager : MonoBehaviour
         _remainingValue = _loan.Total;
         _remainingInstallments = _loan.Installments;
         _isPersistent = true;
-        PersistenceChanged.Invoke();
-        LoanGranted.Invoke(_loan);
+        PersistenceChanged?.Invoke();
+        LoanGranted?.Invoke(_loan);
     }
 
     /// <summary>
