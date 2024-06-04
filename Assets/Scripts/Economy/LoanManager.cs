@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+
+/// <summary>
+/// Manages loans and their associated data, including installments, penalties, and repayment.
+/// This class provides events for loan-related actions, such as loan granting, installment payment, and loan repayment.
+/// It also generates new random loans when the current loan is fully repaid.
+/// </summary>
 public class LoanManager : MonoBehaviour
 {
     public UnityEvent<LoanData> LoanGranted;
@@ -57,6 +63,10 @@ public class LoanManager : MonoBehaviour
         _loan = Loan;
     }
 
+    /// <summary>
+    /// Called when an installment arrives.
+    /// </summary>
+    /// <param name="wallet">The player's wallet data.</param>
     public void OnInstallmentArrival(WalletData wallet)
     {
         if (wallet.CurrentDigitalMoney >= _installmentValue)
@@ -70,6 +80,10 @@ public class LoanManager : MonoBehaviour
         InstallmentArrived.Invoke(_loan);
     }
 
+    /// <summary>
+    /// Called when an installment is paid.
+    /// </summary>
+    /// <param name="wallet">The player's wallet data.</param>
     public void OnInstallmentPaid(WalletData wallet)
     {
         if (_remainingPenaltyInstallments != 0)
@@ -87,6 +101,10 @@ public class LoanManager : MonoBehaviour
         InstallmentPaid.Invoke(_loan);
     }
 
+    /// <summary>
+    /// Called when an installment is late.
+    /// </summary>
+    /// <param name="wallet">The player's wallet data.</param>
     public void OnInstallmentLate(WalletData wallet)
     {
         if (_remainingInstallments != 0)
@@ -104,20 +122,36 @@ public class LoanManager : MonoBehaviour
         InstallmentLate.Invoke(_loan);
     }
 
+    /// <summary>
+    /// Called when a loan is fully repaid by the player.
+    /// </summary>
+    /// <param name="wallet">The player's wallet data.</param>
     public void OnLoanFullyRepaid(WalletData wallet)
     {
         wallet.CurrentDigitalMoney -= _totalToPay;
+        resetLoan();
+
+        PersistenceChanged.Invoke();
+        LoanFullyRepaid.Invoke(_loan);
+    }
+
+    /// <summary>
+    /// Resets the loan to its initial state and generates a new local random loan.
+    /// </summary>
+    void resetLoan()
+    {
         _remainingValue = 0;
         _remainingInstallments = 0;
         _remainingPenaltyInstallments = 0;
         _rawRemainingPenalty = 0;
         _isPersistent = false;
-
         NewLocalRandomLoan();
-        PersistenceChanged.Invoke();
-        LoanFullyRepaid.Invoke(_loan);
     }
 
+    /// <summary>
+    /// Called when a loan is granted to the player.
+    /// </summary>
+    /// <param name="wallet">The player's wallet data.</param>
     public void OnLoanGranted(WalletData wallet)
     {
         wallet.CurrentDigitalMoney += _loan.Principal;
@@ -128,6 +162,18 @@ public class LoanManager : MonoBehaviour
         _isPersistent = true;
         PersistenceChanged.Invoke();
         LoanGranted.Invoke(_loan);
+    }
+
+    /// <summary>
+    /// Generates a new local random loan if the current loan is not persistent.
+    /// </summary>
+    public void NewLocalRandomLoan()
+    {
+        if (!_isPersistent)
+        {
+            LoanData _newLoan = RandomLoan(_loan.LoanType);
+            SetLoanData(_newLoan);
+        }
     }
 
     /// <summary>
@@ -148,14 +194,5 @@ public class LoanManager : MonoBehaviour
         int _installments = UnityEngine.Random.Range(minInstallments, maxInstallments + 1);
 
         return new LoanData(_principal, _rate, _installments, type);
-    }
-
-    public void NewLocalRandomLoan()
-    {
-        if (!_isPersistent)
-        {
-            LoanData _newLoan = RandomLoan(_loan.LoanType);
-            SetLoanData(_newLoan);
-        }
     }
 }
