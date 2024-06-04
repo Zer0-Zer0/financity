@@ -7,6 +7,6 @@ public class LoanTest : MonoBehaviour
 {
     void Update()
     {
-        Debug.Log(LoanManager.RandomLoan(LoanData.Type.CompoundInterest).ToString());
+        Debug.Log(LoanManager.GenerateRandomLoan(LoanData.Type.CompoundInterest).ToString());
     }
 }
