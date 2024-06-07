@@ -49,4 +49,6 @@ public class WheelchairMovement : MonoBehaviour
             transform.Rotate(0, _calculatedRotSpeed, 0);
         }
     }
+
+    
 }

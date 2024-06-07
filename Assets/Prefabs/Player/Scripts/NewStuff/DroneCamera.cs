@@ -7,7 +7,7 @@ public class DroneCamera : MonoBehaviour
     [SerializeField] Vector3 _offset;
     [SerializeField] float _followSpeed = 5f;
 
-    void FixedUpdate()
+    void Update()
     {
         if (_objectToFollow == null || _objectToLookAt == null)
         {
