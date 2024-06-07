@@ -2,28 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerRotationController))]
 public class MouseCapturer : MonoBehaviour
 {
-    private bool isCursorLocked = true;
+    bool _isCursorLocked = true;
+    PlayerRotationController _playerRot;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        _playerRot = GetComponent<PlayerRotationController>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            isCursorLocked = false;
+            _isCursorLocked = false;
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            isCursorLocked = true;
+            _isCursorLocked = true;
         }
 
-        if (isCursorLocked)
+        if (_isCursorLocked)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -33,5 +36,7 @@ public class MouseCapturer : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+
+        _playerRot.CanCameraMove = _isCursorLocked;
     }
 }
