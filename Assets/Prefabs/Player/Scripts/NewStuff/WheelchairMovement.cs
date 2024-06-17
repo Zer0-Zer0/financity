@@ -4,51 +4,53 @@ using UnityEngine;
 
 public class WheelchairMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] Animator _animator;
     [SerializeField] float _rotationSpeed;
     [SerializeField] Transform _wheelLeft;
     [SerializeField] Transform _wheelRight;
-    void Start()
-    {
 
-    }
+    private float _calculatedRotSpeed;
 
-    // Update is called once per frame
     void Update()
     {
-        float _calculatedRotSpeed = _rotationSpeed * Time.deltaTime;
+        HandleMovementInput();
+    }
 
-        if (Input.GetKey(KeyCode.W))
+    void HandleMovementInput()
+    {
+        _calculatedRotSpeed = _rotationSpeed * Time.deltaTime;
+
+        float moveInput = Input.GetAxis("Vertical");
+        float rotateInput = Input.GetAxis("Horizontal");
+
+        if (moveInput != 0)
         {
+            MoveWheels(moveInput);
             _animator.enabled = true;
-            _wheelLeft.Rotate(new Vector3(_calculatedRotSpeed, 0, 0));
-            _wheelRight.Rotate(new Vector3(_calculatedRotSpeed, 0, 0));
-            //_animator.SetBool("mover",true);
+            //_animator.SetBool("mover", true);
         }
         else
         {
             _animator.enabled = false;
-            //_animator.SetBool("mover",false);
+            //_animator.SetBool("mover", false);
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (rotateInput != 0)
         {
-            //_animator.enabled=true;
-            //_animator.SetBool("mover",true);
-            _wheelLeft.Rotate(new Vector3(-_calculatedRotSpeed, 0, 0));
-            _wheelRight.Rotate(new Vector3(_calculatedRotSpeed, 0, 0));
-            transform.Rotate(0, _calculatedRotSpeed * -1, 0);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            //_animator.enabled=true;
-            //_animator.SetBool("mover",true);
-            _wheelLeft.Rotate(new Vector3(_calculatedRotSpeed, 0, 0));
-            _wheelRight.Rotate(new Vector3(-_calculatedRotSpeed, 0, 0));
-            transform.Rotate(0, _calculatedRotSpeed, 0);
+            RotateWheels(rotateInput);
         }
     }
 
-    
+    void MoveWheels(float input)
+    {
+        _wheelLeft.Rotate(new Vector3(_calculatedRotSpeed * input, 0, 0));
+        _wheelRight.Rotate(new Vector3(_calculatedRotSpeed * input, 0, 0));
+    }
+
+    void RotateWheels(float input)
+    {
+        _wheelLeft.Rotate(new Vector3(-_calculatedRotSpeed * input, 0, 0));
+        _wheelRight.Rotate(new Vector3(_calculatedRotSpeed * input, 0, 0));
+        transform.Rotate(0, _calculatedRotSpeed * input, 0);
+    }
 }

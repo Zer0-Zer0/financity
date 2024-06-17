@@ -1,0 +1,253 @@
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;  // Required for UI components
+
+namespace HutongGames.PlayMaker.Actions
+{
+    [ActionCategory(ActionCategory.Device)]
+    [Tooltip("Sends events when a UI Image or UI Text is touched. Optionally filter by a fingerID.")]
+    public class TouchUIEvent : FsmStateAction
+    {
+        [RequiredField]
+        [Tooltip("The Game Object that owns the UI Image or UI Text.")]
+        public FsmOwnerDefault gameObject;
+
+        [Tooltip("Only detect touches that match this fingerID, or set to None.")]
+        public FsmInt fingerId;
+
+        [ActionSection("Events")]
+
+        [Tooltip("Event to send on touch began.")]
+        public FsmEvent touchBegan;
+
+        [Tooltip("Event to send on touch moved.")]
+        public FsmEvent touchMoved;
+
+        [Tooltip("Event to send on stationary touch.")]
+        public FsmEvent touchStationary;
+
+        [Tooltip("Event to send on touch ended.")]
+        public FsmEvent touchEnded;
+
+        [Tooltip("Event to send on touch cancel.")]
+        public FsmEvent touchCanceled;
+
+        [Tooltip("Event to send if not touching (finger down but not over the UI element)")]
+        public FsmEvent notTouching;
+
+        [ActionSection("Store Results")]
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the fingerId of the touch.")]
+        public FsmInt storeFingerId;
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the screen position where the UI element was touched.")]
+        public FsmVector3 storeHitPoint;
+
+        [Tooltip("Normalize the hit point screen coordinates (0-1).")]
+        public FsmBool normalizeHitPoint;
+
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the offset position of the hit.")]
+        public FsmVector3 storeOffset;
+
+        [Tooltip("How to measure the offset.")]
+        public OffsetOptions relativeTo;
+
+        public enum OffsetOptions
+        {
+            TopLeft,
+            Center,
+            TouchStart
+        }
+
+        [Tooltip("Normalize the offset.")]
+        public FsmBool normalizeOffset;
+
+        [ActionSection("")] 
+        
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
+
+        // private work variables
+
+        private Vector3 touchStartPos;
+        private RectTransform uiRectTransform;
+
+        public override void Reset()
+        {
+            gameObject = null;
+            fingerId = new FsmInt { UseVariable = true };
+
+            touchBegan = null;
+            touchMoved = null;
+            touchStationary = null;
+            touchEnded = null;
+            touchCanceled = null;
+
+            storeFingerId = null;
+            storeHitPoint = null;
+            normalizeHitPoint = false;
+            storeOffset = null;
+            relativeTo = OffsetOptions.Center;
+            normalizeOffset = true;
+
+            everyFrame = true;
+        }
+
+        public override void OnEnter()
+        {
+            DoTouchUIEvent();
+
+            if (!everyFrame)
+            {
+                Finish();
+            }
+        }
+
+        public override void OnUpdate()
+        {
+            DoTouchUIEvent();
+        }
+
+        void DoTouchUIEvent()
+        {
+            if (Input.touchCount > 0)
+            {
+                var go = Fsm.GetOwnerDefaultTarget(gameObject);
+                if (go == null)
+                {
+                    return;
+                }
+
+                uiRectTransform = go.GetComponent<RectTransform>();
+
+                if (uiRectTransform == null)
+                {
+                    return;
+                }
+
+                foreach (var touch in Input.touches)
+                {
+                    DoTouch(touch);
+                }
+            }
+        }
+
+        void DoTouch(Touch touch)
+        {
+            // Filter by finger ID
+
+            if (fingerId.IsNone || touch.fingerId == fingerId.Value)
+            {
+                // Get the screen position of the touch
+
+                Vector3 touchPos = touch.position;
+
+                // Check if touchPos is within the bounds of the RectTransform
+                if (RectTransformUtility.RectangleContainsScreenPoint(uiRectTransform, touchPos, null))
+                {
+                    // First touch?
+
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        touchStartPos = touchPos;
+                    }
+
+                    // Store results
+
+                    storeFingerId.Value = touch.fingerId;
+
+                    if (normalizeHitPoint.Value)
+                    {
+                        touchPos.x /= Screen.width;
+                        touchPos.y /= Screen.height;
+                    }
+                    
+                    storeHitPoint.Value = touchPos;
+
+                    // Store touch offset
+
+                    DoTouchOffset(touchPos);
+
+                    // Send Events
+
+                    switch (touch.phase)
+                    {
+                        case TouchPhase.Began:
+                            Fsm.Event(touchBegan);
+                            return;
+
+                        case TouchPhase.Moved:
+                            Fsm.Event(touchMoved);
+                            return;
+
+                        case TouchPhase.Stationary:
+                            Fsm.Event(touchStationary);
+                            return;
+
+                        case TouchPhase.Ended:
+                            Fsm.Event(touchEnded);
+                            return;
+
+                        case TouchPhase.Canceled:
+                            Fsm.Event(touchCanceled);
+                            return;
+                    }
+                }
+                else
+                {
+                    Fsm.Event(notTouching);
+                }
+            }
+        }
+
+        void DoTouchOffset(Vector3 touchPos)
+        {
+            if (storeOffset.IsNone)
+            {
+                return;
+            }
+
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(uiRectTransform, touchPos, null, out var worldPoint);
+            Rect guiRect = RectTransformToScreenSpace(uiRectTransform);
+
+            var offset = new Vector3();
+
+            switch (relativeTo)
+            {
+                case OffsetOptions.TopLeft:
+                    offset.x = touchPos.x - guiRect.x;
+                    offset.y = touchPos.y - guiRect.y;
+                    break;
+                
+                case OffsetOptions.Center:
+                    var center = new Vector3(guiRect.x + guiRect.width * 0.5f, guiRect.y + guiRect.height * 0.5f, 0);
+                    offset = touchPos - center;
+                    break;
+                
+                case OffsetOptions.TouchStart:
+                    offset = touchPos - touchStartPos;
+                    break;
+            }
+
+            if (normalizeOffset.Value)
+            {
+                offset.x /= guiRect.width;
+                offset.y /= guiRect.height;
+            }
+
+            storeOffset.Value = offset;
+        }
+
+        private Rect RectTransformToScreenSpace(RectTransform transform)
+        {
+            Vector2 size = Vector2.Scale(transform.rect.size, transform.lossyScale);
+            Rect rect = new Rect(transform.position.x, Screen.height - transform.position.y, size.x, size.y);
+            rect.x -= (transform.pivot.x * size.x);
+            rect.y -= ((1.0f - transform.pivot.y) * size.y);
+            return rect;
+        }
+    }
+}
