@@ -49,7 +49,7 @@ public class DayNightCycle : MonoBehaviour
     public void AddTransaction(string description, float amount)
     {
         financeManager.AddPurchase(amount);
-        string formattedTransaction = string.Format("{0} - {1} = {2} ${3}", timeManager.CurrentDate.ToString("dd/MM/yyyy"), description, amount >= 0 ? "+" : "-", Mathf.Abs(amount));
+        string formattedTransaction = string.Format("{0} - {1} = {2} ${3}", timeManager.currentDate.ToString("dd/MM/yyyy"), description, amount >= 0 ? "+" : "-", Mathf.Abs(amount));
         transactions.Add(formattedTransaction);
         pendingBalanceChange += amount;
     }
@@ -77,7 +77,7 @@ public class DayNightCycle : MonoBehaviour
             if (!DateTime.TryParseExact(transactionDateStr, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out transactionDate))
                 continue;
 
-            if (transactionDate.Date == timeManager.CurrentDate.Date)
+            if (transactionDate.Date == timeManager.currentDate.Date)
             {
                 if (parts[1].Contains("Parcela"))
                 {
@@ -181,7 +181,7 @@ public class DayNightCycle : MonoBehaviour
     {
         float installmentAmount = CalculateInstallmentAmount(totalAmount, numInstallments, dailyInterestRate);
 
-        InstallmentPayment installmentPayment = new InstallmentPayment(description, totalAmount, numInstallments, dailyInterestRate, installmentAmount, timeManager.CurrentDate);
+        InstallmentPayment installmentPayment = new InstallmentPayment(description, totalAmount, numInstallments, dailyInterestRate, installmentAmount, timeManager.currentDate);
         installmentPayments.Add(installmentPayment);
         Debug.Log("Added Installment: " + description + " Total: $" + totalAmount + " Installments: " + numInstallments + " Daily Interest: " + dailyInterestRate);
     }
@@ -190,7 +190,7 @@ public class DayNightCycle : MonoBehaviour
     {
         foreach (var installmentPayment in installmentPayments)
         {
-            if (installmentPayment.remainingInstallments > 0 && timeManager.CurrentDate >= installmentPayment.nextPaymentDate)
+            if (installmentPayment.remainingInstallments > 0 && timeManager.currentDate >= installmentPayment.nextPaymentDate)
             {
                 float amount = installmentPayment.installmentAmount;
                 AddTransaction(installmentPayment.description + " - Parcela", -amount);

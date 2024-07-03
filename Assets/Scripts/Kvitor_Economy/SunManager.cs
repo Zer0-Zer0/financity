@@ -12,7 +12,7 @@ public class SunManager : MonoBehaviour
 
     private void Update()
     {
-        float time = (float)timeManager.time / (float)TimeManager.MINUTES_IN_A_DAY;
+        float time = (float)timeManager.time / (float)timeManager.MINUTES_IN_A_DAY;
         
         float sunAngle = time * 360f + ANGLE_OFFSET;
         directionalLight.transform.rotation = Quaternion.Euler(sunAngle, 170f, 0f);
