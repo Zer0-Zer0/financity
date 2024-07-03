@@ -73,6 +73,17 @@ namespace HutongGames.PlayMakerEditor
         // e.g., Unity 5 version of Playmaker is imported
         static bool CheckRequirements()
         {
+            // If project doesn't have this folder user hasn't updated Playmaker for Unity5
+            // if (!EditorApp.IsSourceCodeVersion && !AssetDatabase.IsValidFolder(PlaymakerPluginDirectory))
+            // {
+            //     EditorUtility.DisplayDialog("PlayMaker AutoUpdater",
+            //         "Please import Playmaker for Unity 5." +
+            //         "\n\nTo get the latest version, update in the Unity Asset Store " +
+            //         "or download from Hutong Games Store.", "OK");
+            //     Debug.Log("PlayMaker AutoUpdater: Please import Playmaker for Unity 5.");
+            //     EditorPrefs.DeleteKey("PlayMaker.LastAutoUpdate");
+            //     return false;
+            // }
             return true;
         }
 
