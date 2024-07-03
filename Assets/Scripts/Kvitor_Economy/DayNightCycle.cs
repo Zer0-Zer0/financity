@@ -7,19 +7,13 @@ using System;
 
 public class DayNightCycle : MonoBehaviour
 {
-    public Light directionalLight;
-    public float dayDuration = 60f;
-    public Gradient lightColor;
-    public AnimationCurve lightIntensity;
-    public float initialTime = 0f;
-
+    [SerializeField] TimeManager timeManager;
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI dayText;
     public TextMeshProUGUI reportText;
     public TextMeshProUGUI balanceText;
     public RawImage reportImage;
 
-    private float time;
     private DateTime currentDate;
     private string[] daysOfWeek = { "Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado" };
 
@@ -35,7 +29,6 @@ public class DayNightCycle : MonoBehaviour
 
     void Start()
     {
-        time = initialTime;
         reportImage.gameObject.SetActive(false);
         UpdateBalanceText(balance);
 
@@ -49,37 +42,28 @@ public class DayNightCycle : MonoBehaviour
 
         AddInstallmentPayment("Computador", 1000f, 5, 0.05f);
         financeManager.AddPurchase(-800f);
+
+        InvokeRepeating("DayPassed", 0f, timeManager.dayDuration); 
+    }
+
+    void DayPassed(){
+        timeManager.time = 0f;
+        currentDate = currentDate.AddDays(1);
+        Debug.Log("New Day: " + currentDate.ToString("dd/MM/yyyy"));
+        GenerateReport();
+        UpdateTimeText();
+        UpdateDayText();
     }
 
     void Update()
     {
-        time += Time.deltaTime / dayDuration;
-        if (time >= 1f)
-        {
-            time = 0f;
-            currentDate = currentDate.AddDays(1);
-            Debug.Log("New Day: " + currentDate.ToString("dd/MM/yyyy"));
-            GenerateReport();
-        }
-
-        float sunAngle = time * 360f - 90f;
-        directionalLight.transform.rotation = Quaternion.Euler(sunAngle, 170f, 0f);
-        directionalLight.color = lightColor.Evaluate(time);
-        directionalLight.intensity = lightIntensity.Evaluate(time);
-
-        RenderSettings.ambientLight = lightColor.Evaluate(time) * 0.5f;
-        RenderSettings.ambientIntensity = lightIntensity.Evaluate(time) * 0.5f;
-
-        UpdateTimeText();
-        UpdateDayText();
-
         ProcessInstallmentPaymentsDaily();
     }
 
     void UpdateTimeText()
     {
-        int hours = Mathf.FloorToInt(time * 24);
-        int minutes = Mathf.FloorToInt((time * 24 * 60) % 60);
+        int hours = Mathf.FloorToInt(timeManager.time * 24);
+        int minutes = Mathf.FloorToInt((timeManager.time * 24 * 60) % 60);
         string timeString = string.Format("{0:00}:{1:00}", hours, minutes);
         timeText.text = timeString;
     }
