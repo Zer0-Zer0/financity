@@ -11,5 +11,9 @@ public class EventToText : MonoBehaviour
     public void FloatToText(float value){
         _text.text = String.Format(_textFormmating, value);
     }
+    public void StringToText(string value){
+        _text.text = value;
+        Debug.Log(value);
+    }
 
 }

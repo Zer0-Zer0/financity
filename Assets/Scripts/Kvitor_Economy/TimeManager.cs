@@ -6,17 +6,21 @@ using System;
 
 public class TimeManager : MonoBehaviour
 {
+    public readonly int MINUTES_IN_A_DAY = 1440;
     readonly string[] WEEKDAYS = { "Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado" };
     [SerializeField] float _dayDuration = 60f;
-    [SerializeField] float _initialTime = 0f;
+    [SerializeField] int _initialTime = 0;
     [SerializeField] DateTime _initialDate = new DateTime(2024, 1, 1);
-    [System.NonSerialized] public float time;
+
+    [System.NonSerialized] public int time;
     [System.NonSerialized] public DateTime CurrentDate;
 
-    public TextMeshProUGUI dayText;
-    public TextMeshProUGUI timeText;
+    [SerializeField] TextMeshProUGUI dayText;
+    [SerializeField] TextMeshProUGUI timeText;
 
     public UnityEvent<DateTime> DayPassed;
+    public UnityEvent<string> MinutePassed;
+
     void Start()
     {
         time = _initialTime;
@@ -24,32 +28,33 @@ public class TimeManager : MonoBehaviour
 
         //Assim, vai demorar um dia para um dia passar um "report"
         float _remainingDayDuration = _dayDuration - _initialTime;
-        InvokeRepeating("OnDayPassed", _remainingDayDuration, _dayDuration); 
-        InvokeRepeating("OnSecondPassed", 0, 1);
+        InvokeRepeating("OnDayPassed", _remainingDayDuration, _dayDuration);
+        InvokeRepeating("OnMinutePassed", 0, _dayDuration / MINUTES_IN_A_DAY);
     }
 
-    void Update()
+    void OnMinutePassed()
     {
-        time += Time.deltaTime / _dayDuration;
-    }
-
-    void OnSecondPassed(){
-        UpdateTimeText();
+        time++;
+        string formattedMinutes = FormatTime(time);
+        MinutePassed?.Invoke(formattedMinutes);
     }
 
     void OnDayPassed()
     {
-        CurrentDate.AddDays(1);
+        time = 0;
+        CurrentDate = CurrentDate.AddDays(1);
         UpdateDayText();
         DayPassed?.Invoke(CurrentDate);
     }
 
-    void UpdateTimeText()
+    string FormatTime(int totalMinutes)
     {
-        int hours = Mathf.FloorToInt(time * 24);
-        int minutes = Mathf.FloorToInt((time * 24 * 60) % 60);
-        string timeString = string.Format("{0:00}:{1:00}", hours, minutes);
-        timeText.text = timeString;
+        int _hours = totalMinutes / 60;
+        int _minutes = totalMinutes % 60;
+
+        string FormattedText = string.Format("{0:00}:{1:00}", _hours, _minutes);
+
+        return FormattedText;
     }
 
     void UpdateDayText()
