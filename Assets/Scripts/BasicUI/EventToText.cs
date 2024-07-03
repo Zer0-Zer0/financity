@@ -12,14 +12,6 @@ public class EventToText : MonoBehaviour
         _text.text = String.Format(_textFormmating, value);
     }
 
-    public void StringToText(string value){
-        _text.text = value;
-    }
-
-    public void TimeToText(int value){
-        _text.text = TimeManager.FormatTime(value);
-    }
-
     public void ClockToText(ClockString value){
         _text.text = value.time;
     }
