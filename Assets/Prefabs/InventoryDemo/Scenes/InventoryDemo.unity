@@ -1238,6 +1238,7 @@ GameObject:
   - component: {fileID: 1906390665}
   - component: {fileID: 1906390668}
   - component: {fileID: 1906390667}
+  - component: {fileID: 1906390669}
   m_Layer: 0
   m_Name: InventarioDemoScript
   m_TagString: Untagged
@@ -1314,8 +1315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 318824fe42988ab9da9486bfd48df792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dayDuration: 10
-  _initialTime: 0
+  dayDuration: 60
+  initialTime: 0
   dayText: {fileID: 331435442}
   timeText: {fileID: 1094665411}
   DayPassed:
@@ -1386,6 +1387,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1906390669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906390662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09d95faea42dc76aab7af3462eb2326d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

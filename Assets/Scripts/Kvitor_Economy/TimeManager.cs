@@ -3,6 +3,16 @@ using UnityEngine.Events;
 using TMPro;
 using System;
 
+public struct ClockString
+{//Eventos só funcionam com objetos, confia em mim
+    public string time;
+
+    public ClockString(string time)
+    {
+        this.time = time;
+    }
+}
+
 public class TimeManager : MonoBehaviour
 {
     public readonly int MINUTES_IN_A_DAY = 1440;
@@ -19,7 +29,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timeText;
 
     public UnityEvent<DateTime> DayPassed;
-    public UnityEvent<string> MinutePassed;
+    public UnityEvent<ClockString> MinutePassed;
 
     private void Start()
     {
@@ -34,7 +44,7 @@ public class TimeManager : MonoBehaviour
     private void OnMinutePassed()
     {
         time++;
-        string formattedMinutes = FormatTime(time);
+        ClockString formattedMinutes = new ClockString(FormatTime(time));
         MinutePassed?.Invoke(formattedMinutes);
     }
 
@@ -46,7 +56,7 @@ public class TimeManager : MonoBehaviour
         DayPassed?.Invoke(currentDate);
     }
 
-    private string FormatTime(int totalMinutes)
+    public static string FormatTime(int totalMinutes)
     {
         int hours = totalMinutes / 60;
         int minutes = totalMinutes % 60;
