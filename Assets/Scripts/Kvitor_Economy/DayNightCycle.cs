@@ -8,14 +8,9 @@ using System;
 public class DayNightCycle : MonoBehaviour
 {
     [SerializeField] TimeManager timeManager;
-    public TextMeshProUGUI timeText;
-    public TextMeshProUGUI dayText;
     public TextMeshProUGUI reportText;
     public TextMeshProUGUI balanceText;
     public RawImage reportImage;
-
-    private DateTime currentDate;
-    private string[] daysOfWeek = { "Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado" };
 
     private List<string> transactions = new List<string>();
     private float pendingBalanceChange = 0f;
@@ -25,7 +20,7 @@ public class DayNightCycle : MonoBehaviour
 
     private List<InstallmentPayment> installmentPayments = new List<InstallmentPayment>();
 
-    //public MouseVisibilityToggle mouse;
+    public MouseVisibilityToggle mouse;
 
     void Start()
     {
@@ -38,21 +33,12 @@ public class DayNightCycle : MonoBehaviour
             financeManager = gameObject.AddComponent<FinanceManager>();
         }
 
-        currentDate = new DateTime(2024, 1, 1);
-
         AddInstallmentPayment("Computador", 1000f, 5, 0.05f);
         financeManager.AddPurchase(-800f);
-
-        InvokeRepeating("DayPassed", 0f, timeManager.dayDuration); 
     }
 
     void DayPassed(){
-        timeManager.time = 0f;
-        currentDate = currentDate.AddDays(1);
-        Debug.Log("New Day: " + currentDate.ToString("dd/MM/yyyy"));
         GenerateReport();
-        UpdateTimeText();
-        UpdateDayText();
     }
 
     void Update()
@@ -60,25 +46,10 @@ public class DayNightCycle : MonoBehaviour
         ProcessInstallmentPaymentsDaily();
     }
 
-    void UpdateTimeText()
-    {
-        int hours = Mathf.FloorToInt(timeManager.time * 24);
-        int minutes = Mathf.FloorToInt((timeManager.time * 24 * 60) % 60);
-        string timeString = string.Format("{0:00}:{1:00}", hours, minutes);
-        timeText.text = timeString;
-    }
-
-    void UpdateDayText()
-    {
-        string dayOfWeek = currentDate.ToString("dddd", new System.Globalization.CultureInfo("pt-BR"));
-        string dateString = currentDate.ToString("dd/MM/yyyy");
-        dayText.text = $"{dayOfWeek} - {dateString}";
-    }
-
     public void AddTransaction(string description, float amount)
     {
         financeManager.AddPurchase(amount);
-        string formattedTransaction = string.Format("{0} - {1} = {2} ${3}", currentDate.ToString("dd/MM/yyyy"), description, amount >= 0 ? "+" : "-", Mathf.Abs(amount));
+        string formattedTransaction = string.Format("{0} - {1} = {2} ${3}", timeManager.CurrentDate.ToString("dd/MM/yyyy"), description, amount >= 0 ? "+" : "-", Mathf.Abs(amount));
         transactions.Add(formattedTransaction);
         pendingBalanceChange += amount;
     }
@@ -106,7 +77,7 @@ public class DayNightCycle : MonoBehaviour
             if (!DateTime.TryParseExact(transactionDateStr, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out transactionDate))
                 continue;
 
-            if (transactionDate.Date == currentDate.Date)
+            if (transactionDate.Date == timeManager.CurrentDate.Date)
             {
                 if (parts[1].Contains("Parcela"))
                 {
@@ -153,7 +124,7 @@ public class DayNightCycle : MonoBehaviour
         reportText.text += string.Format("Total: {0} ${1}", pendingBalanceChange >= 0 ? "+" : "-", Mathf.Abs(pendingBalanceChange));
 
         reportImage.gameObject.SetActive(true);
-        //mouse.ToggleMouse();
+        mouse.ToggleMouse();
     }
 
     public void HideReport()
@@ -165,7 +136,7 @@ public class DayNightCycle : MonoBehaviour
         reportImage.gameObject.SetActive(false);
         transactions.Clear();
         pendingBalanceChange = 0f;
-        //mouse.ToggleMouse();
+        mouse.ToggleMouse();
     }
 
     public void AddMoney(float amount)
@@ -210,7 +181,7 @@ public class DayNightCycle : MonoBehaviour
     {
         float installmentAmount = CalculateInstallmentAmount(totalAmount, numInstallments, dailyInterestRate);
 
-        InstallmentPayment installmentPayment = new InstallmentPayment(description, totalAmount, numInstallments, dailyInterestRate, installmentAmount, currentDate);
+        InstallmentPayment installmentPayment = new InstallmentPayment(description, totalAmount, numInstallments, dailyInterestRate, installmentAmount, timeManager.CurrentDate);
         installmentPayments.Add(installmentPayment);
         Debug.Log("Added Installment: " + description + " Total: $" + totalAmount + " Installments: " + numInstallments + " Daily Interest: " + dailyInterestRate);
     }
@@ -219,7 +190,7 @@ public class DayNightCycle : MonoBehaviour
     {
         foreach (var installmentPayment in installmentPayments)
         {
-            if (installmentPayment.remainingInstallments > 0 && currentDate >= installmentPayment.nextPaymentDate)
+            if (installmentPayment.remainingInstallments > 0 && timeManager.CurrentDate >= installmentPayment.nextPaymentDate)
             {
                 float amount = installmentPayment.installmentAmount;
                 AddTransaction(installmentPayment.description + " - Parcela", -amount);

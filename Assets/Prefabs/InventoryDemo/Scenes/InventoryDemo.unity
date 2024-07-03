@@ -275,8 +275,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -469.45, y: 123.650055}
+  m_SizeDelta: {x: 301.1, y: 157.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &331435442
 MonoBehaviour:
@@ -409,7 +409,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.9, y: 69.7}
+  m_AnchoredPosition: {x: 422.1, y: 100.6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &735146570
@@ -752,7 +752,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -16.9, y: 116.4}
+  m_AnchoredPosition: {x: -150.8, y: 100.6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1090375327
@@ -886,8 +886,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.1, y: -50}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -469.45, y: -20.9581}
+  m_SizeDelta: {x: 301.1, y: 131.3162}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1094665411
 MonoBehaviour:
@@ -1283,11 +1283,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeManager: {fileID: 1906390667}
-  timeText: {fileID: 331435442}
-  dayText: {fileID: 1094665411}
   reportText: {fileID: 1090375327}
   balanceText: {fileID: 735146570}
   reportImage: {fileID: 1016073024}
+  mouse: {fileID: 0}
 --- !u!114 &1906390667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1300,9 +1299,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 318824fe42988ab9da9486bfd48df792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayDuration: 1
-  initialTime: 0
-  time: 0
+  _dayDuration: 10
+  _initialTime: 0
+  dayText: {fileID: 331435442}
+  timeText: {fileID: 1094665411}
+  DayPassed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1906390668
 MonoBehaviour:
   m_ObjectHideFlags: 0
