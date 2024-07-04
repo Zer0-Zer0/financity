@@ -5,19 +5,25 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 
+/// <summary>
+/// Manages the day-night cycle in the game.
+/// </summary>
 [RequireComponent(typeof(FinanceManager))]
 [RequireComponent(typeof(TimeManager))]
 [RequireComponent(typeof(MouseVisibilityToggle))]
+[RequireComponent(typeof(WalletManager))]
 public class DayNightCycle : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI reportText;
     [SerializeField] private TextMeshProUGUI balanceText;
     [SerializeField] private RawImage reportImage;
+    
 
     private List<string> transactions = new List<string>();
     private float pendingBalanceChange = 0f;
     private float balance = 0f;
 
+    private WalletManager walletManager;
     private TimeManager timeManager;
     private FinanceManager financeManager;
     private MouseVisibilityToggle mouseVisibilityToggle;
@@ -51,6 +57,11 @@ public class DayNightCycle : MonoBehaviour
         ProcessInstallmentPaymentsDaily();
     }
 
+    /// <summary>
+    /// Adds a transaction to the list of transactions.
+    /// </summary>
+    /// <param name="description">Description of the transaction.</param>
+    /// <param name="amount">Amount of the transaction.</param>
     public void AddTransaction(string description, float amount)
     {
         financeManager.AddPurchase(amount);
@@ -59,6 +70,9 @@ public class DayNightCycle : MonoBehaviour
         pendingBalanceChange += amount;
     }
 
+    /// <summary>
+    /// Generates the daily financial report.
+    /// </summary>
     private void GenerateReport()
     {
         reportText.text = string.Empty;
@@ -132,6 +146,9 @@ public class DayNightCycle : MonoBehaviour
         mouseVisibilityToggle.ToggleMouse();
     }
 
+    /// <summary>
+    /// Hides the financial report.
+    /// </summary>
     public void HideReport()
     {
         float oldBalance = balance;
@@ -144,6 +161,10 @@ public class DayNightCycle : MonoBehaviour
         mouseVisibilityToggle.ToggleMouse();
     }
 
+    /// <summary>
+    /// Adds money to the balance.
+    /// </summary>
+    /// <param name="amount">Amount to add.</param>
     public void AddMoney(float amount)
     {
         float oldBalance = balance;
@@ -151,12 +172,18 @@ public class DayNightCycle : MonoBehaviour
         AnimateBalanceChange(oldBalance, balance, amount >= 0);
     }
 
+    /// <summary>
+    /// Animates the balance change.
+    /// </summary>
     private void AnimateBalanceChange(float oldBalance, float newBalance, bool positiveChange)
     {
         Color targetColor = positiveChange ? Color.white : Color.red;
         StartCoroutine(AnimateText(balanceText, oldBalance, newBalance, targetColor));
     }
 
+    /// <summary>
+    /// Animates the text change.
+    /// </summary>
     private IEnumerator AnimateText(TextMeshProUGUI text, float startValue, float endValue, Color targetColor)
     {
         float duration = 1f;
@@ -177,11 +204,17 @@ public class DayNightCycle : MonoBehaviour
         text.color = Color.white;
     }
 
+    /// <summary>
+    /// Updates the balance text.
+    /// </summary>
     private void UpdateBalanceText(float newBalance)
     {
         balanceText.text = "$" + newBalance.ToString("F2");
     }
 
+    /// <summary>
+    /// Adds an installment payment.
+    /// </summary>
     public void AddInstallmentPayment(string description, float totalAmount, int numInstallments, float dailyInterestRate)
     {
         float installmentAmount = CalculateInstallmentAmount(totalAmount, numInstallments, dailyInterestRate);
@@ -191,6 +224,9 @@ public class DayNightCycle : MonoBehaviour
         Debug.Log("Added Installment: " + description + " Total: $" + totalAmount + " Installments: " + numInstallments + " Daily Interest: " + dailyInterestRate);
     }
 
+    /// <summary>
+    /// Processes installment payments daily.
+    /// </summary>
     private void ProcessInstallmentPaymentsDaily()
     {
         foreach (var installmentPayment in installmentPayments)
@@ -215,10 +251,20 @@ public class DayNightCycle : MonoBehaviour
         installmentPayments.RemoveAll(installment => installment.remainingInstallments <= 0);
     }
 
-    private float CalculateInstallmentAmount(float totalAmount, int numInstallments, float dailyInterestRate)
+    /// <summary>
+    /// Calculates the installment amount for a compound loan or credit.
+    /// </summary>
+    /// <param name="principalAmount">The total principal amount of the loan or credit.</param>
+    /// <param name="numberOfInstallments">The number of installments over which the loan will be repaid.</param>
+    /// <param name="dailyInterestRate">The daily interest rate applied to the loan.</param>
+    /// <returns>The calculated installment amount based on the provided parameters.</returns>
+    private float CalculateInstallmentAmount(float principalAmount, int numberOfInstallments, float dailyInterestRate)
     {
-        float interestFactor = Mathf.Pow(1 + dailyInterestRate, numInstallments);
-        float installmentAmount = totalAmount * (interestFactor * dailyInterestRate) / (interestFactor - 1);
+        float interestFactor = Mathf.Pow(1 + dailyInterestRate, numberOfInstallments);
+        float monthlyInterestRate = dailyInterestRate;
+        float installmentAmount = principalAmount * (interestFactor * monthlyInterestRate) / (interestFactor - 1);
         return installmentAmount;
     }
+
+
 }

@@ -15,6 +15,7 @@ using UnityEngine.Events;
 [System.Serializable]
 public struct LoanData
 {
+    public string Name;
     public float Total;
     public float Principal;
     public float Rate;
@@ -45,7 +46,7 @@ public struct LoanData
         CompoundInterest
     }
 
-    public LoanData(float principal, float rate, int installments, LoanData.Type type)
+    public LoanData(float principal, float rate, int installments, LoanData.Type type, string name = "")
     {
         switch (type)
         {
@@ -57,6 +58,7 @@ public struct LoanData
                 break;
         }
 
+        this.Name = name;
         this.Principal = principal;
         this.Rate = rate;
         this.Installments = installments;
