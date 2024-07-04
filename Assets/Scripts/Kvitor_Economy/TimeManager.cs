@@ -3,57 +3,47 @@ using UnityEngine.Events;
 using TMPro;
 using System;
 
-public struct ClockString
-{//Eventos só funcionam com objetos, confia em mim
-    public string time;
-
-    public ClockString(string time)
-    {
-        this.time = time;
-    }
-}
-
 public class TimeManager : MonoBehaviour
 {
-    public readonly int MINUTES_IN_A_DAY = 1440;
+    public static readonly int MINUTES_IN_A_DAY = 1440;
     private readonly string[] WEEKDAYS = { "Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado" };
 
-    [SerializeField] private float dayDuration = 60f;
+    [SerializeField] private int dayDuration = 60;
     [SerializeField] private int initialTime = 0;
     [SerializeField] private DateTime initialDate = new DateTime(2024, 1, 1);
 
     [System.NonSerialized] public int time;
     [System.NonSerialized] public DateTime currentDate;
 
-    [SerializeField] private TextMeshProUGUI dayText;
-    [SerializeField] private TextMeshProUGUI timeText;
-
-    public UnityEvent<DateTime> DayPassed;
-    public UnityEvent<ClockString> MinutePassed;
+    public UnityEvent<EventObject> OnDayPassedEvent;
+    public UnityEvent<EventObject> OnMinutePassedEvent;
 
     private void Start()
     {
         time = initialTime;
         currentDate = initialDate;
 
-        float remainingDayDuration = dayDuration - initialTime;
-        InvokeRepeating("OnDayPassed", remainingDayDuration, dayDuration);
-        InvokeRepeating("OnMinutePassed", 0, dayDuration / MINUTES_IN_A_DAY);
+        int remainingDayDuration = dayDuration * MINUTES_IN_A_DAY/(MINUTES_IN_A_DAY - initialTime);
+        InvokeRepeating("OnDayPassed", (float)remainingDayDuration, (float)dayDuration);
+        InvokeRepeating("OnMinutePassed", 0, (float)dayDuration / (float)MINUTES_IN_A_DAY);
     }
 
     private void OnMinutePassed()
     {
         time++;
-        ClockString formattedMinutes = new ClockString(FormatTime(time));
-        MinutePassed?.Invoke(formattedMinutes);
+        EventObject formattedMinutes = new EventObject();
+        formattedMinutes.text = FormatTime(time);
+        formattedMinutes.integer = time;
+        OnMinutePassedEvent?.Invoke(formattedMinutes);
     }
 
     private void OnDayPassed()
     {
         time = 0;
         currentDate = currentDate.AddDays(1);
-        UpdateDayText();
-        DayPassed?.Invoke(currentDate);
+        EventObject formattedDate = new EventObject();
+        formattedDate.text = FormatDateText();
+        OnDayPassedEvent?.Invoke(formattedDate);
     }
 
     public static string FormatTime(int totalMinutes)
@@ -66,10 +56,11 @@ public class TimeManager : MonoBehaviour
         return formattedText;
     }
 
-    private void UpdateDayText()
+    private string FormatDateText()
     {
         string dayOfWeek = currentDate.ToString("dddd", new System.Globalization.CultureInfo("pt-BR"));
         string dateString = currentDate.ToString("dd/MM/yyyy");
-        dayText.text = $"{dayOfWeek} - {dateString}";
+        string formattedDateText = $"{dayOfWeek} - {dateString}";
+        return formattedDateText;
     }
 }

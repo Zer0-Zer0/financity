@@ -12,7 +12,7 @@ public class EventToText : MonoBehaviour
         _text.text = String.Format(_textFormmating, value);
     }
 
-    public void ClockToText(ClockString value){
-        _text.text = value.time;
+    public void StringToText(EventObject value){
+        _text.text = value.text;
     }
 }

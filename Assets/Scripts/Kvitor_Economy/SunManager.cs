@@ -1,8 +1,8 @@
 using UnityEngine;
 
+[RequireComponent(typeof(TimeManager))]
 public class SunManager : MonoBehaviour
 {
-    [SerializeField] private TimeManager timeManager;
     [SerializeField] private Light directionalLight;
     [SerializeField] private Gradient lightColor;
     [SerializeField] private AnimationCurve lightIntensity;
@@ -10,9 +10,14 @@ public class SunManager : MonoBehaviour
     private const float ANGLE_OFFSET = -90f;
     private const float AMBIENT_MULTIPLIER = 0.5f;
 
-    private void Update()
+    private void Awake()
     {
-        float time = (float)timeManager.time / (float)timeManager.MINUTES_IN_A_DAY;
+        GetComponent<TimeManager>().OnMinutePassedEvent.AddListener(OnTimeChange);
+    }
+
+    private void OnTimeChange(EventObject eventObject)
+    {
+        float time = (float)eventObject.integer / (float)TimeManager.MINUTES_IN_A_DAY;
         
         float sunAngle = time * 360f + ANGLE_OFFSET;
         directionalLight.transform.rotation = Quaternion.Euler(sunAngle, 170f, 0f);

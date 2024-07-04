@@ -5,39 +5,43 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 
+[RequireComponent(typeof(FinanceManager))]
+[RequireComponent(typeof(TimeManager))]
 public class DayNightCycle : MonoBehaviour
 {
-    [SerializeField] TimeManager timeManager;
-    public TextMeshProUGUI reportText;
-    public TextMeshProUGUI balanceText;
-    public RawImage reportImage;
+    [SerializeField] private TextMeshProUGUI reportText;
+    [SerializeField] private TextMeshProUGUI balanceText;
+    [SerializeField] private RawImage reportImage;
 
     private List<string> transactions = new List<string>();
     private float pendingBalanceChange = 0f;
     private float balance = 0f;
 
+    private TimeManager timeManager;
     private FinanceManager financeManager;
 
     private List<InstallmentPayment> installmentPayments = new List<InstallmentPayment>();
 
     public MouseVisibilityToggle mouse;
 
+    void Awake()
+    {
+        financeManager = GetComponent<FinanceManager>();
+        timeManager = GetComponent<TimeManager>();
+    }
+
     void Start()
     {
+        timeManager.OnDayPassedEvent.AddListener(DayPassed);
+
         reportImage.gameObject.SetActive(false);
         UpdateBalanceText(balance);
-
-        financeManager = GetComponent<FinanceManager>();
-        if (financeManager == null)
-        {
-            financeManager = gameObject.AddComponent<FinanceManager>();
-        }
 
         AddInstallmentPayment("Computador", 1000f, 5, 0.05f);
         financeManager.AddPurchase(-800f);
     }
 
-    void DayPassed(){
+    void DayPassed(EventObject _){
         GenerateReport();
     }
 
