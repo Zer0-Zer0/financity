@@ -7,6 +7,7 @@ using System;
 
 [RequireComponent(typeof(FinanceManager))]
 [RequireComponent(typeof(TimeManager))]
+[RequireComponent(typeof(MouseVisibilityToggle))]
 public class DayNightCycle : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI reportText;
@@ -19,15 +20,15 @@ public class DayNightCycle : MonoBehaviour
 
     private TimeManager timeManager;
     private FinanceManager financeManager;
+    private MouseVisibilityToggle mouseVisibilityToggle;
 
     private List<InstallmentPayment> installmentPayments = new List<InstallmentPayment>();
-
-    public MouseVisibilityToggle mouse;
 
     void Awake()
     {
         financeManager = GetComponent<FinanceManager>();
         timeManager = GetComponent<TimeManager>();
+        mouseVisibilityToggle = GetComponent<MouseVisibilityToggle>();
     }
 
     void Start()
@@ -128,7 +129,7 @@ public class DayNightCycle : MonoBehaviour
         reportText.text += string.Format("Total: {0} ${1}", pendingBalanceChange >= 0 ? "+" : "-", Mathf.Abs(pendingBalanceChange));
 
         reportImage.gameObject.SetActive(true);
-        mouse.ToggleMouse();
+        mouseVisibilityToggle.ToggleMouse();
     }
 
     public void HideReport()
@@ -140,7 +141,7 @@ public class DayNightCycle : MonoBehaviour
         reportImage.gameObject.SetActive(false);
         transactions.Clear();
         pendingBalanceChange = 0f;
-        mouse.ToggleMouse();
+        mouseVisibilityToggle.ToggleMouse();
     }
 
     public void AddMoney(float amount)
@@ -219,29 +220,5 @@ public class DayNightCycle : MonoBehaviour
         float interestFactor = Mathf.Pow(1 + dailyInterestRate, numInstallments);
         float installmentAmount = totalAmount * (interestFactor * dailyInterestRate) / (interestFactor - 1);
         return installmentAmount;
-    }
-
-    private class InstallmentPayment
-    {
-        public string description;
-        public float totalAmount;
-        public int numInstallments;
-        public float dailyInterestRate;
-        public float installmentAmount;
-        public int remainingInstallments;
-        public DateTime nextPaymentDate;
-        public float lastProcessedAmount;
-
-        public InstallmentPayment(string desc, float totalAmt, int numInst, float dailyRate, float installmentAmt, DateTime startDate)
-        {
-            description = desc;
-            totalAmount = totalAmt;
-            numInstallments = numInst;
-            dailyInterestRate = dailyRate;
-            installmentAmount = installmentAmt;
-            remainingInstallments = numInst;
-            nextPaymentDate = startDate.AddDays(1);
-            lastProcessedAmount = 0f;
-        }
     }
 }
