@@ -39,7 +39,7 @@ namespace ModularOptions {
 			resolutions = Screen.resolutions;
 			List<string> options = new List<string>();
 			int currentResIndex = 0;
-			Resolution currentRes = Screen.currentResolution; //Fetching refreshrate
+			Resolution currentRes = Screen.currentResolution; //Fetching refresh rate
 			currentRes.width = Screen.width; //Overwrite width/height with screen values to get correct values in Windowed mode
 			currentRes.height = Screen.height;
 			
@@ -57,7 +57,7 @@ namespace ModularOptions {
 
 		void OnValueChange(int _resolutionIndex){
 			var res = resolutions[_resolutionIndex];
-			Screen.SetResolution(res.width, res.height, Screen.fullScreenMode, res.refreshRate);
+			Screen.SetResolution(res.width, res.height, Screen.fullScreenMode, res.refreshRateRatio);
 		}
 	}
 }
