@@ -66,12 +66,19 @@ public class InventorySlot
     {
         if (CurrentItem == null)
         {
-            CurrentAmount = amount;
+            if (amount <= item.MaxAmount)
+            {
+                CurrentAmount = amount;
+            }
+            else
+            {
+                throw new Exception("Attempted to change item amount in the inventory to above its limit.");
+            }
             CurrentItem = item;
         }
         else
         {
-            Debug.LogWarning("Cannot add a different item to this slot. Clear the slot first.");
+            throw new Exception("Attempted to change slot's item even though its amount is not null.");
         }
     }
     public override string ToString()
