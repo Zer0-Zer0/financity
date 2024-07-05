@@ -1,8 +1,8 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
-public class Item : ScriptableObject
+public class InventoryItem : ScriptableObject
 {
-    public string ItemName;
+    public string Name;
     public int MaxAmount;
 }

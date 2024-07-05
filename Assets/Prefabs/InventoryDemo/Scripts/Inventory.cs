@@ -1,52 +1,62 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
-[System.Serializable]
-public class Slot
-{
-    public Item item;
-    public int amount;
-}
+using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour
 {
-    public Slot[] slots;
+    public InventorySlot[] slots;
 
-    public void AddItem(Item item, int amount)
+    public void AddItem(InventoryItem item, int amount)
     {
-        foreach (Slot slot in slots)
+        foreach (InventorySlot slot in slots)
         {
-            if (slot.item == item)
+            if (slot.CurrentItem == item)
             {
-                slot.amount += amount;
+                slot.CurrentAmount += amount;
                 return;
             }
         }
 
         for (int i = 0; i < slots.Length; i++)
         {
-            if (slots[i].item == null)
+            if (slots[i].CurrentItem == null)
             {
-                slots[i].item = item;
-                slots[i].amount = amount;
+                slots[i].CurrentItem = item;
+                slots[i].CurrentAmount = amount;
                 return;
             }
         }
     }
 
-    public void RemoveItem(Item item, int amount)
+    public void RemoveItem(InventoryItem item, int amount)
     {
-        foreach (Slot slot in slots)
+        foreach (InventorySlot slot in slots)
         {
-            if (slot.item == item)
+            if (slot.CurrentItem == item)
             {
-                slot.amount -= amount;
-                if (slot.amount <= 0)
+                slot.CurrentAmount -= amount;
+                if (slot.CurrentAmount <= 0)
                 {
-                    slot.item = null;
-                    slot.amount = 0;
+                    slot.CurrentItem = null;
+                    slot.CurrentAmount = 0;
                 }
                 return;
             }
         }
+    }
+
+    public override string ToString()
+    {
+        string result = "Inventory Slots:\n";
+        foreach (InventorySlot slot in slots)
+        {
+            if (slot.CurrentItem != null)
+            {
+                result += slot.CurrentItem.name + " - " + slot.CurrentAmount + "\n";
+            }
+        }
+        return result;
     }
 }
