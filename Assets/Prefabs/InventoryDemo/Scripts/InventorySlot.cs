@@ -22,7 +22,7 @@ public class InventorySlot
         {
             try
             {
-                if (_currentItem)
+                if (_currentItem != null)
                 {
                     throw new Exception("Changed item in the inventory even though its amount is not null.");
                 }
@@ -59,9 +59,10 @@ public class InventorySlot
 
                 if (value == 0)
                 {
-                    this.CurrentItem = null;
                     SlotCleared?.Invoke(this);
-                }else{
+                }
+                else
+                {
                     AmountChanged?.Invoke(this);
                 }
             }
