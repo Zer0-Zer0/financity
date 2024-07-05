@@ -111,7 +111,7 @@ namespace HutongGames.PlayMakerEditor
                 return;
             }
 
-            if (NeedsUpdate())
+            /*if (NeedsUpdate()) MAIS COMEMTÁRIOS POTENCIALMENTE PROBLEMÁTICOS LOL XD
             {
                 var updateMessage = "NOTE: ALWAYS BACKUP your project before updating PlayMaker or Unity!\n\nPlayMaker AutoUpdater would like to make these changes to the project:\n\n";
                 foreach (var update in updateList)
@@ -123,7 +123,7 @@ namespace HutongGames.PlayMakerEditor
                 {
                     DoUpdate();
                 }
-            }
+            }*/
 
             // Fail silently so we don't spam user with "No Update Needed" dialogs
         }
