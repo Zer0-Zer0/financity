@@ -6,7 +6,6 @@ using System;
 public class TimeManager : MonoBehaviour
 {
     public static readonly int MINUTES_IN_A_DAY = 1440;
-    private readonly string[] WEEKDAYS = { "Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado" };
 
     [SerializeField] private int dayDuration = 60;
     [SerializeField] private int initialTime = 0;
