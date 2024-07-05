@@ -14,7 +14,7 @@ public class InventoryTests
     public void Setup()
     {
         testObject = new GameObject();
-        inventory = this.AddComponent<Inventory>();
+        inventory = testObject.AddComponent<Inventory>();
         inventory.slots = new InventorySlot[5];
         for (int i = 0; i < inventory.slots.Length; i++)
         {
