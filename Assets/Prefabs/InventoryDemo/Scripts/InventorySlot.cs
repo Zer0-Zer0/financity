@@ -18,7 +18,7 @@ public class InventorySlot
         {
             return _currentItem;
         }
-        set
+        private set
         {
             if (_currentItem != null && value != _currentItem && _currentAmount != 0)
             {
@@ -42,7 +42,7 @@ public class InventorySlot
             {
                 throw new Exception("Attempted to change item amount in the inventory to negative.");
             }
-            if (CurrentItem != null)
+            if (!ItemIsNull)
             {
                 if (value > CurrentItem.MaxAmount)
                 {
@@ -62,9 +62,9 @@ public class InventorySlot
         }
     }
 
-    public void AddItem(InventoryItem item, int amount)
+    public void SetItem(InventoryItem item, int amount)
     {
-        if (CurrentItem == null)
+        if (ItemIsNull)
         {
             if (amount <= item.MaxAmount)
             {
@@ -81,6 +81,12 @@ public class InventorySlot
             throw new Exception("Attempted to change slot's item even though its amount is not null.");
         }
     }
+
+    [System.NonSerializable] public bool ItemIsNull
+    {
+        return CurrentItem == null;
+    }
+
     public override string ToString()
     {
         return $"Inventory Slot: {CurrentItem.ToString()} - Amount: {CurrentAmount}";

@@ -23,42 +23,29 @@ public class InventorySlotTests
     }
 
     [Test]
-    public void TestAddItem()
+    public void TestSetItem()
     {
         //Trying to Add too much items to a slot
-        Assert.That(() => slot.AddItem(item2, 6), Throws.TypeOf<Exception>());
+        Assert.That(() => slot.SetItem(item2, 6), Throws.TypeOf<Exception>());
 
         //Trying to negative items to a slot
-        Assert.That(() => slot.AddItem(item2, -1), Throws.TypeOf<Exception>());
+        Assert.That(() => slot.SetItem(item2, -1), Throws.TypeOf<Exception>());
 
         // Test adding an item to an empty slot
-        slot.AddItem(item2, 3);
+        slot.SetItem(item2, 3);
 
         //Sanity check
         Assert.AreEqual(item2, slot.CurrentItem);
         Assert.AreEqual(3, slot.CurrentAmount);
 
         // Test adding a different item to a non-empty slot
-        Assert.That(() => slot.AddItem(item1, 2), Throws.TypeOf<Exception>());
-    }
-
-    [Test]
-    public void TestCurrentItem()
-    {
-        // Test setting a new item in an empty slot
-        slot.AddItem(item1, 5);
-
-        // Test changing item to the same (Should not Throw)
-        Assert.DoesNotThrow(() => slot.CurrentItem = item1);
-
-        // Test changing item to a different one (Should Throw)
-        Assert.That(() => slot.CurrentItem = item2, Throws.TypeOf<Exception>());
+        Assert.That(() => slot.SetItem(item1, 2), Throws.TypeOf<Exception>());
     }
 
     [Test]
     public void TestCurrentAmount()
     {
-        slot.AddItem(item1, 5);
+        slot.SetItem(item1, 5);
 
         // Test setting a negative amount
         Assert.That(() => slot.CurrentAmount = -1, Throws.TypeOf<Exception>());

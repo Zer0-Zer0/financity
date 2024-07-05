@@ -29,28 +29,23 @@ public class Inventory : MonoBehaviour
                     remainingItems -= spaceLeftInSlot;
                 }
             }
-            else if (IsSlotEmpty(slot))
+            else if (slot.ItemIsNull)
             {
                 if (spaceLeftInSlot >= remainingItems)
                 {
-                    slot.AddItem(item, remainingItems);
+                    slot.SetItem(item, remainingItems);
                     remainingItems = 0;
                     return remainingItems;
                 }
                 else
                 {
-                    slot.AddItem(item, item.MaxAmount);
+                    slot.SetItem(item, item.MaxAmount);
                     remainingItems -= spaceLeftInSlot;
                 }
             }
         }
 
         return remainingItems;
-    }
-
-    public bool IsSlotEmpty(InventorySlot slot)
-    {
-        return slot.CurrentItem == null;
     }
 
     public int RemoveItem(InventoryItem item, int amount)
@@ -81,6 +76,26 @@ public class Inventory : MonoBehaviour
         return remainingItems; // Return the remaining items that could not be removed
     }
 
+    public int SearchItem(InventoryItem item)
+    {
+        int totalAmount = 0;
+
+        foreach (InventorySlot slot in slots)
+        {
+            if (slot.CurrentItem == item)
+            {
+                totalAmount += slot.CurrentAmount;
+            }
+        }
+
+        return totalAmount;
+    }
+
+    public void ExchangeItems(Inventory senderInventory, InventoryItem exchangedItem, int amount)
+    {
+        int remaining = AddItem(exchangedItem, amount);
+        senderInventory.RemoveItem(exchangedItem, amount - remaining);
+    }
 
     public override string ToString()
     {
