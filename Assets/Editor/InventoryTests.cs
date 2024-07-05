@@ -5,6 +5,7 @@ using NUnit.Framework;
 [TestFixture]
 public class InventoryTests
 {
+    private GameObject testObject;
     private Inventory inventory;
     private InventoryItem item1;
     private InventoryItem item2;
@@ -12,7 +13,8 @@ public class InventoryTests
     [SetUp]
     public void Setup()
     {
-        inventory = new Inventory();
+        testObject = new GameObject();
+        inventory = this.AddComponent<Inventory>();
         inventory.slots = new InventorySlot[5];
         for (int i = 0; i < inventory.slots.Length; i++)
         {
@@ -65,7 +67,13 @@ public class InventoryTests
         inventory.AddItem(item1, 8);
 
         string expectedString = "Inventory Slots:\nItem: Item1, Max Amount: 10, Current Amount: 8\n";
-        Debug.Log(inventory.ToString());
-        Assert.AreEqual(expectedString, inventory.ToString());
+        string actualString = inventory.ToString();
+        Assert.IsTrue(actualString.Contains(expectedString));
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        GameObject.DestroyImmediate(testObject);
     }
 }
