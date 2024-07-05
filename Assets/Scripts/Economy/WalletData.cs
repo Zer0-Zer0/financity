@@ -4,37 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary>
-/// Manages digital and physical money, debt, and debt limits.
-/// </summary>
 [CreateAssetMenu(fileName = "WalletData", menuName = "WalletData", order = 0)]
 public class WalletData : ScriptableObject
 {
-    /// <summary>
-    /// Initial value for digital money.
-    /// </summary>
-    [SerializeField] float _initialDigitalMoney = 800f;
+    [SerializeField] private float _initialDigitalMoney = 800f;
+    [SerializeField] private float _initialPhysicalMoney = 0f;
+    [SerializeField] private float _initialDebt = 800f;
+    [SerializeField] private float _initialMaxDebt = 800f;
 
-    /// <summary>
-    /// Initial value for physical money.
-    /// </summary>
-    [SerializeField] float _initialPhysicalMoney = 0f;
-
-    /// <summary>
-    /// Initial value for debt.
-    /// </summary>
-    [SerializeField] float _initialDebt = 800f;
-
-    /// <summary>
-    /// Initial value for maximum debt.
-    /// </summary>
-    [SerializeField] float _initialMaxDebt = 800f;
-
-    float _currentDigitalMoney;
-
-    /// <summary>
-    /// Gets or sets the current digital money.
-    /// </summary>
+    private float _currentDigitalMoney;
     public float CurrentDigitalMoney
     {
         get
@@ -43,27 +21,16 @@ public class WalletData : ScriptableObject
         }
         set
         {
-            try
+            if (value < 0f)
             {
-                if (value < 0f)
-                {
-                    throw new Exception("Attempted to spend digital money and the value in the account got negative.");
-                }
-                _currentDigitalMoney = value;
-                OnDigitalMoneyUpdate?.Invoke(_currentDigitalMoney);
+                throw new Exception("Attempted to spend digital money and the value in the account got negative.");
             }
-            catch (Exception ex)
-            {
-                Debug.LogError("Error changing digital money value: " + ex.Message);
-            }
+            _currentDigitalMoney = value;
+            OnDigitalMoneyUpdate?.Invoke(_currentDigitalMoney);
         }
     }
 
-    float _currentPhysicalMoney;
-
-    /// <summary>
-    /// Gets or sets the current physical money.
-    /// </summary>
+    private float _currentPhysicalMoney;
     public float CurrentPhysicalMoney
     {
         get
@@ -72,27 +39,16 @@ public class WalletData : ScriptableObject
         }
         set
         {
-            try
+            if (value < 0f)
             {
-                if (value < 0f)
-                {
-                    throw new Exception("Attempted to spend physical money and the value in the account got negative.");
-                }
-                _currentPhysicalMoney = value;
-                OnPhysicalMoneyUpdate?.Invoke(_currentPhysicalMoney);
+                throw new Exception("Attempted to spend physical money and the value in the account got negative.");
             }
-            catch (Exception ex)
-            {
-                Debug.LogError("Error changing physical money value: " + ex.Message);
-            }
+            _currentPhysicalMoney = value;
+            OnPhysicalMoneyUpdate?.Invoke(_currentPhysicalMoney);
         }
     }
 
-    float _currentMaxDebt;
-
-    /// <summary>
-    /// Gets or sets the current maximum debt.
-    /// </summary>
+    private float _currentMaxDebt;
     public float CurrentMaxDebt
     {
         get
@@ -101,27 +57,16 @@ public class WalletData : ScriptableObject
         }
         set
         {
-            try
+            if (value < 0f)
             {
-                if (value < 0f)
-                {
-                    throw new Exception("Attempted to input a negative max debt value.");
-                }
-                _currentMaxDebt = value;
-                OnMaxDebtUpdate?.Invoke(_currentMaxDebt);
+                throw new Exception("Attempted to input a negative max debt value.");
             }
-            catch (Exception ex)
-            {
-                Debug.LogError("Error changing max debt value: " + ex.Message);
-            }
+            _currentMaxDebt = value;
+            OnMaxDebtUpdate?.Invoke(_currentMaxDebt);
         }
     }
 
-    float _currentDebt;
-
-    /// <summary>
-    /// Gets or sets the current debt.
-    /// </summary>
+    private float _currentDebt;
     public float CurrentDebt
     {
         get
@@ -130,23 +75,16 @@ public class WalletData : ScriptableObject
         }
         set
         {
-            try
+            if (value < 0f)
             {
-                if (value < 0f)
-                {
-                    throw new Exception("Attempted to input a negative debt value.");
-                }
-                else if (value > CurrentMaxDebt)
-                {
-                    throw new Exception("Attempted to input a bigger than allowed debt value.");
-                }
-                _currentDebt = value;
-                OnDebtUpdate?.Invoke(_currentDebt);
+                throw new Exception("Attempted to input a negative debt value.");
             }
-            catch (Exception ex)
+            else if (value > CurrentMaxDebt)
             {
-                Debug.LogError("Error changing debt value: " + ex.Message);
+                throw new Exception("Attempted to input a bigger than allowed debt value.");
             }
+            _currentDebt = value;
+            OnDebtUpdate?.Invoke(_currentDebt);
         }
     }
 
@@ -156,9 +94,9 @@ public class WalletData : ScriptableObject
     public UnityEvent<float> OnMaxDebtUpdate;
 
     /// <summary>
-    /// Initializes the wallet with initial values.
+    /// Initializes the wallet with initial values, Awake() is better than Start() for this.
     /// </summary>
-    void Start()
+    void Awake()
     {
         CurrentDigitalMoney = _initialDigitalMoney;
         CurrentPhysicalMoney = _initialPhysicalMoney;
