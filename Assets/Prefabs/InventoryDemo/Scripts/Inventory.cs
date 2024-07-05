@@ -17,9 +17,9 @@ public class Inventory : MonoBehaviour
             int spaceLeftInSlot = item.MaxAmount - slot.CurrentAmount;
             if (slot.CurrentItem == item)
             {
-                if (spaceLeftInSlot >= amount)
+                if (spaceLeftInSlot >= remainingItems)
                 {
-                    slot.CurrentAmount += amount;
+                    slot.CurrentAmount += remainingItems;
                     remainingItems = 0;
                     return remainingItems;
                 }
@@ -31,15 +31,15 @@ public class Inventory : MonoBehaviour
             }
             else if (IsSlotEmpty(slot))
             {
-                if (spaceLeftInSlot >= amount)
+                if (spaceLeftInSlot >= remainingItems)
                 {
-                    slot.CurrentAmount += amount;
+                    slot.AddItem(item, remainingItems);
                     remainingItems = 0;
                     return remainingItems;
                 }
                 else
                 {
-                    slot.CurrentAmount = item.MaxAmount;
+                    slot.AddItem(item, item.MaxAmount);
                     remainingItems -= spaceLeftInSlot;
                 }
             }
@@ -50,22 +50,7 @@ public class Inventory : MonoBehaviour
 
     public bool IsSlotEmpty(InventorySlot slot)
     {
-        return slot.CurrentItem == null ? true : false;
-    }
-
-    public bool IsInventoryEmpty
-    {
-        get
-        {
-            foreach (InventorySlot slot in slots)
-            {
-                if (slot.CurrentItem != null)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+        return slot.CurrentItem == null;
     }
 
     public int RemoveItem(InventoryItem item, int amount)
@@ -104,7 +89,7 @@ public class Inventory : MonoBehaviour
         {
             if (slot.CurrentItem != null)
             {
-                result += slot.CurrentItem.name + " - " + slot.CurrentAmount + "\n";
+                result += slot.CurrentItem.ToString() + ", Current Amount: " + slot.CurrentAmount + "\n";
             }
         }
         return result;
