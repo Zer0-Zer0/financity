@@ -8,44 +8,94 @@ public class Inventory : MonoBehaviour
 {
     public InventorySlot[] slots;
 
-    public void AddItem(InventoryItem item, int amount)
+    public int AddItem(InventoryItem item, int amount)
     {
+        int remainingItems = amount;
+
         foreach (InventorySlot slot in slots)
         {
+            int spaceLeftInSlot = item.MaxAmount - slot.CurrentAmount;
             if (slot.CurrentItem == item)
             {
-                slot.CurrentAmount += amount;
-                return;
+                if (spaceLeftInSlot >= amount)
+                {
+                    slot.CurrentAmount += amount;
+                    remainingItems = 0;
+                    return remainingItems;
+                }
+                else
+                {
+                    slot.CurrentAmount = item.MaxAmount;
+                    remainingItems -= spaceLeftInSlot;
+                }
+            }
+            else if (IsSlotEmpty(slot))
+            {
+                if (spaceLeftInSlot >= amount)
+                {
+                    slot.CurrentAmount += amount;
+                    remainingItems = 0;
+                    return remainingItems;
+                }
+                else
+                {
+                    slot.CurrentAmount = item.MaxAmount;
+                    remainingItems -= spaceLeftInSlot;
+                }
             }
         }
 
-        for (int i = 0; i < slots.Length; i++)
+        return remainingItems;
+    }
+
+    public bool IsSlotEmpty(InventorySlot slot)
+    {
+        return slot.CurrentItem == null ? true : false;
+    }
+
+    public bool IsInventoryEmpty
+    {
+        get
         {
-            if (slots[i].CurrentItem == null)
+            foreach (InventorySlot slot in slots)
             {
-                slots[i].CurrentItem = item;
-                slots[i].CurrentAmount = amount;
-                return;
+                if (slot.CurrentItem != null)
+                {
+                    return false;
+                }
             }
+            return true;
         }
     }
 
-    public void RemoveItem(InventoryItem item, int amount)
+    public int RemoveItem(InventoryItem item, int amount)
     {
+        int remainingItems = amount;
+
         foreach (InventorySlot slot in slots)
         {
             if (slot.CurrentItem == item)
             {
-                slot.CurrentAmount -= amount;
-                if (slot.CurrentAmount <= 0)
+                if (slot.CurrentAmount >= remainingItems)
                 {
-                    slot.CurrentItem = null;
+                    slot.CurrentAmount -= remainingItems;
+                    if (slot.CurrentAmount <= 0)
+                    {
+                        slot.CurrentAmount = 0;
+                    }
+                    return 0; // No missing items
+                }
+                else
+                {
+                    remainingItems -= slot.CurrentAmount;
                     slot.CurrentAmount = 0;
                 }
-                return;
             }
         }
+
+        return remainingItems; // Return the remaining items that could not be removed
     }
+
 
     public override string ToString()
     {

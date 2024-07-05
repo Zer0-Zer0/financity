@@ -1446,7 +1446,7 @@ GameObject:
   - component: {fileID: 1906390664}
   - component: {fileID: 1906390665}
   m_Layer: 0
-  m_Name: InventarioDemoScript
+  m_Name: InventoryDemoScript
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1480,14 +1480,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slots:
-  - item: {fileID: 0}
-    amount: 0
-  - item: {fileID: 11400000, guid: 3c76fc6e54a8cb3b0810adf5ddf0d60d, type: 2}
-    amount: 20
-  - item: {fileID: 11400000, guid: abbe5b33cf962f22db8375b74d5ee6bc, type: 2}
-    amount: 10
-  - item: {fileID: 11400000, guid: 51b831718dd6967f99bc51f01180736c, type: 2}
-    amount: 3
+  - ItemChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    AmountChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    SlotCleared:
+      m_PersistentCalls:
+        m_Calls: []
+    _currentItem: {fileID: 11400000, guid: 3c76fc6e54a8cb3b0810adf5ddf0d60d, type: 2}
+    _currentAmount: 128
+  - ItemChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    AmountChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    SlotCleared:
+      m_PersistentCalls:
+        m_Calls: []
+    _currentItem: {fileID: 11400000, guid: 3c76fc6e54a8cb3b0810adf5ddf0d60d, type: 2}
+    _currentAmount: 64
+  - ItemChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    AmountChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    SlotCleared:
+      m_PersistentCalls:
+        m_Calls: []
+    _currentItem: {fileID: 11400000, guid: abbe5b33cf962f22db8375b74d5ee6bc, type: 2}
+    _currentAmount: 10
+  - ItemChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    AmountChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    SlotCleared:
+      m_PersistentCalls:
+        m_Calls: []
+    _currentItem: {fileID: 11400000, guid: 51b831718dd6967f99bc51f01180736c, type: 2}
+    _currentAmount: 5
 --- !u!114 &1906390665
 MonoBehaviour:
   m_ObjectHideFlags: 0
