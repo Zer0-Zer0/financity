@@ -20,19 +20,12 @@ public class InventorySlot
         }
         set
         {
-            try
+            if (_currentItem != null && value != _currentItem && _currentAmount != 0)
             {
-                if (_currentItem != null)
-                {
-                    throw new Exception("Changed item in the inventory even though its amount is not null.");
-                }
-                _currentItem = value;
-                ItemChanged?.Invoke(this);
+                throw new Exception("Attempted to change slot's item even though its amount is not null.");
             }
-            catch (Exception ex)
-            {
-                Debug.LogWarning("Potential problematic action during the slot's item change: " + ex.Message);
-            }
+            _currentItem = value;
+            ItemChanged?.Invoke(this);
         }
     }
 
@@ -45,31 +38,45 @@ public class InventorySlot
         }
         set
         {
-            try
+            if (value < 0f)
             {
-                if (value < 0f)
-                {
-                    throw new Exception("Attempted to change item amount in the inventory to negative.");
-                }
-                else if (value > CurrentItem.MaxAmount)
+                throw new Exception("Attempted to change item amount in the inventory to negative.");
+            }
+            if (CurrentItem != null)
+            {
+                if (value > CurrentItem.MaxAmount)
                 {
                     throw new Exception("Attempted to change item amount in the inventory to above its limit.");
                 }
-                _currentAmount = value;
-
-                if (value == 0)
+                else if (value == 0)
                 {
+                    _currentAmount = value;
+                    CurrentItem = null;
                     SlotCleared?.Invoke(this);
-                }
-                else
-                {
-                    AmountChanged?.Invoke(this);
+                    return;
                 }
             }
-            catch (Exception ex)
-            {
-                Debug.LogError("Error changing the slot's item amount: " + ex.Message);
-            }
+
+            _currentAmount = value;
+            AmountChanged?.Invoke(this);
         }
     }
+
+    public void AddItem(InventoryItem item, int amount)
+    {
+        if (CurrentItem == null)
+        {
+            CurrentAmount = amount;
+            CurrentItem = item;
+        }
+        else
+        {
+            Debug.LogWarning("Cannot add a different item to this slot. Clear the slot first.");
+        }
+    }
+    public override string ToString()
+    {
+        return $"Inventory Slot: {CurrentItem.ToString()} - Amount: {CurrentAmount}";
+    }
+
 }

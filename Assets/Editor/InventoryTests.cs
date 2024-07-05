@@ -26,6 +26,9 @@ public class InventoryTests
         item2 = ScriptableObject.CreateInstance<InventoryItem>();
         item2.Name = "Item2";
         item2.MaxAmount = 5;
+
+        Debug.Log(item1);
+        Debug.Log(item2);
     }
 
     [Test]
