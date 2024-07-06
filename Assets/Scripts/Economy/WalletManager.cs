@@ -11,7 +11,7 @@ public class WalletManager : MonoBehaviour
     /// <summary>
     /// Reference to the WalletData scriptable object.
     /// </summary>
-    [SerializeField] private WalletData _walletData;
+    public WalletData Wallet;
 
     public enum TransactionPosition
     {
@@ -19,9 +19,9 @@ public class WalletManager : MonoBehaviour
         Sender
     }
 
-    public Transaction MakeTransaction(WalletData receiver, float value, Transaction.TransactionType type)
+    public Transaction MakeTransaction(float value, WalletData receiver, Transaction.TransactionType type)
     {
-        Transaction transactionToMake = new Transaction(value, _walletData, receiver, type);
+        Transaction transactionToMake = new Transaction(value, Wallet, receiver, type);
         TransactionValidation(transactionToMake);
         transactionToMake.OnTransactionAccepted.AddListener(OnTransactionAcceptedEventHandler);
         return transactionToMake;
@@ -29,11 +29,11 @@ public class WalletManager : MonoBehaviour
 
     public TransactionPosition VerifyTransactionPosition(Transaction transaction)
     {
-        if (transaction.Sender == _walletData)
+        if (transaction.Sender == Wallet)
         {
             return TransactionPosition.Receiver;
         }
-        else if (transaction.Receiver == _walletData)
+        else if (transaction.Receiver == Wallet)
         {
             return TransactionPosition.Sender;
         }
