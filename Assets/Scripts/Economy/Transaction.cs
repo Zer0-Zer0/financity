@@ -78,23 +78,23 @@ public struct Transaction
     /// <summary>
     /// The type of the transaction.
     /// </summary>
-    [SerializeField] private Type _transactionType;
-    public Type TransactionType
+    [SerializeField] private TransactionType _type;
+    public TransactionType Type
     {
         get
         {
-            return _transactionType;
+            return _type;
         }
         private set
         {
-            _transactionType = value;
+            _type = value;
         }
     }
 
     /// <summary>
     /// Enum representing the type of transaction.
     /// </summary>
-    public enum Type
+    public enum TransactionType
     {
         Physical,
         Digital
@@ -108,12 +108,12 @@ public struct Transaction
     /// <summary>
     /// Event triggered when a transfer is accepted.
     /// </summary>
-    public UnityEvent<Transaction> OnTransferAccepted;
+    public UnityEvent<Transaction> OnTransactionAccepted;
 
     /// <summary>
     /// Event triggered when a transfer is refused.
     /// </summary>
-    public UnityEvent<Transaction> OnTransferRefused;
+    public UnityEvent<Transaction> OnTransactionRefused;
 
     /// <summary>
     /// Constructor for creating a new transaction.
@@ -123,17 +123,17 @@ public struct Transaction
     /// <param name="sender">The wallet data of the sender.</param>
     /// <param name="receiver">The wallet data of the receiver.</param>
     /// <param name="transactionType">The type of the transaction (Physical or Digital).</param>
-    public Transaction(string name, float value, WalletData sender, WalletData receiver, Type transactionType)
+    public Transaction(float value, WalletData sender, WalletData receiver, TransactionType type, string name = "")
     {
         this._name = name;
         this._value = value;
         this._sender = sender;
         this._receiver = receiver;
-        this._transactionType = transactionType;
+        this._type = type;
 
         OnTransactionPending = new UnityEvent<Transaction>();
-        OnTransferAccepted = new UnityEvent<Transaction>();
-        OnTransferRefused = new UnityEvent<Transaction>();
+        OnTransactionAccepted = new UnityEvent<Transaction>();
+        OnTransactionRefused = new UnityEvent<Transaction>();
         OnTransactionPending?.Invoke(this);
     }
 }

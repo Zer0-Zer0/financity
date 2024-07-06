@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,47 +13,80 @@ public class WalletManager : MonoBehaviour
     /// </summary>
     [SerializeField] private WalletData _walletData;
 
-    /// <summary>
-    /// Initializes the wallet with initial values and subscribes to events.
-    /// </summary>
-    void Start()
+    enum TransactionPosition
     {
-        // Subscribe to events for updating UI or other systems
-        _walletData.OnDigitalMoneyUpdate.AddListener(UpdateDigitalMoneyUI);
-        _walletData.OnPhysicalMoneyUpdate.AddListener(UpdatePhysicalMoneyUI);
-        _walletData.OnDebtUpdate.AddListener(UpdateDebtUI);
-        _walletData.OnMaxDebtUpdate.AddListener(UpdateMaxDebtUI);
+        Receiver,
+        Sender
     }
 
-    /// <summary>
-    /// Updates the UI elements displaying digital money.
-    /// </summary>
-    void UpdateDigitalMoneyUI(float newValue)
+    void MakeTransaction(WalletData receiver, float value, Transaction.TransactionType type)
     {
-        // Update UI elements displaying digital money
+        Transaction transactionToMake = new Transaction(value, _walletData, receiver, type);
+        TransactionValidation(transactionToMake);
+        transactionToMake.OnTransactionAccepted.AddListener(OnTransactionAcceptedEventHandler);
     }
 
-    /// <summary>
-    /// Updates the UI elements displaying physical money.
-    /// </summary>
-    void UpdatePhysicalMoneyUI(float newValue)
+    TransactionPosition VerifyTransactionPosition(Transaction transaction)
     {
-        // Update UI elements displaying physical money
+        if (transaction.Sender == _walletData)
+        {
+            return TransactionPosition.Receiver;
+        }
+        else if (transaction.Receiver == _walletData)
+        {
+            return TransactionPosition.Sender;
+        }
+        else
+        {
+            throw new Exception("ERROR ON TRANSACTION POSITION VERIFICATION: A Wallet that was neither the sender nor the receiver tried to validate a transaction.");
+        }
     }
 
-    /// <summary>
-    /// Updates the UI elements displaying debt.
-    /// </summary>
-    void UpdateDebtUI(float newValue)
+    public static TransactionPosition TransactionValidation(Transaction transaction)
     {
-        // Update UI elements displaying debt
+        VerifySenderMoney(transaction);
+        return VerifyTransactionPosition(transaction);
     }
 
-    /// <summary>
-    /// Updates the UI elements displaying maximum debt.
-    /// </summary>
-    void UpdateMaxDebtUI(float newValue)
+    public static void VerifySenderMoney(Transaction transaction)
     {
-        // Update UI elements displaying maximum debt
+        switch (transaction.Type)
+        {
+            case Transaction.TransactionType.Physical:
+                if (transaction.Sender.CurrentPhysicalMoney < transaction.Value)
+                {
+                    throw new Exception("ERROR VERIFYING SENDER'S MONEY: Tried to make a PHYSICAL money transaction bigger than the value in the sender wallet itself.");
+                }
+                break;
+            case Transaction.TransactionType.Digital:
+                if (transaction.Sender.CurrentDigitalMoney < transaction.Value)
+                {
+                    throw new Exception("ERROR VERIFYING SENDER'S MONEY: Tried to make a DIGITAL money transaction bigger than the value in the sender wallet itself.");
+                }
+                break;
+            default:
+                throw new Exception("ERROR VERIFYING SENDER'S MONEY: Impossible transaction type.");
+                break;
+        }
+    }
+
+    void OnTransactionAcceptedEventHandler(Transaction transaction)
+    {
+        TransactionValidation(transaction);
+        switch (transaction.Type)
+        {
+            case Transaction.TransactionType.Physical:
+                transaction.Receiver.CurrentPhysicalMoney += transaction.Value;
+                transaction.Sender.CurrentPhysicalMoney -= transaction.Value;
+                break;
+            case Transaction.TransactionType.Digital:
+                transaction.Receiver.CurrentDigitalMoney += transaction.Value;
+                transaction.Sender.CurrentDigitalMoney -= transaction.Value;
+                break;
+            default:
+                throw new Exception("ERROR ON ACCEPTED TRANSACTION EVENT HANDLER: Impossible transaction type.");
+                break;
+        }
+        transaction.OnTransactionAccepted.Remove(OnTransactionAcceptedEventHandler);
     }
 }
