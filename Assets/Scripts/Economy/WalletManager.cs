@@ -27,6 +27,12 @@ public class WalletManager : MonoBehaviour
         return transactionToMake;
     }
 
+    public void ReceiveTransaction(Transaction transaction)
+    {
+        TransactionValidation(transaction);
+        transaction.OnTransactionAccepted?.Invoke(transaction);
+    }
+
     public TransactionPosition VerifyTransactionPosition(Transaction transaction)
     {
         if (transaction.Sender == Wallet)
