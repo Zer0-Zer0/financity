@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void ExpandInventory(int additionalSlots)
+    public void ExpandSlots(int additionalSlots)
     {
         for (int i = 0; i < additionalSlots; i++)
         {
@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void ShrinkInventory(int removedSlots)
+    public void ShrinkSlots(int removedSlots)
     {
         if (CurrentSlotCount - removedSlots >= 0)
         {

@@ -23,7 +23,7 @@ public class InventoryTests
     {
         testObject = new GameObject();
         Inventory _inventory = testObject.AddComponent<Inventory>();
-        _inventory.ExpandInventory(slotCount);
+        _inventory.ExpandSlots(slotCount);
 
         return _inventory;
     }
@@ -37,23 +37,23 @@ public class InventoryTests
     }
 
     [Test]
-    public void CanExpandInventory()
+    public void CanExpandSlots()
     {
         int initialSlotCount = inventory.slots.Count;
         int additionalSlots = 3;
 
-        inventory.ExpandInventory(additionalSlots);
+        inventory.ExpandSlots(additionalSlots);
 
         Assert.AreEqual(initialSlotCount + additionalSlots, inventory.slots.Count);
     }
 
     [Test]
-    public void CanShrinkInventory()
+    public void CanShrinkSlots()
     {
         int initialSlotCount = inventory.slots.Count;
         int removedSlots = 2;
 
-        inventory.ShrinkInventory(removedSlots);
+        inventory.ShrinkSlots(removedSlots);
 
         Assert.AreEqual(initialSlotCount - removedSlots, inventory.slots.Count);
     }
