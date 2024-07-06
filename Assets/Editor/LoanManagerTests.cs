@@ -4,11 +4,19 @@ using UnityEngine;
 public class LoanManagerTests
 {
     private WalletData _walletData;
+    private GameObject _testObject;
+    private LoanManager _loanManager;
 
     [SetUp]
     public void Setup()
     {
+        _testObject = new GameObject();
+        _loanManager = _testObject.AddComponent<LoanManager>();
         _walletData = ScriptableObject.CreateInstance<WalletData>();
+        _walletData.CurrentDigitalMoney = 0f;
+        _walletData.CurrentPhysicalMoney = 0f;
+        _walletData.CurrentMaxDebt = 1000f;
+        _walletData.CurrentDebt = 0f;
     }
 
 
@@ -31,73 +39,104 @@ public class LoanManagerTests
         Assert.LessOrEqual(randomLoan.Rate, _maxRate);
         Assert.GreaterOrEqual(randomLoan.Installments, _minInstallments);
         Assert.LessOrEqual(randomLoan.Installments, _maxInstallments);
-        Assert.AreEqual(_loanType, randomLoan._LoanType);
+        Assert.AreEqual(_loanType, randomLoan.LoanType);
     }
 
-    [UnityTest]
-    public IEnumerator InstallmentArrivalOccurredHandler_EnoughMoney_PaysInstallment()
+
+    [Test]
+    public void InstallmentArrivalOccurredHandler_EnoughMoney_PaysInstallment()
     {
-        // Test paying installment with enough money
+        // Set up scenario
+        _walletData.CurrentDigitalMoney = 500f;
+        LoanData loan = new LoanData(500f, 0.1f, 1, LoanData.Type.SimpleInterest);
+        _loanManager.SetLoanData(loan);
+        _loanManager.LoanGrantOccurredHandler(_walletData);//Initializes loan
+
+
+        // Call method
+        _loanManager.InstallmentArrivalOccurredHandler(_walletData);
+
+        // Assert
+        Assert.AreEqual(450f, _walletData.CurrentDigitalMoney);
     }
 
-    [UnityTest]
-    public IEnumerator InstallmentArrivalOccurredHandler_NotEnoughMoney_PaysPenalty()
+    [Test]
+    public void InstallmentArrivalOccurredHandler_NotEnoughMoney_PaysPenalty()
     {
-        // Test paying penalty when there is not enough money
+        // Set up scenario
+        LoanData loan = new LoanData(500f, 0.1f, 1, LoanData.Type.SimpleInterest);
+        _loanManager.SetLoanData(loan);
+        _loanManager.LoanGrantOccurredHandler(_walletData);
+
+        _walletData.CurrentDigitalMoney = 100f;
+
+        // Call method
+        _loanManager.InstallmentArrivalOccurredHandler(_walletData);
+
+        // Assert
+        Assert.AreEqual(0f, _walletData.CurrentDigitalMoney);
     }
 
-    [UnityTest]
-    public IEnumerator InstallmentPaymentMadeHandler_PaysInstallment()
+    [Test]
+    public void InstallmentPaymentMadeHandler_PaysInstallment()
     {
         // Test making a regular installment payment
     }
 
-    [UnityTest]
-    public IEnumerator InstallmentPaymentMadeHandler_PaysPenalty()
+    [Test]
+    public void InstallmentPaymentMadeHandler_PaysPenalty()
     {
         // Test making a penalty installment payment
     }
 
-    [UnityTest]
-    public IEnumerator InstallmentPaymentLateHandler_MovesToPenalty()
+    [Test]
+    public void InstallmentPaymentLateHandler_MovesToPenalty()
     {
         // Test moving installment to penalty when payment is late
     }
 
-    [UnityTest]
-    public IEnumerator InstallmentPaymentLateHandler_AddsToPenalty()
+    [Test]
+    public void InstallmentPaymentLateHandler_AddsToPenalty()
     {
         // Test adding to penalty when payment is late
     }
 
-    [UnityTest]
-    public IEnumerator LoanFullyRepaidEventHandler_FullyRepayLoan()
+    [Test]
+    public void LoanFullyRepaidEventHandler_FullyRepayLoan()
     {
         // Test fully repaying a loan
     }
 
-    [UnityTest]
-    public IEnumerator LoanGrantOccurredHandler_GrantLoan()
+    [Test]
+    public void LoanGrantOccurredHandler_GrantLoan()
     {
         // Test granting a new loan
     }
 
-    [UnityTest]
-    public IEnumerator NewLocalRandomLoan_GeneratesNewLoan()
+    [Test]
+    public void NewLocalRandomLoan_GeneratesNewLoan()
     {
         // Test generating a new random loan
     }
 
-    [UnityTest]
-    public IEnumerator ResetLoanManager_ResetsLoan()
+    [Test]
+    public void ResetLoanManager_ResetsLoan()
     {
         // Test resetting the loan manager
     }
 
-    [UnityTest]
-    public IEnumerator GenerateRandomLoan_CreatesRandomLoan()
+    [Test]
+    public void GenerateRandomLoan_CreatesRandomLoan()
     {
         // Test generating a random loan with specified parameters
     }
-}
 
+    [TearDown]
+    public void Teardown()
+    {
+        // Clean up resources or reset state after each test
+        _walletData = null;
+        _loanManager = null;
+        GameObject.DestroyImmediate(_testObject);
+    }
+}

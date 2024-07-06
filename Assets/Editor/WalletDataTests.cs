@@ -48,4 +48,11 @@ public class WalletDataTests
         _walletData.CurrentMaxDebt = 2000f;
         Assert.AreEqual(2000f, _walletData.CurrentMaxDebt);
     }
+    
+    [TearDown]
+    public void Teardown()
+    {
+        // Clean up resources or reset state after each test
+        _walletData = null;
+    }
 }

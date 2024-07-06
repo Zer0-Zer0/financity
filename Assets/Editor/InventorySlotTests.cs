@@ -58,4 +58,12 @@ public class InventorySlotTests
         Assert.DoesNotThrow(() => slot.CurrentAmount = 0);
         Assert.IsNull(slot.CurrentItem);
     }
+
+    [TearDown]
+    public void Teardown()
+    {
+        slot = null;
+        item1 = null;
+        item2 = null;
+    }
 }

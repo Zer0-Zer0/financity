@@ -131,6 +131,9 @@ public class InventoryTests
     [TearDown]
     public void TearDown()
     {
+        inventory = null;
+        banana = null;
+        apple = null;
         GameObject.DestroyImmediate(testObject);
     }
 }
