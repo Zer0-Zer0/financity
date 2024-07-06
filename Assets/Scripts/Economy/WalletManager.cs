@@ -13,20 +13,21 @@ public class WalletManager : MonoBehaviour
     /// </summary>
     [SerializeField] private WalletData _walletData;
 
-    enum TransactionPosition
+    public enum TransactionPosition
     {
         Receiver,
         Sender
     }
 
-    void MakeTransaction(WalletData receiver, float value, Transaction.TransactionType type)
+    public Transaction MakeTransaction(WalletData receiver, float value, Transaction.TransactionType type)
     {
         Transaction transactionToMake = new Transaction(value, _walletData, receiver, type);
         TransactionValidation(transactionToMake);
         transactionToMake.OnTransactionAccepted.AddListener(OnTransactionAcceptedEventHandler);
+        return transactionToMake;
     }
 
-    TransactionPosition VerifyTransactionPosition(Transaction transaction)
+    public TransactionPosition VerifyTransactionPosition(Transaction transaction)
     {
         if (transaction.Sender == _walletData)
         {
@@ -42,7 +43,7 @@ public class WalletManager : MonoBehaviour
         }
     }
 
-    public static TransactionPosition TransactionValidation(Transaction transaction)
+    public TransactionPosition TransactionValidation(Transaction transaction)
     {
         VerifySenderMoney(transaction);
         return VerifyTransactionPosition(transaction);
@@ -66,7 +67,6 @@ public class WalletManager : MonoBehaviour
                 break;
             default:
                 throw new Exception("ERROR VERIFYING SENDER'S MONEY: Impossible transaction type.");
-                break;
         }
     }
 
@@ -85,8 +85,7 @@ public class WalletManager : MonoBehaviour
                 break;
             default:
                 throw new Exception("ERROR ON ACCEPTED TRANSACTION EVENT HANDLER: Impossible transaction type.");
-                break;
         }
-        transaction.OnTransactionAccepted.Remove(OnTransactionAcceptedEventHandler);
+        transaction.OnTransactionAccepted?.RemoveListener(OnTransactionAcceptedEventHandler);
     }
 }

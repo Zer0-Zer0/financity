@@ -107,6 +107,19 @@ public class LoanManager : MonoBehaviour
     /// <param name="wallet">The player's wallet data.</param>
     public void InstallmentPaymentLateHandler(WalletData wallet)
     {
+        if (_remainingPenaltyInstallments != 0)
+        {
+            _rawRemainingPenalty -= wallet.CurrentDigitalMoney;
+            wallet.CurrentDigitalMoney = 0;
+        }
+        else
+        {
+            _remainingValue -= wallet.CurrentDigitalMoney;
+            wallet.CurrentDigitalMoney = 0;
+            _remainingInstallments--;
+        }
+
+        wallet.CurrentDigitalMoney = 0;
         if (_remainingInstallments != 0)
         {
             //Moves the installment value from normal to the penalty one
