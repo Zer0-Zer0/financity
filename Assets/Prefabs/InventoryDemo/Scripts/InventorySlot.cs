@@ -62,6 +62,14 @@ public class InventorySlot
         }
     }
 
+    public bool ItemIsNull
+    {
+        get
+        {
+            return CurrentItem == null;
+        }
+    }
+
     public void SetItem(InventoryItem item, int amount)
     {
         if (ItemIsNull)
@@ -80,11 +88,6 @@ public class InventorySlot
         {
             throw new Exception("Attempted to change slot's item even though its amount is not null.");
         }
-    }
-
-    [System.NonSerializable] public bool ItemIsNull
-    {
-        return CurrentItem == null;
     }
 
     public override string ToString()

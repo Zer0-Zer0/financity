@@ -6,7 +6,35 @@ using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour
 {
-    public InventorySlot[] slots;
+    public List<InventorySlot> slots = new List<InventorySlot>();
+
+    public int CurrentSlotCount
+    {
+        get
+        {
+            return slots.Count;
+        }
+    }
+
+    public void ExpandInventory(int additionalSlots)
+    {
+        for (int i = 0; i < additionalSlots; i++)
+        {
+            slots.Add(new InventorySlot());
+        }
+    }
+
+    public void ShrinkInventory(int removedSlots)
+    {
+        if (CurrentSlotCount - removedSlots >= 0)
+        {
+            slots.RemoveRange(slots.Count - removedSlots, removedSlots);
+        }
+        else
+        {
+            throw new Exception("Cannot shrink inventory to negative slots");
+        }
+    }
 
     public int AddItem(InventoryItem item, int amount)
     {
@@ -14,9 +42,24 @@ public class Inventory : MonoBehaviour
 
         foreach (InventorySlot slot in slots)
         {
-            int spaceLeftInSlot = item.MaxAmount - slot.CurrentAmount;
-            if (slot.CurrentItem == item)
+            if (slot.ItemIsNull)
             {
+                if (item.MaxAmount >= remainingItems)
+                {
+                    slot.SetItem(item, remainingItems);
+                    remainingItems = 0;
+                    return remainingItems;
+                }
+                else
+                {
+                    slot.SetItem(item, item.MaxAmount);
+                    remainingItems -= item.MaxAmount;
+                }
+            }
+            else if (slot.CurrentItem == item)
+            {
+                int spaceLeftInSlot = item.MaxAmount - slot.CurrentAmount;
+
                 if (spaceLeftInSlot >= remainingItems)
                 {
                     slot.CurrentAmount += remainingItems;
@@ -29,26 +72,12 @@ public class Inventory : MonoBehaviour
                     remainingItems -= spaceLeftInSlot;
                 }
             }
-            else if (slot.ItemIsNull)
-            {
-                if (spaceLeftInSlot >= remainingItems)
-                {
-                    slot.SetItem(item, remainingItems);
-                    remainingItems = 0;
-                    return remainingItems;
-                }
-                else
-                {
-                    slot.SetItem(item, item.MaxAmount);
-                    remainingItems -= spaceLeftInSlot;
-                }
-            }
         }
 
         return remainingItems;
     }
 
-    public int RemoveItem(InventoryItem item, int amount)
+    public int SubtractItem(InventoryItem item, int amount)
     {
         int remainingItems = amount;
 
@@ -94,7 +123,7 @@ public class Inventory : MonoBehaviour
     public void ExchangeItems(Inventory senderInventory, InventoryItem exchangedItem, int amount)
     {
         int remaining = AddItem(exchangedItem, amount);
-        senderInventory.RemoveItem(exchangedItem, amount - remaining);
+        senderInventory.SubtractItem(exchangedItem, amount - remaining);
     }
 
     public override string ToString()

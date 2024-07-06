@@ -23,7 +23,7 @@ public class InventorySlotTests
     }
 
     [Test]
-    public void TestSetItem()
+    public void CanSetItem()
     {
         //Trying to Add too much items to a slot
         Assert.That(() => slot.SetItem(item2, 6), Throws.TypeOf<Exception>());
