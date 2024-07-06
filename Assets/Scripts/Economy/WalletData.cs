@@ -7,10 +7,23 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "WalletData", menuName = "WalletData", order = 0)]
 public class WalletData : ScriptableObject
 {
+    [SerializeField] private string _walletName;
     [SerializeField] private float _initialDigitalMoney = 800f;
     [SerializeField] private float _initialPhysicalMoney = 0f;
     [SerializeField] private float _initialDebt = 800f;
     [SerializeField] private float _initialMaxDebt = 800f;
+
+    public string WalletName
+    {
+        get
+        {
+            return _walletName;
+        }
+        private set
+        {
+            _walletName = value;
+        }
+    }
 
     private float _currentDigitalMoney;
     public float CurrentDigitalMoney
