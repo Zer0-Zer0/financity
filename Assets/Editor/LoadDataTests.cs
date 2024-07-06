@@ -7,9 +7,9 @@ public class LoanDataTests
     [Test]
     public void TestCalculatePrincipalFromSimpleInterest()
     {
-        float total = 1000f;
+        float total = 1100f;
         float rate = 0.1f;
-        float expectedPrincipal = 909.09f; // Calculated externally
+        float expectedPrincipal = 1000f; // Calculated externally
 
         float calculatedPrincipal = LoanData.CalculatePrincipalFromSimpleInterest(total, rate);
 
@@ -19,10 +19,10 @@ public class LoanDataTests
     [Test]
     public void TestCalculatePrincipalFromCompoundInterest()
     {
-        float total = 1000f;
+        float total = 3138.43f;
         float rate = 0.1f;
         int installments = 12;
-        float expectedPrincipal = 772.18f; // Calculated externally
+        float expectedPrincipal = 1000f;
 
         float calculatedPrincipal = LoanData.CalculatePrincipalFromCompoundInterest(total, rate, installments);
 

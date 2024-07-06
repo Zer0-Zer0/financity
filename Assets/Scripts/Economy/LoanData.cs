@@ -25,24 +25,20 @@ public struct LoanData
     public static UnityEvent<LoanData> OnLoanPaymentComplete;
     public static UnityEvent<LoanData> OnInstallmentPayment;
 
-    public readonly float InstallmentValue{
-    get {
-        return Total / Installments;
-    }}
+    public readonly float InstallmentValue
+    {
+        get
+        {
+            return Total / Installments;
+        }
+    }
 
     /// <summary>
     /// Represents the type of loan, which can be Simple Interest or Compound Interest.
     /// </summary>
     public enum Type
     {
-        /// <summary>
-        /// Represents a loan with simple interest calculation.
-        /// </summary>
         SimpleInterest,
-
-        /// <summary>
-        /// Represents a loan with compound interest calculation.
-        /// </summary>
         CompoundInterest
     }
 
@@ -83,7 +79,8 @@ public struct LoanData
     /// </summary>
     /// <param name="total">The total amount.</param>
     /// <param name="rate">The compound interest rate.</param>
-    /// <param name="installments">The number of i
+    /// <param name="installments">The number of installments.</param>
+    /// <returns>The principal amount.</returns>
     public static float CalculatePrincipalFromCompoundInterest(float total, float rate, int installments)
     {
         float _calculatedRate = rate + 1;
