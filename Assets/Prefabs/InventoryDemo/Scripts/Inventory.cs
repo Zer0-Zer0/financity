@@ -81,8 +81,10 @@ public class Inventory : MonoBehaviour
     {
         int remainingItems = amount;
 
-        foreach (InventorySlot slot in slots)
+        for (int i = slots.Count - 1; i >= 0; i--)
         {
+            InventorySlot slot = slots[i];
+
             if (slot.CurrentItem == item)
             {
                 if (slot.CurrentAmount >= remainingItems)
@@ -104,6 +106,7 @@ public class Inventory : MonoBehaviour
 
         return remainingItems; // Return the remaining items that could not be removed
     }
+
 
     public int SearchItem(InventoryItem item)
     {
