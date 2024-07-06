@@ -31,11 +31,11 @@ public class WalletManager : MonoBehaviour
     {
         if (transaction.Sender == Wallet)
         {
-            return TransactionPosition.Receiver;
+            return TransactionPosition.Sender;
         }
         else if (transaction.Receiver == Wallet)
         {
-            return TransactionPosition.Sender;
+            return TransactionPosition.Receiver;
         }
         else
         {
