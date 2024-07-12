@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class FinanceManager : MonoBehaviour
+public class FinanceManagerDecoupling : MonoBehaviour
 {
     private float currentBalance = 0f;
     private List<Transaction> transactions = new List<Transaction>();

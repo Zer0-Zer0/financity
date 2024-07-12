@@ -12,7 +12,7 @@ using System;
 [RequireComponent(typeof(TimeManager))]
 [RequireComponent(typeof(MouseVisibilityToggle))]
 [RequireComponent(typeof(WalletManager))]
-public class DayNightCycle : MonoBehaviour
+public class DayNightCycleDecoupling : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI reportText;
     [SerializeField] private TextMeshProUGUI balanceText;
