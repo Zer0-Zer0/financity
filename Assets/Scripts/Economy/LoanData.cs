@@ -89,6 +89,13 @@ public struct LoanData
         return _principal;
     }
 
+    public static float CalculateCompoundInterest(float rate, float installments)
+    {
+        float _calculatedRate = rate + 1;
+        float _compoundInterest = Mathf.Pow(_calculatedRate, installments);
+        return _compoundInterest;
+    }
+
     /// <summary>
     /// Calculates the compound interest based on the principal, rate, and installments.
     /// </summary>
@@ -98,10 +105,17 @@ public struct LoanData
     /// <returns>A LoanData struct with the calculated values after applying compound interest.</returns>
     public static float CalculateTotalFromCompoundInterest(float principal, float rate, int installments)
     {
-        float _calculatedRate = rate + 1;
-        float _compoundInterest = Mathf.Pow(_calculatedRate, installments);
+        float _compoundInterest = CalculateCompoundInterest(rate, installments);
         float _total = principal * _compoundInterest;
         return _total;
+    }
+
+
+    public static float CalculatePeriodicPayment(float initialInvestment, float interestRate, int numberOfPeriods)
+    {
+        float factor = Mathf.Pow(1 + interestRate, numberOfPeriods);
+        float periodicPayment = initialInvestment * (factor * interestRate) / (factor - 1);
+        return periodicPayment;
     }
 
     /// <summary>

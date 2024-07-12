@@ -251,13 +251,6 @@ public class DayNightCycle : MonoBehaviour
         installmentPayments.RemoveAll(installment => installment.remainingInstallments <= 0);
     }
 
-    /// <summary>
-    /// Calculates the installment amount for a compound loan or credit.
-    /// </summary>
-    /// <param name="principalAmount">The total principal amount of the loan or credit.</param>
-    /// <param name="numberOfInstallments">The number of installments over which the loan will be repaid.</param>
-    /// <param name="dailyInterestRate">The daily interest rate applied to the loan.</param>
-    /// <returns>The calculated installment amount based on the provided parameters.</returns>
     private float CalculateInstallmentAmount(float principalAmount, int numberOfInstallments, float dailyInterestRate)
     {
         float interestFactor = Mathf.Pow(1 + dailyInterestRate, numberOfInstallments);
