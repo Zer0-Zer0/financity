@@ -1,8 +1,9 @@
-using System;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 using TMPro;
+using Microsoft.Unity.VisualStudio.Editor;
 
 public class YourClassName : MonoBehaviour
 {
@@ -12,11 +13,24 @@ public class YourClassName : MonoBehaviour
     public TMP_Text displayText;
     public float delay = 5f;
 
-    public void Init()
+    public GameObject rank;
+
+    public bool active = false;
+
+
+    public void FixedUpdate()
     {
-        gameObject.SetActive(true);
-        displayText.text = "Recebendo do servidor...";
-        StartCoroutine(GetFileAfterDelay(delay));
+        if (rank.activeSelf && !active)
+        {
+            active = !active;
+            displayText.gameObject.SetActive(true);
+            displayText.text = "                      CARREGANDO...";
+            StartCoroutine(GetFileAfterDelay(delay));
+        } else if (!rank.activeSelf && active) {
+            active = !active;
+            displayText.gameObject.SetActive(false);
+        }
+
     }
 
     IEnumerator GetFileAfterDelay(float delay)
