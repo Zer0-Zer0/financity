@@ -5,7 +5,7 @@ using System.Collections;
 using TMPro;
 using Microsoft.Unity.VisualStudio.Editor;
 
-public class YourClassName : MonoBehaviour
+public class RankGlobal : MonoBehaviour
 {
     private string username = "V1ctorroff";
     private string token = "fc2221eabfb8ecccabbaa7fa0c36fbb06da43a13";
