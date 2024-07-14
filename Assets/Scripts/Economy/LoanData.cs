@@ -15,13 +15,104 @@ using UnityEngine.Events;
 [System.Serializable]
 public struct LoanData
 {
-    public string Name;
-    public float Total;
-    public float Principal;
-    public float Rate;
-    public int Installments;
-    public LoanData.Type LoanType;
+    [SerializeField] private string _name;
+    public string Name
+    {
+        get
+        {
+            return _name;
+        }
+        private set
+        {
+            _name = value;
+        }
+    }
 
+    [SerializeField] private float _total;
+    public float Total
+    {
+        get
+        {
+            return _total;
+        }
+        private set
+        {
+            if (value <= 0)
+            {
+                throw new Exception("Attempted to set the Total value to negative or null");
+            }
+            else
+            {
+                _total = value;
+            }
+        }
+    }
+
+    [SerializeField] private float _principal;
+    public float Principal
+    {
+        get
+        {
+            return _principal;
+        }
+        private set
+        {
+            if (value <= 0)
+            {
+                throw new Exception("Attempted to set the Principal value to negative or null");
+            }
+            else if (value > Total)
+            {
+                throw new Exception("Attempted to set the Principal value to bigger than the Total");
+            }
+            else
+            {
+                _principal = value;
+            }
+        }
+    }
+
+    [SerializeField] private float _rate;
+    public float Rate
+    {
+        get
+        {
+            return _rate;
+        }
+        private set
+        {
+            if (value <= 0)
+            {
+                throw new Exception("Attempted to set the Rate value to negative or null");
+            }
+            else
+            {
+                _rate = value;
+            }
+        }
+    }
+
+    [SerializeField] private int _installments;
+    public int Installments
+    {
+        get
+        {
+            return _installments;
+        }
+        private set
+        {
+            if (value <= 0)
+            {
+                throw new Exception("Attempted to set the Installments value to negative or null");
+            }
+            else
+            {
+                _installments = value;
+            }
+        }
+    }
+
+    public LoanData.Type LoanType;
     public static UnityEvent<LoanData> OnLoanPaymentComplete;
     public static UnityEvent<LoanData> OnInstallmentPayment;
 
@@ -42,7 +133,7 @@ public struct LoanData
         CompoundInterest
     }
 
-    public LoanData(float principal, float rate, int installments, LoanData.Type type, string name = "")
+    public LoanData(float principal, float rate, int installments, LoanData.Type type, string name = "") : this()
     {
         switch (type)
         {
