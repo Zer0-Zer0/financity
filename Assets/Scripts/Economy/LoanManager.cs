@@ -18,7 +18,18 @@ public class LoanManager : MonoBehaviour
     public UnityEvent<LoanData> InstallmentPaymentLate;
     public UnityEvent PersistenceChanged;
 
-    LoanData _loan;
+    [SerializeField] private LoanData _loan;
+    public LoanData Loan
+    {
+        get
+        {
+            return _loan;
+        }
+        set
+        {
+            _loan = value;
+        }
+    }
 
     float _remainingValue;
     float _remainingInstallments;
@@ -37,7 +48,7 @@ public class LoanManager : MonoBehaviour
     {
         get
         {
-            return LoanData.CalculateTotalFromCompoundInterest(_rawRemainingPenalty, _loan.Rate, _remainingPenaltyInstallments);
+            return LoanData.CalculateTotalFromCompoundInterest(_rawRemainingPenalty, Loan.Rate, _remainingPenaltyInstallments);
         }
     }
     float RemainingPenaltyInstallmentsValue
@@ -58,9 +69,9 @@ public class LoanManager : MonoBehaviour
 
     bool _isPersistent;
 
-    public void SetLoanData(LoanData Loan)
+    public void SetLoanData(LoanData loan)
     {
-        _loan = Loan;
+        Loan = loan;
     }
 
     /// <summary>
@@ -77,7 +88,7 @@ public class LoanManager : MonoBehaviour
         {
             InstallmentPaymentLateHandler(wallet);
         }
-        InstallmentArrivalOccurred?.Invoke(_loan);
+        InstallmentArrivalOccurred?.Invoke(Loan);
     }
 
     /// <summary>
@@ -98,7 +109,7 @@ public class LoanManager : MonoBehaviour
             _remainingValue -= InstallmentValue;
             _remainingInstallments--;
         }
-        InstallmentPaymentMade?.Invoke(_loan);
+        InstallmentPaymentMade?.Invoke(Loan);
     }
 
     /// <summary>
@@ -133,7 +144,7 @@ public class LoanManager : MonoBehaviour
         {
             _remainingPenaltyInstallments++;
         }
-        InstallmentPaymentLate?.Invoke(_loan);
+        InstallmentPaymentLate?.Invoke(Loan);
     }
 
     /// <summary>
@@ -146,7 +157,7 @@ public class LoanManager : MonoBehaviour
         ResetLoanManager();
 
         PersistenceChanged?.Invoke();
-        LoanFullyRepaidEvent?.Invoke(_loan);
+        LoanFullyRepaidEvent?.Invoke(Loan);
     }
 
     /// <summary>
@@ -155,14 +166,14 @@ public class LoanManager : MonoBehaviour
     /// <param name="wallet">The player's wallet data.</param>
     public void LoanGrantOccurredHandler(WalletData wallet)
     {
-        wallet.CurrentDigitalMoney += _loan.Principal;
-        wallet.CurrentDebt += _loan.Total;
+        wallet.CurrentDigitalMoney += Loan.Principal;
+        wallet.CurrentDebt += Loan.Total;
 
-        _remainingValue = _loan.Total;
-        _remainingInstallments = _loan.Installments;
+        _remainingValue = Loan.Total;
+        _remainingInstallments = Loan.Installments;
         _isPersistent = true;
         PersistenceChanged?.Invoke();
-        LoanGrantOccurred?.Invoke(_loan);
+        LoanGrantOccurred?.Invoke(Loan);
     }
 
 
@@ -187,7 +198,7 @@ public class LoanManager : MonoBehaviour
     {
         if (!_isPersistent)
         {
-            LoanData _newLoan = GenerateRandomLoan(_loan.LoanType);
+            LoanData _newLoan = GenerateRandomLoan(Loan.LoanType);
             SetLoanData(_newLoan);
         }
     }

@@ -1,5 +1,6 @@
-using NUnit.Framework;
+using System;
 using UnityEngine;
+using NUnit.Framework;
 
 public class WalletManagerTests
 {
@@ -40,6 +41,8 @@ public class WalletManagerTests
         WalletData receiverWallet = ScriptableObject.CreateInstance<WalletData>();
 
         // Act
+        Assert.That(() => _walletManager.MakeTransaction(300f, receiverWallet, Transaction.TransactionType.Digital), Throws.TypeOf<Exception>());
+
         Transaction transaction = _walletManager.MakeTransaction(100f, receiverWallet, Transaction.TransactionType.Digital);
 
         // Assert
