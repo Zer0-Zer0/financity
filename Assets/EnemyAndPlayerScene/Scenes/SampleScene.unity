@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -865,6 +866,7 @@ GameObject:
   m_Component:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
+  - component: {fileID: 705507996}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -949,6 +951,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &705507996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705507993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &847214609
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,7 +1142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6593802, guid: 9c11588fb683e564b87b9fe92d39b707, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6593802, guid: 9c11588fb683e564b87b9fe92d39b707, type: 3}
       propertyPath: m_Center.x
@@ -1341,6 +1366,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 463873443345166975, guid: f1526d1782af15240820c59803292bed, type: 3}
   m_PrefabInstance: {fileID: 6212373061908138768}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1165319316 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6619163389755060927, guid: f1526d1782af15240820c59803292bed, type: 3}
+  m_PrefabInstance: {fileID: 6212373061908138768}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1165319317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165319307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd8bc8805e21476ec9f2c46377a8cd0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroiAnim: {fileID: 1165319316}
 --- !u!1 &1165914959 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7972377007108044847, guid: 2ba44b079590ea54aa681e08b02f9aaf, type: 3}
@@ -2167,10 +2210,14 @@ PrefabInstance:
       propertyPath: fsm.states.Array.data[1].actionData.fsmOwnerDefaultParams.Array.data[0].gameObject.value
       value: 
       objectReference: {fileID: 1596237611}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1858690222226945352, guid: f1526d1782af15240820c59803292bed, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 463873443345166975, guid: f1526d1782af15240820c59803292bed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1165319317}
   m_SourcePrefab: {fileID: 100100000, guid: f1526d1782af15240820c59803292bed, type: 3}
 --- !u!1001 &7592506941088655525
 PrefabInstance:
