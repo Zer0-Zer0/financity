@@ -24,7 +24,6 @@ public class MouseVisibilityToggle : MonoBehaviour
             if (!cursorVisible)
             {
                 Cursor.lockState = CursorLockMode.Locked;
-                Cursor.lockState = CursorLockMode.None;
             }
             else
             {
