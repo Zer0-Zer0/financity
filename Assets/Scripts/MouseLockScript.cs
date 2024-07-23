@@ -5,12 +5,13 @@ using UnityEngine;
 public class MouseLockScript : MonoBehaviour
 {
     private bool _isCursorLocked = true;
+
     void Start()
     {
-        SetCursorState(true);
+        SetCursorState(_isCursorLocked);
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
