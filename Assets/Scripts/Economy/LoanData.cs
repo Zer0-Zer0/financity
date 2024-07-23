@@ -103,7 +103,7 @@ public struct LoanData
         {
             if (value <= 0)
             {
-                throw new Exception("Attempted to set the Installments value to negative or null");
+                throw new Exception("Attempted to set the Installments quantity value to negative or null");
             }
             else
             {
@@ -116,11 +116,18 @@ public struct LoanData
     public static UnityEvent<LoanData> OnLoanPaymentComplete;
     public static UnityEvent<LoanData> OnInstallmentPayment;
 
-    public readonly float InstallmentValue
+    public float InstallmentValue
     {
         get
         {
             return Total / Installments;
+        }
+        private set
+        {
+            if (value <= 0)
+            {
+                throw new Exception("Attempted to set the value of the individual installment, that is not intended");
+            }
         }
     }
 
