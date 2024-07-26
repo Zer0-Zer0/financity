@@ -3,16 +3,16 @@ using System;
 using TMPro;
 using UnityEngine;
 using System.IO;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(TMP_Text))]
 public class TypewriterEffect : MonoBehaviour
 {
     [SerializeField] private float delay = 0.1f;
     private TMP_Text _textComponent;
-
     private string _fullText;
-
     private int _visibleCharacterCount = 0;
+    public UnityEvent TypingFinished;
 
     void Awake()
     {
@@ -25,7 +25,7 @@ public class TypewriterEffect : MonoBehaviour
         StartCoroutine(ShowText());
     }
 
-    IEnumerator ShowText(string text = "")
+    public IEnumerator ShowText(string text = "")
     {
         if (text == "")
         {
@@ -44,5 +44,7 @@ public class TypewriterEffect : MonoBehaviour
 
             yield return new WaitForSeconds(delay);
         }
+
+        TypingFinished?.Invoke();
     }
 }
