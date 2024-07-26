@@ -12,20 +12,30 @@ public class DialogueManager : MonoBehaviour
     private Coroutine _typingDialogueCoroutine;
     private Coroutine _waitForEPress;
 
-    IEnumerator BeginDialogue()
+    void BeginDialogue()
     {
         _dialogue.DialogueBegan?.Invoke(_dialogue);
         _dialogue.Conversation.ConversationBegan?.Invoke(_dialogue.Conversation);
 
+        StartCoroutine(DisplayDialoguePhrases());
+
+        _dialogue.Conversation.ConversationEnded?.Invoke();
+        _dialogue.DialogueEnded?.Invoke();
+    }
+
+    IEnumerator DisplayDialoguePhrases()
+    {
         foreach (DialoguePhrase phrase in _dialogue.Conversation.ConversationPhrases)
         {
+            _typingDialogueCoroutine = StartCoroutine(DialogueTextbox.ShowText(phrase.Text));
+
             phrase.PhraseBegan?.Invoke(phrase);
-            _typingDialogueCoroutine = StartCoroutine(ShowDialogueText(phrase.Text));
+
             yield return _typingDialogueCoroutine; // Wait for text display to complete
 
             if (phrase.ConversationRoutes.Length != 0)
             {
-                Debug.Log(phrase.ConversationRoutes.ToString);
+                Debug.Log(phrase.ConversationRoutes.ToString());
             }
 
             _waitForEPress = StartCoroutine(WaitForInput(KeyCode.E));
@@ -33,14 +43,6 @@ public class DialogueManager : MonoBehaviour
 
             phrase.PhraseEnded?.Invoke();
         }
-
-        _dialogue.Conversation.ConversationEnded?.Invoke();
-        _dialogue.DialogueEnded?.Invoke();
-    }
-
-    IEnumerator ShowDialogueText(string text)
-    {
-        yield return DialogueTextbox.ShowText(text);
     }
 
     IEnumerator WaitForInput(KeyCode key)
@@ -53,6 +55,6 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(BeginDialogue());
+        BeginDialogue();
     }
 }
