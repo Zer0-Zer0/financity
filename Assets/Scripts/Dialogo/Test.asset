@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05ac2211c1c984a7db755d4a6f88ce95, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  Conversation:
+    _conversationPhrases:
+    - _conversationRoutes: []
+      _text: Eae meu chapa
+      PhraseBegan:
+        m_PersistentCalls:
+          m_Calls: []
+      PhraseEnded:
+        m_PersistentCalls:
+          m_Calls: []
+    - _conversationRoutes:
+      - _text: Vou bem
+        _route:
+          _conversationPhrases: []
+          ConversationBegan:
+            m_PersistentCalls:
+              m_Calls: []
+          ConversationEnded:
+            m_PersistentCalls:
+              m_Calls: []
+        RouteChosen:
+          m_PersistentCalls:
+            m_Calls: []
+      - _text: Vou mal
+        _route:
+          _conversationPhrases: []
+          ConversationBegan:
+            m_PersistentCalls:
+              m_Calls: []
+          ConversationEnded:
+            m_PersistentCalls:
+              m_Calls: []
+        RouteChosen:
+          m_PersistentCalls:
+            m_Calls: []
+      _text: Como vai?
+      PhraseBegan:
+        m_PersistentCalls:
+          m_Calls: []
+      PhraseEnded:
+        m_PersistentCalls:
+          m_Calls: []
+    - _conversationRoutes:
+      - _text: Vou bem
+        _route:
+          _conversationPhrases: []
+          ConversationBegan:
+            m_PersistentCalls:
+              m_Calls: []
+          ConversationEnded:
+            m_PersistentCalls:
+              m_Calls: []
+        RouteChosen:
+          m_PersistentCalls:
+            m_Calls: []
+      - _text: Vou mal
+        _route:
+          _conversationPhrases: []
+          ConversationBegan:
+            m_PersistentCalls:
+              m_Calls: []
+          ConversationEnded:
+            m_PersistentCalls:
+              m_Calls: []
+        RouteChosen:
+          m_PersistentCalls:
+            m_Calls: []
+      _text: Voce eh surdo?
+      PhraseBegan:
+        m_PersistentCalls:
+          m_Calls: []
+      PhraseEnded:
+        m_PersistentCalls:
+          m_Calls: []
+    ConversationBegan:
+      m_PersistentCalls:
+        m_Calls: []
+    ConversationEnded:
+      m_PersistentCalls:
+        m_Calls: []
+  DialogueBegan:
+    m_PersistentCalls:
+      m_Calls: []
+  DialogueEnded:
+    m_PersistentCalls:
+      m_Calls: []

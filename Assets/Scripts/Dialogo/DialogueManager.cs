@@ -35,7 +35,7 @@ public class DialogueManager : MonoBehaviour
 
             if (phrase.ConversationRoutes.Length != 0)
             {
-                Debug.Log(phrase.ConversationRoutes.ToString());
+                Debug.Log(phrase.ToString());
             }
 
             _waitForEPress = StartCoroutine(WaitForInput(KeyCode.E));
