@@ -1,10 +1,18 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+
 
 [CreateAssetMenu(fileName = "Dialogue", menuName = "Dialogue", order = 0)]
 public class Dialogue : ScriptableObject
 {
+    private string _name;
+    public string Name
+    {
+        get { return _name; }
+        private set { _name = value; }
+    }
     public DialogueConversation Conversation;
 
     public UnityEvent<Dialogue> DialogueBegan;
@@ -31,12 +39,12 @@ public struct DialogueConversation
 
     public override string ToString()
     {
-        return $"Conversation: {string.Join(", ", _conversationPhrases)}";
+        return $"Conversation: {string.Join(", ", _conversationPhrases.Select(p => p.Text))}";
     }
 }
 
 [System.Serializable]
-public struct DialogueConversationRoute
+public class DialogueRoute
 {
     [SerializeField] private string _text;
     public string Text
@@ -45,32 +53,24 @@ public struct DialogueConversationRoute
         private set { _text = value; }
     }
 
-    [SerializeField] private DialogueConversation _route;
-    public DialogueConversation Route
-    {
-        get { return _route; }
-        set { _route = value; }
-    }
-
     public UnityEvent RouteChosen;
 
     public override string ToString()
     {
-        return $"Route text: {Text} \nRoute: {Route}";
+        return $"Route text: {Text}";
     }
 }
 
 [System.Serializable]
-public struct DialoguePhrase
+public class DialoguePhrase
 {
-    [SerializeField] private DialogueConversationRoute[] _conversationRoutes;
-    public DialogueConversationRoute[] ConversationRoutes
+    [SerializeField] private DialogueRoute[] _routes;
+    public DialogueRoute[] Routes
     {
-        get { return _conversationRoutes; }
-        set { _conversationRoutes = value; }
+        get { return _routes; }
+        set { _routes = value; }
     }
-
-    [SerializeField] private string _text;
+    [TextArea][SerializeField] private string _text;
     public string Text
     {
         get { return _text; }
@@ -78,10 +78,10 @@ public struct DialoguePhrase
     }
 
     public UnityEvent<DialoguePhrase> PhraseBegan;
-    public UnityEvent PhraseEnded;
+    public UnityEvent<DialoguePhrase> PhraseEnded;
 
     public override string ToString()
     {
-        return $"Phrase: {Text} \nConversationRoutes: {string.Join(", ", ConversationRoutes)}";
+        return $"Phrase: {Text} \nConversationRoutes: {string.Join(", ", Routes.Select(r => r.Text))}";
     }
 }
