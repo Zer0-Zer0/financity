@@ -7,6 +7,9 @@ using UnityEngine.Events;
 public class Dialogue : ScriptableObject
 {
     public DialogueConversation Conversation;
+
+    public UnityEvent<Dialogue> DialogueBegan;
+    public UnityEvent DialogueEnded;
 }
 
 [System.Serializable]
