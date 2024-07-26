@@ -14,13 +14,10 @@ public class DialogueManager : MonoBehaviour
 
     void BeginDialogue()
     {
-        _dialogue.DialogueBegan?.Invoke(_dialogue);
+        _dialogue.DialogueBegan?.Invoke();
         _dialogue.Conversation.ConversationBegan?.Invoke(_dialogue.Conversation);
 
         StartCoroutine(DisplayDialoguePhrases());
-
-        _dialogue.Conversation.ConversationEnded?.Invoke();
-        _dialogue.DialogueEnded?.Invoke();
     }
 
     IEnumerator DisplayDialoguePhrases()
@@ -31,26 +28,21 @@ public class DialogueManager : MonoBehaviour
 
             phrase.PhraseBegan?.Invoke(phrase);
 
-            yield return _typingDialogueCoroutine; // Wait for text display to complete
+            yield return _typingDialogueCoroutine;
 
-            if (phrase.ConversationRoutes.Length != 0)
+            _waitForEPress = StartCoroutine(Waiters.InputWaiter(KeyCode.E));
+            yield return _waitForEPress;
+
+            phrase.PhraseEnded?.Invoke(phrase);
+
+            if (phrase.Routes.Length != 0)
             {
                 Debug.Log(phrase.ToString());
             }
-
-            _waitForEPress = StartCoroutine(WaitForInput(KeyCode.E));
-            yield return _waitForEPress; // Wait for input before proceeding
-
-            phrase.PhraseEnded?.Invoke();
         }
-    }
 
-    IEnumerator WaitForInput(KeyCode key)
-    {
-        while (!Input.GetKeyDown(key))
-        {
-            yield return null;
-        }
+        _dialogue.Conversation.ConversationEnded?.Invoke();
+        _dialogue.DialogueEnded?.Invoke();//This makes sense trust me
     }
 
     void Start()

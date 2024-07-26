@@ -3,19 +3,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-
-[CreateAssetMenu(fileName = "Dialogue", menuName = "Dialogue", order = 0)]
-public class Dialogue : ScriptableObject
+[System.Serializable]
+public class Dialogue
 {
-    private string _name;
-    public string Name
-    {
-        get { return _name; }
-        private set { _name = value; }
-    }
     public DialogueConversation Conversation;
 
-    public UnityEvent<Dialogue> DialogueBegan;
+    public UnityEvent DialogueBegan;
     public UnityEvent DialogueEnded;
 
     public override string ToString()
@@ -54,6 +47,10 @@ public class DialogueRoute
     }
 
     public UnityEvent RouteChosen;
+
+    public void InvokeRoute(){
+        RouteChosen?.Invoke();
+    }
 
     public override string ToString()
     {
