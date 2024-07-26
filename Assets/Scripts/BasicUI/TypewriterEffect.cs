@@ -8,7 +8,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(TMP_Text))]
 public class TypewriterEffect : MonoBehaviour
 {
-    [SerializeField] private float delay = 0.1f;
+    [SerializeField] private float delay = 0.2f;
+    [SerializeField] private float delayInterPhrase = 2f;
     private TMP_Text _textComponent;
     private string _fullText;
     private int _visibleCharacterCount = 0;
@@ -27,6 +28,8 @@ public class TypewriterEffect : MonoBehaviour
 
     public IEnumerator ShowText(string text = "")
     {
+        _visibleCharacterCount = 0;
+
         if (text == "")
         {
             text = _fullText;
