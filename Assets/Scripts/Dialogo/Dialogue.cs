@@ -3,31 +3,73 @@ using System.Diagnostics.Contracts;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Dialogue : MonoBehaviour
+[CreateAssetMenu(fileName = "Dialogue", menuName = "Dialogue", order = 0)]
+public class Dialogue : ScriptableObject
 {
+    public DialogueConversation Conversation;
 }
 
 [System.Serializable]
-public struct Conversation
+public struct DialogueConversation
 {
-    public static UnityEvent<Conversation> ConversationBegan;
-    public static UnityEvent ConversationEnded;
+    [SerializeField] private DialoguePhrase[] _conversationPhrases;
+    public DialoguePhrase[] ConversationPhrases
+    {
+        get
+        {
+            return _conversationPhrases;
+        }
+        set
+        {
+            _conversationPhrases = value;
+        }
+    }
 
-    public Phrase[] Phrases;
+    public UnityEvent<DialogueConversation> ConversationBegan;
+    public UnityEvent ConversationEnded;
 }
 
 [System.Serializable]
-public struct ConversationRoute
+public struct DialogueConversationRoute
 {
-    public string Text;
-    public Conversation Route;
-    public static UnityEvent RouteChosen;
+    [SerializeField] private string _text;
+    public string Text
+    {
+        get { return _text; }
+        private set { _text = value; }
+    }
+
+    [SerializeField] private DialogueConversation _route;
+    public DialogueConversation Route
+    {
+        get
+        {
+            return _route;
+        }
+        set
+        {
+            _route = value;
+        }
+    }
+
+    public UnityEvent RouteChosen;
 }
 
 [System.Serializable]
-public struct Phrase
+public struct DialoguePhrase
 {
-    public ConversationRoute[] ConversationRoutes;
+    [SerializeField] private DialogueConversationRoute[] _conversationRoutes;
+    public DialogueConversationRoute[] ConversationRoutes
+    {
+        get
+        {
+            return _conversationRoutes;
+        }
+        set
+        {
+            _conversationRoutes = value;
+        }
+    }
 
     [SerializeField] private string _text;
     public string Text
@@ -36,6 +78,6 @@ public struct Phrase
         private set { _text = value; }
     }
 
-    public UnityEvent<Phrase> PhraseBegan;
+    public UnityEvent<DialoguePhrase> PhraseBegan;
     public UnityEvent PhraseEnded;
 }
