@@ -1269,11 +1269,19 @@ MonoBehaviour:
         - _text: To mal
           RouteChosen:
             m_PersistentCalls:
-              m_Calls: []
-        - _text: cara, eu vim pra outro planeta por dinheiro
-          RouteChosen:
-            m_PersistentCalls:
-              m_Calls: []
+              m_Calls:
+              - m_Target: {fileID: 1649747967}
+                m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+                m_MethodName: SetDialogue
+                m_Mode: 2
+                m_Arguments:
+                  m_ObjectArgument: {fileID: 11400000, guid: b0afe8b86d7936bebb8e6fda41672777, type: 2}
+                  m_ObjectArgumentAssemblyTypeName: DialogueFile, Assembly-CSharp
+                  m_IntArgument: 0
+                  m_FloatArgument: 0
+                  m_StringArgument: 
+                  m_BoolArgument: 0
+                m_CallState: 2
         _text: Bom dia! Como voce ta
         PhraseBegan:
           m_PersistentCalls:
@@ -1341,7 +1349,19 @@ MonoBehaviour:
     DialogueEnded:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 754993406}
+        - m_Target: {fileID: 263971164}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 633226849}
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6

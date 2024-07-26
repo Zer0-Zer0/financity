@@ -7,6 +7,25 @@ using UnityEngine.Events;
 public class DialogueManager : MonoBehaviour
 {
     [SerializeField] private Dialogue _dialogue;
+    public Dialogue CurrentDialogue
+    {
+        get
+        {
+            return _dialogue;
+        }
+        set
+        {
+            EndDialogue();
+            StopAllCoroutines();
+
+            _dialogue = value;
+            StartCoroutine(DisplayDialoguePhrases());
+        }
+    }
+
+    [SerializeField] private GameObject OptionsMenu;
+    [SerializeField] private GameObject DialogueBox;
+
     [SerializeField] private TypewriterEffect DialogueTextbox;
 
     private Coroutine _typingDialogueCoroutine;
@@ -14,15 +33,15 @@ public class DialogueManager : MonoBehaviour
 
     void BeginDialogue()
     {
-        _dialogue.DialogueBegan?.Invoke();
-        _dialogue.Conversation.ConversationBegan?.Invoke(_dialogue.Conversation);
+        CurrentDialogue.DialogueBegan?.Invoke();
+        CurrentDialogue.Conversation.ConversationBegan?.Invoke(CurrentDialogue.Conversation);
 
         StartCoroutine(DisplayDialoguePhrases());
     }
 
     IEnumerator DisplayDialoguePhrases()
     {
-        foreach (DialoguePhrase phrase in _dialogue.Conversation.ConversationPhrases)
+        foreach (DialoguePhrase phrase in CurrentDialogue.Conversation.ConversationPhrases)
         {
             _typingDialogueCoroutine = StartCoroutine(DialogueTextbox.ShowText(phrase.Text));
 
@@ -41,8 +60,17 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        _dialogue.Conversation.ConversationEnded?.Invoke();
-        _dialogue.DialogueEnded?.Invoke();//This makes sense trust me
+        EndDialogue();
+    }
+
+    public void EndDialogue(){
+        CurrentDialogue.Conversation.ConversationEnded?.Invoke();
+        CurrentDialogue.DialogueEnded?.Invoke();
+    }
+
+    public void SetDialogue(DialogueFile value)
+    {
+        CurrentDialogue = value.dialogue;
     }
 
     void Start()
