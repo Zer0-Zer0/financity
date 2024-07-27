@@ -43,7 +43,7 @@ public class TypewriterEffect : MonoBehaviour
 
     public IEnumerator ShowText(string text = "")
     {
-        _visibleCharacterCount = 0;
+        ClearText();
 
         if (text == "")
         {
@@ -64,5 +64,9 @@ public class TypewriterEffect : MonoBehaviour
         }
 
         TypingFinished?.Invoke();
+    }
+
+    void ClearText(){
+        _visibleCharacterCount = 0;
     }
 }

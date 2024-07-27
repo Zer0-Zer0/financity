@@ -4,15 +4,21 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 
-[RequireComponent(typeof(TextMeshProUGUI))]
+[RequireComponent(typeof(TypewriterEffect))]
 public class Dialogo : MonoBehaviour
 {
-/*
-    Para funcionar:
-    Adicione isso a caixa de texto na qual o dialogo sera exibido
-    SE HOUVER MAIS DE UM SCRIPT DESSE EM UMA CENA, UM ERRO SERA OUTPUTEADO
-*/
-
+    /*
+        Para funcionar:
+        Adicione isso a caixa de texto na qual o dialogo sera exibido
+        SE HOUVER MAIS DE UM SCRIPT DESSE EM UMA CENA, UM ERRO SERA OUTPUTEADO
+    */
+    [SerializeField] private KeyCode _inputProximaFrase = KeyCode.Return;
+    private int index;
+    private string[] linhas;
+    private Coroutine typingCoroutine;
+    public UnityEvent DialogoAcabou;
+    private TypewriterEffect _textbox;
+    
     public static Dialogo Instance { get; private set; }
 
     private void Awake()
@@ -26,39 +32,20 @@ public class Dialogo : MonoBehaviour
             Instance = this;
         }
 
-        _textComponent = GetComponent<TextMeshProUGUI>();
+        _textbox = GetComponent<TypewriterEffect>();
     }
-
-    [SerializeField] private float _delay = 0.2f;
-    [SerializeField] private KeyCode _inputProximaFrase = KeyCode.Return;
-
-    private TextMeshProUGUI _textComponent;
-    private string[] linhas;
-    private int index;
-    private Coroutine typingCoroutine;
-    public UnityEvent DialogoAcabou;
 
     public void InicializarDialogo(string[] linhasDialogo)
     {
         linhas = linhasDialogo;
         index = 0;
-        _textComponent.text = string.Empty;
 
         typingCoroutine = StartCoroutine(TypeLine());
     }
 
-    IEnumerator TypeLine()
+    public IEnumerator TypeLine()
     {
-        int _visibleCharacterCount = 0;
-
-        while (_visibleCharacterCount <= linhas[index].Length)
-        {
-            _textComponent.maxVisibleCharacters = _visibleCharacterCount;
-            _visibleCharacterCount++;
-
-            yield return new WaitForSeconds(_delay);
-        }
-
+        yield return _textbox.ShowText(linhas[index]);
         yield return Waiters.InputWaiter(_inputProximaFrase);
         ProximaFrase();
     }
@@ -68,17 +55,12 @@ public class Dialogo : MonoBehaviour
         if (index < linhas.Length - 1)
         {
             index++;
-            _textComponent.text = string.Empty;
-            if (typingCoroutine != null)
-                StopCoroutine(typingCoroutine);
             typingCoroutine = StartCoroutine(TypeLine());
         }
         else
         {
-            LimparTexto();
+            _textbox.ClearText();
             DialogoAcabou?.Invoke();
         }
     }
-
-    void LimparTexto() { _textComponent.text = string.Empty; }
 }
