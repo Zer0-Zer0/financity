@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Dialogo))]
 public class InteracaoNPC : MonoBehaviour
 {
     /*
@@ -13,20 +12,14 @@ public class InteracaoNPC : MonoBehaviour
 
     [SerializeField] private KeyCode _teclaInteracao = KeyCode.E;
     [SerializeField] private string[] _mensagens;
-    private Dialogo _dialogo;
     private bool _interacaoPossivel = false;
-
-    private void Awake()
-    {
-        _dialogo = GetComponent<Dialogo>();
-    }
 
     void Update()
     {
         if (Input.GetKeyDown(_teclaInteracao) && _interacaoPossivel)
         {
             ChecaMensagens();
-            _dialogo.InicializarDialogo(_mensagens);
+            Dialogo.Instance.InicializarDialogo(_mensagens);
         }
     }
 

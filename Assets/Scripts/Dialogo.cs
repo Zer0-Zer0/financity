@@ -1,10 +1,34 @@
 using System.Collections;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 
+[RequireComponent(typeof(TextMeshProUGUI))]
 public class Dialogo : MonoBehaviour
 {
+/*
+    Para funcionar:
+    Adicione isso a caixa de texto na qual o dialogo sera exibido
+    SE HOUVER MAIS DE UM SCRIPT DESSE EM UMA CENA, UM ERRO SERA OUTPUTEADO
+*/
+
+    public static Dialogo Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            throw new Exception("ERROR: Atempted to add a second instance to the Dialogo singleton");
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        _textComponent = GetComponent<TextMeshProUGUI>();
+    }
+
     [SerializeField] private float _delay = 0.2f;
     [SerializeField] private KeyCode _inputProximaFrase = KeyCode.Return;
 
@@ -13,12 +37,6 @@ public class Dialogo : MonoBehaviour
     private int index;
     private Coroutine typingCoroutine;
     public UnityEvent DialogoAcabou;
-
-    private void Awake()
-    {
-        GameObject _textComponentGameObject = TagFinder.FindObjectWithTag("DialogueText");
-        _textComponent = _textComponentGameObject.GetComponent<TextMeshProUGUI>();
-    }
 
     public void InicializarDialogo(string[] linhasDialogo)
     {

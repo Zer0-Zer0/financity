@@ -10,31 +10,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.11
+      value: 98.43
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000023841858
+      value: -1.8912735
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.07
+      value: 36.46
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.78180325
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.6235253
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -77.148
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -68,9 +68,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3785050130626186676}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4526011381871306404}
   m_SourcePrefab: {fileID: 100100000, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
 --- !u!1 &8605031827191948675 stripped
 GameObject:
@@ -140,7 +137,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 4, z: 4}
+  m_Size: {x: 6, y: 6, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3785050130626186676
 MonoBehaviour:
@@ -164,22 +161,3 @@ MonoBehaviour:
     para voc\xEA enfrentar o lado de fora"
   - "Infelizmente\u2122  os outros chegaram aqui antes de voc\xEA e s\xF3 tenho mais
     uma unidade desses kits, toma aqui"
---- !u!114 &4526011381871306404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8605031827191948675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87960fa97730cadfbacb2c67fe54bb1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textComponent: {fileID: 0}
-  _delay: 0.2
-  _inputProximaFrase: 13
-  slider2: {fileID: 0}
-  DialogoAcabou:
-    m_PersistentCalls:
-      m_Calls: []
