@@ -10,7 +10,7 @@ public static class Impostos
     public const float MAXIMO_FAIXA1_IRPF = 2826.65f;
     public const float MAXIMO_FAIXA2_IRPF = 3751.05f;
     public const float MAXIMO_FAIXA3_IRPF = 4664.68f;
-    //public const float MAXIMO_FAIXA4_IRPF =
+
 
     public static float CalcularIRPF(float salario)
     {
