@@ -10,6 +10,10 @@ public class AnimatedText : MonoBehaviour
 
     private Coroutine displayCoroutine;
 
+    void Awake(){
+        textComponent.text = "";
+    }
+
     // Método para exibir o texto letra por letra
     private IEnumerator DisplayText(string text)
     {
