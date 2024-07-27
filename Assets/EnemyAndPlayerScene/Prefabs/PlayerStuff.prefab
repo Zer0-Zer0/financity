@@ -116,7 +116,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3289588896463818005
 RectTransform:
   m_ObjectHideFlags: 0
@@ -924,6 +924,10 @@ PrefabInstance:
     - target: {fileID: 7489898415797956910, guid: f1526d1782af15240820c59803292bed, type: 3}
       propertyPath: fsm.states.Array.data[0].actionData.byteData.Array.data[0]
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8187579586731555466, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.preprocessed
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8187579586731555466, guid: f1526d1782af15240820c59803292bed, type: 3}
       propertyPath: fsm.states.Array.data[4].hideUnused

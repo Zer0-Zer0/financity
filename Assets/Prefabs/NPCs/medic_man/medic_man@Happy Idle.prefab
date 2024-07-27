@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 98.43
+      value: -11.403381
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.8912735
+      value: 2.224566
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.46
+      value: 4.1615868
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -152,12 +152,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _teclaInteracao: 101
+  nomeNPC: "Farmac\xE9utico"
   _mensagens:
-  - "Olha s\xF3! Voc\xEA deve ser um dos novos recrutas!"
-  - "99% dos antigos recrutas falharam por n\xE3o terem comprado produtos o suficiente
-    na minha m\xE3o"
-  - "Se voc\xEA n\xE3o estiver interessado em ser um deles"
-  - "Aproveite meu nov\xEDssinho\u2122  kit recruta\u2122, contendo tudo necess\xE1rio
-    para voc\xEA enfrentar o lado de fora"
-  - "Infelizmente\u2122  os outros chegaram aqui antes de voc\xEA e s\xF3 tenho mais
-    uma unidade desses kits, toma aqui"
+  - Texto: "Olha s\xF3! Voc\xEA deve ser um dos novos recrutas!"
+    FraseAcabou:
+      m_PersistentCalls:
+        m_Calls: []
+  - Texto: "De acordo com o senso do m\xEAs passado, 99% dos antigos recrutas falharam
+      por n\xE3o terem comprado produtos o suficiente na minha m\xE3o"
+    FraseAcabou:
+      m_PersistentCalls:
+        m_Calls: []
+  - Texto: "Se voc\xEA n\xE3o estiver interessado em ser um deles..."
+    FraseAcabou:
+      m_PersistentCalls:
+        m_Calls: []
+  - Texto: "Aproveite meu nov\xEDssimo kit recruta, um kit com tudo necess\xE1rio
+      para sobreviver no lado de fora (uso \xFAnico)."
+    FraseAcabou:
+      m_PersistentCalls:
+        m_Calls: []
+  - Texto: "Infelizmente os outros chegaram aqui antes de voc\xEA e s\xF3 tenho mais
+      uma unidade desses kits, toma aqui."
+    FraseAcabou:
+      m_PersistentCalls:
+        m_Calls: []
