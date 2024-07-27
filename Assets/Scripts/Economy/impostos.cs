@@ -17,25 +17,25 @@ public static class Impostos
         float imposto = 0f;
 
         float impostoFaixa1 = (salario - VALOR_MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1;
-        float impostoFaixa2 = (2826.66f - VALOR_MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1 + (salario - 2826.66f) * ALIQUOTA_IRPF_2;
+        float impostoFaixa2 = (MAXIMO_FAIXA1_IRPF - VALOR_MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1 + (salario - MAXIMO_FAIXA1_IRPF) * ALIQUOTA_IRPF_2;
 
-        float impostoFaixa3 = (2826.66f - VALOR_MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1 + (3751.06f - 2826.66f) * ALIQUOTA_IRPF_2 + (salario - 3751.06f) * ALIQUOTA_IRPF_3;
+        float impostoFaixa3 = (MAXIMO_FAIXA1_IRPF - VALOR_MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1 + (MAXIMO_FAIXA2_IRPF - MAXIMO_FAIXA1_IRPF) * ALIQUOTA_IRPF_2 + (salario - MAXIMO_FAIXA2_IRPF) * ALIQUOTA_IRPF_3;
         
-        float impostoFaixa4 = (2826.66f - VALOR_MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1 + (3751.06f - 2826.66f) * ALIQUOTA_IRPF_2 + (4664.68f - 3751.06f) * ALIQUOTA_IRPF_3 + (salario - 4664.68f) * ALIQUOTAIRPF__4;
+        float impostoFaixa4 = (MAXIMO_FAIXA1_IRPF - VALOR_MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1 + (MAXIMO_FAIXA2_IRPF - MAXIMO_FAIXA1_IRPF) * ALIQUOTA_IRPF_2 + (MAXIMO_FAIXA3_IRPF - MAXIMO_FAIXA2_IRPF) * ALIQUOTA_IRPF_3 + (salario - MAXIMO_FAIXA3_IRPF) * ALIQUOTA_IRPF_4;
 
         if (salario <= MAXIMO_INSENCAO_IRPF)
         {
             imposto = 0f;
         }
-        else if (salario <= 2826.65f)
+        else if (salario <= MAXIMO_FAIXA1_IRPF)
         {
             imposto = impostoFaixa1;
         }
-        else if (salario <= 3751.05f)
+        else if (salario <= MAXIMO_FAIXA2_IRPF)
         {
             imposto = impostoFaixa2;
         }
-        else if (salario <= 4664.68f)
+        else if (salario <= MAXIMO_FAIXA3_IRPF)
         {
             imposto = impostoFaixa3;
         }
