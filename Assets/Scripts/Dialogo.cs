@@ -17,7 +17,14 @@ public class Dialogo : MonoBehaviour
     public static Dialogo Instance { get; private set; }
 
     private int index;
-    private string[] linhas;
+
+    [Serializable]
+    public struct Frases
+    {
+        [TextArea] public string Texto;
+        public UnityEvent FraseAcabou;
+    }
+    private Frases[] frases;
     private Coroutine typingCoroutine;
 
     private TypewriterEffect _textoDialogo;
@@ -79,9 +86,9 @@ public class Dialogo : MonoBehaviour
         _painelDialogo.SetActive(false);
     }
 
-    public void InicializarDialogo(string[] linhasDialogo, string nomeFalante = "")
+    public void InicializarDialogo(Frases[] frasesDialogo, string nomeFalante = "")
     {
-        linhas = linhasDialogo;
+        frases = frasesDialogo;
         index = 0;
         _textoNome.text = nomeFalante;
         _painelDialogo.SetActive(true);
@@ -90,14 +97,15 @@ public class Dialogo : MonoBehaviour
 
     public IEnumerator TypeLine()
     {
-        yield return _textoDialogo.ShowText(linhas[index]);
+        yield return _textoDialogo.ShowText(frases[index].Texto);
         yield return Waiters.InputWaiter(_inputProximaFrase);
+        frases[index].FraseAcabou?.Invoke();
         ProximaFrase();
     }
 
     void ProximaFrase()
     {
-        if (index < linhas.Length - 1)
+        if (index < frases.Length - 1)
         {
             index++;
             typingCoroutine = StartCoroutine(TypeLine());

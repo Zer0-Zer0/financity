@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,7 +12,8 @@ public class InteracaoNPC : MonoBehaviour
     */
 
     [SerializeField] private KeyCode _teclaInteracao = KeyCode.E;
-    [SerializeField] private string[] _mensagens;
+    [SerializeField] private string nomeNPC;
+    [SerializeField] private Dialogo.Frases[] _mensagens;
     private bool _interacaoPossivel = false;
 
     void Update()
@@ -19,7 +21,7 @@ public class InteracaoNPC : MonoBehaviour
         if (Input.GetKeyDown(_teclaInteracao) && _interacaoPossivel)
         {
             ChecaMensagens();
-            Dialogo.Instance.InicializarDialogo(_mensagens);
+            Dialogo.Instance.InicializarDialogo(_mensagens, nomeNPC);
         }
     }
 
@@ -27,7 +29,7 @@ public class InteracaoNPC : MonoBehaviour
     {
         if (_mensagens == null || _mensagens.Length == 0)
         {
-            _mensagens = new string[] { "Mensagem padrão 1", "Mensagem padrão 2" };
+            throw new Exception("Nao ha frases para falar");
         }
     }
 
