@@ -64,7 +64,7 @@ PrefabInstance:
       addedObject: {fileID: 8475134280278989597}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5674940252449343323}
+      addedObject: {fileID: -4710450895937348939}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3785050130626186676}
@@ -118,8 +118,8 @@ CapsuleCollider:
   m_Height: 2.2084894
   m_Direction: 1
   m_Center: {x: -0.046058357, y: 0.6042447, z: -0.04059404}
---- !u!65 &5674940252449343323
-BoxCollider:
+--- !u!135 &-4710450895937348939
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -137,7 +137,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6, y: 6, z: 6}
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3785050130626186676
 MonoBehaviour:
