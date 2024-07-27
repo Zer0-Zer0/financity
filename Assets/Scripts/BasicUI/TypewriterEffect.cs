@@ -66,7 +66,7 @@ public class TypewriterEffect : MonoBehaviour
         TypingFinished?.Invoke();
     }
 
-    void ClearText(){
+    public void ClearText(){
         _visibleCharacterCount = 0;
     }
 }
