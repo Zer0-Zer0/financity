@@ -8,6 +8,8 @@ public class OptionsManager : MonoBehaviour
     public Button[] Buttons;
     public TMP_Text[] ButtonTexts;
 
+    public UnityEvent AllListenersCleared;
+
     public void OnOptionsPopup(DialoguePhrase dialoguePhrase)
     {
         int index = 0;
@@ -26,4 +28,22 @@ public class OptionsManager : MonoBehaviour
             }
         }
     }
+
+    public void AssignToEveryButton(UnityAction call)
+    {
+        foreach (Button button in Buttons)
+        {
+            button.onClick.AddListener(call);
+        }
+    }
+
+    public void ClearListenersFromEveryButton()
+    {
+        foreach (Button button in Buttons)
+        {
+            button.onClick.RemoveAllListeners();
+        }
+        AllListenersCleared?.Invoke();
+    }
+
 }

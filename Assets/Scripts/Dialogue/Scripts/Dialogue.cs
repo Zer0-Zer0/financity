@@ -28,7 +28,7 @@ public struct DialogueConversation
     }
 
     public UnityEvent<DialogueConversation> ConversationBegan;
-    public UnityEvent ConversationEnded;
+    public UnityEvent<DialogueConversation> ConversationEnded;
 
     public override string ToString()
     {

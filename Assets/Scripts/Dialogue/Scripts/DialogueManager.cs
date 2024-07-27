@@ -15,7 +15,6 @@ public class DialogueManager : MonoBehaviour
         }
         set
         {
-            EndDialogue();
             StopAllCoroutines();
 
             _dialogue = value;
@@ -23,20 +22,53 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    [SerializeField] private GameObject OptionsMenu;
-    [SerializeField] private GameObject DialogueBox;
+    [SerializeField] private OptionsManager _optionsManager;
+    [SerializeField] private GameObject _optionsBox;
+    [SerializeField] private GameObject _dialogueBox;
 
     [SerializeField] private TypewriterEffect DialogueTextbox;
 
     private Coroutine _typingDialogueCoroutine;
     private Coroutine _waitForEPress;
 
-    void BeginDialogue()
+    private void Awake()
+    {
+        _optionsManager.AllListenersCleared.AddListener(OnAllListenersCleared);
+        OnAllListenersCleared();
+    }
+
+    private void OnAllListenersCleared()
+    {
+        _optionsManager.AssignToEveryButton(OnOptionChosen);
+    }
+
+    public void EndDialogue()
+    {
+        CurrentDialogue.DialogueEnded?.Invoke();
+        CurrentDialogue.Conversation.ConversationEnded?.Invoke(CurrentDialogue.Conversation);
+
+        StopCoroutine(DisplayDialoguePhrases());
+        _dialogueBox.SetActive(false);
+    }
+
+    public void OptionsPopup(DialoguePhrase dialoguePhrase)
+    {
+        _optionsBox.gameObject.SetActive(true);
+        _optionsManager.OnOptionsPopup(dialoguePhrase);
+    }
+
+    public void OnOptionChosen()
+    {
+        _optionsBox.gameObject.SetActive(false);
+    }
+
+    public void BeginDialogue()
     {
         CurrentDialogue.DialogueBegan?.Invoke();
         CurrentDialogue.Conversation.ConversationBegan?.Invoke(CurrentDialogue.Conversation);
 
         StartCoroutine(DisplayDialoguePhrases());
+        _dialogueBox.SetActive(true);
     }
 
     IEnumerator DisplayDialoguePhrases()
@@ -60,11 +92,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        EndDialogue();
-    }
-
-    public void EndDialogue(){
-        CurrentDialogue.Conversation.ConversationEnded?.Invoke();
+        CurrentDialogue.Conversation.ConversationEnded?.Invoke(CurrentDialogue.Conversation);
         CurrentDialogue.DialogueEnded?.Invoke();
     }
 
