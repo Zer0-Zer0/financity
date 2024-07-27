@@ -21,10 +21,9 @@ public class sliderempre : MonoBehaviour
 
     private float dinheiro;
 
-    public string[] mensagensafirmação;
-    public string[] mensagensnegação;
-
-    private string[] cancelar;
+    [SerializeField] private Dialogo.Frases[] mensagensafirmação;
+    [SerializeField] private Dialogo.Frases[] mensagensnegação;
+    [SerializeField] private Dialogo.Frases[] cancelar;
 
     public bancocobrar banco;
 
@@ -124,7 +123,6 @@ public class sliderempre : MonoBehaviour
 
     public void negar()
     {
-        cancelar = new string[] { "Poxa, pena que não pude ajudar dessa vez", "Mas sei que você ainda irá precisar de mim!" };
         Dialogo.Instance.InicializarDialogo(cancelar);
         slider.gameObject.SetActive(false);
         texto.gameObject.SetActive(false);
