@@ -12,7 +12,6 @@ public class sliderempre : MonoBehaviour
     private bool ativo = true;
 
     public Carteira carteira;
-    public Dialogo dialogo;
 
     public TMP_Dropdown dropdown;
     public int minemprestimo = 2;
@@ -104,7 +103,7 @@ public class sliderempre : MonoBehaviour
         {
             metodo = dropdown.options[dropdown.value].text;
             banco.cobrar(metodo);
-            dialogo.InicializarDialogo(mensagensafirmação);
+            Dialogo.Instance.InicializarDialogo(mensagensafirmação);
             slider.gameObject.SetActive(false);
             texto.gameObject.SetActive(false);
             dropdown.gameObject.SetActive(false);
@@ -113,7 +112,7 @@ public class sliderempre : MonoBehaviour
         }
         else
         {
-            dialogo.InicializarDialogo(mensagensnegação);
+            Dialogo.Instance.InicializarDialogo(mensagensnegação);
             slider.gameObject.SetActive(false);
             texto.gameObject.SetActive(false);
             dropdown.gameObject.SetActive(false);
@@ -126,7 +125,7 @@ public class sliderempre : MonoBehaviour
     public void negar()
     {
         cancelar = new string[] { "Poxa, pena que não pude ajudar dessa vez", "Mas sei que você ainda irá precisar de mim!" };
-        dialogo.InicializarDialogo(cancelar);
+        Dialogo.Instance.InicializarDialogo(cancelar);
         slider.gameObject.SetActive(false);
         texto.gameObject.SetActive(false);
         dropdown.gameObject.SetActive(false);

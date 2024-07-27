@@ -1,25 +1,66 @@
 using System.Collections;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
 
-[RequireComponent(typeof(TypewriterEffect))]
 public class Dialogo : MonoBehaviour
 {
     /*
         Para funcionar:
         Adicione isso a caixa de texto na qual o dialogo sera exibido
+        Olhe a void Awake, la tem todos os objetos que voce tera que adicionar como filho
         SE HOUVER MAIS DE UM SCRIPT DESSE EM UMA CENA, UM ERRO SERA OUTPUTEADO
     */
     [SerializeField] private KeyCode _inputProximaFrase = KeyCode.Return;
+    public static Dialogo Instance { get; private set; }
+
     private int index;
     private string[] linhas;
     private Coroutine typingCoroutine;
+
+    private TypewriterEffect _textoDialogo;
+    private TMP_Text _textoNome;
+    private GameObject _painelDialogo;
+
     public UnityEvent DialogoAcabou;
-    private TypewriterEffect _textbox;
-    
-    public static Dialogo Instance { get; private set; }
+
+    /// <summary>
+    /// Encontra e retorna o Transform do objeto filho com o nome especificado.
+    /// </summary>
+    /// <param name="nome">O nome do objeto filho a ser encontrado.</param>
+    /// <returns>O Transform do objeto filho encontrado.</returns>
+    /// <exception cref="System.Exception">É lançada se o objeto filho com o nome especificado não for encontrado.</exception>
+    private Transform AchaCrianca(string nome, Transform pai = null)
+    {
+        if (pai == null)
+        {
+            pai = transform;
+        }
+
+        Transform child = pai.Find(nome);
+
+        if (child == null)
+        {
+            throw new Exception($"Child object with the name {nome} not found.");
+        }
+        return child;
+    }
+
+    /// <summary>
+    /// Encontra e retorna um array de botões que são descendentes do Transform pai com o nome especificado.
+    /// </summary>
+    /// <param name="nomePai">O nome do objeto pai a ser encontrado.</param>
+    /// <returns>Um array de botões que são descendentes do objeto pai encontrado.</returns>
+    public Button[] AchaBotoes(string nomePai)
+    {
+        Transform pai = transform.Find(nomePai);
+
+        Button[] children = pai.GetComponentsInChildren<Button>();
+
+        return children;
+    }
 
     private void Awake()
     {
@@ -32,20 +73,24 @@ public class Dialogo : MonoBehaviour
             Instance = this;
         }
 
-        _textbox = GetComponent<TypewriterEffect>();
+        _painelDialogo = AchaCrianca("PainelDialogo").gameObject;
+        _textoNome = AchaCrianca("TextoNome", _painelDialogo.transform).GetComponent<TMP_Text>();
+        _textoDialogo = AchaCrianca("TextoDialogo", _painelDialogo.transform).GetComponent<TypewriterEffect>();
+        _painelDialogo.SetActive(false);
     }
 
-    public void InicializarDialogo(string[] linhasDialogo)
+    public void InicializarDialogo(string[] linhasDialogo, string nomeFalante = "")
     {
         linhas = linhasDialogo;
         index = 0;
-
+        _textoNome.text = nomeFalante;
+        _painelDialogo.SetActive(true);
         typingCoroutine = StartCoroutine(TypeLine());
     }
 
     public IEnumerator TypeLine()
     {
-        yield return _textbox.ShowText(linhas[index]);
+        yield return _textoDialogo.ShowText(linhas[index]);
         yield return Waiters.InputWaiter(_inputProximaFrase);
         ProximaFrase();
     }
@@ -59,7 +104,8 @@ public class Dialogo : MonoBehaviour
         }
         else
         {
-            _textbox.ClearText();
+            _textoDialogo.ClearText();
+            _painelDialogo.SetActive(false);
             DialogoAcabou?.Invoke();
         }
     }
