@@ -241,11 +241,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1 &847214609 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1913621706999830569, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
-  m_PrefabInstance: {fileID: 7185907704695320134}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &954401757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -572,11 +567,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c40fc33156af87951906f7a49279b1a1, type: 3}
---- !u!1 &3746629621794987808 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3621851163832033718, guid: c40fc33156af87951906f7a49279b1a1, type: 3}
-  m_PrefabInstance: {fileID: 1961622320542630448}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4731051222122462140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -634,10 +624,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1165319307}
     - target: {fileID: 4620560180446594818, guid: ab0678ecd324d3f4486aaf50cfed9eb9, type: 3}
-      propertyPath: fsm.states.Array.data[2].actionData.fsmGameObjectParams.Array.data[1].value
-      value: 
-      objectReference: {fileID: 3746629621794987808}
-    - target: {fileID: 4620560180446594818, guid: ab0678ecd324d3f4486aaf50cfed9eb9, type: 3}
       propertyPath: fsm.states.Array.data[2].actionData.fsmOwnerDefaultParams.Array.data[0].gameObject.value
       value: 
       objectReference: {fileID: 1165319307}
@@ -645,14 +631,10 @@ PrefabInstance:
       propertyPath: fsm.states.Array.data[0].actionData.fsmGameObjectParams.Array.data[0].value
       value: 
       objectReference: {fileID: 1165319307}
-    - target: {fileID: 7651509090974881846, guid: ab0678ecd324d3f4486aaf50cfed9eb9, type: 3}
-      propertyPath: fsm.states.Array.data[0].actionData.fsmOwnerDefaultParams.Array.data[2].gameObject.value
+    - target: {fileID: 7669376764241933217, guid: ab0678ecd324d3f4486aaf50cfed9eb9, type: 3}
+      propertyPath: fsm.states.Array.data[0].actionData.fsmOwnerDefaultParams.Array.data[1].gameObject.value
       value: 
-      objectReference: {fileID: 847214609}
-    - target: {fileID: 7651509090974881846, guid: ab0678ecd324d3f4486aaf50cfed9eb9, type: 3}
-      propertyPath: fsm.states.Array.data[1].actionData.fsmOwnerDefaultParams.Array.data[1].gameObject.value
-      value: 
-      objectReference: {fileID: 847214609}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -775,6 +757,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1913621706999830569, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2255931114857660158, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -847,11 +833,11 @@ PrefabInstance:
     - target: {fileID: 3735041755094641200, guid: ec4fffddb68ee134cb72706c9eaacba8, type: 3}
       propertyPath: fsm.states.Array.data[0].actionData.fsmOwnerDefaultParams.Array.data[2].gameObject.value
       value: 
-      objectReference: {fileID: 847214609}
+      objectReference: {fileID: 0}
     - target: {fileID: 3735041755094641200, guid: ec4fffddb68ee134cb72706c9eaacba8, type: 3}
       propertyPath: fsm.states.Array.data[1].actionData.fsmOwnerDefaultParams.Array.data[1].gameObject.value
       value: 
-      objectReference: {fileID: 847214609}
+      objectReference: {fileID: 0}
     - target: {fileID: 4164620555468657323, guid: ec4fffddb68ee134cb72706c9eaacba8, type: 3}
       propertyPath: fsm.states.Array.data[2].actionData.fsmOwnerDefaultParams.Array.data[0].gameObject.value
       value: 
