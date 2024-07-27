@@ -104,7 +104,7 @@ public class sliderempre : MonoBehaviour
         {
             metodo = dropdown.options[dropdown.value].text;
             banco.cobrar(metodo);
-            dialogo.IniciarDialogo(mensagensafirmação);
+            dialogo.InicializarDialogo(mensagensafirmação);
             slider.gameObject.SetActive(false);
             texto.gameObject.SetActive(false);
             dropdown.gameObject.SetActive(false);
@@ -113,7 +113,7 @@ public class sliderempre : MonoBehaviour
         }
         else
         {
-            dialogo.IniciarDialogo(mensagensnegação);
+            dialogo.InicializarDialogo(mensagensnegação);
             slider.gameObject.SetActive(false);
             texto.gameObject.SetActive(false);
             dropdown.gameObject.SetActive(false);
@@ -126,7 +126,7 @@ public class sliderempre : MonoBehaviour
     public void negar()
     {
         cancelar = new string[] { "Poxa, pena que não pude ajudar dessa vez", "Mas sei que você ainda irá precisar de mim!" };
-        dialogo.IniciarDialogo(cancelar);
+        dialogo.InicializarDialogo(cancelar);
         slider.gameObject.SetActive(false);
         texto.gameObject.SetActive(false);
         dropdown.gameObject.SetActive(false);

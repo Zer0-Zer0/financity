@@ -1,55 +1,40 @@
 using UnityEngine;
+using UnityEngine.Events;
 
+[RequireComponent(typeof(Dialogo))]
 public class InteracaoNPC : MonoBehaviour
 {
     /*
-    Para isto funcionar o player tem que está com a tag de player
-    distancia tem que ser 10
-    o colidder do npc tem que ser um trigger
+    Para isto funcionar o player tem que está com a tag de "Player"
+    Para isto funcionar a caixa de dialogo tem que está com a tag de "DialogueBox"
+    o npc deve conter um colliger que eh trigger
     melhor distancia é x 5 y 5 z 5
-    falta uma desativação depois que já foi ativo
-
     */
 
+    [SerializeField] private KeyCode _teclaInteracao = KeyCode.E;
+    [SerializeField] private string[] _mensagens;
+    private Dialogo _dialogo;
+    private bool _interacaoPossivel = false;
 
-    public Dialogo dialogo;
-    public float distanciaMaxima = 10f;
-    public KeyCode teclaInteracao = KeyCode.E;
-    public string[] mensagens;
-    public Carteira carteira;
-    public float valor;
-    public bool financeiro;
-    public bool empréstimo = false;
-    public sliderempre slider;
-
-    public string operador;
-
-    bool interacaoPossivel = false;
+    private void Awake()
+    {
+        _dialogo = GetComponent<Dialogo>();
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(teclaInteracao) && interacaoPossivel)
+        if (Input.GetKeyDown(_teclaInteracao) && _interacaoPossivel)
         {
-            if (mensagens == null || mensagens.Length == 0)
-            {
-                mensagens = new string[] { "Mensagem padrão 1", "Mensagem padrão 2" };
-            }
-            dialogo.IniciarDialogo(mensagens);
+            ChecaMensagens();
+            _dialogo.InicializarDialogo(_mensagens);
+        }
+    }
 
-            if (empréstimo == true) {
-                slider.toggleslide();
-            }
-
-            if (financeiro == true) {
-                if (operador == "+") {
-                    carteira.Adicionar(valor);
-                }
-
-                if (operador == "-") {
-                    carteira.Subtrair(valor);
-                }
-                
-            }
+    void ChecaMensagens()
+    {
+        if (_mensagens == null || _mensagens.Length == 0)
+        {
+            _mensagens = new string[] { "Mensagem padrão 1", "Mensagem padrão 2" };
         }
     }
 
@@ -57,7 +42,7 @@ public class InteracaoNPC : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            interacaoPossivel = true;
+            _interacaoPossivel = true;
         }
     }
 
@@ -65,7 +50,7 @@ public class InteracaoNPC : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            interacaoPossivel = false;
+            _interacaoPossivel = false;
         }
     }
 }

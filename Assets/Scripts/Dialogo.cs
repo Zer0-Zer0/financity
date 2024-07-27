@@ -1,70 +1,56 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 public class Dialogo : MonoBehaviour
 {
-    public TextMeshProUGUI textComponent;
-    //public GameObject botaoPular;
-    //public GameObject botaoAutomatico;
-    public float velocidade;
-    public float delayParaProximaFala = 1f; // Alterado para delay para próxima fala
+    [SerializeField] private float _delay = 0.2f;
+    [SerializeField] private KeyCode _inputProximaFrase = KeyCode.Return;
 
+    private TextMeshProUGUI _textComponent;
     private string[] linhas;
     private int index;
-    private bool dialogoAtivo = false;
     private Coroutine typingCoroutine;
-    private bool automaticoAtivado = false;
+    public UnityEvent DialogoAcabou;
 
-    public sliderempre slider2;
-
-    //public AnimaObjeto payanim;  
-
-    void Update()
+    private void Awake()
     {
-        if (dialogoAtivo && Input.GetKeyDown(KeyCode.Return))
-        {
-            if (!automaticoAtivado)
-                proxlinha();
-        }
+        GameObject _textComponentGameObject = TagFinder.FindObjectWithTag("DialogueText");
+        _textComponent = _textComponentGameObject.GetComponent<TextMeshProUGUI>();
     }
 
-    public void IniciarDialogo(string[] linhasDialogo)
+    public void InicializarDialogo(string[] linhasDialogo)
     {
-        gameObject.SetActive(true);
         linhas = linhasDialogo;
         index = 0;
-        dialogoAtivo = true;
-        textComponent.text = string.Empty;
-        if (typingCoroutine != null)
-            StopCoroutine(typingCoroutine);
-        typingCoroutine = StartCoroutine(TypeLine());
+        _textComponent.text = string.Empty;
 
-       // botaoPular.SetActive(true);
-        //botaoAutomatico.SetActive(true);
+        typingCoroutine = StartCoroutine(TypeLine());
     }
 
     IEnumerator TypeLine()
     {
-        foreach (char letra in linhas[index].ToCharArray())
+        int _visibleCharacterCount = 0;
+
+        while (_visibleCharacterCount <= linhas[index].Length)
         {
-            textComponent.text += letra;
-            yield return new WaitForSeconds(velocidade);
+            _textComponent.maxVisibleCharacters = _visibleCharacterCount;
+            _visibleCharacterCount++;
+
+            yield return new WaitForSeconds(_delay);
         }
 
-        if (automaticoAtivado)
-            yield return new WaitForSeconds(delayParaProximaFala);
-
-        if (dialogoAtivo && automaticoAtivado)
-            proxlinha();
+        yield return Waiters.InputWaiter(_inputProximaFrase);
+        ProximaFrase();
     }
 
-    void proxlinha()
+    void ProximaFrase()
     {
         if (index < linhas.Length - 1)
         {
             index++;
-            textComponent.text = string.Empty;
+            _textComponent.text = string.Empty;
             if (typingCoroutine != null)
                 StopCoroutine(typingCoroutine);
             typingCoroutine = StartCoroutine(TypeLine());
@@ -72,38 +58,9 @@ public class Dialogo : MonoBehaviour
         else
         {
             LimparTexto();
-            dialogoAtivo = false;
-            //gameObject.SetActive(false);
-
-            //botaoPular.SetActive(false);
-            //botaoAutomatico.SetActive(false);
-            /*if (slider2.feito)
-            {
-                slider2.feito = false;
-                //payanim.animação(slider2.value, "Solicitando\nao banco...", "EMPRESTIMO\nCONCEDIDO!", true);
-            }//*/
-
+            DialogoAcabou?.Invoke();
         }
     }
 
-    public void PularDialogo()
-    {
-        StopCoroutine(typingCoroutine);
-        LimparTexto();
-        dialogoAtivo = false;
-        //gameObject.SetActive(false);
-
-        //botaoPular.SetActive(false);
-        //botaoAutomatico.SetActive(false);
-    }
-
-    public void AtivarAutomatico()
-    {
-        automaticoAtivado = !automaticoAtivado;
-    }
-
-    void LimparTexto()
-    {
-        textComponent.text = string.Empty;
-    }
+    void LimparTexto() { _textComponent.text = string.Empty; }
 }

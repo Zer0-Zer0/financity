@@ -1561,19 +1561,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a8120bf140500067ca19c2506426774b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.723528
+      value: 72.97
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8120bf140500067ca19c2506426774b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.8912731
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8120bf140500067ca19c2506426774b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.9718804
+      value: 29.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8120bf140500067ca19c2506426774b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8401852
+      value: 0.6716612
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8120bf140500067ca19c2506426774b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1581,7 +1581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8120bf140500067ca19c2506426774b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.54229957
+      value: 0.7408585
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8120bf140500067ca19c2506426774b, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1593,7 +1593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8120bf140500067ca19c2506426774b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 65.681
+      value: 95.609
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8120bf140500067ca19c2506426774b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1619,10 +1619,13 @@ PrefabInstance:
       addedObject: {fileID: 88129259599249062}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8120bf140500067ca19c2506426774b, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8691859587075206705}
+      addedObject: {fileID: 496240867440330605}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8120bf140500067ca19c2506426774b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8937604936546623359}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8120bf140500067ca19c2506426774b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 768756161479585013}
   m_SourcePrefab: {fileID: 100100000, guid: a8120bf140500067ca19c2506426774b, type: 3}
 --- !u!1 &2970341772083075678 stripped
 GameObject:
@@ -1652,8 +1655,8 @@ CapsuleCollider:
   m_Height: 2.2084894
   m_Direction: 1
   m_Center: {x: -0.046058357, y: 0.6042447, z: -0.04059404}
---- !u!65 &8691859587075206705
-BoxCollider:
+--- !u!135 &496240867440330605
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1671,7 +1674,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 4, z: 4}
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8937604936546623359
 MonoBehaviour:
@@ -1685,24 +1688,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d4b9f3fd7d1a0fd8ed5da72ce60b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogo: {fileID: 0}
-  distanciaMaxima: 5
-  teclaInteracao: 101
-  mensagens:
-  - "Ol\xE1 novato, seja bem-vindo por aqui!"
+  _teclaInteracao: 101
+  _mensagens:
+  - "Ol\xE1 novate, seja bem-vinde por aqui!"
   - "Eles provavelmente n\xE3o te contaram isso antes de te trazerem para c\xE1 mas
     voc\xEA vai precisar de mais do que seus punhos podem te oferecer"
   - Eu sempre soube que eles eram reais
   - "O motivo deles n\xE3o terem me respondido nos anos 20 foi por eles serem NOSSOS
     INIMIGOS"
   - "De qualquer forma, leve essa pistola, te darei um desconto nela s\xF3 por voc\xEA
-    ser novo por aqui"
-  carteira: {fileID: 0}
-  valor: 500
-  financeiro: 1
-  "empr\xE9stimo": 0
-  slider: {fileID: 0}
-  operador: '-'
+    ser nove por aqui"
+--- !u!114 &768756161479585013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2970341772083075678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87960fa97730cadfbacb2c67fe54bb1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textComponent: {fileID: 0}
+  _delay: 0.2
+  _inputProximaFrase: 13
+  slider2: {fileID: 0}
+  DialogoAcabou:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &8410726991577566310 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5855040603234790249, guid: a8120bf140500067ca19c2506426774b, type: 3}

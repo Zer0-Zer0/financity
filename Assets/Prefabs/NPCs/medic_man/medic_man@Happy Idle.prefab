@@ -68,6 +68,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3785050130626186676}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4526011381871306404}
   m_SourcePrefab: {fileID: 100100000, guid: 6c54fb2b058d84123b914ef0fbd7e60d, type: 3}
 --- !u!1 &8605031827191948675 stripped
 GameObject:
@@ -151,10 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d4b9f3fd7d1a0fd8ed5da72ce60b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogo: {fileID: 0}
-  distanciaMaxima: 10
-  teclaInteracao: 101
-  mensagens:
+  _teclaInteracao: 101
+  _mensagens:
   - "Olha s\xF3! Voc\xEA deve ser um dos novos recrutas!"
   - "99% dos antigos recrutas falharam por n\xE3o terem comprado produtos o suficiente
     na minha m\xE3o"
@@ -163,9 +164,22 @@ MonoBehaviour:
     para voc\xEA enfrentar o lado de fora"
   - "Infelizmente\u2122  os outros chegaram aqui antes de voc\xEA e s\xF3 tenho mais
     uma unidade desses kits, toma aqui"
-  carteira: {fileID: 0}
-  valor: 200
-  financeiro: 1
-  "empr\xE9stimo": 0
-  slider: {fileID: 0}
-  operador: '-'
+--- !u!114 &4526011381871306404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8605031827191948675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87960fa97730cadfbacb2c67fe54bb1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textComponent: {fileID: 0}
+  _delay: 0.2
+  _inputProximaFrase: 13
+  slider2: {fileID: 0}
+  DialogoAcabou:
+    m_PersistentCalls:
+      m_Calls: []

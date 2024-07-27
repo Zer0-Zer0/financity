@@ -4444,34 +4444,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: gun_gal@Rifle Idle
       objectReference: {fileID: 0}
-    - target: {fileID: 8691859587075206705, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: m_Size.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8691859587075206705, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: m_Size.y
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8691859587075206705, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: m_Size.z
-      value: 6
+    - target: {fileID: 8937604936546623359, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
+      propertyPath: _mensagens.Array.data[0]
+      value: "Ol\xE1 novate, seja bem-vinde por aqui!"
       objectReference: {fileID: 0}
     - target: {fileID: 8937604936546623359, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: dialogo
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8937604936546623359, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: carteira
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8937604936546623359, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: mensagens.Array.data[0]
-      value: "Ol\xE1 novata, seja bem-vinda por aqui!"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8937604936546623359, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: mensagens.Array.data[4]
+      propertyPath: _mensagens.Array.data[4]
       value: "De qualquer forma, leve essa pistola, te darei um desconto nela s\xF3
-        por voc\xEA ser nova por aqui"
+        por voc\xEA ser nove por aqui"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13643,7 +13623,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 337875fa3cae2d794922485d3fe827c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.2
+  _normalDelay: 0.2
+  _fastDelay: 0.05
+  delayInterPhrase: 1
   TypingFinished:
     m_PersistentCalls:
       m_Calls: []
@@ -13756,7 +13738,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15cff0f018b8b8f06aa9debfeb690637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: c82e461269dc283cf829bdebb821a12f, type: 2}
+  _dialogue:
+    Conversation:
+      _conversationPhrases: []
+      ConversationBegan:
+        m_PersistentCalls:
+          m_Calls: []
+      ConversationEnded:
+        m_PersistentCalls:
+          m_Calls: []
+    DialogueBegan:
+      m_PersistentCalls:
+        m_Calls: []
+    DialogueEnded:
+      m_PersistentCalls:
+        m_Calls: []
+  _optionsManager: {fileID: 0}
+  _optionsBox: {fileID: 0}
+  _dialogueBox: {fileID: 0}
   DialogueTextbox: {fileID: 1296684417}
 --- !u!1001 &1302171361
 PrefabInstance:
