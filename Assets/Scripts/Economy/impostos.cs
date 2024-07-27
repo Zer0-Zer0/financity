@@ -16,12 +16,12 @@ public static class Impostos
     {
         float imposto = 0f;
 
-        float impostoFaixa1 = (salario - VALOR_MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1;
-        float impostoFaixa2 = (MAXIMO_FAIXA1_IRPF - VALOR_MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1 + (salario - MAXIMO_FAIXA1_IRPF) * ALIQUOTA_IRPF_2;
+        float impostoFaixa1 = (salario - MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1;
+        float impostoFaixa2 = (MAXIMO_FAIXA1_IRPF - MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1 + (salario - MAXIMO_FAIXA1_IRPF) * ALIQUOTA_IRPF_2;
 
-        float impostoFaixa3 = (MAXIMO_FAIXA1_IRPF - VALOR_MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1 + (MAXIMO_FAIXA2_IRPF - MAXIMO_FAIXA1_IRPF) * ALIQUOTA_IRPF_2 + (salario - MAXIMO_FAIXA2_IRPF) * ALIQUOTA_IRPF_3;
+        float impostoFaixa3 = (MAXIMO_FAIXA1_IRPF - MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1 + (MAXIMO_FAIXA2_IRPF - MAXIMO_FAIXA1_IRPF) * ALIQUOTA_IRPF_2 + (salario - MAXIMO_FAIXA2_IRPF) * ALIQUOTA_IRPF_3;
         
-        float impostoFaixa4 = (MAXIMO_FAIXA1_IRPF - VALOR_MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1 + (MAXIMO_FAIXA2_IRPF - MAXIMO_FAIXA1_IRPF) * ALIQUOTA_IRPF_2 + (MAXIMO_FAIXA3_IRPF - MAXIMO_FAIXA2_IRPF) * ALIQUOTA_IRPF_3 + (salario - MAXIMO_FAIXA3_IRPF) * ALIQUOTA_IRPF_4;
+        float impostoFaixa4 = (MAXIMO_FAIXA1_IRPF - MAXIMO_INSENCAO_IRPF) * ALIQUOTA_IRPF_1 + (MAXIMO_FAIXA2_IRPF - MAXIMO_FAIXA1_IRPF) * ALIQUOTA_IRPF_2 + (MAXIMO_FAIXA3_IRPF - MAXIMO_FAIXA2_IRPF) * ALIQUOTA_IRPF_3 + (salario - MAXIMO_FAIXA3_IRPF) * ALIQUOTA_IRPF_4;
 
         if (salario <= MAXIMO_INSENCAO_IRPF)
         {
@@ -48,7 +48,7 @@ public static class Impostos
     }
 
     // Função para calcular o Imposto de Renda Pessoa Jurídica (IRPJ)
-    public float CalcularIRPJ(float lucroMensal)
+    public static float CalcularIRPJ(float lucroMensal)
     {
         float imposto = 0f;
 
