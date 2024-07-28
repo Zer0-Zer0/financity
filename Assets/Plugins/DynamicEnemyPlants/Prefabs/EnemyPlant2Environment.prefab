@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 112181328}
   - component: {fileID: 112181329}
   - component: {fileID: 4628280117051018362}
+  - component: {fileID: 938220259070433445}
   m_Layer: 0
   m_Name: EnemyPlant2Mesh
   m_TagString: Untagged
@@ -112,6 +113,25 @@ CapsuleCollider:
   m_Height: 0.009335771
   m_Direction: 2
   m_Center: {x: -0.00006448984, y: 0.00009149715, z: 0.00442833}
+--- !u!114 &938220259070433445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112181327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &326761866
 GameObject:
   m_ObjectHideFlags: 0
