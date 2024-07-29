@@ -1,36 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MouseLockScript : MonoBehaviour
 {
     private bool _isCursorLocked = true;
 
-    void Start()
+    [SerializeField]
+    private Texture2D Empty;
+
+    private void Start()
     {
-        SetCursorState(_isCursorLocked);
+        Cursor.SetCursor(Empty, new Vector2(0f, 0f), CursorMode.Auto);
     }
 
-    void LateUpdate()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            _isCursorLocked = !_isCursorLocked;
-            SetCursorState(_isCursorLocked);
-        }
-    }
-
-    void SetCursorState(bool isCursorLocked)
-    {
-        if (isCursorLocked)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            Cursor.SetCursor(Empty, new Vector2(0f, 0f), CursorMode.Auto);
         }
     }
 }
