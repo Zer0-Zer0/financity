@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using TMPro;
 
 public class FPSDisplay : MonoBehaviour
@@ -33,4 +33,4 @@ public class FPSDisplay : MonoBehaviour
 
         fpsText.color = textColor;
     }
-}
+}*/

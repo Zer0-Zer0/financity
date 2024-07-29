@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using System.Collections.Generic;
 
 public class FinanceManager : MonoBehaviour
@@ -56,3 +56,4 @@ public class FinanceManager : MonoBehaviour
         Credit
     }
 }
+*/
