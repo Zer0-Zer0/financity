@@ -628,7 +628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 36a1265430357104e813ede853bbd099, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 36a1265430357104e813ede853bbd099, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1031,15 +1031,15 @@ NavMeshAgent:
   m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 180
-  m_StoppingDistance: 1
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.82
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 1
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &1396172734243190339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1607,9 +1607,9 @@ MonoBehaviour:
     dataVersion: 2
     usedInTemplate: {fileID: 0}
     name: Damage
-    startState: Normal
+    startState: NaoTomandoDano
     states:
-    - name: Normal
+    - name: NaoTomandoDano
       description: 
       colorIndex: 0
       position:
@@ -3337,7 +3337,7 @@ MonoBehaviour:
         name: DELAYDANOACABOU
         isSystemEvent: 0
         isGlobal: 0
-      toState: Normal
+      toState: NaoTomandoDano
       linkStyle: 0
       linkConstraint: 0
       colorIndex: 0
@@ -3445,7 +3445,7 @@ MonoBehaviour:
           name: Atacar
           isSystemEvent: 0
           isGlobal: 0
-        toState: Delay
+        toState: Atacar
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
@@ -3792,7 +3792,7 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - Atacar
-        byteData: 0000000001000000
+        byteData: 0000000000000000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
@@ -3815,120 +3815,15 @@ MonoBehaviour:
         - storeCollider
         paramDataPos: 0000000000000000010000000100000000000000000000000100000002000000030000000100000004000000000000000000000000000000
         paramByteDataSize: 0000000001000000000000000100000000000000000000000000000001000000010000000000000004000000000000000000000000000000
-    - name: Ataque
+    - name: VerificarAtaque
       description: 
       colorIndex: 0
       position:
         serializedVersion: 2
         x: 250
         y: 196
-        width: 100
+        width: 144
         height: 32
-      isBreakpoint: 0
-      isSequence: 0
-      hideUnused: 0
-      transitions:
-      - fsmEvent:
-          name: FINISHED
-          isSystemEvent: 1
-          isGlobal: 0
-        toState: EsperarAtaqueTerminar
-        linkStyle: 0
-        linkConstraint: 0
-        colorIndex: 0
-      actionData:
-        actionNames:
-        - HutongGames.PlayMaker.Actions.FloatAdd
-        - HutongGames.PlayMaker.Actions.ActivateGameObject
-        customNames:
-        - 
-        - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000004000000
-        actionHashCodes: 2a6e8a00b2cf1000
-        unityObjectParams: []
-        fsmGameObjectParams: []
-        fsmOwnerDefaultParams:
-        - ownerOption: 1
-          gameObject:
-            useVariable: 0
-            name: 
-            tooltip: 
-            showInInspector: 0
-            networkSync: 0
-            value: {fileID: 5380499631803712105}
-        animationCurveParams: []
-        functionCallParams: []
-        fsmTemplateControlParams: []
-        fsmEventTargetParams: []
-        fsmPropertyParams: []
-        layoutOptionParams: []
-        fsmStringParams: []
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams:
-        - useVariable: 1
-          name: Player_Health
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: -1
-        fsmIntParams: []
-        fsmBoolParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 1
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 1
-        fsmVector2Params: []
-        fsmVector3Params: []
-        fsmColorParams: []
-        fsmRectParams: []
-        fsmQuaternionParams: []
-        stringParams: []
-        byteData: 00000000
-        arrayParamSizes: 
-        arrayParamTypes: []
-        customTypeSizes: 
-        customTypeNames: []
-        paramDataType: 0f0000000f00000001000000010000001400000011000000110000000100000001000000
-        paramName:
-        - floatVariable
-        - add
-        - everyFrame
-        - perSecond
-        - gameObject
-        - activate
-        - recursive
-        - resetOnExit
-        - everyFrame
-        paramDataPos: 000000000100000000000000010000000000000000000000010000000200000003000000
-        paramByteDataSize: 000000000000000001000000010000000000000000000000000000000100000001000000
-    - name: Delay
-      description: 
-      colorIndex: 0
-      position:
-        serializedVersion: 2
-        x: 244.17969
-        y: 108.3125
-        width: 100
-        height: 48
       isBreakpoint: 0
       isSequence: 0
       hideUnused: 0
@@ -3937,35 +3832,21 @@ MonoBehaviour:
           name: Acertou
           isSystemEvent: 0
           isGlobal: 0
-        toState: Ataque
-        linkStyle: 0
-        linkConstraint: 0
-        colorIndex: 0
-      - fsmEvent:
-          name: NaoAcertou
-          isSystemEvent: 0
-          isGlobal: 0
-        toState: EsperarAtaqueTerminar
+        toState: EnviarDano
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
       actionData:
         actionNames:
-        - HutongGames.PlayMaker.Actions.SetProperty
-        - HutongGames.PlayMaker.Actions.SetProperty
-        - HutongGames.PlayMaker.Actions.SetAnimatorBool
         - HutongGames.PlayMaker.Actions.TriggerEvent
-        - HutongGames.PlayMaker.Actions.Wait
+        - HutongGames.PlayMaker.Actions.SetAnimatorBool
         customNames:
         - 
         - 
-        - 
-        - 
-        - 
-        actionEnabled: 0101010101
-        actionIsOpen: 0101010101
-        actionStartIndex: 000000000200000004000000090000000e000000
-        actionHashCodes: 5ac852045ac852045f9135049c51240048c01101
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000005000000
+        actionHashCodes: 9c5124005f913504
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 1
@@ -3983,6 +3864,101 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             value: {fileID: 0}
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: Player
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: Slap
+        fsmObjectParams: []
+        fsmVarParams: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams: []
+        fsmIntParams: []
+        fsmBoolParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams:
+        - Acertou
+        byteData: 010000000000000000
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 14000000070000001200000017000000130000001400000012000000110000000100000007000000
+        paramName:
+        - gameObject
+        - trigger
+        - collideTag
+        - sendEvent
+        - storeCollider
+        - gameObject
+        - parameter
+        - Value
+        - everyFrame
+        - everyFrameOption
+        paramDataPos: 00000000000000000000000000000000000000000100000001000000000000000400000005000000
+        paramByteDataSize: 00000000040000000000000000000000000000000000000000000000000000000100000004000000
+    - name: Atacar
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 245.17969
+        y: 114.3125
+        width: 100
+        height: 16
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions: []
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.SetProperty
+        - HutongGames.PlayMaker.Actions.SetProperty
+        - HutongGames.PlayMaker.Actions.SetAnimatorBool
+        customNames:
+        - 
+        - 
+        - 
+        actionEnabled: 010101
+        actionIsOpen: 010101
+        actionStartIndex: 000000000200000004000000
+        actionHashCodes: 5ac852045ac852045f913504
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams:
         - ownerOption: 0
           gameObject:
             useVariable: 0
@@ -4268,23 +4244,11 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: Slap
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: Player
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
         fsmEnumParams: []
-        fsmFloatParams:
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 2
+        fsmFloatParams: []
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 0
@@ -4298,15 +4262,13 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams:
-        - NaoAcertou
-        - Acertou
-        byteData: 000000000000000200000001
+        stringParams: []
+        byteData: 00000000000000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 24000000010000002400000001000000140000001200000011000000010000000700000014000000070000001200000017000000130000000f0000001700000001000000
+        paramDataType: 240000000100000024000000010000001400000012000000110000000100000007000000
         paramName:
         - targetProperty
         - everyFrame
@@ -4317,24 +4279,16 @@ MonoBehaviour:
         - Value
         - everyFrame
         - everyFrameOption
-        - gameObject
-        - trigger
-        - collideTag
-        - sendEvent
-        - storeCollider
-        - time
-        - finishEvent
-        - realTime
-        paramDataPos: 000000000000000001000000010000000000000000000000000000000200000003000000010000000700000001000000000000000000000000000000010000000b000000
-        paramByteDataSize: 0000000001000000000000000100000000000000000000000000000001000000040000000000000004000000000000000000000000000000000000000000000001000000
-    - name: EsperarAtaqueTerminar
+        paramDataPos: 000000000000000001000000010000000000000000000000000000000200000003000000
+        paramByteDataSize: 000000000100000000000000010000000000000000000000000000000100000004000000
+    - name: EnviarDano
       description: 
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 235.8125
-        y: 272.8828
-        width: 172
+        x: 451
+        y: 207
+        width: 100
         height: 16
       isBreakpoint: 0
       isSequence: 0
@@ -4342,42 +4296,50 @@ MonoBehaviour:
       transitions: []
       actionData:
         actionNames:
-        - HutongGames.PlayMaker.Actions.SetAnimatorBool
+        - HutongGames.PlayMaker.Actions.FloatAdd
+        - HutongGames.PlayMaker.Actions.ActivateGameObject
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 5f913504
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000004000000
+        actionHashCodes: 2a6e8a00b2cf1000
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
-        - ownerOption: 0
+        - ownerOption: 1
           gameObject:
             useVariable: 0
             name: 
             tooltip: 
             showInInspector: 0
             networkSync: 0
-            value: {fileID: 0}
+            value: {fileID: 5380499631803712105}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
         fsmEventTargetParams: []
         fsmPropertyParams: []
         layoutOptionParams: []
-        fsmStringParams:
+        fsmStringParams: []
+        fsmObjectParams: []
+        fsmVarParams: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams:
+        - useVariable: 1
+          name: Player_Health
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         - useVariable: 0
           name: 
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: Slap
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams: []
+          value: -1
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 0
@@ -4385,27 +4347,37 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 0
+          value: 1
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData: 0000000000
+        byteData: 00000000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 1400000012000000110000000100000007000000
+        paramDataType: 0f0000000f00000001000000010000001400000011000000110000000100000001000000
         paramName:
-        - gameObject
-        - parameter
-        - Value
+        - floatVariable
+        - add
         - everyFrame
-        - everyFrameOption
-        paramDataPos: 0000000000000000000000000000000001000000
-        paramByteDataSize: 0000000000000000000000000100000004000000
+        - perSecond
+        - gameObject
+        - activate
+        - recursive
+        - resetOnExit
+        - everyFrame
+        paramDataPos: 000000000100000000000000010000000000000000000000010000000200000003000000
+        paramByteDataSize: 000000000000000001000000010000000000000000000000000000000100000001000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -4419,13 +4391,21 @@ MonoBehaviour:
     - name: Atacar
       isSystemEvent: 0
       isGlobal: 0
-    - name: AtaqueParou
-      isSystemEvent: 0
-      isGlobal: 0
     - name: NaoAcertou
       isSystemEvent: 0
       isGlobal: 0
+    - name: VERIFICARATAQUE
+      isSystemEvent: 0
+      isGlobal: 0
     globalTransitions:
+    - fsmEvent:
+        name: VERIFICARATAQUE
+        isSystemEvent: 0
+        isGlobal: 0
+      toState: VerificarAtaque
+      linkStyle: 0
+      linkConstraint: 0
+      colorIndex: 0
     - fsmEvent:
         name: ATAQUEPAROU
         isSystemEvent: 0
@@ -4438,13 +4418,7 @@ MonoBehaviour:
       floatVariables: []
       intVariables: []
       boolVariables: []
-      stringVariables:
-      - useVariable: 1
-        name: CurrentClipName
-        tooltip: 
-        showInInspector: 0
-        networkSync: 0
-        value: 
+      stringVariables: []
       vector2Variables: []
       vector3Variables: []
       colorVariables: []
@@ -4458,7 +4432,7 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs: 00000000
+      variableCategoryIDs: 
     description: 
     docUrl: 
     showStateLabel: 0
@@ -4616,7 +4590,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.000000010244548, y: 0.4309678, z: -9.313226e-10}
+  m_ConnectedAnchor: {x: 0.000000006519258, y: 0.43096793, z: -5.820766e-10}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -4919,7 +4893,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.000000013969839, y: 0.4312322, z: -1.1641532e-10}
+  m_ConnectedAnchor: {x: -0.0000000121071935, y: 0.43123227, z: -5.820766e-11}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -5124,7 +5098,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -2.8589672e-11, y: 0.37251815, z: 0.060530435}
+  m_ConnectedAnchor: {x: -4.3141588e-11, y: 0.37251803, z: 0.060530413}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
