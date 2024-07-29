@@ -1081,6 +1081,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3076093189812881878, guid: 66f3808da4ce5c04a92fdd25b945d66b, type: 3}
   m_PrefabInstance: {fileID: 8141888257425050633}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8969807358457992732 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 902660010254555669, guid: 66f3808da4ce5c04a92fdd25b945d66b, type: 3}
+  m_PrefabInstance: {fileID: 8141888257425050633}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9187139060607626570 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1117607902742094147, guid: 66f3808da4ce5c04a92fdd25b945d66b, type: 3}
@@ -1139,6 +1144,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.states.Array.data[0].actionData.actionIsOpen.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
       propertyPath: fsm.states.Array.data[0].actionData.fsmGameObjectParams.Array.data[0].value
       value: 
       objectReference: {fileID: 2039205101505491160}
@@ -1178,6 +1187,14 @@ PrefabInstance:
       propertyPath: fsm.states.Array.data[3].actionData.fsmOwnerDefaultParams.Array.data[5].gameObject.value
       value: 
       objectReference: {fileID: 2039205101505491160}
+    - target: {fileID: 8187579586731555466, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.variables.gameObjectVariables.Array.data[2].value
+      value: 
+      objectReference: {fileID: 8969807358457992732}
+    - target: {fileID: 8187579586731555466, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.states.Array.data[4].actionData.fsmOwnerDefaultParams.Array.data[0].gameObject.value
+      value: 
+      objectReference: {fileID: 8969807358457992732}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
