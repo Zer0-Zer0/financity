@@ -859,6 +859,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1859176746702136549}
+  - component: {fileID: 7810673327118856461}
+  - component: {fileID: 2334314440097846838}
   m_Layer: 6
   m_Name: PlayerStuff
   m_TagString: Untagged
@@ -888,6 +890,112 @@ Transform:
   - {fileID: 8441281839768324001}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7810673327118856461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9218115725149763938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3ba909475c37afbb7220856925d3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EventName: EnablePlayerMovement
+  EventDescription: 
+  EventInvoked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2577565079434501595}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: set_applyRootMotion
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4035768291739750564}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7102591663616999650}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &2334314440097846838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9218115725149763938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3ba909475c37afbb7220856925d3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EventName: DisablePlayerMovement
+  EventDescription: 
+  EventInvoked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2577565079434501595}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: set_applyRootMotion
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4035768291739750564}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7102591663616999650}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1093560431518327277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1423,14 +1531,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1858690222226945352, guid: f1526d1782af15240820c59803292bed, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
-      propertyPath: fsm.description
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
       propertyPath: fsm.states.Array.data[0].actionData.fsmGameObjectParams.Array.data[0].value
       value: 
@@ -1484,11 +1584,32 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1526d1782af15240820c59803292bed, type: 3}
+--- !u!95 &2577565079434501595 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6619163389755060927, guid: f1526d1782af15240820c59803292bed, type: 3}
+  m_PrefabInstance: {fileID: 8655539981185183588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &4035768291739750564 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 4620493252550016960, guid: f1526d1782af15240820c59803292bed, type: 3}
+  m_PrefabInstance: {fileID: 8655539981185183588}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5533053309925284090 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3807790647996233630, guid: f1526d1782af15240820c59803292bed, type: 3}
   m_PrefabInstance: {fileID: 8655539981185183588}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7102591663616999650 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
+  m_PrefabInstance: {fileID: 8655539981185183588}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8441281839768324001 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 953587592646043845, guid: f1526d1782af15240820c59803292bed, type: 3}

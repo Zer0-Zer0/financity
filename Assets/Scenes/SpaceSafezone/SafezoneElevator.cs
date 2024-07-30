@@ -10,7 +10,7 @@ public class SafezoneElevator : MonoBehaviour
     private UnityEvent ElevatorChegou;
 
     [SerializeField]
-    private Transform Player;
+    private GameObject Player;
 
     public void EmitirElevadorChegou()
     {
@@ -18,7 +18,12 @@ public class SafezoneElevator : MonoBehaviour
 
         if (Player != null)
         {
-            Player.SetParent(null);
+            Player.transform.SetParent(null);
         }
+    }
+
+    private void Update()
+    {
+        Player = TagFinder.FindObjectWithTag("Player");
     }
 }
