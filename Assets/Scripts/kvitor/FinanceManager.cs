@@ -1,58 +1,84 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class FinanceManager : MonoBehaviour
 {
-    private float currentBalance = 0f;
-    private List<Transaction> transactions = new List<Transaction>();
+    [SerializeField]
+    private float InitialBalance;
 
     public float CurrentBalance
     {
-        get { return currentBalance; }
+        get
+        {
+            float value = 0f;
+            foreach (Transaction transaction in _transactions)
+            {
+                if (transaction.type == TransactionType.Credit)
+                {
+                    value += transaction.amount;
+                }
+                else if (transaction.type == TransactionType.Purchase)
+                {
+                    value -= transaction.amount;
+                }
+                else
+                {
+                    throw new Exception(
+                        "ERRO: Tipo de transação impossível ou ainda não implementado"
+                    );
+                }
+            }
+            return value;
+        }
+        private set
+        {
+            throw new Exception(
+                "ERRO: Não é possível alterar o balanço atual diretamente, adicione uma transação em vez disso"
+            );
+        }
     }
 
+    private List<Transaction> _transactions = new List<Transaction>();
     public UnityEvent<EventObject> BalanceChanged;
 
     void Start()
     {
-        EventObject _eventObject = new EventObject();
-        _eventObject.floatingPoint = GetCurrentBalance();
-        BalanceChanged?.Invoke(_eventObject);
+        if (InitialBalance != 0f)
+        {
+            AddCredit(InitialBalance);
+        }
     }
 
     // Adiciona uma compra à lista de transações
     public void AddPurchase(float amount)
     {
-        currentBalance += amount;
-        transactions.Add(new Transaction(amount, TransactionType.Purchase));
-        PlayerPrefs.SetFloat("currentBalance", currentBalance);
+        _transactions.Add(new Transaction(amount, TransactionType.Purchase));
+
+        PlayerPrefs.SetFloat("CurrentBalance", CurrentBalance);
         PlayerPrefs.Save();
         EventObject _eventObject = new EventObject();
-        _eventObject.floatingPoint = GetCurrentBalance();
+        _eventObject.floatingPoint = CurrentBalance;
         BalanceChanged?.Invoke(_eventObject);
     }
 
     // Adiciona um crédito à lista de transações
     public void AddCredit(float amount)
     {
-        currentBalance -= amount;
-        transactions.Add(new Transaction(amount, TransactionType.Credit));
-        PlayerPrefs.SetFloat("currentBalance", currentBalance);
+        _transactions.Add(new Transaction(amount, TransactionType.Credit));
+
+        PlayerPrefs.SetFloat("CurrentBalance", CurrentBalance);
         PlayerPrefs.Save();
+
         EventObject _eventObject = new EventObject();
-        _eventObject.floatingPoint = GetCurrentBalance();
+        _eventObject.floatingPoint = CurrentBalance;
         BalanceChanged?.Invoke(_eventObject);
     }
 
-    // Retorna o saldo atual considerando todas as transações até a data atual
-    public float GetCurrentBalance()
-    {
-        return PlayerPrefs.GetFloat("currentBalance", CurrentBalance);
-    }
-
     // Estrutura para representar uma transação
-    private struct Transaction
+    [Serializable]
+    public struct Transaction
     {
         public float amount;
         public TransactionType type;
@@ -65,7 +91,8 @@ public class FinanceManager : MonoBehaviour
     }
 
     // Enumeração para tipo de transação
-    private enum TransactionType
+    [Serializable]
+    public enum TransactionType
     {
         Purchase,
         Credit

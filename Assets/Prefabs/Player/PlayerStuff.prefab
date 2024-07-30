@@ -583,7 +583,7 @@ GameObject:
   - component: {fileID: 5312929360515574681}
   - component: {fileID: 6130323863910994857}
   - component: {fileID: 1847426248762628652}
-  - component: {fileID: 4732080612791759399}
+  - component: {fileID: 9137819863293503249}
   m_Layer: 6
   m_Name: FinanceManager
   m_TagString: Untagged
@@ -674,7 +674,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4732080612791759399
+--- !u!114 &9137819863293503249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -683,9 +683,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5191167851144965457}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06bd2bf1a9a601a83b9ca4095c91da23, type: 3}
+  m_Script: {fileID: 11500000, guid: b21698213235c0245b076c996139df47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InitialBalance: 800
   BalanceChanged:
     m_PersistentCalls:
       m_Calls:
@@ -848,7 +849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a130c8f46b764edd8b3f4751bef10836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textFormmating: 
+  _textFormmating: BRL {0:C2}
 --- !u!1 &9218115725149763938
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,13 +879,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6054639467593037783}
   - {fileID: 3289588896463818005}
   - {fileID: 7238417449929637134}
   - {fileID: 2128961158188187642}
   - {fileID: 8916243582099216536}
   - {fileID: 1669350459884792217}
   - {fileID: 8441281839768324001}
-  - {fileID: 6054639467593037783}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1093560431518327277

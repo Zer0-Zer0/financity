@@ -3,25 +3,25 @@ using System.Collections.Generic;
 
 public class FinanceManager : MonoBehaviour
 {
-    private float currentBalance = 0f;
+    private float _currentBalance = 0f;
     private List<Transaction> transactions = new List<Transaction>();
 
     public float CurrentBalance
     {
-        get { return currentBalance; }
+        get { return _currentBalance; }
     }
 
     // Adiciona uma compra à lista de transações
     public void AddPurchase(float amount)
     {
-        currentBalance += amount;
+        _currentBalance += amount;
         transactions.Add(new Transaction(amount, TransactionType.Purchase));
     }
 
     // Adiciona um crédito à lista de transações
     public void AddCredit(float amount)
     {
-        currentBalance -= amount;
+        _currentBalance -= amount;
         transactions.Add(new Transaction(amount, TransactionType.Credit));
     }
 

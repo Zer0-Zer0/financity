@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 using System;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 [RequireComponent(typeof(TMP_Text))]
 public class EventToText : MonoBehaviour
 {
     private TMP_Text _text;
-    [SerializeField] string _textFormmating = "";
+
+    [SerializeField]
+    string _textFormmating = "";
 
     void Awake()
     {
