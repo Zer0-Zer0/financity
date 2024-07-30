@@ -50,10 +50,9 @@ public class FinanceManager : MonoBehaviour
 
     void Start()
     {
-        //Checa se é a primeira vez que o jogador está jogndo
-        float _fTValue = PlayerPrefs.GetFloat("FirstTime", 0); // 0 == primeira vez
-        bool _firstTime = _fTValue == 0;
-        if (InitialBalance != 0f && _firstTime)
+        PlayerData playerData = DataManager.LoadPlayerData();
+
+        if (playerData.FirstTime)
         {
             Debug.Log("Adicionando Credito inicial");
             AddCredit(InitialBalance);
@@ -61,15 +60,16 @@ public class FinanceManager : MonoBehaviour
         else
         {
             Debug.Log("Adicionando Credito salvo");
-            float _creditToAdd = PlayerPrefs.GetFloat("CurrentBalance", CurrentBalance);
+            float _creditToAdd = playerData.CurrentBalance;
             AddCredit(_creditToAdd);
         }
     }
 
     void OnBalanceChanged(EventObject value)
     {
-        PlayerPrefs.SetFloat("CurrentBalance", CurrentBalance);
-        PlayerPrefs.Save();
+        PlayerData playerData = DataManager.LoadPlayerData();
+        playerData.CurrentBalance = CurrentBalance;
+        DataManager.SavePlayerData(playerData.CurrentBalance);
         Debug.Log("Balanço mudou");
     }
 
