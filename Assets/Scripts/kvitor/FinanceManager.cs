@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class FinanceManager : MonoBehaviour
 {
@@ -11,11 +12,25 @@ public class FinanceManager : MonoBehaviour
         get { return currentBalance; }
     }
 
+    public UnityEvent<EventObject> BalanceChanged;
+
+    void Start()
+    {
+        EventObject _eventObject = new EventObject();
+        _eventObject.floatingPoint = GetCurrentBalance();
+        BalanceChanged?.Invoke(_eventObject);
+    }
+
     // Adiciona uma compra à lista de transações
     public void AddPurchase(float amount)
     {
         currentBalance += amount;
         transactions.Add(new Transaction(amount, TransactionType.Purchase));
+        PlayerPrefs.SetFloat("currentBalance", currentBalance);
+        PlayerPrefs.Save();
+        EventObject _eventObject = new EventObject();
+        _eventObject.floatingPoint = GetCurrentBalance();
+        BalanceChanged?.Invoke(_eventObject);
     }
 
     // Adiciona um crédito à lista de transações
@@ -23,17 +38,17 @@ public class FinanceManager : MonoBehaviour
     {
         currentBalance -= amount;
         transactions.Add(new Transaction(amount, TransactionType.Credit));
+        PlayerPrefs.SetFloat("currentBalance", currentBalance);
+        PlayerPrefs.Save();
+        EventObject _eventObject = new EventObject();
+        _eventObject.floatingPoint = GetCurrentBalance();
+        BalanceChanged?.Invoke(_eventObject);
     }
 
     // Retorna o saldo atual considerando todas as transações até a data atual
     public float GetCurrentBalance()
     {
-        float balance = 0f;
-        foreach (Transaction transaction in transactions)
-        {
-            balance += transaction.amount;
-        }
-        return balance;
+        return PlayerPrefs.GetFloat("currentBalance", CurrentBalance);
     }
 
     // Estrutura para representar uma transação
