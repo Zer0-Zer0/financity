@@ -31,53 +31,53 @@ public static class DataManager
 [System.Serializable]
 public class PlayerData
 {
-    private float currentAmmo;
-    private float totalAmmo;
-    private float currentBalance;
-    private bool firstTime;
+    public float CurrentAmmo;
+    public float TotalAmmo;
+    public float CurrentBalance;
+    public bool FirstTime;
 
     // Getter and Setter for CurrentAmmo
     public float GetCurrentAmmo()
     {
-        return currentAmmo;
+        return CurrentAmmo;
     }
 
     public void SetCurrentAmmo(float value)
     {
-        currentAmmo = value;
+        CurrentAmmo = value;
     }
 
     // Getter and Setter for TotalAmmo
     public float GetTotalAmmo()
     {
-        return totalAmmo;
+        return TotalAmmo;
     }
 
     public void SetTotalAmmo(float value)
     {
-        totalAmmo = value;
+        TotalAmmo = value;
     }
 
     // Getter and Setter for CurrentBalance
     public float GetCurrentBalance()
     {
-        return currentBalance;
+        return CurrentBalance;
     }
 
     public void SetCurrentBalance(float value)
     {
-        currentBalance = value;
+        CurrentBalance = value;
     }
 
     // Getter and Setter for FirstTime
     public bool GetFirstTime()
     {
-        return firstTime;
+        return FirstTime;
     }
 
     public void SetFirstTime(bool value)
     {
-        firstTime = value;
+        FirstTime = value;
     }
 
     public override string ToString()

@@ -69,7 +69,7 @@ public class FinanceManager : MonoBehaviour
     {
         PlayerData playerData = DataManager.LoadPlayerData();
         playerData.CurrentBalance = CurrentBalance;
-        DataManager.SavePlayerData(playerData.CurrentBalance);
+        DataManager.SavePlayerData(playerData);
         Debug.Log("Balanço mudou");
     }
 
