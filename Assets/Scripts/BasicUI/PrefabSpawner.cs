@@ -31,7 +31,7 @@ public class PrefabSpawner : MonoBehaviour
 
             if (_onlyOnce)
             {
-                this.enabled = false;
+                Destroy(this);
             }
         }
         else

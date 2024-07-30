@@ -1,5 +1,4 @@
 using UnityEngine;
-//using PlayerPrefs;
 using UnityEngine.Events;
 
 public class PlayerPrefsToEvent : MonoBehaviour
@@ -14,7 +13,7 @@ public class PlayerPrefsToEvent : MonoBehaviour
     [SerializeField]
     private int DesiredValue;
 
-    void Update()
+    void Start()
     {
         int _prefValue = PlayerPrefs.GetInt(pref, 0);
         if (_prefValue == DesiredValue)
