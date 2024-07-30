@@ -19,6 +19,7 @@ public class PlayerPrefsToEvent : MonoBehaviour
         if (_prefValue == DesiredValue)
         {
             prefChanged?.Invoke();
+            Debug.Log($"The PlayerPref {pref} has the desired value of {DesiredValue}");
         }
     }
 
