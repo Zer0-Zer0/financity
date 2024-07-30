@@ -534,6 +534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 341414419}
   - component: {fileID: 341414418}
+  - component: {fileID: 341414420}
   m_Layer: 0
   m_Name: MISSAO
   m_TagString: Untagged
@@ -581,6 +582,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 341414420}
+        m_TargetAssemblyTypeName: PlayerPrefsToEvent, Assembly-CSharp
+        m_MethodName: SetPlayerPrefs
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!4 &341414419
 Transform:
   m_ObjectHideFlags: 0
@@ -596,6 +609,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &341414420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341414417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 893012b2977ecd9ed9886e039042bd5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pref: M1Completed
+  prefChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  DesiredValue: 0
 --- !u!1 &415672546
 GameObject:
   m_ObjectHideFlags: 0

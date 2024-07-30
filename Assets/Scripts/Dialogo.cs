@@ -73,7 +73,8 @@ public class Dialogo : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            throw new Exception("ERROR: Atempted to add a second instance to the Dialogo singleton");
+            //throw new Exception("ERROR: Atempted to add a second instance to the Dialogo singleton");
+            Destroy(gameObject);//Temporariamente adicionado
         }
         else
         {
