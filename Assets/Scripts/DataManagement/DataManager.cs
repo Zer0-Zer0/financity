@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public static class DataManager
 {
@@ -34,7 +35,12 @@ public class PlayerData
     public float CurrentAmmo;
     public float TotalAmmo;
     public float CurrentBalance;
-    public bool FirstTime;
+    public float FirstTime;
+
+    public static UnityEvent CurrentAmmoChanged;
+    public static UnityEvent TotalAmmoChanged;
+    public static UnityEvent CurrentBalanceChanged;
+    public static UnityEvent FirstTimeChanged;
 
     // Getter and Setter for CurrentAmmo
     public float GetCurrentAmmo()
@@ -45,6 +51,7 @@ public class PlayerData
     public void SetCurrentAmmo(float value)
     {
         CurrentAmmo = value;
+        CurrentAmmoChanged?.Invoke();
     }
 
     // Getter and Setter for TotalAmmo
@@ -56,6 +63,7 @@ public class PlayerData
     public void SetTotalAmmo(float value)
     {
         TotalAmmo = value;
+        TotalAmmoChanged?.Invoke();
     }
 
     // Getter and Setter for CurrentBalance
@@ -67,17 +75,19 @@ public class PlayerData
     public void SetCurrentBalance(float value)
     {
         CurrentBalance = value;
+        CurrentBalanceChanged?.Invoke();
     }
 
     // Getter and Setter for FirstTime
-    public bool GetFirstTime()
+    public float GetFirstTime()
     {
         return FirstTime;
     }
 
-    public void SetFirstTime(bool value)
+    public void SetFirstTime(float value)
     {
         FirstTime = value;
+        FirstTimeChanged?.Invoke();
     }
 
     public override string ToString()

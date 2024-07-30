@@ -52,7 +52,7 @@ public class FinanceManager : MonoBehaviour
     {
         PlayerData playerData = DataManager.LoadPlayerData();
 
-        if (playerData.FirstTime)
+        if (playerData.FirstTime == 1)
         {
             Debug.Log("Adicionando Credito inicial");
             AddCredit(InitialBalance);
