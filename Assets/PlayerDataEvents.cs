@@ -57,4 +57,24 @@ public class PlayerDataEvents : MonoBehaviour
             FirstTimeChanged?.Invoke();
         }
     }
+
+    public void SetCurrentAmmo(float value)
+    {
+        playerData.SetCurrentAmmo(value);
+    }
+
+    public void SetTotalAmmo(float value)
+    {
+        playerData.SetTotalAmmo(value);
+    }
+
+    public void SetCurrentBalance(float value)
+    {
+        playerData.SetCurrentBalance(value);
+    }
+
+    public void SetFirstTime(float value)
+    {
+        playerData.SetFirstTime(value);
+    }
 }

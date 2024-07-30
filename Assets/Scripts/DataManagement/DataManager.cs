@@ -52,6 +52,7 @@ public class PlayerData
     {
         CurrentAmmo = value;
         CurrentAmmoChanged?.Invoke();
+        DataManager.SavePlayerData(this);
     }
 
     // Getter and Setter for TotalAmmo
@@ -64,6 +65,7 @@ public class PlayerData
     {
         TotalAmmo = value;
         TotalAmmoChanged?.Invoke();
+        DataManager.SavePlayerData(this);
     }
 
     // Getter and Setter for CurrentBalance
@@ -76,6 +78,7 @@ public class PlayerData
     {
         CurrentBalance = value;
         CurrentBalanceChanged?.Invoke();
+        DataManager.SavePlayerData(this);
     }
 
     // Getter and Setter for FirstTime
@@ -88,6 +91,7 @@ public class PlayerData
     {
         FirstTime = value;
         FirstTimeChanged?.Invoke();
+        DataManager.SavePlayerData(this);
     }
 
     public override string ToString()
