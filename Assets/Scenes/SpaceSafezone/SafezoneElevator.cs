@@ -22,7 +22,7 @@ public class SafezoneElevator : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void Start()
     {
         Player = TagFinder.FindObjectWithTag("Player");
     }

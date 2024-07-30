@@ -15,24 +15,12 @@ public class PrefabSpawner : MonoBehaviour
 
     [SerializeField]
     private bool _onlyOnce = true;
-    private bool _spawned = false;
 
     public void SpawnPrefab()
     {
-        bool _canSpawn;
-        
-        if (_onlyOnce && !_spawned || !_onlyOnce)
-        {
-            _canSpawn = true;
-        }
-        else
-        {
-            _canSpawn = false;
-        }
-
         bool _isAnythingNull = prefabToSpawn != null && spawnPoint != null && parentObject != null;
 
-        if (_isAnythingNull && _canSpawn)
+        if (_isAnythingNull)
         {
             GameObject spawnedPrefab = Instantiate(
                 prefabToSpawn,
@@ -40,7 +28,11 @@ public class PrefabSpawner : MonoBehaviour
                 spawnPoint.rotation,
                 parentObject
             );
-            _spawned = true;
+
+            if (_onlyOnce)
+            {
+                this.enabled = false;
+            }
         }
         else
         {

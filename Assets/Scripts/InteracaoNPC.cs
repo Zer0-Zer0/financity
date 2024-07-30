@@ -11,15 +11,24 @@ public class InteracaoNPC : MonoBehaviour
     melhor distancia é x 5 y 5 z 5
     */
 
-    [SerializeField] private KeyCode _teclaInteracao = KeyCode.E;
-    [SerializeField] private string nomeNPC;
-    [SerializeField] private Dialogo.Frases[] _mensagens;
+    [SerializeField]
+    private KeyCode _teclaInteracao = KeyCode.E;
+
+    [SerializeField]
+    private string nomeNPC;
+
+    [SerializeField]
+    private UnityEvent DialogoIniciou;
+
+    [SerializeField]
+    private Dialogo.Frases[] _mensagens;
     private bool _interacaoPossivel = false;
 
     void Update()
     {
         if (Input.GetKeyDown(_teclaInteracao) && _interacaoPossivel)
         {
+            DialogoIniciou?.Invoke();
             ChecaMensagens();
             Dialogo.Instance.InicializarDialogo(_mensagens, nomeNPC);
         }
