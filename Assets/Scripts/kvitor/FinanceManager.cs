@@ -43,21 +43,38 @@ public class FinanceManager : MonoBehaviour
     private List<Transaction> _transactions = new List<Transaction>();
     public UnityEvent<EventObject> BalanceChanged;
 
+    void Awake()
+    {
+        BalanceChanged.AddListener(OnBalanceChanged);
+    }
+
     void Start()
     {
-        if (InitialBalance != 0f)
+        //Checa se é a primeira vez que o jogador está jogndo
+        bool _firstTime = PlayerPrefs.GetFloat("FirstTime", 0) == 1;
+        if (InitialBalance != 0f && _firstTime)
         {
+            Debug.Log("Adicionando Credito inicial");
             AddCredit(InitialBalance);
         }
+        else
+        {
+            float _creditToAdd = PlayerPrefs.GetFloat("CurrentBalance", CurrentBalance);
+            AddCredit(_creditToAdd);
+        }
+    }
+
+    void OnBalanceChanged(EventObject value)
+    {
+        PlayerPrefs.SetFloat("CurrentBalance", CurrentBalance);
+        PlayerPrefs.Save();
+        Debug.Log("Balanço mudou");
     }
 
     // Adiciona uma compra à lista de transações
     public void AddPurchase(float amount)
     {
         _transactions.Add(new Transaction(amount, TransactionType.Purchase));
-
-        PlayerPrefs.SetFloat("CurrentBalance", CurrentBalance);
-        PlayerPrefs.Save();
         EventObject _eventObject = new EventObject();
         _eventObject.floatingPoint = CurrentBalance;
         BalanceChanged?.Invoke(_eventObject);
@@ -67,10 +84,6 @@ public class FinanceManager : MonoBehaviour
     public void AddCredit(float amount)
     {
         _transactions.Add(new Transaction(amount, TransactionType.Credit));
-
-        PlayerPrefs.SetFloat("CurrentBalance", CurrentBalance);
-        PlayerPrefs.Save();
-
         EventObject _eventObject = new EventObject();
         _eventObject.floatingPoint = CurrentBalance;
         BalanceChanged?.Invoke(_eventObject);
