@@ -1459,20 +1459,22 @@ MonoBehaviour:
         width: 100
         height: 16
       isBreakpoint: 0
-      isSequence: 0
+      isSequence: 1
       hideUnused: 0
       transitions: []
       actionData:
         actionNames:
+        - HutongGames.PlayMaker.Actions.Wait
         - HutongGames.PlayMaker.Actions.FindGameObject
         - HutongGames.PlayMaker.Actions.SetAgentDestinationAsGameObject
         customNames:
         - 
         - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000003000000
-        actionHashCodes: 786b3902f0eeac01
+        - 
+        actionEnabled: 010101
+        actionIsOpen: 010101
+        actionStartIndex: 000000000300000006000000
+        actionHashCodes: 48c01101786b3902f0eeac01
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 1
@@ -1526,6 +1528,12 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 1
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
         fsmIntParams: []
         fsmBoolParams: []
         fsmVector2Params: []
@@ -1533,22 +1541,26 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
-        byteData: 
+        stringParams:
+        - 
+        byteData: 00
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 12000000120000001300000014000000130000000f000000
+        paramDataType: 0f000000170000000100000012000000120000001300000014000000130000000f000000
         paramName:
+        - time
+        - finishEvent
+        - realTime
         - objectName
         - withTag
         - store
         - gameObject
         - destination
         - triggerThreshold
-        paramDataPos: 000000000100000000000000000000000100000000000000
-        paramByteDataSize: 000000000000000000000000000000000000000000000000
+        paramDataPos: 000000000000000000000000000000000100000000000000000000000100000001000000
+        paramByteDataSize: 000000000000000001000000000000000000000000000000000000000000000000000000
     events: []
     globalTransitions: []
     variables:
