@@ -83,9 +83,19 @@ public class PlayerDataEvents : MonoBehaviour
         playerData.SetCurrentAmmo(value);
     }
 
+    public void AddToCurrentAmmo(float value)
+    {
+        playerData.SetCurrentAmmo(CurrentAmmo + value);
+    }
+
     public void SetTotalAmmo(float value)
     {
         playerData.SetTotalAmmo(value);
+    }
+
+    public void AddToTotalAmmo(float value)
+    {
+        playerData.SetTotalAmmo(TotalAmmo + value);
     }
 
     public void SetCurrentBalance(float value)
