@@ -42,7 +42,7 @@ public class barradecarregamento : MonoBehaviour
 
     IEnumerator Carregar()
     {
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("Earth");
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("SpaceSafezone");
         while (!asyncOperation.isDone)
         {
             loading.value = asyncOperation.progress;

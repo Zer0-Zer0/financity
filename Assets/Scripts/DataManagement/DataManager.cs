@@ -79,8 +79,7 @@ public class PlayerData
     public void SetCurrentAmmo(float value)
     {
         CurrentAmmo = value;
-        CurrentAmmoChanged?.Invoke();
-        DataManager.playerData = this;
+        //CurrentAmmoChanged?.Invoke();
     }
 
     // Getter and Setter for TotalAmmo
@@ -92,8 +91,7 @@ public class PlayerData
     public void SetTotalAmmo(float value)
     {
         TotalAmmo = value;
-        TotalAmmoChanged?.Invoke();
-        DataManager.playerData = this;
+        //TotalAmmoChanged?.Invoke();
     }
 
     // Getter and Setter for CurrentBalance
@@ -105,8 +103,7 @@ public class PlayerData
     public void SetCurrentBalance(float value)
     {
         CurrentBalance = value;
-        CurrentBalanceChanged?.Invoke();
-        DataManager.playerData = this;
+        //CurrentBalanceChanged?.Invoke();
     }
 
     // Getter and Setter for FirstTime
@@ -118,8 +115,7 @@ public class PlayerData
     public void SetFirstTime(float value)
     {
         FirstTime = value;
-        FirstTimeChanged?.Invoke();
-        DataManager.playerData = this;
+        //FirstTimeChanged?.Invoke();
     }
 
     public override string ToString()

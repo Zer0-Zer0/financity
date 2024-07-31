@@ -8,16 +8,12 @@ public class InitializePlayerData : MonoBehaviour
     private PlayerData playerData;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        try
-        {
-            DataManager.playerData = DataManager.LoadPlayerData();
-        }
-        catch
-        {
-            DataManager.playerData = playerData;
-        }
+        DataManager.playerData = playerData;
+        DataManager.SavePlayerData(DataManager.playerData);
+
+        Debug.Log(DataManager.playerData);
     }
 
     public void SaveData()
