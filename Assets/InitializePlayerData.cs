@@ -12,8 +12,14 @@ public class InitializePlayerData : MonoBehaviour
     {
         DataManager.playerData = playerData;
         DataManager.SavePlayerData(DataManager.playerData);
+        FinanceManager.InvokeBalanceChanged();
 
-        Debug.Log(DataManager.playerData);
+        FinanceManager.financeManager.BalanceChanged.AddListener(FinanceManager.OnBalanceChanged);
+        DataManager.playerData.CurrentBalanceChanged.AddListener(
+            FinanceManager.InvokeBalanceChanged
+        );
+
+        FinanceManager.financeManager = new FinanceManager();
     }
 
     public void SaveData()

@@ -21,9 +21,4 @@ public class SafezoneElevator : MonoBehaviour
             Player.transform.SetParent(null);
         }
     }
-
-    private void Start()
-    {
-        Player = TagFinder.FindObjectWithTag("Player");
-    }
 }
