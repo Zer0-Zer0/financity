@@ -3,7 +3,19 @@ using UnityEngine.Events;
 
 public static class DataManager
 {
-    public static PlayerData playerData;
+    private static PlayerData _playerData;
+    public static PlayerData playerData
+    {
+        get
+        {
+            if (_playerData == null)
+            {
+                _playerData = new PlayerData();
+            }
+            return _playerData;
+        }
+        set { _playerData = value; }
+    }
 
     public static void SavePlayerData(PlayerData data)
     {
@@ -28,10 +40,17 @@ public static class DataManager
 [System.Serializable]
 public class PlayerData
 {
-    public float CurrentAmmo;
-    public float TotalAmmo;
-    public float CurrentBalance;
-    public float FirstTime;
+    [SerializeField]
+    float _currentAmmo = 30f;
+
+    [SerializeField]
+    float _totalAmmo = 120f;
+
+    [SerializeField]
+    float _currentBalance = 1440f;
+
+    [SerializeField]
+    float _firstTime = 1f;
 
     public UnityEvent CurrentAmmoChanged;
     public UnityEvent TotalAmmoChanged;
@@ -41,48 +60,48 @@ public class PlayerData
     // Getter and Setter for CurrentAmmo
     public float GetCurrentAmmo()
     {
-        return CurrentAmmo;
+        return _currentAmmo;
     }
 
     public void SetCurrentAmmo(float value)
     {
-        CurrentAmmo = value;
+        _currentAmmo = value;
         CurrentAmmoChanged?.Invoke();
     }
 
     // Getter and Setter for TotalAmmo
     public float GetTotalAmmo()
     {
-        return TotalAmmo;
+        return _totalAmmo;
     }
 
     public void SetTotalAmmo(float value)
     {
-        TotalAmmo = value;
+        _totalAmmo = value;
         TotalAmmoChanged?.Invoke();
     }
 
     // Getter and Setter for CurrentBalance
     public float GetCurrentBalance()
     {
-        return CurrentBalance;
+        return _currentBalance;
     }
 
     public void SetCurrentBalance(float value)
     {
-        CurrentBalance = value;
+        _currentBalance = value;
         CurrentBalanceChanged?.Invoke();
     }
 
     // Getter and Setter for FirstTime
     public float GetFirstTime()
     {
-        return FirstTime;
+        return _firstTime;
     }
 
     public void SetFirstTime(float value)
     {
-        FirstTime = value;
+        _firstTime = value;
         FirstTimeChanged?.Invoke();
     }
 
