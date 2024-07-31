@@ -119,7 +119,7 @@ private void GenerateReport()
     float totalInstallmentAmount = 0f;
 
     // Atualiza o saldo pendente com base no FinanceManager
-    pendingBalanceChange = financeManager.CurrentBalance;
+    //pendingBalanceChange = financeManager.CurrentBalance;
 
     // Filtra e mostra todas as transações do dia no relatório
     foreach (string transaction in transactions)

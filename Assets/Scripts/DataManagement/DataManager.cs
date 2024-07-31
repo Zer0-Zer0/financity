@@ -3,20 +3,16 @@ using UnityEngine.Events;
 
 public static class DataManager
 {
+    public static PlayerData playerData;
+
     public static void SavePlayerData(PlayerData data)
     {
-        Debug.Log("Saving Player data");
-
         string json = JsonUtility.ToJson(data);
         System.IO.File.WriteAllText(Application.persistentDataPath + "/playerData.json", json);
-
-        Debug.Log(Application.persistentDataPath + "/playerData.json");
     }
 
     public static PlayerData LoadPlayerData()
     {
-        Debug.Log("Loading Player data");
-
         // Load data
         string json = System.IO.File.ReadAllText(
             Application.persistentDataPath + "/playerData.json"
@@ -32,15 +28,47 @@ public static class DataManager
 [System.Serializable]
 public class PlayerData
 {
-    public float CurrentAmmo;
-    public float TotalAmmo;
-    public float CurrentBalance;
-    public float FirstTime;
+    public float CurrentAmmo
+    {
+        get { return CurrentAmmo; }
+        set
+        {
+            CurrentAmmoChanged?.Invoke();
+            CurrentAmmo = value;
+        }
+    }
+    public float TotalAmmo
+    {
+        get { return TotalAmmo; }
+        set
+        {
+            TotalAmmoChanged?.Invoke();
+            TotalAmmo = value;
+        }
+    }
+    public float CurrentBalance
+    {
+        get { return CurrentBalance; }
+        set
+        {
+            CurrentBalanceChanged?.Invoke();
+            CurrentBalance = value;
+        }
+    }
+    public float FirstTime
+    {
+        get { return FirstTime; }
+        set
+        {
+            FirstTimeChanged?.Invoke();
+            FirstTime = value;
+        }
+    }
 
-    public static UnityEvent CurrentAmmoChanged;
-    public static UnityEvent TotalAmmoChanged;
-    public static UnityEvent CurrentBalanceChanged;
-    public static UnityEvent FirstTimeChanged;
+    public UnityEvent CurrentAmmoChanged;
+    public UnityEvent TotalAmmoChanged;
+    public UnityEvent CurrentBalanceChanged;
+    public UnityEvent FirstTimeChanged;
 
     // Getter and Setter for CurrentAmmo
     public float GetCurrentAmmo()
@@ -52,7 +80,7 @@ public class PlayerData
     {
         CurrentAmmo = value;
         CurrentAmmoChanged?.Invoke();
-        DataManager.SavePlayerData(this);
+        DataManager.playerData = this;
     }
 
     // Getter and Setter for TotalAmmo
@@ -65,7 +93,7 @@ public class PlayerData
     {
         TotalAmmo = value;
         TotalAmmoChanged?.Invoke();
-        DataManager.SavePlayerData(this);
+        DataManager.playerData = this;
     }
 
     // Getter and Setter for CurrentBalance
@@ -78,7 +106,7 @@ public class PlayerData
     {
         CurrentBalance = value;
         CurrentBalanceChanged?.Invoke();
-        DataManager.SavePlayerData(this);
+        DataManager.playerData = this;
     }
 
     // Getter and Setter for FirstTime
@@ -91,7 +119,7 @@ public class PlayerData
     {
         FirstTime = value;
         FirstTimeChanged?.Invoke();
-        DataManager.SavePlayerData(this);
+        DataManager.playerData = this;
     }
 
     public override string ToString()

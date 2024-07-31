@@ -12,6 +12,26 @@ public class PlayerDataEvents : MonoBehaviour
 
     public float DesiredValue;
 
+    public float CurrentAmmo
+    {
+        get { return playerData.CurrentAmmo; }
+    }
+
+    public float TotalAmmo
+    {
+        get { return playerData.TotalAmmo; }
+    }
+
+    public float CurrentBalance
+    {
+        get { return playerData.CurrentBalance; }
+    }
+
+    public float FirstTime
+    {
+        get { return playerData.FirstTime; }
+    }
+
     PlayerData playerData
     {
         get { return DataManager.LoadPlayerData(); }
@@ -20,10 +40,10 @@ public class PlayerDataEvents : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerData.CurrentAmmoChanged.AddListener(OnCurrentAmmoChanged);
-        PlayerData.TotalAmmoChanged.AddListener(OnTotalAmmoChanged);
-        PlayerData.CurrentBalanceChanged.AddListener(OnCurrentBalanceChanged);
-        PlayerData.FirstTimeChanged.AddListener(OnFirstTimeChanged);
+        DataManager.playerData.CurrentAmmoChanged.AddListener(OnCurrentAmmoChanged);
+        DataManager.playerData.TotalAmmoChanged.AddListener(OnTotalAmmoChanged);
+        DataManager.playerData.CurrentBalanceChanged.AddListener(OnCurrentBalanceChanged);
+        DataManager.playerData.FirstTimeChanged.AddListener(OnFirstTimeChanged);
     }
 
     public void OnCurrentAmmoChanged()
@@ -71,6 +91,11 @@ public class PlayerDataEvents : MonoBehaviour
     public void SetCurrentBalance(float value)
     {
         playerData.SetCurrentBalance(value);
+    }
+
+    public void AddToCurrentBalance(float value)
+    {
+        playerData.CurrentBalance+= value;
     }
 
     public void SetFirstTime(float value)

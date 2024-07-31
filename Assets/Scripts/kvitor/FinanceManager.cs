@@ -5,10 +5,7 @@ using UnityEngine.Events;
 
 public class FinanceManager : MonoBehaviour
 {
-    [SerializeField]
-    private float InitialBalance;
-
-    public float CurrentBalance
+    /*public float CurrentBalance
     {
         get
         {
@@ -38,56 +35,54 @@ public class FinanceManager : MonoBehaviour
                 "ERRO: Não é possível alterar o balanço atual diretamente, adicione uma transação em vez disso"
             );
         }
-    }
+    }*/
 
-    private List<Transaction> _transactions = new List<Transaction>();
+    //private List<Transaction> _transactions = new List<Transaction>();
     public UnityEvent<EventObject> BalanceChanged;
 
     void Awake()
     {
         BalanceChanged.AddListener(OnBalanceChanged);
+        DataManager.playerData.CurrentBalanceChanged.AddListener(InvokeBalanceChanged);
     }
 
     void Start()
     {
-        PlayerData playerData = DataManager.LoadPlayerData();
+        float _creditToAdd = DataManager.playerData.CurrentBalance;
+        AddCredit(_creditToAdd);
+    }
 
-        if (playerData.FirstTime == 1)
-        {
-            Debug.Log("Adicionando Credito inicial");
-            AddCredit(InitialBalance);
-        }
-        else
-        {
-            Debug.Log("Adicionando Credito salvo");
-            float _creditToAdd = playerData.CurrentBalance;
-            AddCredit(_creditToAdd);
-        }
+    void InvokeBalanceChanged()
+    {
+        EventObject _eventObject = new EventObject();
+        _eventObject.floatingPoint = DataManager.playerData.CurrentBalance;
+        BalanceChanged?.Invoke(_eventObject);
     }
 
     void OnBalanceChanged(EventObject value)
     {
-        PlayerData playerData = DataManager.LoadPlayerData();
-        playerData.CurrentBalance = CurrentBalance;
-        DataManager.SavePlayerData(playerData);
+        //DataManager.playerData.CurrentBalance = value.floatingPoint;
         Debug.Log("Balanço mudou");
+        Debug.Log(DataManager.playerData.CurrentBalance);
     }
 
     // Adiciona uma compra à lista de transações
     public void AddPurchase(float amount)
     {
-        _transactions.Add(new Transaction(amount, TransactionType.Purchase));
+        DataManager.playerData.CurrentBalance -= amount;
+        //        _transactions.Add(new Transaction(amount, TransactionType.Purchase));
         EventObject _eventObject = new EventObject();
-        _eventObject.floatingPoint = CurrentBalance;
+        _eventObject.floatingPoint = DataManager.playerData.CurrentBalance;
         BalanceChanged?.Invoke(_eventObject);
     }
 
     // Adiciona um crédito à lista de transações
     public void AddCredit(float amount)
     {
-        _transactions.Add(new Transaction(amount, TransactionType.Credit));
+        DataManager.playerData.CurrentBalance += amount;
+        //_transactions.Add(new Transaction(amount, TransactionType.Credit));
         EventObject _eventObject = new EventObject();
-        _eventObject.floatingPoint = CurrentBalance;
+        _eventObject.floatingPoint = DataManager.playerData.CurrentBalance;
         BalanceChanged?.Invoke(_eventObject);
     }
 

@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneOnTrigger : MonoBehaviour
 {
-    [SerializeField] private string _sceneName;
+    [SerializeField]
+    private string _sceneName;
     private bool _isPlayerInRange = false;
 
     public UnityEvent PlayerIsInRange;
@@ -16,6 +17,7 @@ public class LoadSceneOnTrigger : MonoBehaviour
     {
         if (_isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
+            DataManager.SavePlayerData(DataManager.playerData);
             SceneManager.LoadScene(_sceneName);
         }
     }
