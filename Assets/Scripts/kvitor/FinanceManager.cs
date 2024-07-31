@@ -5,14 +5,13 @@ using UnityEngine.Events;
 
 public class FinanceManager : MonoBehaviour
 {
-    public UnityEvent<EventObject> BalanceChanged;
-    public static FinanceManager financeManager;
+    public static UnityEvent<EventObject> BalanceChanged;
 
     public static void InvokeBalanceChanged()
     {
         EventObject _eventObject = new EventObject();
         _eventObject.floatingPoint = DataManager.playerData.CurrentBalance;
-        financeManager.BalanceChanged?.Invoke(_eventObject);
+        BalanceChanged?.Invoke(_eventObject);
     }
 
     public static void OnBalanceChanged(EventObject value)
@@ -27,7 +26,7 @@ public class FinanceManager : MonoBehaviour
         DataManager.playerData.CurrentBalance -= amount;
         EventObject _eventObject = new EventObject();
         _eventObject.floatingPoint = DataManager.playerData.CurrentBalance;
-        financeManager.BalanceChanged?.Invoke(_eventObject);
+        BalanceChanged?.Invoke(_eventObject);
     }
 
     // Adiciona um crédito à lista de transações
@@ -36,6 +35,6 @@ public class FinanceManager : MonoBehaviour
         DataManager.playerData.CurrentBalance += amount;
         EventObject _eventObject = new EventObject();
         _eventObject.floatingPoint = DataManager.playerData.CurrentBalance;
-        financeManager.BalanceChanged?.Invoke(_eventObject);
+        BalanceChanged?.Invoke(_eventObject);
     }
 }

@@ -583,7 +583,6 @@ GameObject:
   - component: {fileID: 5312929360515574681}
   - component: {fileID: 6130323863910994857}
   - component: {fileID: 1847426248762628652}
-  - component: {fileID: 9137819863293503249}
   m_Layer: 6
   m_Name: FinanceManager
   m_TagString: Untagged
@@ -674,34 +673,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &9137819863293503249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5191167851144965457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b21698213235c0245b076c996139df47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitialBalance: 800
-  BalanceChanged:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6897495303612673811}
-        m_TargetAssemblyTypeName: EventToText, Assembly-CSharp
-        m_MethodName: FloatToText
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &6502610605802288047
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,7 +684,7 @@ GameObject:
   - component: {fileID: 8750957784479262040}
   - component: {fileID: 4149169854009955945}
   - component: {fileID: 5309128480561235441}
-  - component: {fileID: 6897495303612673811}
+  - component: {fileID: 7292890364258804005}
   m_Layer: 6
   m_Name: CurrentMoney
   m_TagString: Untagged
@@ -837,7 +808,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6897495303612673811
+--- !u!114 &7292890364258804005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -846,10 +817,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6502610605802288047}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a130c8f46b764edd8b3f4751bef10836, type: 3}
+  m_Script: {fileID: 11500000, guid: 555bc430c7ce8ad46bb02a71400f7223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textFormmating: '{0:C2} BRL'
 --- !u!1 &9218115725149763938
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,6 +832,7 @@ GameObject:
   - component: {fileID: 7810673327118856461}
   - component: {fileID: 2334314440097846838}
   - component: {fileID: 1284838869517035399}
+  - component: {fileID: 1680481438180676494}
   m_Layer: 6
   m_Name: PlayerStuff
   m_TagString: Untagged
@@ -1014,6 +985,30 @@ MonoBehaviour:
     TotalAmmo: 120
     CurrentBalance: 800
     FirstTime: 1
+    CurrentAmmoChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    TotalAmmoChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    CurrentBalanceChanged:
+      m_PersistentCalls:
+        m_Calls: []
+    FirstTimeChanged:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &1680481438180676494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9218115725149763938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b21698213235c0245b076c996139df47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1093560431518327277
 PrefabInstance:
   m_ObjectHideFlags: 0
