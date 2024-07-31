@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 2278050724991611561}
   - component: {fileID: 6802435247462473804}
   - component: {fileID: 7055069191531734498}
+  - component: {fileID: 3780460923582128073}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -502,7 +503,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -529,14 +530,28 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
-    handleLateUpdate: 0
+    handleLateUpdate: 1
     handleApplicationEvents: 0
     handleUiEvents: 0
     handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
+--- !u!114 &3780460923582128073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6274729147588653288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1079068393, guid: aa5f7f06166acea47ab3d38c356f6e0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetFSMs:
+  - {fileID: 7055069191531734498}
 --- !u!1 &7404558700166325809
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,6 +801,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36a1265430357104e813ede853bbd099, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7828920140511641787}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36a1265430357104e813ede853bbd099, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8942721204386307714}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36a1265430357104e813ede853bbd099, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7089098179377488646}
     - targetCorrespondingSourceObject: {fileID: 1082271958561512970, guid: 36a1265430357104e813ede853bbd099, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2500515376964427338}
@@ -1396,7 +1417,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -1430,7 +1451,7 @@ MonoBehaviour:
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
 --- !u!114 &6183514253738959140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1597,7 +1618,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -1631,7 +1652,7 @@ MonoBehaviour:
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
 --- !u!114 &4164620555468657323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3631,7 +3652,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -3665,7 +3686,7 @@ MonoBehaviour:
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
 --- !u!114 &3735041755094641200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4736,7 +4757,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -4751,9 +4772,9 @@ MonoBehaviour:
     handleCollisionEnter2D: 0
     handleCollisionExit2D: 0
     handleCollisionStay2D: 0
-    handleTriggerEnter: 0
+    handleTriggerEnter: 1
     handleTriggerExit: 0
-    handleTriggerStay: 0
+    handleTriggerStay: 1
     handleCollisionEnter: 0
     handleCollisionExit: 0
     handleCollisionStay: 0
@@ -4770,7 +4791,7 @@ MonoBehaviour:
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
 --- !u!136 &6513648025843893902
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4817,6 +4838,34 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &-8942721204386307714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783025548473620418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 82786459, guid: aa5f7f06166acea47ab3d38c356f6e0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetFSMs:
+  - {fileID: 3735041755094641200}
+--- !u!114 &-7089098179377488646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783025548473620418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -104615663, guid: aa5f7f06166acea47ab3d38c356f6e0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetFSMs:
+  - {fileID: 3735041755094641200}
 --- !u!1 &3188897627728439443 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6170625038081293824, guid: 36a1265430357104e813ede853bbd099, type: 3}

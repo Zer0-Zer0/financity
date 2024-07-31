@@ -992,7 +992,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -1026,7 +1026,7 @@ MonoBehaviour:
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
 --- !u!1 &808580871164694198
 GameObject:
   m_ObjectHideFlags: 0
@@ -3582,7 +3582,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -3616,7 +3616,7 @@ MonoBehaviour:
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
 --- !u!1 &3989121459765601748
 GameObject:
   m_ObjectHideFlags: 0
@@ -9534,6 +9534,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 511a33afb2546924fbb44b71eefdd55b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5431523942259141356}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 511a33afb2546924fbb44b71eefdd55b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4299353334267730142}
   m_SourcePrefab: {fileID: 100100000, guid: 511a33afb2546924fbb44b71eefdd55b, type: 3}
 --- !u!1 &463873443345166975 stripped
 GameObject:
@@ -11176,7 +11179,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -11203,14 +11206,14 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
-    handleLateUpdate: 0
+    handleLateUpdate: 1
     handleApplicationEvents: 0
     handleUiEvents: 0
     handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
 --- !u!114 &8187579586731555466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12468,7 +12471,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -12502,7 +12505,7 @@ MonoBehaviour:
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
 --- !u!114 &7489898415797956910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14875,7 +14878,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -14909,7 +14912,7 @@ MonoBehaviour:
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
 --- !u!114 &9058844327998133309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15642,7 +15645,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 0
+    preprocessed: 1
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -15676,7 +15679,7 @@ MonoBehaviour:
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
-  eventHandlerComponentsAdded: 0
+  eventHandlerComponentsAdded: 1
 --- !u!114 &5431523942259141356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15702,6 +15705,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   DesiredValue: 0
+--- !u!114 &4299353334267730142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463873443345166975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1079068393, guid: aa5f7f06166acea47ab3d38c356f6e0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetFSMs:
+  - {fileID: 1913993267220918150}
 --- !u!4 &543952447497336491 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8269195505564239483, guid: 511a33afb2546924fbb44b71eefdd55b, type: 3}
