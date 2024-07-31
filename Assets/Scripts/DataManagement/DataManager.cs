@@ -1,16 +1,19 @@
+using System.IO;
+using System.Security;
 using UnityEngine;
 using UnityEngine.Events;
 
 public static class DataManager
 {
     private static PlayerData _playerData;
+    private static string _playerDataPath = Application.persistentDataPath + "/playerData.json";
     public static PlayerData playerData
     {
         get
         {
             if (_playerData == null)
             {
-                _playerData = new PlayerData();
+                _playerData = LoadPlayerData();
             }
             return _playerData;
         }
@@ -20,20 +23,21 @@ public static class DataManager
     public static void SavePlayerData(PlayerData data)
     {
         string json = JsonUtility.ToJson(data);
-        System.IO.File.WriteAllText(Application.persistentDataPath + "/playerData.json", json);
+        System.IO.File.WriteAllText(_playerDataPath, json);
     }
 
     public static PlayerData LoadPlayerData()
     {
         // Load data
-        string json = System.IO.File.ReadAllText(
-            Application.persistentDataPath + "/playerData.json"
-        );
-        PlayerData loadedData = JsonUtility.FromJson<PlayerData>(json);
+        if (!File.Exists(_playerDataPath))
+            return new PlayerData();
+        else
+        {
+            string json = System.IO.File.ReadAllText(_playerDataPath);
+            PlayerData loadedData = JsonUtility.FromJson<PlayerData>(json);
 
-        Debug.Log(loadedData);
-
-        return loadedData;
+            return loadedData;
+        }
     }
 }
 

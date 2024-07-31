@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class FinanceManager : MonoBehaviour
 {
-    private float _currentBalance
+    private static float _currentBalance
     {
         get { return DataManager.playerData.GetCurrentBalance(); }
         set { DataManager.playerData.SetCurrentBalance(value); }

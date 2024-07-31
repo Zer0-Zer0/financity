@@ -14,41 +14,41 @@ public class PlayerDataEvents : MonoBehaviour
 
     public float CurrentAmmo
     {
-        get { return playerData.CurrentAmmo; }
+        get { return playerData.GetCurrentAmmo(); }
     }
 
     public float TotalAmmo
     {
-        get { return playerData.TotalAmmo; }
+        get { return playerData.GetTotalAmmo(); }
     }
 
     public float CurrentBalance
     {
-        get { return playerData.CurrentBalance; }
+        get { return playerData.GetCurrentBalance(); }
     }
 
     public float FirstTime
     {
-        get { return playerData.FirstTime; }
+        get { return playerData.GetFirstTime(); }
     }
 
     PlayerData playerData
     {
-        get { return DataManager.LoadPlayerData(); }
+        get { return DataManager.playerData; }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        DataManager.playerData.CurrentAmmoChanged.AddListener(OnCurrentAmmoChanged);
-        DataManager.playerData.TotalAmmoChanged.AddListener(OnTotalAmmoChanged);
-        DataManager.playerData.CurrentBalanceChanged.AddListener(OnCurrentBalanceChanged);
-        DataManager.playerData.FirstTimeChanged.AddListener(OnFirstTimeChanged);
+        playerData.CurrentAmmoChanged.AddListener(OnCurrentAmmoChanged);
+        playerData.TotalAmmoChanged.AddListener(OnTotalAmmoChanged);
+        playerData.CurrentBalanceChanged.AddListener(OnCurrentBalanceChanged);
+        playerData.FirstTimeChanged.AddListener(OnFirstTimeChanged);
     }
 
     public void OnCurrentAmmoChanged()
     {
-        if (playerData.CurrentAmmo == DesiredValue)
+        if (CurrentAmmo == DesiredValue)
         {
             CurrentAmmoChanged?.Invoke();
         }
@@ -56,7 +56,7 @@ public class PlayerDataEvents : MonoBehaviour
 
     public void OnTotalAmmoChanged()
     {
-        if (playerData.TotalAmmo == DesiredValue)
+        if (TotalAmmo == DesiredValue)
         {
             TotalAmmoChanged?.Invoke();
         }
@@ -64,7 +64,7 @@ public class PlayerDataEvents : MonoBehaviour
 
     public void OnCurrentBalanceChanged()
     {
-        if (playerData.CurrentBalance == DesiredValue)
+        if (CurrentBalance == DesiredValue)
         {
             CurrentBalanceChanged?.Invoke();
         }
@@ -72,7 +72,7 @@ public class PlayerDataEvents : MonoBehaviour
 
     public void OnFirstTimeChanged()
     {
-        if (playerData.FirstTime == DesiredValue)
+        if (FirstTime == DesiredValue)
         {
             FirstTimeChanged?.Invoke();
         }
@@ -95,7 +95,7 @@ public class PlayerDataEvents : MonoBehaviour
 
     public void AddToCurrentBalance(float value)
     {
-        playerData.CurrentBalance+= value;
+        playerData.SetCurrentBalance(CurrentBalance + value);
     }
 
     public void SetFirstTime(float value)
