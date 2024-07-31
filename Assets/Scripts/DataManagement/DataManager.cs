@@ -28,42 +28,10 @@ public static class DataManager
 [System.Serializable]
 public class PlayerData
 {
-    public float CurrentAmmo
-    {
-        get { return CurrentAmmo; }
-        set
-        {
-            CurrentAmmoChanged?.Invoke();
-            CurrentAmmo = value;
-        }
-    }
-    public float TotalAmmo
-    {
-        get { return TotalAmmo; }
-        set
-        {
-            TotalAmmoChanged?.Invoke();
-            TotalAmmo = value;
-        }
-    }
-    public float CurrentBalance
-    {
-        get { return CurrentBalance; }
-        set
-        {
-            CurrentBalanceChanged?.Invoke();
-            CurrentBalance = value;
-        }
-    }
-    public float FirstTime
-    {
-        get { return FirstTime; }
-        set
-        {
-            FirstTimeChanged?.Invoke();
-            FirstTime = value;
-        }
-    }
+    public float CurrentAmmo;
+    public float TotalAmmo;
+    public float CurrentBalance;
+    public float FirstTime;
 
     public UnityEvent CurrentAmmoChanged;
     public UnityEvent TotalAmmoChanged;
@@ -79,7 +47,7 @@ public class PlayerData
     public void SetCurrentAmmo(float value)
     {
         CurrentAmmo = value;
-        //CurrentAmmoChanged?.Invoke();
+        CurrentAmmoChanged?.Invoke();
     }
 
     // Getter and Setter for TotalAmmo
@@ -91,7 +59,7 @@ public class PlayerData
     public void SetTotalAmmo(float value)
     {
         TotalAmmo = value;
-        //TotalAmmoChanged?.Invoke();
+        TotalAmmoChanged?.Invoke();
     }
 
     // Getter and Setter for CurrentBalance
@@ -103,7 +71,7 @@ public class PlayerData
     public void SetCurrentBalance(float value)
     {
         CurrentBalance = value;
-        //CurrentBalanceChanged?.Invoke();
+        CurrentBalanceChanged?.Invoke();
     }
 
     // Getter and Setter for FirstTime
@@ -115,7 +83,7 @@ public class PlayerData
     public void SetFirstTime(float value)
     {
         FirstTime = value;
-        //FirstTimeChanged?.Invoke();
+        FirstTimeChanged?.Invoke();
     }
 
     public override string ToString()
