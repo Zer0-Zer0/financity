@@ -10,10 +10,14 @@ public class CurrentMoneyTextScript : MonoBehaviour
 {
     private TMP_Text _text;
 
-    void Awake()
+    void Start()
     {
         _text = GetComponent<TMP_Text>();
-        DataManager.playerData.CurrentBalanceChanged.AddListener(OnCurrentBalanceChanged);
+        //DataManager.playerData.CurrentBalanceChanged.AddListener(OnCurrentBalanceChanged); For some reason aint working
+    }
+
+    void Update(){
+        OnCurrentBalanceChanged();
     }
 
     void OnCurrentBalanceChanged()

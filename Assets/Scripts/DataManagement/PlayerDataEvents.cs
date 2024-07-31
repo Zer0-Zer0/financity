@@ -102,4 +102,9 @@ public class PlayerDataEvents : MonoBehaviour
     {
         playerData.SetFirstTime(value);
     }
+
+    public void SaveData()
+    {
+        DataManager.SavePlayerData(DataManager.playerData);
+    }
 }

@@ -831,7 +831,6 @@ GameObject:
   - component: {fileID: 1859176746702136549}
   - component: {fileID: 7810673327118856461}
   - component: {fileID: 2334314440097846838}
-  - component: {fileID: 1284838869517035399}
   - component: {fileID: 1680481438180676494}
   m_Layer: 6
   m_Name: PlayerStuff
@@ -968,35 +967,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1284838869517035399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9218115725149763938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cff7978dbdc892538b2e96ffdf64ab2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData:
-    CurrentAmmo: 30
-    TotalAmmo: 120
-    CurrentBalance: 800
-    FirstTime: 1
-    CurrentAmmoChanged:
-      m_PersistentCalls:
-        m_Calls: []
-    TotalAmmoChanged:
-      m_PersistentCalls:
-        m_Calls: []
-    CurrentBalanceChanged:
-      m_PersistentCalls:
-        m_Calls: []
-    FirstTimeChanged:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!114 &1680481438180676494
 MonoBehaviour:
   m_ObjectHideFlags: 0

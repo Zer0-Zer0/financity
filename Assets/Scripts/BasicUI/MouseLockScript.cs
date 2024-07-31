@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class MouseLockScript : MonoBehaviour
 {
-    private bool _isCursorLocked = true;
-
     [SerializeField]
     private Texture2D Empty;
 

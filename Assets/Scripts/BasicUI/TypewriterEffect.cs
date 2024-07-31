@@ -10,7 +10,6 @@ public class TypewriterEffect : MonoBehaviour
 {
     [SerializeField] private float _normalDelay = 0.2f;
     [SerializeField] private float _fastDelay = 0.05f;
-    [SerializeField] private float delayInterPhrase = 1f;
     private TMP_Text _textComponent;
     private string _fullText;
     private int _visibleCharacterCount = 0;
