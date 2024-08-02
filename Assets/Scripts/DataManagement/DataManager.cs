@@ -26,6 +26,11 @@ public static class DataManager
         System.IO.File.WriteAllText(_playerDataPath, json);
     }
 
+    public static void ClearPlayerData(){
+        PlayerData EmptySave = new PlayerData();
+        SavePlayerData(EmptySave);
+    }
+
     public static PlayerData LoadPlayerData()
     {
         // Load data
