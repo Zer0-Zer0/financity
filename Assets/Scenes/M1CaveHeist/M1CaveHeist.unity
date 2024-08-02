@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.46226418, g: 0.26285613, b: 0, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 6a906f5ddc9d2ac8688db17d913870c3, type: 2}
   m_HaloStrength: 0
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 6226175552970514578}
-  m_IndirectSpecularColor: {r: 0.16143666, g: 0.2017999, b: 0.28118196, a: 1}
+  m_IndirectSpecularColor: {r: 0.3850402, g: 0.1423782, b: 0.14056003, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 1bc1cfaa9a964ba5e988125397791874, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: efe6a3eba6a7dcc0ea511890e6ff469c, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: b8531d676e6d7a0deb16bfd1c155dca2, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -4278,8 +4278,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Color: {r: 1, g: 0.5707547, b: 0.5707547, a: 1}
+  m_Intensity: 1
   m_Range: 213.13416
   m_SpotAngle: 62.88524
   m_InnerSpotAngle: 48.172897
@@ -4321,10 +4321,10 @@ Light:
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 10
+  m_BounceIntensity: 250
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 2.691459e+20, y: 175.45087, z: 7.2149148e+22, w: 0.000000013005421}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
