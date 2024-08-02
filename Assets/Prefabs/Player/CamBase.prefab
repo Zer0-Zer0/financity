@@ -322,37 +322,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Empty: {fileID: 2800000, guid: 0e48449aafce4f05f81e5a3ff0cd72b2, type: 3}
---- !u!1 &902660010254555669
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3474830952581852430}
-  m_Layer: 0
-  m_Name: Ray_cast_fire
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3474830952581852430
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902660010254555669}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3543791877788530534}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1117607902742094147
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +448,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5258248997546235347}
-  - {fileID: 3474830952581852430}
   m_Father: {fileID: 7482578350468228496}
   m_LocalEulerAnglesHint: {x: 22.229, y: 0, z: 0}
 --- !u!20 &466623992830743078
