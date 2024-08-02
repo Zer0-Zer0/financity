@@ -831,7 +831,6 @@ GameObject:
   - component: {fileID: 1859176746702136549}
   - component: {fileID: 7810673327118856461}
   - component: {fileID: 2334314440097846838}
-  - component: {fileID: 1680481438180676494}
   m_Layer: 6
   m_Name: PlayerStuff
   m_TagString: Untagged
@@ -967,18 +966,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1680481438180676494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9218115725149763938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b21698213235c0245b076c996139df47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1093560431518327277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1555,19 +1542,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2039205101505491160}
     - target: {fileID: 8187579586731555466, guid: f1526d1782af15240820c59803292bed, type: 3}
-      propertyPath: fsm.states.Array.data[3].hideUnused
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8187579586731555466, guid: f1526d1782af15240820c59803292bed, type: 3}
-      propertyPath: fsm.states.Array.data[8].hideUnused
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8187579586731555466, guid: f1526d1782af15240820c59803292bed, type: 3}
       propertyPath: fsm.variables.gameObjectVariables.Array.data[2].value
       value: 
       objectReference: {fileID: 8969807358457992732}
     - target: {fileID: 8187579586731555466, guid: f1526d1782af15240820c59803292bed, type: 3}
-      propertyPath: fsm.states.Array.data[4].actionData.fsmOwnerDefaultParams.Array.data[0].gameObject.value
+      propertyPath: fsm.states.Array.data[3].actionData.fsmOwnerDefaultParams.Array.data[0].gameObject.value
       value: 
       objectReference: {fileID: 8969807358457992732}
     m_RemovedComponents: []
