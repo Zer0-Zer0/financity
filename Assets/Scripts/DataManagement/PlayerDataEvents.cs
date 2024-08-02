@@ -116,6 +116,11 @@ public class PlayerDataEvents : MonoBehaviour
         playerData.SetCurrentBalance(CurrentBalance + value);
     }
 
+    public void RemoveFromCurrentBalance(float value)
+    {
+        playerData.SetCurrentBalance(CurrentBalance - value);
+    }
+
     public void SetFirstTime(bool value)
     {
         playerData.SetFirstTime(value);

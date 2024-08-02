@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 8578254485972194016}
   - component: {fileID: 234327680257868619}
   - component: {fileID: 1309635336471697244}
-  - component: {fileID: 975229982215713076}
+  - component: {fileID: 513252575096662904}
   m_Layer: 0
   m_Name: Medkit
   m_TagString: Untagged
@@ -688,15 +688,15 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: AddPurchase
+          value: RemoveFromCurrentBalance
         fsmObjectParams:
         - useVariable: 0
           name: 
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          typeName: FinanceManager
-          value: {fileID: 975229982215713076}
+          typeName: PlayerDataEvents
+          value: {fileID: 513252575096662904}
         fsmVarParams:
         - variableName: SaldoARemover
           objectType: UnityEngine.Object
@@ -978,7 +978,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &975229982215713076
+--- !u!114 &513252575096662904
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -987,9 +987,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 7480473517899681680}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b21698213235c0245b076c996139df47, type: 3}
+  m_Script: {fileID: 11500000, guid: c102af5669f6c88778a684c46d542fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BalanceChanged:
+  CurrentAmmoChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  TotalAmmoChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  CurrentBalanceChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  FirstTimeChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  MissionOneCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  IfIsFirstTime:
+    m_PersistentCalls:
+      m_Calls: []
+  IfNotFirstTime:
     m_PersistentCalls:
       m_Calls: []
