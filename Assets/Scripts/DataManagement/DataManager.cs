@@ -45,41 +45,45 @@ public static class DataManager
 public class PlayerData
 {
     [SerializeField]
-    float _currentAmmo = 30f;
+    int _currentAmmo = 30;
 
     [SerializeField]
-    float _totalAmmo = 120f;
+    int _totalAmmo = 120;
 
     [SerializeField]
     float _currentBalance = 1440f;
 
     [SerializeField]
-    float _firstTime = 1f;
+    bool _firstTime = true;
+
+    [SerializeField]
+    bool _missionOneCompleted = false;
 
     public UnityEvent CurrentAmmoChanged;
     public UnityEvent TotalAmmoChanged;
     public UnityEvent CurrentBalanceChanged;
     public UnityEvent FirstTimeChanged;
+    public UnityEvent MissionOneCompleted;
 
     // Getter and Setter for CurrentAmmo
-    public float GetCurrentAmmo()
+    public int GetCurrentAmmo()
     {
         return _currentAmmo;
     }
 
-    public void SetCurrentAmmo(float value)
+    public void SetCurrentAmmo(int value)
     {
         _currentAmmo = value;
         CurrentAmmoChanged?.Invoke();
     }
 
     // Getter and Setter for TotalAmmo
-    public float GetTotalAmmo()
+    public int GetTotalAmmo()
     {
         return _totalAmmo;
     }
 
-    public void SetTotalAmmo(float value)
+    public void SetTotalAmmo(int value)
     {
         _totalAmmo = value;
         TotalAmmoChanged?.Invoke();
@@ -98,15 +102,26 @@ public class PlayerData
     }
 
     // Getter and Setter for FirstTime
-    public float GetFirstTime()
+    public bool GetFirstTime()
     {
         return _firstTime;
     }
 
-    public void SetFirstTime(float value)
+    public void SetFirstTime(bool value)
     {
         _firstTime = value;
         FirstTimeChanged?.Invoke();
+    }
+
+    public bool GetMissionOneStatus()
+    {
+        return _missionOneCompleted;
+    }
+
+    public void CompleteMissionOne()
+    {
+        _missionOneCompleted = true;
+        MissionOneCompleted?.Invoke();
     }
 
     public override string ToString()

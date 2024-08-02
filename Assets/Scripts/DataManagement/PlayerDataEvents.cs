@@ -9,25 +9,26 @@ public class PlayerDataEvents : MonoBehaviour
     public UnityEvent TotalAmmoChanged;
     public UnityEvent CurrentBalanceChanged;
     public UnityEvent FirstTimeChanged;
+    public UnityEvent MissionOneCompleted;
+    public UnityEvent IfIsFirstTime;
+    public UnityEvent IfNotFirstTime;
 
-    public float DesiredValue;
-
-    public float CurrentAmmo
+    int CurrentAmmo
     {
         get { return playerData.GetCurrentAmmo(); }
     }
 
-    public float TotalAmmo
+    int TotalAmmo
     {
         get { return playerData.GetTotalAmmo(); }
     }
 
-    public float CurrentBalance
+    float CurrentBalance
     {
         get { return playerData.GetCurrentBalance(); }
     }
 
-    public float FirstTime
+    bool FirstTime
     {
         get { return playerData.GetFirstTime(); }
     }
@@ -44,56 +45,63 @@ public class PlayerDataEvents : MonoBehaviour
         playerData.TotalAmmoChanged.AddListener(OnTotalAmmoChanged);
         playerData.CurrentBalanceChanged.AddListener(OnCurrentBalanceChanged);
         playerData.FirstTimeChanged.AddListener(OnFirstTimeChanged);
+        playerData.MissionOneCompleted.AddListener(OnMissionOneCompleted);
+        if (playerData.GetFirstTime())
+        {
+            IfIsFirstTime?.Invoke();
+        }
+        else
+        {
+            IfNotFirstTime?.Invoke();
+        }
+
+        if (playerData.GetMissionOneStatus())
+        {
+            OnMissionOneCompleted();
+        }
     }
 
     public void OnCurrentAmmoChanged()
     {
-        if (CurrentAmmo == DesiredValue)
-        {
-            CurrentAmmoChanged?.Invoke();
-        }
+        CurrentAmmoChanged?.Invoke();
     }
 
     public void OnTotalAmmoChanged()
     {
-        if (TotalAmmo == DesiredValue)
-        {
-            TotalAmmoChanged?.Invoke();
-        }
+        TotalAmmoChanged?.Invoke();
     }
 
     public void OnCurrentBalanceChanged()
     {
-        if (CurrentBalance == DesiredValue)
-        {
-            CurrentBalanceChanged?.Invoke();
-        }
+        CurrentBalanceChanged?.Invoke();
     }
 
     public void OnFirstTimeChanged()
     {
-        if (FirstTime == DesiredValue)
-        {
-            FirstTimeChanged?.Invoke();
-        }
+        FirstTimeChanged?.Invoke();
     }
 
-    public void SetCurrentAmmo(float value)
+    public void OnMissionOneCompleted()
+    {
+        MissionOneCompleted?.Invoke();
+    }
+
+    public void SetCurrentAmmo(int value)
     {
         playerData.SetCurrentAmmo(value);
     }
 
-    public void AddToCurrentAmmo(float value)
+    public void AddToCurrentAmmo(int value)
     {
         playerData.SetCurrentAmmo(CurrentAmmo + value);
     }
 
-    public void SetTotalAmmo(float value)
+    public void SetTotalAmmo(int value)
     {
         playerData.SetTotalAmmo(value);
     }
 
-    public void AddToTotalAmmo(float value)
+    public void AddToTotalAmmo(int value)
     {
         playerData.SetTotalAmmo(TotalAmmo + value);
     }
@@ -108,9 +116,34 @@ public class PlayerDataEvents : MonoBehaviour
         playerData.SetCurrentBalance(CurrentBalance + value);
     }
 
-    public void SetFirstTime(float value)
+    public void SetFirstTime(bool value)
     {
         playerData.SetFirstTime(value);
+    }
+
+    public void CompleteMissionOne()
+    {
+        playerData.CompleteMissionOne();
+    }
+
+    public int GetCurrentAmmo()
+    {
+        return CurrentAmmo;
+    }
+
+    public int GetTotalAmmo()
+    {
+        return TotalAmmo;
+    }
+
+    public float GetCurrentBalance()
+    {
+        return CurrentBalance;
+    }
+
+    public bool GetFirstTime()
+    {
+        return FirstTime;
     }
 
     public void SaveData()

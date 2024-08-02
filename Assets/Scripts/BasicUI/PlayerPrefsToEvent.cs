@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerPrefsToEvent : MonoBehaviour
+public class PlayerPrefsToEvent : ScriptableObject
 {
     //Vai assumir que a pp é uma int
     [SerializeField]

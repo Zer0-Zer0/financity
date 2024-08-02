@@ -9,7 +9,7 @@ OcclusionCullingSettings:
     smallestHole: 0.25
     backfaceThreshold: 100
   m_SceneGUID: a1599b3fd3c7933e68e7518460e1f5c6
-  m_OcclusionCullingData: {fileID: 36300000, guid: 72ff0fef19b416e108ba20ff5b87d5ed, type: 2}
+  m_OcclusionCullingData: {fileID: 36300000, guid: 78f0517ad3c34db49bf0437ce000e314, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -583,9 +583,9 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 341414420}
-        m_TargetAssemblyTypeName: PlayerPrefsToEvent, Assembly-CSharp
-        m_MethodName: SetPlayerPrefs
-        m_Mode: 3
+        m_TargetAssemblyTypeName: PlayerDataEvents, Assembly-CSharp
+        m_MethodName: CompleteMissionOne
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -618,14 +618,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 341414417}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 893012b2977ecd9ed9886e039042bd5c, type: 3}
+  m_Script: {fileID: 11500000, guid: c102af5669f6c88778a684c46d542fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pref: M1Completed
-  prefChanged:
+  CurrentAmmoChanged:
     m_PersistentCalls:
       m_Calls: []
-  DesiredValue: 0
+  TotalAmmoChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  CurrentBalanceChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  FirstTimeChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &415672546
 GameObject:
   m_ObjectHideFlags: 0
@@ -4324,7 +4331,7 @@ Light:
   m_BounceIntensity: 250
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.691459e+20, y: 175.45087, z: 7.2149148e+22, w: 0.000000013005421}
+  m_BoundingSphereOverride: {x: 4.5681e-41, y: -1.8802455e-38, z: 4.5681e-41, w: 1.024e-41}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
