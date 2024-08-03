@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using TMPro;
 
 namespace UISystem
@@ -16,7 +17,7 @@ namespace UISystem
     public class CustomButton : CustomUIComponent
     {
         public Style style;
-        public GameEvent onClickEvent;
+        public UnityEvent onClick;
 
         private Button button;
         private TextMeshProUGUI buttonText;
@@ -41,7 +42,7 @@ namespace UISystem
 
         public void OnClick()
         {
-            onClickEvent.Raise(this, null);
+            onClick?.Invoke();
         }
     }
 }

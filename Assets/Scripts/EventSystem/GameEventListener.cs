@@ -1,4 +1,4 @@
-//Fonte de inspiração: https://youtu.be/7_dyDmF0Ktw
+//Fonte de inspiraÃ§Ã£o: https://youtu.be/7_dyDmF0Ktw
 using UnityEngine;
 using UnityEngine.Events;
 
