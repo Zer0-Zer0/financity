@@ -6,39 +6,23 @@ using TMPro;
 
 namespace UISystem
 {
-    public class Text : MonoBehaviour
+    public class Text : CustomUIComponent
     {
         public TextSO textData;
         public Style style;
 
         private TextMeshProUGUI textMeshProUGUI;
 
-        private void Awake()
-        {
-            Init();
-        }
-
-        public void Init()
-        {
-            Setup();
-            Configure();
-        }
-
-        public void Setup()
+        public override void Setup()
         {
             textMeshProUGUI = GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        public void Configure()
+        public override void Configure()
         {
             textMeshProUGUI.color = textData.theme.GetTextColor(style);
             textMeshProUGUI.font = textData.font;
             textMeshProUGUI.fontSize = textData.size;
-        }
-
-        private void OnValidate()
-        {
-            Init();
         }
     }
 }

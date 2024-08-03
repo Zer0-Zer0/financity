@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace UISystem
 {
-    public class View : MonoBehaviour
+    public class View : CustomUIComponent
     {
         public ViewSO viewData;
 
@@ -21,18 +21,7 @@ namespace UISystem
 
         private VerticalLayoutGroup verticalLayoutGroup;
 
-        private void Awake()
-        {
-            Init();
-        }
-
-        public void Init()
-        {
-            Setup();
-            Configure();
-        }
-
-        public void Setup()
+        public override void Setup()
         {
             verticalLayoutGroup = GetComponent<VerticalLayoutGroup>();
             imageTop = containerTop.GetComponent<Image>();
@@ -40,7 +29,7 @@ namespace UISystem
             imageBottom = containerBottom.GetComponent<Image>();
         }
 
-        public void Configure()
+        public override void Configure()
         {
             verticalLayoutGroup.padding = viewData.padding;
             verticalLayoutGroup.spacing = viewData.spacing;
@@ -48,11 +37,6 @@ namespace UISystem
             imageTop.color = viewData.theme.primaryBG;
             imageCenter.color = viewData.theme.secondaryBG;
             imageBottom.color = viewData.theme.tertiaryBG;
-        }
-
-        private void OnValidate()
-        {
-            Init();
         }
     }
 }
