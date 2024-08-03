@@ -6,7 +6,7 @@ namespace UISystem
     {
         [SerializeField] private InventorySlotView inventorySlotView;
 
-        public void SetCurrentInventorySlot(InventorySlot slot)
+        public void UpdateSlotGraphics(InventorySlot slot)
         {
             inventorySlotView.UpdateSlotGraphics(slot);
         }

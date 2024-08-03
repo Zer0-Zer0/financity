@@ -26,7 +26,7 @@ namespace UISystem
         [SerializeField] private int _currentAmount;
         public int CurrentAmount
         {
-            get {return _currentAmount;}
+            get { return _currentAmount; }
             set
             {
                 if (value < 0f)
@@ -51,7 +51,7 @@ namespace UISystem
             }
         }
 
-        public bool ItemIsNull { get {return CurrentItem == null;} }
+        public bool ItemIsNull { get { return CurrentItem == null; } }
 
         public void SetItem(InventoryItem item, int amount)
         {

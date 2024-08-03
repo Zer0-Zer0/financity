@@ -9,8 +9,8 @@ namespace UISystem
 {
     public class InventorySlotView : CustomUIComponent
     {
-        [SerializeField] private TextSO textData;
-        [SerializeField] private Style style;
+        [SerializeField] private TextSO _textData;
+        [SerializeField] private Style _style;
         
         [Header("Structure")]
         [SerializeField] private Image _slotIcon;
@@ -24,11 +24,11 @@ namespace UISystem
             ThemeSO theme = GetMainTheme();
             if (theme == null) return;
 
-            _slotBackground.color = theme.GetBackgroundColor(style);
+            _slotBackground.color = theme.GetBackgroundColor(_style);
 
-            _itemCounter.color = theme.GetTextColor(style);
-            _itemCounter.font = textData.font;
-            _itemCounter.fontSize = textData.size;
+            _itemCounter.color = theme.GetTextColor(_style);
+            _itemCounter.font = _textData.font;
+            _itemCounter.fontSize = _textData.size;
         }
 
         public void UpdateSlotGraphics(InventorySlot slot)

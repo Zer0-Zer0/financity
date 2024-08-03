@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace UISystem
 {
-    public class Inventory : MonoBehaviour
+    public class Inventory :
     {
         public List<InventorySlot> slots = new List<InventorySlot>();
 
@@ -108,7 +108,6 @@ namespace UISystem
 
             return remainingItems; // Return the remaining items that could not be removed
         }
-
 
         public int SearchItem(InventoryItem item)
         {
