@@ -1,4 +1,10 @@
-// Fonte de inspiração: https://youtu.be/oOQvhIg0ntg
+/*
+Fontes de inspiração:
+    https://youtu.be/oOQvhIg0ntg
+    https://youtu.be/4gUeUCdeiq8
+*/
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,27 +15,32 @@ namespace UISystem
 {
     public class CustomButton : CustomUIComponent
     {
-        public ThemeSO theme;
         public Style style;
         public GameEvent onClickEvent;
 
         private Button button;
         private TextMeshProUGUI buttonText;
 
-        protected override void Setup(){
+        protected override void Setup()
+        {
             button = GetComponentInChildren<Button>();
             buttonText = GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        protected override void Configure(){
+        protected override void Configure()
+        {
+            ThemeSO theme = GetMainTheme();
+            if (theme == null) throw new Exception("ERROR: ThemeManager missing or not found and no override theme added.");
+
             ColorBlock cb = button.colors;
             cb.normalColor = theme.GetBackgroundColor(style);
             button.colors = cb;
 
-            buttonText.color = theme.GetTextColor(style);            
+            buttonText.color = theme.GetTextColor(style);
         }
 
-        public void OnClick(){
+        public void OnClick()
+        {
             onClickEvent.Raise(this, null);
         }
     }

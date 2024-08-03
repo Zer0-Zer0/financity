@@ -1,4 +1,10 @@
-// Fonte de inspiração: https://youtu.be/oOQvhIg0ntg
+/*
+Fontes de inspiração:
+    https://youtu.be/oOQvhIg0ntg
+    https://youtu.be/4gUeUCdeiq8
+*/
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,12 +37,15 @@ namespace UISystem
 
         protected override void Configure()
         {
+            ThemeSO theme = GetMainTheme();
+            if (theme == null) throw new Exception("ERROR: ThemeManager missing or not found and no override theme added.");
+
             verticalLayoutGroup.padding = viewData.padding;
             verticalLayoutGroup.spacing = viewData.spacing;
 
-            imageTop.color = viewData.theme.primaryBG;
-            imageCenter.color = viewData.theme.secondaryBG;
-            imageBottom.color = viewData.theme.tertiaryBG;
+            imageTop.color = theme.primaryBG;
+            imageCenter.color = theme.secondaryBG;
+            imageBottom.color = theme.tertiaryBG;
         }
     }
 }

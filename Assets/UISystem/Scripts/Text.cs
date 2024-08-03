@@ -1,4 +1,10 @@
-// Fonte de inspiração: https://youtu.be/oOQvhIg0ntg
+/*
+Fontes de inspiração:
+    https://youtu.be/oOQvhIg0ntg
+    https://youtu.be/4gUeUCdeiq8
+*/
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +26,10 @@ namespace UISystem
 
         protected override void Configure()
         {
-            textMeshProUGUI.color = textData.theme.GetTextColor(style);
+            ThemeSO theme = GetMainTheme();
+            if (theme == null) throw new Exception("ERROR: ThemeManager missing or not found and no override theme added.");
+
+            textMeshProUGUI.color = theme.GetTextColor(style);
             textMeshProUGUI.font = textData.font;
             textMeshProUGUI.fontSize = textData.size;
         }
