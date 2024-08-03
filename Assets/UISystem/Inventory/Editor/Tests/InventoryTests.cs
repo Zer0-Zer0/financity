@@ -23,8 +23,7 @@ public class InventoryTests
     private Inventory InventoryFactory(int slotCount = 5)
     {
         testObject = new GameObject();
-        Inventory _inventory = testObject.AddComponent<Inventory>();
-        _inventory.ExpandSlots(slotCount);
+        Inventory _inventory = new Inventory(slotCount);
 
         return _inventory;
     }
@@ -63,37 +62,37 @@ public class InventoryTests
     public void CanAddItem()
     {
         // Test adding items to empty slots
-        Assert.AreEqual(0, inventory.AddItem(banana, 5));
-        Assert.AreEqual(0, inventory.AddItem(apple, 3));
+        Assert.AreEqual(0, inventory.AddItem(new InventorySlot(banana, 5)));
+        Assert.AreEqual(0, inventory.AddItem(new InventorySlot(apple, 3)));
 
         // Test adding items to slots with existing items
-        Assert.AreEqual(0, inventory.AddItem(banana, 3));
-        Assert.AreEqual(0, inventory.AddItem(apple, 4));
+        Assert.AreEqual(0, inventory.AddItem(new InventorySlot(banana, 3)));
+        Assert.AreEqual(0, inventory.AddItem(new InventorySlot(apple, 4)));
 
         // Test adding more items than slot capacity
-        Assert.AreEqual(3, inventory.AddItem(banana, 25));
+        Assert.AreEqual(3, inventory.AddItem(new InventorySlot(banana, 25)));
     }
 
     [Test]
     public void CanSubtractItem()
     {
         // Add items to slots for removal testing
-        inventory.AddItem(banana, 8);
-        inventory.AddItem(apple, 5);
+        inventory.AddItem(new InventorySlot(banana, 8));
+        inventory.AddItem(new InventorySlot(apple, 5));
 
         // Test removing items
-        Assert.AreEqual(0, inventory.SubtractItem(banana, 5));
-        Assert.AreEqual(2, inventory.SubtractItem(banana, 5));
+        Assert.AreEqual(0, inventory.SubtractItem(new InventorySlot(banana, 5)));
+        Assert.AreEqual(2, inventory.SubtractItem(new InventorySlot(banana, 5)));
 
-        Assert.AreEqual(0, inventory.SubtractItem(apple, 4));
-        Assert.AreEqual(4, inventory.SubtractItem(apple, 5));
+        Assert.AreEqual(0, inventory.SubtractItem(new InventorySlot(apple, 4)));
+        Assert.AreEqual(4, inventory.SubtractItem(new InventorySlot(apple, 5)));
     }
 
     [Test]
     public void CanSearchItem()
     {
-        inventory.AddItem(banana, 28);
-        inventory.AddItem(apple, 6);
+        inventory.AddItem(new InventorySlot(banana, 28));
+        inventory.AddItem(new InventorySlot(apple, 6));
 
         // Test searching for items
         Assert.AreEqual(28, inventory.SearchItem(banana));
@@ -108,10 +107,10 @@ public class InventoryTests
         Inventory _senderInventory = InventoryFactory();
 
         // Add items to sender inventory for exchange
-        _senderInventory.AddItem(banana, 5);
+        _senderInventory.AddItem(new InventorySlot(banana, 5));
 
         // Test exchanging items between inventories
-        inventory.ExchangeItems(_senderInventory, banana, 3);
+        inventory.ExchangeItems(_senderInventory, new InventorySlot(banana, 3));
 
         // Check if items were exchanged correctly
         Assert.AreEqual(3, inventory.SearchItem(banana));
@@ -122,7 +121,7 @@ public class InventoryTests
     public void CanToString()
     {
         // Add items to slots for testing ToString method
-        inventory.AddItem(banana, 8);
+        inventory.AddItem(new InventorySlot(banana, 8));
 
         string expectedString = "Inventory Slots:\nItem: banana, Max Amount: 10, Current Amount: 8\n";
         string actualString = inventory.ToString();

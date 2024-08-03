@@ -6,9 +6,14 @@ using UnityEngine.Events;
 
 namespace UISystem
 {
-    public class Inventory :
+    public class Inventory
     {
-        public List<InventorySlot> slots = new List<InventorySlot>();
+        public List<InventorySlot> slots { get; private set; } = new List<InventorySlot>();
+
+        public Inventory(int initialSlotCount)
+        {
+            ExpandSlots(initialSlotCount);
+        }
 
         public int CurrentSlotCount
         {
@@ -38,39 +43,40 @@ namespace UISystem
             }
         }
 
-        public int AddItem(InventoryItem item, int amount)
+        public int AddItem(InventorySlot slot)
         {
-            int remainingItems = amount;
+            int remainingItems = slot.CurrentAmount;
+            InventoryItem item = slot.CurrentItem;
 
-            foreach (InventorySlot slot in slots)
+            foreach (InventorySlot _slot in slots)
             {
-                if (slot.ItemIsNull)
+                if (_slot.ItemIsNull)
                 {
                     if (item.MaxAmount >= remainingItems)
                     {
-                        slot.SetItem(item, remainingItems);
+                        _slot.SetItem(item, remainingItems);
                         remainingItems = 0;
                         return remainingItems;
                     }
                     else
                     {
-                        slot.SetItem(item, item.MaxAmount);
+                        _slot.SetItem(item, item.MaxAmount);
                         remainingItems -= item.MaxAmount;
                     }
                 }
-                else if (slot.CurrentItem == item)
+                else if (_slot.CurrentItem == item)
                 {
-                    int spaceLeftInSlot = item.MaxAmount - slot.CurrentAmount;
+                    int spaceLeftInSlot = item.MaxAmount - _slot.CurrentAmount;
 
                     if (spaceLeftInSlot >= remainingItems)
                     {
-                        slot.CurrentAmount += remainingItems;
+                        _slot.CurrentAmount += remainingItems;
                         remainingItems = 0;
                         return remainingItems;
                     }
                     else
                     {
-                        slot.CurrentAmount = item.MaxAmount;
+                        _slot.CurrentAmount = item.MaxAmount;
                         remainingItems -= spaceLeftInSlot;
                     }
                 }
@@ -79,29 +85,27 @@ namespace UISystem
             return remainingItems;
         }
 
-        public int SubtractItem(InventoryItem item, int amount)
+        public int SubtractItem(InventorySlot slot)
         {
-            int remainingItems = amount;
+            int remainingItems = slot.CurrentAmount;
 
-            for (int i = slots.Count - 1; i >= 0; i--)
+            foreach (InventorySlot _slot in slots)
             {
-                InventorySlot slot = slots[i];
-
-                if (slot.CurrentItem == item)
+                if (_slot.CurrentItem == slot.CurrentItem)
                 {
-                    if (slot.CurrentAmount >= remainingItems)
+                    if (_slot.CurrentAmount >= remainingItems)
                     {
-                        slot.CurrentAmount -= remainingItems;
-                        if (slot.CurrentAmount <= 0)
+                        _slot.CurrentAmount -= remainingItems;
+                        if (_slot.CurrentAmount <= 0)
                         {
-                            slot.CurrentAmount = 0;
+                            _slot.CurrentAmount = 0;
                         }
                         return 0; // No missing items
                     }
                     else
                     {
-                        remainingItems -= slot.CurrentAmount;
-                        slot.CurrentAmount = 0;
+                        remainingItems -= _slot.CurrentAmount;
+                        _slot.CurrentAmount = 0;
                     }
                 }
             }
@@ -124,10 +128,11 @@ namespace UISystem
             return totalAmount;
         }
 
-        public void ExchangeItems(Inventory senderInventory, InventoryItem exchangedItem, int amount)
+        public void ExchangeItems(Inventory senderInventory, InventorySlot exchangedItem)
         {
-            int remaining = AddItem(exchangedItem, amount);
-            senderInventory.SubtractItem(exchangedItem, amount - remaining);
+            int remaining = AddItem(exchangedItem);
+            InventorySlot removeFromSender = new InventorySlot(exchangedItem.CurrentItem, exchangedItem.CurrentAmount - remaining);
+            senderInventory.SubtractItem(removeFromSender);
         }
 
         public override string ToString()

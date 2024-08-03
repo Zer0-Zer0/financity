@@ -53,6 +53,12 @@ namespace UISystem
 
         public bool ItemIsNull { get { return CurrentItem == null; } }
 
+        public InventorySlot(InventoryItem item = null, int amount = 0)
+        {
+            CurrentItem = item;
+            CurrentAmount = amount;
+        }
+
         public void SetItem(InventoryItem item, int amount)
         {
             if (ItemIsNull)
