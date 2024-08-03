@@ -1,17 +1,15 @@
-using System.Collections;
+//Fonte de inspiração: https://youtu.be/7_dyDmF0Ktw
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "GameEvent", menuName = "GameEvent", order = 0)]
 public class GameEvent : ScriptableObject {
-    //Fonte de inspiração: https://youtu.be/7_dyDmF0Ktw
     public List<GameEventListener> listeners = new List<GameEventListener>();
-    public void Raise()
+    public void Raise(Component sender, object data)
     {
         foreach (GameEventListener listener in listeners)
         {
-            listener.OnEventRaised();
+            listener.OnEventRaised(sender, data);
         }
     }
 

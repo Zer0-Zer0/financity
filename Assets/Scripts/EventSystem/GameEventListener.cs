@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+//Fonte de inspiração: https://youtu.be/7_dyDmF0Ktw
 using UnityEngine;
 using UnityEngine.Events;
 
+[System.Serializable]
+public class CustomUnityEvent : UnityEvent<Component, object> {}
+
 public class GameEventListener : MonoBehaviour
 {
-    //Fonte de inspiração: https://youtu.be/7_dyDmF0Ktw
     public GameEvent gameEvent;
 
-    public UnityEvent response;
+    public CustomUnityEvent response;
     private void OnEnable()
     {
         gameEvent.RegisterListener(this);
@@ -19,8 +20,8 @@ public class GameEventListener : MonoBehaviour
         gameEvent.UnregisterListener(this);
     }
 
-    public void OnEventRaised()
+    public void OnEventRaised(Component sender, object data)
     {
-        response.Invoke();
+        response.Invoke(sender, data);
     }
 }
