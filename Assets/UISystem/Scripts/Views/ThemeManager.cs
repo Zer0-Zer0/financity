@@ -26,14 +26,7 @@ namespace UISystem
 
         private void Init()
         {
-            if (ThemeManager.Instance == null && ThemeManager.Instance != this)
-            {
-                ThemeManager.Instance = this;
-            }
-            else
-            {
-                Debug.LogWarning("WARNING: More than one ThemeManager in this scene.");
-            }
+            Instance = this;
         }
 
         public ThemeSO GetMainTheme()
