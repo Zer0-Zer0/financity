@@ -22,15 +22,15 @@ namespace UISystem
 
         private void OnEnable()
         {
-            _button.onClick.AddListener(OnClick);
+            _button.onClickEvent.AddListener(OnClickMethod);
         }
 
         private void OnDisable()
         {
-            _button.onClick.RemoveListener(OnClick);
+            _button.onClickEvent.RemoveListener(OnClickMethod);
         }
 
-        private void OnClick()
+        private void OnClickMethod()
         {
             _onClickEvent.Raise(this, _data);
         }

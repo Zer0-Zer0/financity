@@ -37,11 +37,11 @@ namespace UISystem
 
         protected override void Configure()
         {
-            ThemeSO theme = GetMainTheme();
-            if (theme == null) throw new Exception("ERROR: ThemeManager missing or not found and no override theme added.");
-
             verticalLayoutGroup.padding = viewData.padding;
             verticalLayoutGroup.spacing = viewData.spacing;
+
+            ThemeSO theme = GetMainTheme();
+            if (theme == null) return;
 
             imageTop.color = theme.primaryBG;
             imageCenter.color = theme.secondaryBG;

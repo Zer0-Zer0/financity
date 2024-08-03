@@ -17,7 +17,7 @@ namespace UISystem
     public class CustomButton : CustomUIComponent
     {
         public Style style;
-        public UnityEvent onClick;
+        public UnityEvent onClickEvent;
 
         private Button button;
         private TextMeshProUGUI buttonText;
@@ -31,7 +31,7 @@ namespace UISystem
         protected override void Configure()
         {
             ThemeSO theme = GetMainTheme();
-            if (theme == null) throw new Exception("ERROR: ThemeManager missing or not found and no override theme added.");
+            if (theme == null) return;
 
             ColorBlock cb = button.colors;
             cb.normalColor = theme.GetBackgroundColor(style);
@@ -40,9 +40,17 @@ namespace UISystem
             buttonText.color = theme.GetTextColor(style);
         }
 
-        public void OnClick()
+        private void OnEnable() {
+            button.onClick.AddListener(OnClickMethod);
+        }
+
+        private void OnDisable(){
+            button.onClick.RemoveListener(OnClickMethod);
+        }
+
+        public void OnClickMethod()
         {
-            onClick?.Invoke();
+            onClickEvent?.Invoke();
         }
     }
 }

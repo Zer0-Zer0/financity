@@ -27,7 +27,7 @@ namespace UISystem
         protected override void Configure()
         {
             ThemeSO theme = GetMainTheme();
-            if (theme == null) throw new Exception("ERROR: ThemeManager missing or not found and no override theme added.");
+            if (theme == null) return;
 
             textMeshProUGUI.color = theme.GetTextColor(style);
             textMeshProUGUI.font = textData.font;
