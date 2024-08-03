@@ -1,10 +1,13 @@
-// Fonte de inspiração: https://youtu.be/oOQvhIg0ntg
+// Fonte de inspiraÃ§Ã£o: https://youtu.be/oOQvhIg0ntg
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "CustomUI/ViewSO", fileName = "ViewSO")]
-public class ViewSO : ScriptableObject
+namespace UISystem
 {
-    public ThemeSO theme;
-    public RectOffset padding;
-    public float spacing;
+    [CreateAssetMenu(menuName = "CustomUI/ViewSO", fileName = "ViewSO")]
+    public class ViewSO : ScriptableObject
+    {
+        public ThemeSO theme;
+        public RectOffset padding;
+        public float spacing;
+    }
 }

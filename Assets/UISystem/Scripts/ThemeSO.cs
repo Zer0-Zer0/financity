@@ -1,23 +1,58 @@
-// Fonte de inspiração: https://youtu.be/oOQvhIg0ntg
+// Fonte de inspiraÃ§Ã£o: https://youtu.be/oOQvhIg0ntg
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "CustomUI/ThemeSO", fileName = "ThemeSO")]
-public class ThemeSO : ScriptableObject
+namespace UISystem
 {
-    [Header("Primary")]
-    public Color primaryBG;
-    public Color primaryText;
-  
-    [Header("Secondary")]
-    public Color secondaryBG;
-    public Color secondaryText;
+    [CreateAssetMenu(menuName = "CustomUI/ThemeSO", fileName = "ThemeSO")]
+    public class ThemeSO : ScriptableObject
+    {
+        [Header("Primary")]
+        public Color primaryBG;
+        public Color primaryText;
 
-    [Header("Tertiary")]
-    public Color tertiaryBG;
-    public Color tertiaryText;
+        [Header("Secondary")]
+        public Color secondaryBG;
+        public Color secondaryText;
 
-    [Header("Other")]
-    public Color disabled;
+        [Header("Tertiary")]
+        public Color tertiaryBG;
+        public Color tertiaryText;
+
+        [Header("Other")]
+        public Color disabled;
+
+        public Color GetBackgroundColor(Style style)
+        {
+            switch (style)
+            {
+                case Style.Primary:
+                    return primaryBG;
+                case Style.Secondary:
+                    return secondaryBG;
+                case Style.Tertiary:
+                    return tertiaryBG;
+                default:
+                    Debug.LogError("ERROR: Non implemented style");
+                    return disabled;
+            }
+        }
+
+        public Color GetTextColor(Style style)
+        {
+            switch (style)
+            {
+                case Style.Primary:
+                    return primaryText;
+                case Style.Secondary:
+                    return secondaryText;
+                case Style.Tertiary:
+                    return tertiaryText;
+                default:
+                    Debug.LogError("ERROR: Non implemented style");
+                    return disabled;
+            }
+        }
+    }
 }
