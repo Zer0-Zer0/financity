@@ -8,8 +8,8 @@ using UnityEngine;
 
 namespace UISystem
 {
-    [CreateAssetMenu(menuName = "CustomUI/ViewSO", fileName = "ViewSO")]
-    public class ViewSO : ScriptableObject
+    [CreateAssetMenu(menuName = "CustomUI/PaddingSO", fileName = "PaddingSO")]
+    public class PaddingSO : ScriptableObject
     {
         public RectOffset padding;
         public float spacing;

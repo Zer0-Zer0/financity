@@ -13,7 +13,7 @@ namespace UISystem
 {
     public class ContainerRows : CustomUIComponent
     {
-        public ViewSO viewData;
+        public PaddingSO paddingData;
         private VerticalLayoutGroup verticalLayoutGroup;
         protected override void Setup()
         {
@@ -21,8 +21,8 @@ namespace UISystem
         }
         protected override void Configure()
         {
-            verticalLayoutGroup.padding = viewData.padding;
-            verticalLayoutGroup.spacing = viewData.spacing;
+            verticalLayoutGroup.padding = paddingData.padding;
+            verticalLayoutGroup.spacing = paddingData.spacing;
         }
     }
 }

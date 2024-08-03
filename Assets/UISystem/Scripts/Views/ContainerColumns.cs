@@ -13,7 +13,7 @@ namespace UISystem
 {
     public class ContainerColumns : CustomUIComponent
     {
-        public ViewSO viewData;
+        public PaddingSO paddingData;
         private HorizontalLayoutGroup horizontalLayoutGroup;
         protected override void Setup()
         {
@@ -21,8 +21,8 @@ namespace UISystem
         }
         protected override void Configure()
         {
-            horizontalLayoutGroup.padding = viewData.padding;
-            horizontalLayoutGroup.spacing = viewData.spacing;
+            horizontalLayoutGroup.padding = paddingData.padding;
+            horizontalLayoutGroup.spacing = paddingData.spacing;
         }
     }
 }

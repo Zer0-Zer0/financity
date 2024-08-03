@@ -37,8 +37,8 @@ namespace UISystem
 
         protected override void Configure()
         {
-            verticalLayoutGroup.padding = viewData.padding;
-            verticalLayoutGroup.spacing = viewData.spacing;
+            verticalLayoutGroup.padding = viewData.paddingData.padding;
+            verticalLayoutGroup.spacing = viewData.paddingData.spacing;
 
             ThemeSO theme = GetMainTheme();
             if (theme == null) return;
