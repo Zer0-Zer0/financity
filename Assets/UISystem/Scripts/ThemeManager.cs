@@ -12,17 +12,28 @@ namespace UISystem
         [SerializeField] private ThemeSO mainTheme;
 
         private static ThemeManager _instance;
-        public static ThemeManager Instance
+        public static ThemeManager Instance { get; private set; }
+
+        private void OnValidate()
         {
-            get
+            Init();
+        }
+
+        private void Awake()
+        {
+            Init();
+        }
+
+        private void Init()
+        {
+            if (ThemeManager.Instance == null && ThemeManager.Instance != this)
             {
-                if (_instance == null)
-                {
-                    _instance = new ThemeManager();
-                }
-                return _instance;
+                ThemeManager.Instance = this;
             }
-            set { _instance = value; }
+            else
+            {
+                Debug.LogWarning("WARNING: More than one ThemeManager in this scene.");
+            }
         }
 
         public ThemeSO GetMainTheme()
