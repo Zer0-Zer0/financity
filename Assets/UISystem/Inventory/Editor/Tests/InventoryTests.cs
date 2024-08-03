@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using NUnit.Framework;
+using UISystem;
 
 [TestFixture]
 public class InventoryTests

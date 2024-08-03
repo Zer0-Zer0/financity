@@ -294,6 +294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5305920178413246873}
   - component: {fileID: 1728599411144453437}
+  - component: {fileID: 1052099655135410276}
   m_Layer: 5
   m_Name: ItemSlot
   m_TagString: Untagged
@@ -336,20 +337,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OverwriteTheme: {fileID: 0}
-  _inventorySlot:
-    ItemChanged:
-      m_PersistentCalls:
-        m_Calls: []
-    AmountChanged:
-      m_PersistentCalls:
-        m_Calls: []
-    SlotCleared:
-      m_PersistentCalls:
-        m_Calls: []
-    _currentItem: {fileID: 0}
-    _currentAmount: 0
+  textData: {fileID: 11400000, guid: 2e6c81ee42132854691003871c338cbe, type: 2}
+  style: 0
   _slotIcon: {fileID: 7522378093498229342}
   _slotBackground: {fileID: 2410593007093955093}
   _itemCounter: {fileID: 8182094568205753017}
-  textData: {fileID: 11400000, guid: 2e6c81ee42132854691003871c338cbe, type: 2}
-  style: 0
+--- !u!114 &1052099655135410276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6027980683858628116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd2a101b1dbf6d42b47b9f49df9f8dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventorySlotView: {fileID: 1728599411144453437}

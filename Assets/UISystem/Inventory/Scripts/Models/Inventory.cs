@@ -4,141 +4,144 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Inventory : MonoBehaviour
+namespace UISystem
 {
-    public List<InventorySlot> slots = new List<InventorySlot>();
-
-    public int CurrentSlotCount
+    public class Inventory : MonoBehaviour
     {
-        get
-        {
-            return slots.Count;
-        }
-    }
+        public List<InventorySlot> slots = new List<InventorySlot>();
 
-    public void ExpandSlots(int additionalSlots)
-    {
-        for (int i = 0; i < additionalSlots; i++)
+        public int CurrentSlotCount
         {
-            slots.Add(new InventorySlot());
-        }
-    }
-
-    public void ShrinkSlots(int removedSlots)
-    {
-        if (CurrentSlotCount - removedSlots >= 0)
-        {
-            slots.RemoveRange(slots.Count - removedSlots, removedSlots);
-        }
-        else
-        {
-            throw new Exception("Cannot shrink inventory to negative slots");
-        }
-    }
-
-    public int AddItem(InventoryItem item, int amount)
-    {
-        int remainingItems = amount;
-
-        foreach (InventorySlot slot in slots)
-        {
-            if (slot.ItemIsNull)
+            get
             {
-                if (item.MaxAmount >= remainingItems)
-                {
-                    slot.SetItem(item, remainingItems);
-                    remainingItems = 0;
-                    return remainingItems;
-                }
-                else
-                {
-                    slot.SetItem(item, item.MaxAmount);
-                    remainingItems -= item.MaxAmount;
-                }
-            }
-            else if (slot.CurrentItem == item)
-            {
-                int spaceLeftInSlot = item.MaxAmount - slot.CurrentAmount;
-
-                if (spaceLeftInSlot >= remainingItems)
-                {
-                    slot.CurrentAmount += remainingItems;
-                    remainingItems = 0;
-                    return remainingItems;
-                }
-                else
-                {
-                    slot.CurrentAmount = item.MaxAmount;
-                    remainingItems -= spaceLeftInSlot;
-                }
+                return slots.Count;
             }
         }
 
-        return remainingItems;
-    }
-
-    public int SubtractItem(InventoryItem item, int amount)
-    {
-        int remainingItems = amount;
-
-        for (int i = slots.Count - 1; i >= 0; i--)
+        public void ExpandSlots(int additionalSlots)
         {
-            InventorySlot slot = slots[i];
-
-            if (slot.CurrentItem == item)
+            for (int i = 0; i < additionalSlots; i++)
             {
-                if (slot.CurrentAmount >= remainingItems)
+                slots.Add(new InventorySlot());
+            }
+        }
+
+        public void ShrinkSlots(int removedSlots)
+        {
+            if (CurrentSlotCount - removedSlots >= 0)
+            {
+                slots.RemoveRange(slots.Count - removedSlots, removedSlots);
+            }
+            else
+            {
+                throw new Exception("Cannot shrink inventory to negative slots");
+            }
+        }
+
+        public int AddItem(InventoryItem item, int amount)
+        {
+            int remainingItems = amount;
+
+            foreach (InventorySlot slot in slots)
+            {
+                if (slot.ItemIsNull)
                 {
-                    slot.CurrentAmount -= remainingItems;
-                    if (slot.CurrentAmount <= 0)
+                    if (item.MaxAmount >= remainingItems)
                     {
+                        slot.SetItem(item, remainingItems);
+                        remainingItems = 0;
+                        return remainingItems;
+                    }
+                    else
+                    {
+                        slot.SetItem(item, item.MaxAmount);
+                        remainingItems -= item.MaxAmount;
+                    }
+                }
+                else if (slot.CurrentItem == item)
+                {
+                    int spaceLeftInSlot = item.MaxAmount - slot.CurrentAmount;
+
+                    if (spaceLeftInSlot >= remainingItems)
+                    {
+                        slot.CurrentAmount += remainingItems;
+                        remainingItems = 0;
+                        return remainingItems;
+                    }
+                    else
+                    {
+                        slot.CurrentAmount = item.MaxAmount;
+                        remainingItems -= spaceLeftInSlot;
+                    }
+                }
+            }
+
+            return remainingItems;
+        }
+
+        public int SubtractItem(InventoryItem item, int amount)
+        {
+            int remainingItems = amount;
+
+            for (int i = slots.Count - 1; i >= 0; i--)
+            {
+                InventorySlot slot = slots[i];
+
+                if (slot.CurrentItem == item)
+                {
+                    if (slot.CurrentAmount >= remainingItems)
+                    {
+                        slot.CurrentAmount -= remainingItems;
+                        if (slot.CurrentAmount <= 0)
+                        {
+                            slot.CurrentAmount = 0;
+                        }
+                        return 0; // No missing items
+                    }
+                    else
+                    {
+                        remainingItems -= slot.CurrentAmount;
                         slot.CurrentAmount = 0;
                     }
-                    return 0; // No missing items
                 }
-                else
+            }
+
+            return remainingItems; // Return the remaining items that could not be removed
+        }
+
+
+        public int SearchItem(InventoryItem item)
+        {
+            int totalAmount = 0;
+
+            foreach (InventorySlot slot in slots)
+            {
+                if (slot.CurrentItem == item)
                 {
-                    remainingItems -= slot.CurrentAmount;
-                    slot.CurrentAmount = 0;
+                    totalAmount += slot.CurrentAmount;
                 }
             }
+
+            return totalAmount;
         }
 
-        return remainingItems; // Return the remaining items that could not be removed
-    }
-
-
-    public int SearchItem(InventoryItem item)
-    {
-        int totalAmount = 0;
-
-        foreach (InventorySlot slot in slots)
+        public void ExchangeItems(Inventory senderInventory, InventoryItem exchangedItem, int amount)
         {
-            if (slot.CurrentItem == item)
-            {
-                totalAmount += slot.CurrentAmount;
-            }
+            int remaining = AddItem(exchangedItem, amount);
+            senderInventory.SubtractItem(exchangedItem, amount - remaining);
         }
 
-        return totalAmount;
-    }
-
-    public void ExchangeItems(Inventory senderInventory, InventoryItem exchangedItem, int amount)
-    {
-        int remaining = AddItem(exchangedItem, amount);
-        senderInventory.SubtractItem(exchangedItem, amount - remaining);
-    }
-
-    public override string ToString()
-    {
-        string result = "Inventory Slots:\n";
-        foreach (InventorySlot slot in slots)
+        public override string ToString()
         {
-            if (slot.CurrentItem != null)
+            string result = "Inventory Slots:\n";
+            foreach (InventorySlot slot in slots)
             {
-                result += slot.CurrentItem.ToString() + ", Current Amount: " + slot.CurrentAmount + "\n";
+                if (slot.CurrentItem != null)
+                {
+                    result += slot.CurrentItem.ToString() + ", Current Amount: " + slot.CurrentAmount + "\n";
+                }
             }
+            return result;
         }
-        return result;
     }
 }
