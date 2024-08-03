@@ -1,3 +1,4 @@
+// Fonte de inspiração: https://youtu.be/oOQvhIg0ntg
 using UnityEngine;
 
 namespace UISystem
