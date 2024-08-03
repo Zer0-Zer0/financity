@@ -24,7 +24,7 @@ public class GameEvent : ScriptableObject {
     public void UnregisterListener(GameEventListener listener)
     {
         if (listeners.Contains(listener))
-            listeners.Add(listener);
+            listeners.Remove(listener);
         else
             Debug.LogWarning($"WARNING: Tried to remove [{listener.gameObject.name}] from [{this.name}] when it wasn't attached to begin with.");
     }
