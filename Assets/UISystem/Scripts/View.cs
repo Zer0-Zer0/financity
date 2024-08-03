@@ -21,7 +21,7 @@ namespace UISystem
 
         private VerticalLayoutGroup verticalLayoutGroup;
 
-        public override void Setup()
+        protected override void Setup()
         {
             verticalLayoutGroup = GetComponent<VerticalLayoutGroup>();
             imageTop = containerTop.GetComponent<Image>();
@@ -29,7 +29,7 @@ namespace UISystem
             imageBottom = containerBottom.GetComponent<Image>();
         }
 
-        public override void Configure()
+        protected override void Configure()
         {
             verticalLayoutGroup.padding = viewData.padding;
             verticalLayoutGroup.spacing = viewData.spacing;

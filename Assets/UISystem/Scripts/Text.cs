@@ -13,12 +13,12 @@ namespace UISystem
 
         private TextMeshProUGUI textMeshProUGUI;
 
-        public override void Setup()
+        protected override void Setup()
         {
             textMeshProUGUI = GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        public override void Configure()
+        protected override void Configure()
         {
             textMeshProUGUI.color = textData.theme.GetTextColor(style);
             textMeshProUGUI.font = textData.font;

@@ -9,10 +9,10 @@ namespace UISystem
             Init();
         }
 
-        public abstract void Setup();
-        public abstract void Configure();
+        protected abstract void Setup();
+        protected abstract void Configure();
 
-        public void Init()
+        private void Init()
         {
             Setup();
             Configure();
