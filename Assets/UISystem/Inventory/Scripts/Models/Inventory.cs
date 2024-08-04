@@ -6,20 +6,41 @@ namespace UISystem
 {
     public class Inventory
     {
-        public List<InventorySlot> slots { get; private set; } = new List<InventorySlot>();
+        private List<InventorySlot> slots = new List<InventorySlot>();
 
-        public Inventory(int initialSlotCount)
+        public Inventory(int initialSlotCount = 0)
         {
+            if (initialSlotCount < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(initialSlotCount), "Initial slot count cannot be negative.");
+            }
             ExpandSlots(initialSlotCount);
         }
 
         public Inventory(List<InventorySlot> initialSlots)
         {
-            slots = initialSlots ?? new List<InventorySlot>();
+            if (initialSlots == null)
+            {
+                throw new ArgumentNullException(nameof(initialSlots), "Initial slots cannot be null.");
+            }
+            slots = initialSlots;
         }
 
         public Inventory(InventoryItem item, int amount, int initialSlotCount)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item), "Item cannot be null.");
+            }
+            if (amount <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be greater than zero.");
+            }
+            if (initialSlotCount < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(initialSlotCount), "Initial slot count cannot be negative.");
+            }
+
             ExpandSlots(initialSlotCount);
             int remainingItems = amount;
 
@@ -42,10 +63,16 @@ namespace UISystem
             }
         }
 
-        public int CurrentSlotCount => slots.Count;
+        public int GetCurrentSlotCount() => slots.Count;
+
+        public List<InventorySlot> GetInventorySlots() => slots;
 
         public void ExpandSlots(int additionalSlots)
         {
+            if (additionalSlots < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(additionalSlots), "Additional slots cannot be negative.");
+            }
             for (int i = 0; i < additionalSlots; i++)
             {
                 slots.Add(new InventorySlot());
@@ -54,7 +81,11 @@ namespace UISystem
 
         public void ShrinkSlots(int removedSlots)
         {
-            if (CurrentSlotCount - removedSlots < 0)
+            if (removedSlots < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(removedSlots), "Removed slots cannot be negative.");
+            }
+            if (GetCurrentSlotCount() - removedSlots < 0)
             {
                 throw new Exception("Cannot shrink inventory to negative slots");
             }
@@ -63,7 +94,12 @@ namespace UISystem
 
         public Inventory AddItem(Inventory sourceInventory)
         {
-            Inventory remainingInventory = new Inventory(sourceInventory.CurrentSlotCount);
+            if (sourceInventory == null)
+            {
+                throw new ArgumentNullException(nameof(sourceInventory), "Source inventory cannot be null.");
+            }
+
+            Inventory remainingInventory = new Inventory(sourceInventory.GetCurrentSlotCount());
 
             foreach (InventorySlot slot in sourceInventory.slots)
             {
@@ -78,6 +114,15 @@ namespace UISystem
 
         private void AddItemToInventory(InventorySlot slot, Inventory remainingInventory)
         {
+            if (slot == null)
+            {
+                throw new ArgumentNullException(nameof(slot), "Slot cannot be null.");
+            }
+            if (remainingInventory == null)
+            {
+                throw new ArgumentNullException(nameof(remainingInventory), "Remaining inventory cannot be null.");
+            }
+
             InventoryItem item = slot.CurrentItem;
             int remainingItems = slot.CurrentAmount;
 
@@ -133,6 +178,15 @@ namespace UISystem
 
         private int AddToEmptySlot(InventorySlot slot, InventoryItem item, int remainingItems)
         {
+            if (slot == null)
+            {
+                throw new ArgumentNullException(nameof(slot), "Slot cannot be null.");
+            }
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item), "Item cannot be null.");
+            }
+
             if (item.MaxAmount >= remainingItems)
             {
                 slot.SetItem(item, remainingItems);
@@ -147,6 +201,15 @@ namespace UISystem
 
         private int AddToExistingSlot(InventorySlot slot, InventoryItem item, int remainingItems)
         {
+            if (slot == null)
+            {
+                throw new ArgumentNullException(nameof(slot), "Slot cannot be null.");
+            }
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item), "Item cannot be null.");
+            }
+
             int spaceLeftInSlot = item.MaxAmount - slot.CurrentAmount;
 
             if (spaceLeftInSlot >= remainingItems)
@@ -163,7 +226,12 @@ namespace UISystem
 
         public Inventory SubtractItem(Inventory sourceInventory)
         {
-            Inventory remainingInventory = new Inventory(sourceInventory.CurrentSlotCount);
+            if (sourceInventory == null)
+            {
+                throw new ArgumentNullException(nameof(sourceInventory), "Source inventory cannot be null.");
+            }
+
+            Inventory remainingInventory = new Inventory(sourceInventory.GetCurrentSlotCount());
 
             foreach (InventorySlot slot in sourceInventory.slots)
             {
@@ -178,6 +246,15 @@ namespace UISystem
 
         private void SubtractItemFromInventory(InventorySlot slot, Inventory remainingInventory)
         {
+            if (slot == null)
+            {
+                throw new ArgumentNullException(nameof(slot), "Slot cannot be null.");
+            }
+            if (remainingInventory == null)
+            {
+                throw new ArgumentNullException(nameof(remainingInventory), "Remaining inventory cannot be null.");
+            }
+
             foreach (InventorySlot _slot in slots)
             {
                 if (_slot.CurrentItem != slot.CurrentItem) continue;
@@ -199,6 +276,15 @@ namespace UISystem
 
         public int SubtractItem(InventoryItem item, int amount)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item), "Item cannot be null.");
+            }
+            if (amount <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be greater than zero.");
+            }
+
             int remainingItems = amount;
 
             for (int i = slots.Count - 1; i >= 0; i--)
@@ -217,6 +303,11 @@ namespace UISystem
 
         private int SubtractFromSlot(InventorySlot slot, int remainingItems)
         {
+            if (slot == null)
+            {
+                throw new ArgumentNullException(nameof(slot), "Slot cannot be null.");
+            }
+
             if (slot.CurrentAmount >= remainingItems)
             {
                 slot.CurrentAmount -= remainingItems;
@@ -232,6 +323,11 @@ namespace UISystem
 
         public int SearchItem(InventoryItem item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item), "Item cannot be null.");
+            }
+
             int totalAmount = 0;
 
             foreach (InventorySlot slot in slots)
@@ -247,6 +343,15 @@ namespace UISystem
 
         public void ExchangeItems(Inventory senderInventory, Inventory exchangedItems)
         {
+            if (senderInventory == null)
+            {
+                throw new ArgumentNullException(nameof(senderInventory), "Sender inventory cannot be null.");
+            }
+            if (exchangedItems == null)
+            {
+                throw new ArgumentNullException(nameof(exchangedItems), "Exchanged items cannot be null.");
+            }
+
             Inventory remainingItems = AddItem(exchangedItems);
             Inventory removeFromSender = exchangedItems.SubtractItem(remainingItems);
             senderInventory.SubtractItem(removeFromSender);
@@ -254,6 +359,19 @@ namespace UISystem
 
         public void ExchangeItems(Inventory senderInventory, InventoryItem exchangedItem, int amount)
         {
+            if (senderInventory == null)
+            {
+                throw new ArgumentNullException(nameof(senderInventory), "Sender inventory cannot be null.");
+            }
+            if (exchangedItem == null)
+            {
+                throw new ArgumentNullException(nameof(exchangedItem), "Exchanged item cannot be null.");
+            }
+            if (amount <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be greater than zero.");
+            }
+
             int remaining = AddItem(exchangedItem, amount);
             senderInventory.SubtractItem(exchangedItem, amount - remaining);
         }

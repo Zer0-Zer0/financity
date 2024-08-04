@@ -7,23 +7,15 @@ using UISystem;
 [TestFixture]
 public class InventoryTests
 {
-    private GameObject testObject;
     private Inventory inventory;
     private InventoryItem banana, apple;
 
     [SetUp]
     public void Setup()
     {
-        testObject = new GameObject();
-        inventory = InventoryFactory();
-
-        banana = ItemFactory("banana");
+        inventory = new Inventory(5);
+        banana = ItemFactory("banana", 10);
         apple = ItemFactory("apple", 5);
-    }
-
-    private Inventory InventoryFactory(int slotCount = 5)
-    {
-        return new Inventory(slotCount);
     }
 
     private List<InventorySlot> SlotListFactory(InventorySlot item)
@@ -43,23 +35,23 @@ public class InventoryTests
     [Test]
     public void CanExpandSlots()
     {
-        int initialSlotCount = inventory.slots.Count;
+        int initialSlotCount = inventory.GetCurrentSlotCount();
         int additionalSlots = 3;
 
         inventory.ExpandSlots(additionalSlots);
 
-        Assert.AreEqual(initialSlotCount + additionalSlots, inventory.slots.Count);
+        Assert.AreEqual(initialSlotCount + additionalSlots, inventory.GetCurrentSlotCount());
     }
 
     [Test]
     public void CanShrinkSlots()
     {
-        int initialSlotCount = inventory.slots.Count;
+        int initialSlotCount = inventory.GetCurrentSlotCount();
         int removedSlots = 2;
 
         inventory.ShrinkSlots(removedSlots);
 
-        Assert.AreEqual(initialSlotCount - removedSlots, inventory.slots.Count);
+        Assert.AreEqual(initialSlotCount - removedSlots, inventory.GetCurrentSlotCount());
     }
 
     [Test]
@@ -130,6 +122,5 @@ public class InventoryTests
         inventory = null;
         banana = null;
         apple = null;
-        GameObject.DestroyImmediate(testObject); // Clean up test object
     }
 }

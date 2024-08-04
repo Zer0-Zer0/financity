@@ -21,7 +21,7 @@ namespace UISystem
 
         private void Start()
         {
-            OnInventoryChanged.Raise(this, _inventory.slots);
+            OnInventoryChanged.Raise(this, _inventory.GetInventorySlots());
         }
 
         public void OnInventoryItemSubtracted(Component sender, object data)
@@ -29,7 +29,7 @@ namespace UISystem
             if (data is Inventory items)
             {
                 _inventory.SubtractItem(items);
-                OnInventoryChanged.Raise(this, _inventory.slots);
+                OnInventoryChanged.Raise(this, _inventory.GetInventorySlots());
             }
         }
 
