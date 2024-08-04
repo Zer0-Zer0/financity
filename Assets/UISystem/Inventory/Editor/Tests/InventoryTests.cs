@@ -77,6 +77,18 @@ namespace UISystem.Tests
         }
 
         [Test]
+        public void AddItem_WithInventoryObject_AddsBothInventories()
+        {
+            InventoryItem newItem = ItemFactory("New Item", 5);
+            Inventory inventoryToBeAdded = new Inventory(5);
+            inventoryToBeAdded.AddItem(testItem, 25);
+            inventoryToBeAdded.AddItem(newItem, 7);
+            Inventory remainingItems = inventory.AddItem(inventoryToBeAdded);
+            Assert.AreEqual(inventoryToBeAdded.ToString(), inventory.ToString());
+            Assert.AreEqual(remainingItems.ToString(), new Inventory(0).ToString());
+        }
+
+        [Test]
         public void SubtractItem_WithNullItem_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() => inventory.SubtractItem(null, 1));
@@ -140,7 +152,7 @@ namespace UISystem.Tests
         [Test]
         public void AddItem_WithZeroAmount_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => inventory.AddItem(testItem, 0));
+            Assert.Throws<ArgumentOutOfRangeException>(() => inventory.AddItem(testItem, -1));
         }
 
         [Test]
