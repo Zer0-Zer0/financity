@@ -7,6 +7,7 @@ namespace UISystem
     [System.Serializable]
     public class Inventory
     {
+        [SerializeField]
         private List<InventorySlot> slots = new List<InventorySlot>();
 
         public Inventory(int initialSlotCount = 0)

@@ -34,7 +34,6 @@ namespace UISystem
                 return;
 
             _slotBackground.color = theme.GetBackgroundColor(_style);
-
             _itemCounter.color = theme.GetTextColor(_style);
             _itemCounter.font = _textData.font;
             _itemCounter.fontSize = _textData.size;
@@ -42,7 +41,7 @@ namespace UISystem
 
         public void UpdateSlotGraphics(InventorySlot slot)
         {
-            if (slot.CurrentItem == null)
+            if (slot == null || slot.CurrentItem == null)
                 Reset();
             else
                 SetGraphics(slot);
@@ -50,6 +49,15 @@ namespace UISystem
 
         private void SetGraphics(InventorySlot slot)
         {
+            if (slot.CurrentAmount <= 0)
+                throw new ArgumentOutOfRangeException("CurrentAmount needs to be bigger than zero.");
+
+            if (slot.CurrentItem == null)
+            {
+                Reset();
+                return;
+            }
+            
             _slotIcon.sprite = slot.CurrentItem.Icon;
             _itemCounter.SetText(slot.CurrentAmount.ToString());
         }

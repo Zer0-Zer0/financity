@@ -10,7 +10,7 @@ namespace UISystem
     public class InventoryController : MonoBehaviour
     {
         [SerializeField]
-        private int _initialSlotCount;
+        private Inventory _initialInventory;
 
         [Header("Event")]
         [SerializeField]
@@ -20,7 +20,7 @@ namespace UISystem
 
         private void Awake()
         {
-            _inventory = new Inventory(_initialSlotCount);
+            _inventory = _initialInventory;
         }
 
         private void Start()
@@ -49,7 +49,8 @@ namespace UISystem
                 Inventory.AddItem(_inventory, slot);
             else
                 throw new InvalidDataException(
-                    $"ERROR: Not possible to add to inventory data of type {data.GetType()} sent from {sender}");
+                    $"ERROR: Not possible to add to inventory data of type {data.GetType()} sent from {sender}"
+                );
             OnInventoryChanged.Raise(this, _inventory.GetInventorySlots());
         }
     }
