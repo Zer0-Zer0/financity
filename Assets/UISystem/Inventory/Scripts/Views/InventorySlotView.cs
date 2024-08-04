@@ -1,28 +1,37 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 namespace UISystem
 {
     public class InventorySlotView : CustomUIComponent
     {
-        [SerializeField] private TextSO _textData;
-        [SerializeField] private Style _style;
-        
+        [SerializeField]
+        private TextSO _textData;
+
+        [SerializeField]
+        private Style _style;
+
         [Header("Structure")]
-        [SerializeField] private Image _slotIcon;
-        [SerializeField] private Image _slotBackground;
-        [SerializeField] private TextMeshProUGUI _itemCounter;
-        
+        [SerializeField]
+        private Image _slotIcon;
+
+        [SerializeField]
+        private Image _slotBackground;
+
+        [SerializeField]
+        private TextMeshProUGUI _itemCounter;
+
         protected override void Setup() { }
 
         protected override void Configure()
         {
             ThemeSO theme = GetMainTheme();
-            if (theme == null) return;
+            if (theme == null)
+                return;
 
             _slotBackground.color = theme.GetBackgroundColor(_style);
 
@@ -33,11 +42,22 @@ namespace UISystem
 
         public void UpdateSlotGraphics(InventorySlot slot)
         {
-            _slotIcon.sprite = slot.CurrentItem.Icon;
-            if (slot.CurrentAmount == 0)
-                _itemCounter.SetText(String.Empty);
+            if (slot.CurrentItem == null)
+                Reset();
             else
-                _itemCounter.SetText(slot.CurrentAmount.ToString());
+                SetGraphics(slot);
+        }
+
+        private void SetGraphics(InventorySlot slot)
+        {
+            _slotIcon.sprite = slot.CurrentItem.Icon;
+            _itemCounter.SetText(slot.CurrentAmount.ToString());
+        }
+
+        private void Reset()
+        {
+            _slotIcon.sprite = null;
+            _itemCounter.SetText(String.Empty);
         }
     }
 }

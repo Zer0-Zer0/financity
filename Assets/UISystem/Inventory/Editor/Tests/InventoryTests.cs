@@ -94,7 +94,7 @@ namespace UISystem.Tests
             Inventory.AddItem(inventory, testItem, 5);
             Inventory remainingInventory = Inventory.SubtractItem(inventory, testItem, 7);
             Assert.AreEqual(
-                new Inventory(testItem, 2, inventory.GetCurrentSlotCount()),
+                new Inventory(testItem, 2, inventory.GetCurrentSlotCount()).ToString(),
                 remainingInventory.ToString()
             );
             Assert.AreEqual(0, inventory.SearchItem(testItem));

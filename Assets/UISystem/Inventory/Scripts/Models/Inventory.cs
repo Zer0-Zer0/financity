@@ -33,7 +33,7 @@ namespace UISystem
         {
             if (item == null)
                 throw new ArgumentNullException(nameof(item), "Item cannot be null.");
-            if (amount <= 0)
+            if (amount < 0)
                 throw new ArgumentOutOfRangeException(
                     nameof(amount),
                     "Amount must be greater than zero."
@@ -44,8 +44,13 @@ namespace UISystem
                     "Initial slot count must be greater than zero."
                 );
 
-            ExpandSlots(initialSlotCount);
-            AddItem(this, item, amount);
+            if (amount == 0)
+                ExpandSlots(0);
+            else
+            {
+                ExpandSlots(initialSlotCount);
+                AddItem(this, item, amount);
+            }
         }
 
         public int GetCurrentSlotCount() => slots.Count;
@@ -115,7 +120,7 @@ namespace UISystem
                 throw new ArgumentNullException(nameof(inventory), "Inventory cannot be null.");
             if (item == null)
                 throw new ArgumentNullException(nameof(item), "Item cannot be null.");
-            if (amount < 0)
+            if (amount <= 0)
                 throw new ArgumentOutOfRangeException(
                     nameof(amount),
                     "Amount must be greater than zero."
@@ -230,10 +235,6 @@ namespace UISystem
                 );
 
             int totalAvailable = inventory.SearchItem(item);
-            if (amount > totalAvailable)
-                throw new InvalidOperationException(
-                    "Cannot subtract more items than available in inventory."
-                );
 
             int remainingItems = amount;
 

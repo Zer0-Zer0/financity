@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,12 +9,15 @@ namespace UISystem
 {
     public class InventoryController : MonoBehaviour
     {
-        [SerializeField] private int _initialSlotCount;
+        [SerializeField]
+        private int _initialSlotCount;
 
         [Header("Event")]
-        [SerializeField] private GameEvent OnInventoryChanged;
+        [SerializeField]
+        private GameEvent OnInventoryChanged;
 
         private Inventory _inventory;
+
         private void Awake()
         {
             _inventory = new Inventory(_initialSlotCount);
@@ -27,12 +31,26 @@ namespace UISystem
         public void OnInventoryItemSubtracted(Component sender, object data)
         {
             if (data is Inventory items)
-            {
                 Inventory.SubtractItem(_inventory, items);
-                OnInventoryChanged.Raise(this, _inventory.GetInventorySlots());
-            }
+            else if (data is InventorySlot slot)
+                Inventory.SubtractItem(_inventory, slot);
+            else
+                throw new InvalidDataException(
+                    $"ERROR: Not possible to subtract from inventory data of type {data.GetType()} sent from {sender}"
+                );
+            OnInventoryChanged.Raise(this, _inventory.GetInventorySlots());
         }
 
-
+        public void OnInventoryItemAdded(Component sender, object data)
+        {
+            if (data is Inventory items)
+                Inventory.AddItem(_inventory, items);
+            else if (data is InventorySlot slot)
+                Inventory.AddItem(_inventory, slot);
+            else
+                throw new InvalidDataException(
+                    $"ERROR: Not possible to add to inventory data of type {data.GetType()} sent from {sender}");
+            OnInventoryChanged.Raise(this, _inventory.GetInventorySlots());
+        }
     }
 }

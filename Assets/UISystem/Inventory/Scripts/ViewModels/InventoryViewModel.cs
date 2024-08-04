@@ -8,7 +8,6 @@ namespace UISystem
     public class InventoryViewModel : MonoBehaviour
     {
         [SerializeField] private InventoryView _inventoryView;
-        [SerializeField] private GameEvent _inventoryChanged;
 
         public void OnInventoryChanged(Component sender, object data)
         {
