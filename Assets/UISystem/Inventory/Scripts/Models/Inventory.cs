@@ -112,6 +112,48 @@ namespace UISystem
             return remainingInventory;
         }
 
+
+        public int AddItem(InventoryItem item, int amount)
+        {
+            int remainingItems = amount;
+
+            foreach (InventorySlot slot in slots)
+            {
+                if (slot.ItemIsNull)
+                {
+                    if (item.MaxAmount >= remainingItems)
+                    {
+                        slot.SetItem(item, remainingItems);
+                        remainingItems = 0;
+                        return remainingItems;
+                    }
+                    else
+                    {
+                        slot.SetItem(item, item.MaxAmount);
+                        remainingItems -= item.MaxAmount;
+                    }
+                }
+                else if (slot.CurrentItem == item)
+                {
+                    int spaceLeftInSlot = item.MaxAmount - slot.CurrentAmount;
+
+                    if (spaceLeftInSlot >= remainingItems)
+                    {
+                        slot.CurrentAmount += remainingItems;
+                        remainingItems = 0;
+                        return remainingItems;
+                    }
+                    else
+                    {
+                        slot.CurrentAmount = item.MaxAmount;
+                        remainingItems -= spaceLeftInSlot;
+                    }
+                }
+            }
+
+            return remainingItems;
+        }
+
         public Inventory SubtractItem(Inventory sourceInventory)
         {
             Inventory remainingInventory = new Inventory(sourceInventory.CurrentSlotCount);
@@ -146,6 +188,51 @@ namespace UISystem
             return remainingInventory; // Return the inventory with remaining items
         }
 
+        public int SubtractItem(InventoryItem item, int amount)
+        {
+            int remainingItems = amount;
+
+            for (int i = slots.Count - 1; i >= 0; i--)
+            {
+                InventorySlot slot = slots[i];
+
+                if (slot.CurrentItem == item)
+                {
+                    if (slot.CurrentAmount >= remainingItems)
+                    {
+                        slot.CurrentAmount -= remainingItems;
+                        if (slot.CurrentAmount <= 0)
+                        {
+                            slot.CurrentAmount = 0;
+                        }
+                        return 0; // No missing items
+                    }
+                    else
+                    {
+                        remainingItems -= slot.CurrentAmount;
+                        slot.CurrentAmount = 0;
+                    }
+                }
+            }
+
+            return remainingItems; // Return the remaining items that could not be removed
+        }
+
+        public int SearchItem(InventoryItem item)
+        {
+            int totalAmount = 0;
+
+            foreach (InventorySlot slot in slots)
+            {
+                if (slot.CurrentItem == item)
+                {
+                    totalAmount += slot.CurrentAmount;
+                }
+            }
+
+            return totalAmount;
+        }
+
         public int SearchItem(InventoryItem item)
         {
             int totalAmount = 0;
@@ -166,6 +253,12 @@ namespace UISystem
             Inventory remainingItems = AddItem(exchangedItems);
             Inventory removeFromSender = exchangedItems.SubtractItem(remainingItems);
             senderInventory.SubtractItem(removeFromSender);
+        }
+
+        public void ExchangeItems(Inventory senderInventory, InventoryItem exchangedItem, int amount)
+        {
+            int remaining = AddItem(exchangedItem, amount);
+            senderInventory.SubtractItem(exchangedItem, amount - remaining);
         }
 
         public override string ToString()
