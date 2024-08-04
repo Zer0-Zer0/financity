@@ -30,14 +30,12 @@ namespace UISystem
             set
             {
                 if (value < 0f)
-                {
-                    throw new Exception("Attempted to change item amount in the inventory to negative.");
-                }
+                    throw new Exception("Attempted to change item amount in the inventory slot to negative.");
                 if (!ItemIsNull)
                 {
                     if (value > CurrentItem.MaxAmount)
                     {
-                        throw new Exception("Attempted to change item amount in the inventory to above its limit.");
+                        throw new Exception("Attempted to change item amount in the inventory slot to above its limit.");
                     }
                     else if (value == 0)
                     {

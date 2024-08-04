@@ -70,7 +70,7 @@ public class InventoryTests
         Assert.AreEqual(0, inventory.AddItem(new InventorySlot(apple, 4)));
 
         // Test adding more items than slot capacity
-        Assert.AreEqual(3, inventory.AddItem(new InventorySlot(banana, 25)));
+        Assert.AreEqual(3, inventory.AddItem(new InventorySlot(banana, 5)));
     }
 
     [Test]

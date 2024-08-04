@@ -52,33 +52,22 @@ namespace UISystem
             {
                 if (_slot.ItemIsNull)
                 {
-                    if (item.MaxAmount >= remainingItems)
-                    {
-                        _slot.SetItem(item, remainingItems);
-                        remainingItems = 0;
-                        return remainingItems;
-                    }
-                    else
-                    {
-                        _slot.SetItem(item, item.MaxAmount);
-                        remainingItems -= item.MaxAmount;
-                    }
+                    int amountToAdd = Math.Min(item.MaxAmount, remainingItems);
+                    _slot.SetItem(item, amountToAdd);
+                    remainingItems -= amountToAdd;
+
+                    if (remainingItems == 0)
+                        return 0;
                 }
                 else if (_slot.CurrentItem == item)
                 {
                     int spaceLeftInSlot = item.MaxAmount - _slot.CurrentAmount;
+                    int amountToAdd = Math.Min(spaceLeftInSlot, remainingItems);
+                    _slot.CurrentAmount += amountToAdd;
+                    remainingItems -= amountToAdd;
 
-                    if (spaceLeftInSlot >= remainingItems)
-                    {
-                        _slot.CurrentAmount += remainingItems;
-                        remainingItems = 0;
-                        return remainingItems;
-                    }
-                    else
-                    {
-                        _slot.CurrentAmount = item.MaxAmount;
-                        remainingItems -= spaceLeftInSlot;
-                    }
+                    if (remainingItems == 0)
+                        return 0;
                 }
             }
 
@@ -88,29 +77,25 @@ namespace UISystem
         public int SubtractItem(InventorySlot slot)
         {
             int remainingItems = slot.CurrentAmount;
+            InventoryItem item = slot.CurrentItem;
 
             foreach (InventorySlot _slot in slots)
             {
-                if (_slot.CurrentItem == slot.CurrentItem)
+                if (_slot.CurrentItem != item) continue;
+
+                if (_slot.CurrentAmount >= remainingItems)
                 {
-                    if (_slot.CurrentAmount >= remainingItems)
-                    {
-                        _slot.CurrentAmount -= remainingItems;
-                        if (_slot.CurrentAmount <= 0)
-                        {
-                            _slot.CurrentAmount = 0;
-                        }
-                        return 0; // No missing items
-                    }
-                    else
-                    {
-                        remainingItems -= _slot.CurrentAmount;
-                        _slot.CurrentAmount = 0;
-                    }
+                    _slot.CurrentAmount -= remainingItems;
+                    return 0;
+                }
+                else
+                {
+                    remainingItems -= _slot.CurrentAmount;
+                    _slot.CurrentAmount = 0;
                 }
             }
 
-            return remainingItems; // Return the remaining items that could not be removed
+            return remainingItems;
         }
 
         public int SearchItem(InventoryItem item)
