@@ -1,9 +1,9 @@
-using UnityEngine;
-using TMPro;
-using System.Collections.Generic;
-using UnityEngine.UI;
-using System.Collections;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class DayNightCycle : MonoBehaviour
 {
@@ -21,7 +21,16 @@ public class DayNightCycle : MonoBehaviour
 
     private float time;
     private DateTime currentDate;
-    private string[] daysOfWeek = { "Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado" };
+    private string[] daysOfWeek =
+    {
+        "Domingo",
+        "Segunda-Feira",
+        "Terça-Feira",
+        "Quarta-Feira",
+        "Quinta-Feira",
+        "Sexta-Feira",
+        "Sábado"
+    };
 
     private List<string> transactions = new List<string>();
     private float pendingBalanceChange = 0f;
@@ -50,7 +59,7 @@ public class DayNightCycle : MonoBehaviour
 
         // Exemplo de uso para demonstração:
         AddInstallmentPayment("Computador", 1000f, 5, 0.05f); // Adiciona um pagamento parcelado de exemplo
-        financeManager.AddPurchase(-800f);
+        FinanceManager.AddPurchase(-800f);
     }
 
     void Update()
@@ -88,118 +97,142 @@ public class DayNightCycle : MonoBehaviour
 
     void UpdateDayText()
     {
-        string dayOfWeek = currentDate.ToString("dddd", new System.Globalization.CultureInfo("pt-BR"));
+        string dayOfWeek = currentDate.ToString(
+            "dddd",
+            new System.Globalization.CultureInfo("pt-BR")
+        );
         string dateString = currentDate.ToString("dd/MM/yyyy");
         dayText.text = $"{dayOfWeek} - {dateString}";
     }
 
-public void AddTransaction(string description, float amount)
-{
-    financeManager.AddPurchase(amount);
-
-    // Formata a transação incluindo a data
-    string formattedTransaction = string.Format("{0} - {1} = {2} ${3}", currentDate.ToString("dd/MM/yyyy"), description, amount >= 0 ? "+" : "-", Mathf.Abs(amount));
-    transactions.Add(formattedTransaction);
-
-    pendingBalanceChange += amount;
-}
-
-
-private void GenerateReport()
-{
-    // Limpa o texto do relatório antes de gerar um novo relatório
-    reportText.text = string.Empty;
-
-    // Variáveis para somar transações de crédito
-    float totalCredit = 0f;
-    string creditDescription = "Crédito = ";
-    bool hasCreditTransactions = false;
-
-    // Variável para somar o valor total das parcelas do dia
-    float totalInstallmentAmount = 0f;
-
-    // Atualiza o saldo pendente com base no FinanceManager
-    //pendingBalanceChange = financeManager.CurrentBalance;
-
-    // Filtra e mostra todas as transações do dia no relatório
-    foreach (string transaction in transactions)
+    public void AddTransaction(string description, float amount)
     {
-        // Extrai a data da transação para comparar com a currentDate
-        string[] parts = transaction.Split(new string[] { " - ", " = " }, StringSplitOptions.None);
-        if (parts.Length < 3)
-            continue;
+        FinanceManager.AddPurchase(amount);
 
-        string transactionDateStr = parts[0];
-        DateTime transactionDate;
-        if (!DateTime.TryParseExact(transactionDateStr, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out transactionDate))
-            continue;
+        // Formata a transação incluindo a data
+        string formattedTransaction = string.Format(
+            "{0} - {1} = {2} ${3}",
+            currentDate.ToString("dd/MM/yyyy"),
+            description,
+            amount >= 0 ? "+" : "-",
+            Mathf.Abs(amount)
+        );
+        transactions.Add(formattedTransaction);
 
-        // Verifica se a transação ocorreu na currentDate
-        if (transactionDate.Date == currentDate.Date)
+        pendingBalanceChange += amount;
+    }
+
+    private void GenerateReport()
+    {
+        // Limpa o texto do relatório antes de gerar um novo relatório
+        reportText.text = string.Empty;
+
+        // Variáveis para somar transações de crédito
+        float totalCredit = 0f;
+        string creditDescription = "Crédito = ";
+        bool hasCreditTransactions = false;
+
+        // Variável para somar o valor total das parcelas do dia
+        float totalInstallmentAmount = 0f;
+
+        // Atualiza o saldo pendente com base no FinanceManager
+        //pendingBalanceChange = financeManager.CurrentBalance;
+
+        // Filtra e mostra todas as transações do dia no relatório
+        foreach (string transaction in transactions)
         {
-            // Adiciona a transação ao relatório
-            if (parts[1].Contains("Parcela"))
-            {
-                // Adiciona ao total de parcelas do dia
-                float amount = float.Parse(parts[2].TrimStart('$'));
-                totalInstallmentAmount += amount;
+            // Extrai a data da transação para comparar com a currentDate
+            string[] parts = transaction.Split(
+                new string[] { " - ", " = " },
+                StringSplitOptions.None
+            );
+            if (parts.Length < 3)
+                continue;
 
-                // Adiciona a transação de parcela ao relatório
-                reportText.text += transaction + "\n";
-            }
-            else if (parts[1].Contains("Crédito"))
+            string transactionDateStr = parts[0];
+            DateTime transactionDate;
+            if (
+                !DateTime.TryParseExact(
+                    transactionDateStr,
+                    "dd/MM/yyyy",
+                    null,
+                    System.Globalization.DateTimeStyles.None,
+                    out transactionDate
+                )
+            )
+                continue;
+
+            // Verifica se a transação ocorreu na currentDate
+            if (transactionDate.Date == currentDate.Date)
             {
-                // Adiciona ao total de crédito e guarda a transação de crédito
-                float amount = float.Parse(parts[2].TrimStart('$'));
-                totalCredit += amount;
-                hasCreditTransactions = true;
-            }
-            else
-            {
-                // Outras transações são adicionadas diretamente ao relatório
-                reportText.text += transaction + "\n";
+                // Adiciona a transação ao relatório
+                if (parts[1].Contains("Parcela"))
+                {
+                    // Adiciona ao total de parcelas do dia
+                    float amount = float.Parse(parts[2].TrimStart('$'));
+                    totalInstallmentAmount += amount;
+
+                    // Adiciona a transação de parcela ao relatório
+                    reportText.text += transaction + "\n";
+                }
+                else if (parts[1].Contains("Crédito"))
+                {
+                    // Adiciona ao total de crédito e guarda a transação de crédito
+                    float amount = float.Parse(parts[2].TrimStart('$'));
+                    totalCredit += amount;
+                    hasCreditTransactions = true;
+                }
+                else
+                {
+                    // Outras transações são adicionadas diretamente ao relatório
+                    reportText.text += transaction + "\n";
+                }
             }
         }
-    }
 
-    // Adiciona as transações de crédito agrupadas
-    if (hasCreditTransactions)
-    {
-        creditDescription += "-$" + totalCredit.ToString("F2") + "\n";
-        reportText.text += creditDescription;
-    }
-
-    // Calcula e adiciona o ICMS ao relatório diário
-    float icms = pendingBalanceChange * 0.1f;
-    reportText.text += "ICMS: $" + icms.ToString("F2") + "\n";
-
-    // Atualiza o total com o ICMS
-    pendingBalanceChange += icms;
-
-    // Adiciona o total de parcelas do dia ao relatório
-    if (totalInstallmentAmount > 0f)
-    {
-        reportText.text += $"Total de Parcelas: ${totalInstallmentAmount.ToString("F2")}\n";
-
-        // Adiciona o valor da última parcela processada ao relatório
-        foreach (var installmentPayment in installmentPayments)
+        // Adiciona as transações de crédito agrupadas
+        if (hasCreditTransactions)
         {
-            if (installmentPayment.lastProcessedAmount > 0f)
+            creditDescription += "-$" + totalCredit.ToString("F2") + "\n";
+            reportText.text += creditDescription;
+        }
+
+        // Calcula e adiciona o ICMS ao relatório diário
+        float icms = pendingBalanceChange * 0.1f;
+        reportText.text += "ICMS: $" + icms.ToString("F2") + "\n";
+
+        // Atualiza o total com o ICMS
+        pendingBalanceChange += icms;
+
+        // Adiciona o total de parcelas do dia ao relatório
+        if (totalInstallmentAmount > 0f)
+        {
+            reportText.text += $"Total de Parcelas: ${totalInstallmentAmount.ToString("F2")}\n";
+
+            // Adiciona o valor da última parcela processada ao relatório
+            foreach (var installmentPayment in installmentPayments)
             {
-                reportText.text += string.Format("Parcela Processada: {0} - ${1}\n", installmentPayment.description, installmentPayment.lastProcessedAmount.ToString("F2"));
+                if (installmentPayment.lastProcessedAmount > 0f)
+                {
+                    reportText.text += string.Format(
+                        "Parcela Processada: {0} - ${1}\n",
+                        installmentPayment.description,
+                        installmentPayment.lastProcessedAmount.ToString("F2")
+                    );
+                }
             }
         }
+
+        reportText.text += "----------------------------\n";
+        reportText.text += string.Format(
+            "Total: {0} ${1}",
+            pendingBalanceChange >= 0 ? "+" : "-",
+            Mathf.Abs(pendingBalanceChange)
+        );
+
+        reportImage.gameObject.SetActive(true);
+        mouse.ToggleMouse();
     }
-
-    reportText.text += "----------------------------\n";
-    reportText.text += string.Format("Total: {0} ${1}", pendingBalanceChange >= 0 ? "+" : "-", Mathf.Abs(pendingBalanceChange));
-
-    reportImage.gameObject.SetActive(true);
-    mouse.ToggleMouse();
-}
-
-
-
 
     public void HideReport()
     {
@@ -226,7 +259,12 @@ private void GenerateReport()
         StartCoroutine(AnimateText(balanceText, oldBalance, newBalance, targetColor));
     }
 
-    private IEnumerator AnimateText(TextMeshProUGUI text, float startValue, float endValue, Color targetColor)
+    private IEnumerator AnimateText(
+        TextMeshProUGUI text,
+        float startValue,
+        float endValue,
+        Color targetColor
+    )
     {
         float duration = 1f;
         float elapsedTime = 0f;
@@ -251,78 +289,121 @@ private void GenerateReport()
         balanceText.text = "$" + newBalance.ToString("F2");
     }
 
-    public void AddInstallmentPayment(string description, float totalAmount, int numInstallments, float dailyInterestRate)
+    public void AddInstallmentPayment(
+        string description,
+        float totalAmount,
+        int numInstallments,
+        float dailyInterestRate
+    )
     {
-        float installmentAmount = CalculateInstallmentAmount(totalAmount, numInstallments, dailyInterestRate);
+        float installmentAmount = CalculateInstallmentAmount(
+            totalAmount,
+            numInstallments,
+            dailyInterestRate
+        );
 
-        InstallmentPayment installmentPayment = new InstallmentPayment(description, totalAmount, numInstallments, dailyInterestRate, installmentAmount, currentDate);
+        InstallmentPayment installmentPayment = new InstallmentPayment(
+            description,
+            totalAmount,
+            numInstallments,
+            dailyInterestRate,
+            installmentAmount,
+            currentDate
+        );
         installmentPayments.Add(installmentPayment);
-        Debug.Log("Added Installment: " + description + " Total: $" + totalAmount + " Installments: " + numInstallments + " Daily Interest: " + dailyInterestRate);
+        Debug.Log(
+            "Added Installment: "
+                + description
+                + " Total: $"
+                + totalAmount
+                + " Installments: "
+                + numInstallments
+                + " Daily Interest: "
+                + dailyInterestRate
+        );
     }
 
     private void ProcessInstallmentPaymentsDaily()
-{
-    foreach (var installmentPayment in installmentPayments)
     {
-        if (installmentPayment.remainingInstallments > 0 && currentDate >= installmentPayment.nextPaymentDate)
+        foreach (var installmentPayment in installmentPayments)
         {
-            float amount = installmentPayment.installmentAmount;
-
-            // Adiciona a transação diária para a parcela
-            AddTransaction(installmentPayment.description + " - Parcela", -amount);
-            installmentPayment.lastProcessedAmount = amount; // Atualiza o valor da última parcela processada
-
-            // Reduz o número de parcelas restantes
-            installmentPayment.remainingInstallments--;
-
-            // Atualiza a próxima data de pagamento
-            installmentPayment.nextPaymentDate = installmentPayment.nextPaymentDate.AddDays(1);
-
-            // Se todas as parcelas foram pagas, remove o pagamento parcelado da lista
-            if (installmentPayment.remainingInstallments <= 0)
+            if (
+                installmentPayment.remainingInstallments > 0
+                && currentDate >= installmentPayment.nextPaymentDate
+            )
             {
-                Debug.Log("Parcelamento concluído para: " + installmentPayment.description);
-            }
+                float amount = installmentPayment.installmentAmount;
 
-            // Log para depuração
-            Debug.Log("Processed Installment: " + installmentPayment.description + " Amount: $" + amount);
+                // Adiciona a transação diária para a parcela
+                AddTransaction(installmentPayment.description + " - Parcela", -amount);
+                installmentPayment.lastProcessedAmount = amount; // Atualiza o valor da última parcela processada
+
+                // Reduz o número de parcelas restantes
+                installmentPayment.remainingInstallments--;
+
+                // Atualiza a próxima data de pagamento
+                installmentPayment.nextPaymentDate = installmentPayment.nextPaymentDate.AddDays(1);
+
+                // Se todas as parcelas foram pagas, remove o pagamento parcelado da lista
+                if (installmentPayment.remainingInstallments <= 0)
+                {
+                    Debug.Log("Parcelamento concluído para: " + installmentPayment.description);
+                }
+
+                // Log para depuração
+                Debug.Log(
+                    "Processed Installment: "
+                        + installmentPayment.description
+                        + " Amount: $"
+                        + amount
+                );
+            }
         }
+
+        // Remove os pagamentos parcelados concluídos da lista principal
+        installmentPayments.RemoveAll(installment => installment.remainingInstallments <= 0);
     }
 
-    // Remove os pagamentos parcelados concluídos da lista principal
-    installmentPayments.RemoveAll(installment => installment.remainingInstallments <= 0);
-}
-
-
-    private float CalculateInstallmentAmount(float totalAmount, int numInstallments, float dailyInterestRate)
+    private float CalculateInstallmentAmount(
+        float totalAmount,
+        int numInstallments,
+        float dailyInterestRate
+    )
     {
         float interestFactor = Mathf.Pow(1 + dailyInterestRate, numInstallments);
-        float installmentAmount = totalAmount * (interestFactor * dailyInterestRate) / (interestFactor - 1);
+        float installmentAmount =
+            totalAmount * (interestFactor * dailyInterestRate) / (interestFactor - 1);
         return installmentAmount;
     }
 
-private class InstallmentPayment
-{
-    public string description;
-    public float totalAmount;
-    public int numInstallments;
-    public float dailyInterestRate;
-    public float installmentAmount;
-    public int remainingInstallments;
-    public DateTime nextPaymentDate;
-    public float lastProcessedAmount; // Novo campo para armazenar o valor da última parcela processada
-
-    public InstallmentPayment(string desc, float totalAmt, int numInst, float dailyRate, float installmentAmt, DateTime startDate)
+    private class InstallmentPayment
     {
-        description = desc;
-        totalAmount = totalAmt;
-        numInstallments = numInst;
-        dailyInterestRate = dailyRate;
-        installmentAmount = installmentAmt;
-        remainingInstallments = numInst;
-        nextPaymentDate = startDate.AddDays(1); // Primeira parcela no próximo dia
-        lastProcessedAmount = 0f; // Inicializa o valor da última parcela processada como zero
-    }
-}
+        public string description;
+        public float totalAmount;
+        public int numInstallments;
+        public float dailyInterestRate;
+        public float installmentAmount;
+        public int remainingInstallments;
+        public DateTime nextPaymentDate;
+        public float lastProcessedAmount; // Novo campo para armazenar o valor da última parcela processada
 
+        public InstallmentPayment(
+            string desc,
+            float totalAmt,
+            int numInst,
+            float dailyRate,
+            float installmentAmt,
+            DateTime startDate
+        )
+        {
+            description = desc;
+            totalAmount = totalAmt;
+            numInstallments = numInst;
+            dailyInterestRate = dailyRate;
+            installmentAmount = installmentAmt;
+            remainingInstallments = numInst;
+            nextPaymentDate = startDate.AddDays(1); // Primeira parcela no próximo dia
+            lastProcessedAmount = 0f; // Inicializa o valor da última parcela processada como zero
+        }
+    }
 }
