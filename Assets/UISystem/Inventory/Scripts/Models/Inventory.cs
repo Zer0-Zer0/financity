@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace UISystem
 {
+    [System.Serializable]
     public class Inventory
     {
         private List<InventorySlot> slots = new List<InventorySlot>();
