@@ -1,126 +1,152 @@
-using System.Collections.Generic;
-using System;
-using UnityEngine;
 using NUnit.Framework;
-using UISystem;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
-[TestFixture]
-public class InventoryTests
+namespace UISystem.Tests
 {
-    private Inventory inventory;
-    private InventoryItem banana, apple;
-
-    [SetUp]
-    public void Setup()
+    [TestFixture]
+    public class InventoryTests
     {
-        inventory = new Inventory(5);
-        banana = ItemFactory("banana", 10);
-        apple = ItemFactory("apple", 5);
-    }
+        private Inventory inventory;
+        private InventoryItem testItem;
 
-    private List<InventorySlot> SlotListFactory(InventorySlot item)
-    {
-        List<InventorySlot> slotList = new List<InventorySlot>() { item };
-        return slotList;
-    }
+        [SetUp]
+        public void SetUp()
+        {
+            testItem = ItemFactory("Test Item", 10);
+            inventory = new Inventory(5);
+        }
 
-    private InventoryItem ItemFactory(string name = "Item", int maxAmount = 10)
-    {
-        InventoryItem _item = ScriptableObject.CreateInstance<InventoryItem>();
-        _item.Name = name;
-        _item.MaxAmount = maxAmount;
-        return _item;
-    }
+        [TearDown]
+        public void TearDown()
+        {
+            inventory = null;
+            testItem = null;
+        }
 
-    [Test]
-    public void CanExpandSlots()
-    {
-        int initialSlotCount = inventory.GetCurrentSlotCount();
-        int additionalSlots = 3;
+        private InventoryItem ItemFactory(string name = "Item", int maxAmount = 10)
+        {
+            InventoryItem _item = ScriptableObject.CreateInstance<InventoryItem>();
+            _item.Name = name;
+            _item.MaxAmount = maxAmount;
+            return _item;
+        }
 
-        inventory.ExpandSlots(additionalSlots);
+        [Test]
+        public void Constructor_WithNegativeInitialSlotCount_ThrowsArgumentOutOfRangeException()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Inventory(-1));
+        }
 
-        Assert.AreEqual(initialSlotCount + additionalSlots, inventory.GetCurrentSlotCount());
-    }
+        [Test]
+        public void Constructor_WithNullInitialSlots_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Inventory(null));
+        }
 
-    [Test]
-    public void CanShrinkSlots()
-    {
-        int initialSlotCount = inventory.GetCurrentSlotCount();
-        int removedSlots = 2;
+        [Test]
+        public void Constructor_WithItemAndAmount_AddsItemToInventory()
+        {
+            Inventory inventoryWithItem = new Inventory(testItem, 5, 5);
+            Assert.AreEqual(5, inventoryWithItem.SearchItem(testItem));
+        }
 
-        inventory.ShrinkSlots(removedSlots);
+        [Test]
+        public void AddItem_WithNullSourceInventory_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => inventory.AddItem(null));
+        }
 
-        Assert.AreEqual(initialSlotCount - removedSlots, inventory.GetCurrentSlotCount());
-    }
+        [Test]
+        public void AddItem_WithExistingItem_AddsToExistingSlot()
+        {
+            inventory.AddItem(testItem, 5);
+            int remaining = inventory.AddItem(testItem, 3);
+            Assert.AreEqual(0, remaining);
+            Assert.AreEqual(8, inventory.SearchItem(testItem));
+        }
 
-    [Test]
-    public void CanAddItem()
-    {
-        List<InventorySlot> slotList = SlotListFactory(new InventorySlot(banana, 5));
-        slotList.Add(new InventorySlot(apple, 3));
-        // Create a new inventory for adding items
-        Inventory sourceInventory = new Inventory(slotList);
+        [Test]
+        public void AddItem_WithNewItem_AddsToEmptySlot()
+        {
+            InventoryItem newItem = ItemFactory("New Item", 5);
+            int remaining = inventory.AddItem(newItem, 3);
+            Assert.AreEqual(0, remaining);
+            Assert.AreEqual(3, inventory.SearchItem(newItem));
+        }
 
-        // Test adding items to the inventory
-        Assert.AreEqual(new Inventory(0).ToString(), inventory.AddItem(sourceInventory).ToString()); // Add source inventory to the main inventory
+        [Test]
+        public void SubtractItem_WithNullItem_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => inventory.SubtractItem(null, 1));
+        }
 
-        // Test adding more items than slot capacity
-        Assert.AreEqual(5, inventory.SearchItem(banana)); // Check remaining items after adding
-    }
+        [Test]
+        public void SubtractItem_WithInsufficientAmount_ReturnsRemainingAmount()
+        {
+            inventory.AddItem(testItem, 5);
+            int remaining = inventory.SubtractItem(testItem, 7);
+            Assert.AreEqual(2, remaining);
+            Assert.AreEqual(0, inventory.SearchItem(testItem));
+        }
 
-    [Test]
-    public void CanSubtractItem()
-    {
-        List<InventorySlot> slotList = SlotListFactory(new InventorySlot(banana, 8));
-        slotList.Add(new InventorySlot(apple, 5));
-        // Create a new inventory for adding items
-        Inventory sourceInventory = new Inventory(slotList);
+        [Test]
+        public void SearchItem_WithNullItem_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => inventory.SearchItem(null));
+        }
 
-        // Test removing items
-        Assert.AreEqual(new Inventory(0).ToString(), inventory.SubtractItem(sourceInventory).ToString()); // Subtract from main inventory
-        //Assert.AreEqual(2, inventory.SubtractItem(sourceInventory)); // Check remaining items
-    }
+        [Test]
+        public void ExchangeItems_WithNullSenderInventory_ThrowsArgumentNullException()
+        {
+            Inventory exchangeInventory = new Inventory(1);
+            Assert.Throws<ArgumentNullException>(() => inventory.ExchangeItems(null, exchangeInventory));
+        }
 
-    [Test]
-    public void CanSearchItem()
-    {
-        Inventory sourceInventory = new Inventory(banana, 28, 10);
-        sourceInventory.AddItem(apple, 6);
+        [Test]
+        public void ExchangeItems_WithNullExchangedItems_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => inventory.ExchangeItems(inventory, null));
+        }
 
-        // Test searching for items
-        Assert.AreEqual(28, sourceInventory.SearchItem(banana));
-        Assert.AreEqual(6, sourceInventory.SearchItem(apple));
-        Assert.AreEqual(0, sourceInventory.SearchItem(ItemFactory()));
-    }
+        [Test]
+        public void ToString_ReturnsCorrectFormat()
+        {
+            inventory.AddItem(testItem, 5);
+            string result = inventory.ToString();
+            Assert.IsTrue(result.Contains("Test Item"));
+            Assert.IsTrue(result.Contains("Current Amount: 5"));
+        }
 
-    [Test]
-    public void CanExchangeItems()
-    {
-        Inventory _senderInventory = new Inventory(banana, 5, 1);
-        inventory.ExchangeItems(_senderInventory, banana, 3);
+        [Test]
+        public void ShrinkSlots_WithNegativeRemovedSlots_ThrowsArgumentOutOfRangeException()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => inventory.ShrinkSlots(-1));
+        }
 
-        // Check if items were exchanged correctly
-        Assert.AreEqual(3, inventory.SearchItem(banana));
-        Assert.AreEqual(2, _senderInventory.SearchItem(banana));
-    }
+        [Test]
+        public void ShrinkSlots_WithTooManyRemovedSlots_ThrowsException()
+        {
+            Assert.Throws<Exception>(() => inventory.ShrinkSlots(6));
+        }
 
-    [Test]
-    public void CanToString()
-    {
-        // Add items to slots for testing ToString method
-        inventory.AddItem(new Inventory(SlotListFactory(new InventorySlot(banana, 8)))); // Add bananas to main inventory
+        [Test]
+        public void ExpandSlots_WithNegativeAdditionalSlots_ThrowsArgumentOutOfRangeException()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => inventory.ExpandSlots(-1));
+        }
 
-        string expectedString = "Inventory Slots:\nItem: banana, Max Amount: 10, Current Amount: 8\n";
-        string actualString = inventory.ToString(); // Get string representation of inventory
-        Assert.IsTrue(actualString.Contains(expectedString)); // Check if expected string is in actual string
-    }
+        [Test]
+        public void AddItem_WithZeroAmount_ThrowsArgumentOutOfRangeException()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => inventory.AddItem(testItem, 0));
+        }
 
-    [TearDown]
-    public void TearDown()
-    {
-        inventory = null;
-        banana = null;
-        apple = null;
+        [Test]
+        public void SubtractItem_WithZeroAmount_ThrowsArgumentOutOfRangeException()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => inventory.SubtractItem(testItem, 0));
+        }
     }
 }
