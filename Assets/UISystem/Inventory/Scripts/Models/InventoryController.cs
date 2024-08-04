@@ -28,7 +28,7 @@ namespace UISystem
         {
             if (data is Inventory items)
             {
-                _inventory.SubtractItem(items);
+                Inventory.SubtractItem(_inventory, items);
                 OnInventoryChanged.Raise(this, _inventory.GetInventorySlots());
             }
         }

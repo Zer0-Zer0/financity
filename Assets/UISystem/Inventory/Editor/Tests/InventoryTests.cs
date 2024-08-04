@@ -1,6 +1,6 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
 namespace UISystem.Tests
@@ -62,8 +62,8 @@ namespace UISystem.Tests
         public void AddItem_WithExistingItem_AddsToExistingSlot()
         {
             inventory.AddItem(testItem, 5);
-            int remaining = inventory.AddItem(testItem, 3);
-            Assert.AreEqual(0, remaining);
+            Inventory remainingInventory = inventory.AddItem(testItem, 3);
+            Assert.AreEqual(new Inventory(0).ToString(), remainingInventory.ToString());
             Assert.AreEqual(8, inventory.SearchItem(testItem));
         }
 
@@ -71,8 +71,8 @@ namespace UISystem.Tests
         public void AddItem_WithNewItem_AddsToEmptySlot()
         {
             InventoryItem newItem = ItemFactory("New Item", 5);
-            int remaining = inventory.AddItem(newItem, 3);
-            Assert.AreEqual(0, remaining);
+            Inventory remainingInventory = inventory.AddItem(newItem, 3);
+            Assert.AreEqual(new Inventory(0).ToString(), remainingInventory.ToString());
             Assert.AreEqual(3, inventory.SearchItem(newItem));
         }
 
@@ -98,8 +98,11 @@ namespace UISystem.Tests
         public void SubtractItem_WithInsufficientAmount_ReturnsRemainingAmount()
         {
             inventory.AddItem(testItem, 5);
-            int remaining = inventory.SubtractItem(testItem, 7);
-            Assert.AreEqual(2, remaining);
+            Inventory remainingInventory = inventory.SubtractItem(testItem, 7);
+            Assert.AreEqual(
+                new Inventory(testItem, 2, inventory.GetCurrentSlotCount()),
+                remainingInventory.ToString()
+            );
             Assert.AreEqual(0, inventory.SearchItem(testItem));
         }
 
@@ -113,7 +116,9 @@ namespace UISystem.Tests
         public void ExchangeItems_WithNullSenderInventory_ThrowsArgumentNullException()
         {
             Inventory exchangeInventory = new Inventory(1);
-            Assert.Throws<ArgumentNullException>(() => inventory.ExchangeItems(null, exchangeInventory));
+            Assert.Throws<ArgumentNullException>(
+                () => inventory.ExchangeItems(null, exchangeInventory)
+            );
         }
 
         [Test]
