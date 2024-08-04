@@ -50,15 +50,18 @@ namespace UISystem
         private void SetGraphics(InventorySlot slot)
         {
             if (slot.CurrentAmount <= 0)
-                throw new ArgumentOutOfRangeException("CurrentAmount needs to be bigger than zero.");
+                throw new ArgumentOutOfRangeException(
+                    "CurrentAmount needs to be bigger than zero."
+                );
 
             if (slot.CurrentItem == null)
             {
                 Reset();
                 return;
             }
-            
+
             _slotIcon.sprite = slot.CurrentItem.Icon;
+            _slotIcon.color = Color.white;
             _itemCounter.SetText(slot.CurrentAmount.ToString());
         }
 
@@ -66,6 +69,7 @@ namespace UISystem
         {
             _slotIcon.sprite = null;
             _itemCounter.SetText(String.Empty);
+            _slotIcon.color = new Color(0, 0, 0, 0);
         }
     }
 }

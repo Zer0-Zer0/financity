@@ -2092,7 +2092,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventoryView: {fileID: 1611079644}
-  _inventoryChanged: {fileID: 11400000, guid: 82fe49751a5a2174f95ae278aeee44e6, type: 2}
 --- !u!114 &1611079646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2296,7 +2295,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf04412f44e5bf3419e50aa1b024060d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialSlotCount: 16
+  _initialInventory:
+    slots:
+    - _currentItem: {fileID: 11400000, guid: abbe5b33cf962f22db8375b74d5ee6bc, type: 2}
+      _currentAmount: 4
+    - _currentItem: {fileID: 11400000, guid: 3c76fc6e54a8cb3b0810adf5ddf0d60d, type: 2}
+      _currentAmount: 3
+    - _currentItem: {fileID: 11400000, guid: 09465445c54be3643aa7e0f02ddc3db2, type: 2}
+      _currentAmount: 5
+    - _currentItem: {fileID: 11400000, guid: a1064d11dcee97c4fa1570bacbffd117, type: 2}
+      _currentAmount: 3
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
   OnInventoryChanged: {fileID: 11400000, guid: 82fe49751a5a2174f95ae278aeee44e6, type: 2}
 --- !u!4 &1830720962
 Transform:
