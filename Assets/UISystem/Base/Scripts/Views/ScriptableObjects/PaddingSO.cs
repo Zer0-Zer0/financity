@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace UISystem
 {
-    [CreateAssetMenu(menuName = "CustomUI/PaddingSO", fileName = "PaddingSO")]
+    [CreateAssetMenu(menuName = "UISystem/PaddingSO", fileName = "PaddingSO")]
     public class PaddingSO : ScriptableObject
     {
         public RectOffset padding;

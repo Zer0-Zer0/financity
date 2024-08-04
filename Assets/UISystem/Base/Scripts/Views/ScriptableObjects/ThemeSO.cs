@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace UISystem
 {
-    [CreateAssetMenu(menuName = "CustomUI/ThemeSO", fileName = "ThemeSO")]
+    [CreateAssetMenu(menuName = "UISystem/ThemeSO", fileName = "ThemeSO")]
     public class ThemeSO : ScriptableObject
     {
         [Header("Primary")]

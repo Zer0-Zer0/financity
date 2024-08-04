@@ -11,7 +11,7 @@ using TMPro;
 
 namespace UISystem
 {
-    [CreateAssetMenu(menuName = "CustomUI/TextSO", fileName = "TextSO")]
+    [CreateAssetMenu(menuName = "UISystem/TextSO", fileName = "TextSO")]
     public class TextSO : ScriptableObject
     {
         public TMP_FontAsset font;
