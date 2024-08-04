@@ -1,36 +1,53 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine;
 
-public class Stock : MonoBehaviour
+[CreateAssetMenu(
+    fileName = "Economy/FluctuatingValueSO",
+    menuName = "FluctuatingValueSO",
+    order = 0
+)]
+public class FluctuatingValueSO : ScriptableObject
 {
-    public string stockName = "Stock";
-    
-    [HideInInspector] public float currentValue, currentDelay;
-    [SerializeField] private float initialValue, instability, delay, maxValue, minValue;
+    [HideInInspector]
+    public float currentValue,
+        currentDelay;
 
+    [SerializeField]
+    private float initialValue,
+        instability,
+        delay,
+        maxValue,
+        minValue;
 
-    [SerializeField] private int minTendency = 1, maxTendency = 1;
+    [SerializeField]
+    private int minTendency = 1,
+        maxTendency = 1;
     int tendencyAmount;
 
-    private float highShadow, lowShadow, openValue, closeValue, tendency;
+    private float highShadow,
+        lowShadow,
+        openValue,
+        closeValue,
+        tendency;
 
     private float trendPersistence = 0.7f;
     private float meanReversionFactor = 0.05f;
 
     // Define a delegate for the stock update event
-    public delegate void StockUpdateEventHandler(string stockName, float open, float close, float high, float low);
+    public delegate void StockUpdateEventHandler(float open, float close, float high, float low);
+
     // Declare the event using the above delegate
     public event StockUpdateEventHandler OnStockUpdate;
 
-    void Start()
+    public void Init()
     {
         currentValue = openValue = lowShadow = initialValue;
         currentDelay = delay;
     }
-    private void FixedUpdate()
+
+    public void Tick()
     {
         if (currentDelay > 0)
         {
@@ -40,7 +57,8 @@ public class Stock : MonoBehaviour
 
                 // Introduce trend persistence
                 float trendFactor = 1 + trendPersistence * (tendency - 1);
-                currentValue += currentValue * instability * tendency * tendencyPercentage * trendFactor;
+                currentValue +=
+                    currentValue * instability * tendency * tendencyPercentage * trendFactor;
 
                 // Introduce mean reversion
                 float meanReversion = (initialValue - currentValue) * meanReversionFactor;
