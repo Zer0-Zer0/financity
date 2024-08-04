@@ -9,7 +9,7 @@ public class CandlestickChart : MonoBehaviour
 {
     public CandleRender candlePrefab;
     public List<CandleRender> candles = new List<CandleRender>();
-    public Stock representedStock;
+    public FluctuatingValueSO representedStock;
 
     public TMP_Text CurrentValueText;
 
@@ -85,7 +85,7 @@ public class CandlestickChart : MonoBehaviour
         oldestCandle.gameObject.SetActive(false);
     }
 
-    void HandleStockUpdate(string stockName, float open, float close, float high, float low)
+    void HandleStockUpdate(float open, float close, float high, float low)
     {
         if (lowest > low)
         {
@@ -102,7 +102,7 @@ public class CandlestickChart : MonoBehaviour
             highest = high;
         }
         // Do something with the updated stock data
-        Debug.Log($"Received stock update - Stock: {stockName}, Open: ${open}, Close: ${close}, HighShadow: ${high}, LowShadow: ${low}");
+        Debug.Log($"Received stock update - Open: ${open}, Close: ${close}, HighShadow: ${high}, LowShadow: ${low}");
 
 
         // Instantiate a new CandleRender and add it to the list

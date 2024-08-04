@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+/*using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +9,7 @@ public class newCandlestickChart : MonoBehaviour
     public float CandlePadding = 100f;
     public int maxCandles = 5;
     public List<CandleRender> candles = new List<CandleRender>();
-    public Stock representedStock;
+    public FluctuatingValueSO representedStock;
     public float lowest = -1f, highest = 1f;
     public float maxCandleHeight = 160f, maxCandleY = 200f;
 
@@ -99,4 +99,4 @@ public class newCandlestickChart : MonoBehaviour
 
         RefreshCandleScale();
     }
-}
+}*/
