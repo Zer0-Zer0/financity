@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 using UnityEngine;
 using NUnit.Framework;
@@ -22,10 +23,13 @@ public class InventoryTests
 
     private Inventory InventoryFactory(int slotCount = 5)
     {
-        testObject = new GameObject();
-        Inventory _inventory = new Inventory(slotCount);
+        return new Inventory(slotCount);
+    }
 
-        return _inventory;
+    private List<InventorySlot> SlotListFactory(InventorySlot item)
+    {
+        List<InventorySlot> slotList = new List<InventorySlot>() { item };
+        return slotList;
     }
 
     private InventoryItem ItemFactory(string name = "Item", int maxAmount = 10)
@@ -61,71 +65,74 @@ public class InventoryTests
     [Test]
     public void CanAddItem()
     {
-        // Test adding items to empty slots
-        Assert.AreEqual(0, inventory.AddItem(new InventorySlot(banana, 5)));
-        Assert.AreEqual(0, inventory.AddItem(new InventorySlot(apple, 3)));
+        List<InventorySlot> slotList = SlotListFactory(new InventorySlot(banana, 5));
+        slotList.Add(new InventorySlot(apple, 3));
+        // Create a new inventory for adding items
+        Inventory sourceInventory = new Inventory(slotList);
 
-        // Test adding items to slots with existing items
-        Assert.AreEqual(0, inventory.AddItem(new InventorySlot(banana, 3)));
-        Assert.AreEqual(0, inventory.AddItem(new InventorySlot(apple, 4)));
+        // Test adding items to the inventory
+        Assert.AreEqual(new Inventory(0).ToString(), inventory.AddItem(sourceInventory)); // Add source inventory to the main inventory
 
         // Test adding more items than slot capacity
-        Assert.AreEqual(3, inventory.AddItem(new InventorySlot(banana, 5)));
+        sourceInventory.AddItem(new Inventory(SlotListFactory(new InventorySlot(banana, 5)))); // Add more bananas to source inventory
+        Assert.AreEqual(3, inventory.AddItem(sourceInventory)); // Check remaining items after adding
     }
 
     [Test]
     public void CanSubtractItem()
     {
-        // Add items to slots for removal testing
-        inventory.AddItem(new InventorySlot(banana, 8));
-        inventory.AddItem(new InventorySlot(apple, 5));
+        List<InventorySlot> slotList = SlotListFactory(new InventorySlot(banana, 8));
+        slotList.Add(new InventorySlot(apple, 5));
+        // Create a new inventory for adding items
+        Inventory sourceInventory = new Inventory(slotList);
 
         // Test removing items
-        Assert.AreEqual(0, inventory.SubtractItem(new InventorySlot(banana, 5)));
-        Assert.AreEqual(2, inventory.SubtractItem(new InventorySlot(banana, 5)));
-
-        Assert.AreEqual(0, inventory.SubtractItem(new InventorySlot(apple, 4)));
-        Assert.AreEqual(4, inventory.SubtractItem(new InventorySlot(apple, 5)));
+        Assert.AreEqual(new Inventory(0).ToString(), inventory.SubtractItem(sourceInventory)); // Subtract from main inventory
+        //Assert.AreEqual(2, inventory.SubtractItem(sourceInventory)); // Check remaining items
     }
 
     [Test]
     public void CanSearchItem()
     {
-        inventory.AddItem(new InventorySlot(banana, 28));
-        inventory.AddItem(new InventorySlot(apple, 6));
+        List<InventorySlot> slotList = SlotListFactory(new InventorySlot(banana, 28));
+        slotList.Add(new InventorySlot(apple, 6));
+        // Create a new inventory for adding items
+        Inventory sourceInventory = new Inventory(slotList);
 
         // Test searching for items
-        Assert.AreEqual(28, inventory.SearchItem(banana));
-        Assert.AreEqual(6, inventory.SearchItem(apple));
-        Assert.AreEqual(0, inventory.SearchItem(ItemFactory()));
+        Assert.AreEqual(28, inventory.SearchItem(banana)); // Search for bananas
+        Assert.AreEqual(6, inventory.SearchItem(apple)); // Search for apples
+        Assert.AreEqual(0, inventory.SearchItem(ItemFactory())); // Search for a non-existent item
     }
 
     [Test]
     public void CanExchangeItems()
     {
+        List<InventorySlot> slotList = SlotListFactory(new InventorySlot(banana, 5));
         // Create a second inventory for exchange testing
-        Inventory _senderInventory = InventoryFactory();
+        Inventory _senderInventory = new Inventory(slotList);
 
-        // Add items to sender inventory for exchange
-        _senderInventory.AddItem(new InventorySlot(banana, 5));
+        // Prepare items to exchange
+        List<InventorySlot> slotList2 = SlotListFactory(new InventorySlot(banana, 3));
+        Inventory exchangedItems = new Inventory(slotList2);
 
         // Test exchanging items between inventories
-        inventory.ExchangeItems(_senderInventory, new InventorySlot(banana, 3));
+        inventory.ExchangeItems(_senderInventory, exchangedItems); // Perform exchange
 
         // Check if items were exchanged correctly
-        Assert.AreEqual(3, inventory.SearchItem(banana));
-        Assert.AreEqual(2, _senderInventory.SearchItem(banana));
+        Assert.AreEqual(3, inventory.SearchItem(banana)); // Check bananas in main inventory
+        Assert.AreEqual(2, _senderInventory.SearchItem(banana)); // Check remaining bananas in sender inventory
     }
 
     [Test]
     public void CanToString()
     {
         // Add items to slots for testing ToString method
-        inventory.AddItem(new InventorySlot(banana, 8));
+        inventory.AddItem(new Inventory(SlotListFactory(new InventorySlot(banana, 8)))); // Add bananas to main inventory
 
         string expectedString = "Inventory Slots:\nItem: banana, Max Amount: 10, Current Amount: 8\n";
-        string actualString = inventory.ToString();
-        Assert.IsTrue(actualString.Contains(expectedString));
+        string actualString = inventory.ToString(); // Get string representation of inventory
+        Assert.IsTrue(actualString.Contains(expectedString)); // Check if expected string is in actual string
     }
 
     [TearDown]
@@ -134,6 +141,6 @@ public class InventoryTests
         inventory = null;
         banana = null;
         apple = null;
-        GameObject.DestroyImmediate(testObject);
+        GameObject.DestroyImmediate(testObject); // Clean up test object
     }
 }

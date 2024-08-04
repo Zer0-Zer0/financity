@@ -26,9 +26,9 @@ namespace UISystem
 
         public void OnInventoryItemSubtracted(Component sender, object data)
         {
-            if (data is InventorySlot slot)
+            if (data is Inventory items)
             {
-                _inventory.SubtractItem(slot);
+                _inventory.SubtractItem(items);
                 OnInventoryChanged.Raise(this, _inventory.slots);
             }
         }
