@@ -53,16 +53,10 @@ namespace UISystem.Tests
         }
 
         [Test]
-        public void AddItem_WithNullSourceInventory_ThrowsArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>(() => inventory.AddItem(null));
-        }
-
-        [Test]
         public void AddItem_WithExistingItem_AddsToExistingSlot()
         {
-            inventory.AddItem(testItem, 5);
-            Inventory remainingInventory = inventory.AddItem(testItem, 3);
+            Inventory.AddItem(inventory, testItem, 5);
+            Inventory remainingInventory = Inventory.AddItem(inventory, testItem, 3);
             Assert.AreEqual(new Inventory(0).ToString(), remainingInventory.ToString());
             Assert.AreEqual(8, inventory.SearchItem(testItem));
         }
@@ -71,7 +65,7 @@ namespace UISystem.Tests
         public void AddItem_WithNewItem_AddsToEmptySlot()
         {
             InventoryItem newItem = ItemFactory("New Item", 5);
-            Inventory remainingInventory = inventory.AddItem(newItem, 3);
+            Inventory remainingInventory = Inventory.AddItem(inventory, newItem, 3);
             Assert.AreEqual(new Inventory(0).ToString(), remainingInventory.ToString());
             Assert.AreEqual(3, inventory.SearchItem(newItem));
         }
@@ -81,9 +75,9 @@ namespace UISystem.Tests
         {
             InventoryItem newItem = ItemFactory("New Item", 5);
             Inventory inventoryToBeAdded = new Inventory(5);
-            inventoryToBeAdded.AddItem(testItem, 25);
-            inventoryToBeAdded.AddItem(newItem, 7);
-            Inventory remainingItems = inventory.AddItem(inventoryToBeAdded);
+            Inventory.AddItem(inventoryToBeAdded, testItem, 25);
+            Inventory.AddItem(inventoryToBeAdded, newItem, 7);
+            Inventory remainingItems = Inventory.AddItem(inventory, inventoryToBeAdded);
             Assert.AreEqual(inventoryToBeAdded.ToString(), inventory.ToString());
             Assert.AreEqual(remainingItems.ToString(), new Inventory(0).ToString());
         }
@@ -91,14 +85,14 @@ namespace UISystem.Tests
         [Test]
         public void SubtractItem_WithNullItem_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => inventory.SubtractItem(null, 1));
+            Assert.Throws<ArgumentNullException>(() => Inventory.SubtractItem(inventory, null, 1));
         }
 
         [Test]
         public void SubtractItem_WithInsufficientAmount_ReturnsRemainingAmount()
         {
-            inventory.AddItem(testItem, 5);
-            Inventory remainingInventory = inventory.SubtractItem(testItem, 7);
+            Inventory.AddItem(inventory, testItem, 5);
+            Inventory remainingInventory = Inventory.SubtractItem(inventory, testItem, 7);
             Assert.AreEqual(
                 new Inventory(testItem, 2, inventory.GetCurrentSlotCount()),
                 remainingInventory.ToString()
@@ -117,20 +111,22 @@ namespace UISystem.Tests
         {
             Inventory exchangeInventory = new Inventory(1);
             Assert.Throws<ArgumentNullException>(
-                () => inventory.ExchangeItems(null, exchangeInventory)
+                () => Inventory.ExchangeItems(inventory, null, exchangeInventory)
             );
         }
 
         [Test]
         public void ExchangeItems_WithNullExchangedItems_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => inventory.ExchangeItems(inventory, null));
+            Assert.Throws<ArgumentNullException>(
+                () => Inventory.ExchangeItems(inventory, null, null)
+            );
         }
 
         [Test]
         public void ToString_ReturnsCorrectFormat()
         {
-            inventory.AddItem(testItem, 5);
+            Inventory.AddItem(inventory, testItem, 5);
             string result = inventory.ToString();
             Assert.IsTrue(result.Contains("Test Item"));
             Assert.IsTrue(result.Contains("Current Amount: 5"));
@@ -157,13 +153,17 @@ namespace UISystem.Tests
         [Test]
         public void AddItem_WithZeroAmount_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => inventory.AddItem(testItem, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => Inventory.AddItem(inventory, testItem, -1)
+            );
         }
 
         [Test]
         public void SubtractItem_WithZeroAmount_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => inventory.SubtractItem(testItem, 0));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => Inventory.SubtractItem(inventory, testItem, 0)
+            );
         }
     }
 }

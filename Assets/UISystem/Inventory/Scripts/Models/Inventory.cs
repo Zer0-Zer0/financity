@@ -45,7 +45,6 @@ namespace UISystem
                 );
 
             ExpandSlots(initialSlotCount);
-            int remainingItems = amount;
             AddItem(this, item, amount);
         }
 
@@ -78,8 +77,12 @@ namespace UISystem
 
         public static Inventory AddItem(Inventory inventory, Inventory items)
         {
+            if (inventory == null)
+                throw new ArgumentNullException(nameof(inventory), "Inventory cannot be null.");
             if (items == null)
                 throw new ArgumentNullException(nameof(items), "Source inventory cannot be null.");
+            if (items.GetCurrentSlotCount() <= 0)
+                throw new ArgumentOutOfRangeException("Source inventory is empty.");
 
             Inventory remainingInventory = new Inventory(items.GetCurrentSlotCount());
 
@@ -92,8 +95,15 @@ namespace UISystem
 
         public static Inventory AddItem(Inventory inventory, InventorySlot slot)
         {
+            if (inventory == null)
+                throw new ArgumentNullException(nameof(inventory), "Inventory cannot be null.");
             if (slot == null)
                 throw new ArgumentNullException(nameof(slot), "Slot cannot be null.");
+            if (slot.CurrentAmount <= 0)
+                throw new ArgumentOutOfRangeException(
+                    nameof(slot.CurrentAmount),
+                    "Slot amount must be greater than zero."
+                );
 
             Inventory remainingInventory = AddItem(inventory, slot.CurrentItem, slot.CurrentAmount);
             return remainingInventory;
@@ -101,6 +111,8 @@ namespace UISystem
 
         public static Inventory AddItem(Inventory inventory, InventoryItem item, int amount)
         {
+            if (inventory == null)
+                throw new ArgumentNullException(nameof(inventory), "Inventory cannot be null.");
             if (item == null)
                 throw new ArgumentNullException(nameof(item), "Item cannot be null.");
             if (amount < 0)
@@ -126,7 +138,7 @@ namespace UISystem
 
             Inventory remainingItemInventory = new Inventory(
                 item,
-                amount,
+                remainingItems,
                 inventory.GetCurrentSlotCount()
             );
             return remainingItemInventory;
@@ -174,8 +186,12 @@ namespace UISystem
 
         public static Inventory SubtractItem(Inventory inventory, Inventory items)
         {
+            if (inventory == null)
+                throw new ArgumentNullException(nameof(inventory), "Inventory cannot be null.");
             if (items == null)
                 throw new ArgumentNullException(nameof(items), "Source inventory cannot be null.");
+            if (items.GetCurrentSlotCount() <= 0)
+                throw new InvalidOperationException("Source inventory is empty.");
 
             Inventory remainingInventory = new Inventory(items.GetCurrentSlotCount());
 
@@ -188,6 +204,8 @@ namespace UISystem
 
         public static Inventory SubtractItem(Inventory inventory, InventorySlot slot)
         {
+            if (inventory == null)
+                throw new ArgumentNullException(nameof(inventory), "Inventory cannot be null.");
             if (slot == null)
                 throw new ArgumentNullException(nameof(slot), "Slot cannot be null.");
 
@@ -201,12 +219,20 @@ namespace UISystem
 
         public static Inventory SubtractItem(Inventory inventory, InventoryItem item, int amount)
         {
+            if (inventory == null)
+                throw new ArgumentNullException(nameof(inventory), "Inventory cannot be null.");
             if (item == null)
                 throw new ArgumentNullException(nameof(item), "Item cannot be null.");
             if (amount <= 0)
                 throw new ArgumentOutOfRangeException(
                     nameof(amount),
                     "Amount must be greater than zero."
+                );
+
+            int totalAvailable = inventory.SearchItem(item);
+            if (amount > totalAvailable)
+                throw new InvalidOperationException(
+                    "Cannot subtract more items than available in inventory."
                 );
 
             int remainingItems = amount;
@@ -263,12 +289,14 @@ namespace UISystem
             return totalAmount;
         }
 
-        public void ExchangeItems(
+        public static void ExchangeItems(
             Inventory inventory,
             Inventory senderInventory,
             Inventory exchangedItems
         )
         {
+            if (inventory == null)
+                throw new ArgumentNullException(nameof(inventory), "Inventory cannot be null.");
             if (senderInventory == null)
                 throw new ArgumentNullException(
                     nameof(senderInventory),
@@ -285,13 +313,15 @@ namespace UISystem
             SubtractItem(senderInventory, removeFromSender);
         }
 
-        public void ExchangeItems(
+        public static void ExchangeItems(
             Inventory inventory,
             Inventory senderInventory,
             InventoryItem exchangedItem,
             int amount
         )
         {
+            if (inventory == null)
+                throw new ArgumentNullException(nameof(inventory), "Inventory cannot be null.");
             if (senderInventory == null)
                 throw new ArgumentNullException(
                     nameof(senderInventory),
