@@ -37,9 +37,9 @@ namespace UISystem
             {
                 throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be greater than zero.");
             }
-            if (initialSlotCount < 0)
+            if (initialSlotCount <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(initialSlotCount), "Initial slot count cannot be negative.");
+                throw new ArgumentOutOfRangeException(nameof(initialSlotCount), "Initial slot count must be greater than zero.");
             }
 
             ExpandSlots(initialSlotCount);
