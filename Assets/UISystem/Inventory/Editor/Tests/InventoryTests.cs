@@ -94,10 +94,9 @@ public class InventoryTests
     [Test]
     public void CanSearchItem()
     {
-        List<InventorySlot> slotList = SlotListFactory(new InventorySlot(banana, 28));
-        slotList.Add(new InventorySlot(apple, 6));
+        Inventory sourceInventory = new Inventory(banana, 28);
+        sourceInventory.AddItem(apple, 6);
         // Create a new inventory for adding items
-        Inventory sourceInventory = new Inventory(slotList);
 
         // Test searching for items
         Assert.AreEqual(28, inventory.SearchItem(banana)); // Search for bananas
