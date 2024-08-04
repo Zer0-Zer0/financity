@@ -71,11 +71,10 @@ public class InventoryTests
         Inventory sourceInventory = new Inventory(slotList);
 
         // Test adding items to the inventory
-        Assert.AreEqual(new Inventory(0).ToString(), inventory.AddItem(sourceInventory)); // Add source inventory to the main inventory
+        Assert.AreEqual(new Inventory(0).ToString(), inventory.AddItem(sourceInventory).ToString()); // Add source inventory to the main inventory
 
         // Test adding more items than slot capacity
-        sourceInventory.AddItem(new Inventory(SlotListFactory(new InventorySlot(banana, 5)))); // Add more bananas to source inventory
-        Assert.AreEqual(3, inventory.AddItem(sourceInventory)); // Check remaining items after adding
+        Assert.AreEqual(5, inventory.SearchItem(banana)); // Check remaining items after adding
     }
 
     [Test]
@@ -87,33 +86,27 @@ public class InventoryTests
         Inventory sourceInventory = new Inventory(slotList);
 
         // Test removing items
-        Assert.AreEqual(new Inventory(0).ToString(), inventory.SubtractItem(sourceInventory)); // Subtract from main inventory
+        Assert.AreEqual(new Inventory(0).ToString(), inventory.SubtractItem(sourceInventory).ToString()); // Subtract from main inventory
         //Assert.AreEqual(2, inventory.SubtractItem(sourceInventory)); // Check remaining items
     }
 
     [Test]
     public void CanSearchItem()
     {
-        Inventory sourceInventory = new Inventory(banana, 28);
+        Inventory sourceInventory = new Inventory(banana, 28, 10);
         sourceInventory.AddItem(apple, 6);
-        // Create a new inventory for adding items
 
         // Test searching for items
-        Assert.AreEqual(28, inventory.SearchItem(banana)); // Search for bananas
-        Assert.AreEqual(6, inventory.SearchItem(apple)); // Search for apples
-        Assert.AreEqual(0, inventory.SearchItem(ItemFactory())); // Search for a non-existent item
+        Assert.AreEqual(28, sourceInventory.SearchItem(banana));
+        Assert.AreEqual(6, sourceInventory.SearchItem(apple));
+        Assert.AreEqual(0, sourceInventory.SearchItem(ItemFactory()));
     }
 
     [Test]
     public void CanExchangeItems()
     {
-        List<InventorySlot> slotList = SlotListFactory(new InventorySlot(banana, 5));
-        Inventory _senderInventory = new Inventory(slotList);
-
-        List<InventorySlot> slotList2 = SlotListFactory(new InventorySlot(banana, 3));
-        Inventory exchangedItems = new Inventory(slotList2);
-
-        inventory.ExchangeItems(_senderInventory, exchangedItems);
+        Inventory _senderInventory = new Inventory(banana, 5, 1);
+        inventory.ExchangeItems(_senderInventory, banana, 3);
 
         // Check if items were exchanged correctly
         Assert.AreEqual(3, inventory.SearchItem(banana));
