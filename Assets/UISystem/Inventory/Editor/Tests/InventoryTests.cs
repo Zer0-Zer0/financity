@@ -109,19 +109,16 @@ public class InventoryTests
     public void CanExchangeItems()
     {
         List<InventorySlot> slotList = SlotListFactory(new InventorySlot(banana, 5));
-        // Create a second inventory for exchange testing
         Inventory _senderInventory = new Inventory(slotList);
 
-        // Prepare items to exchange
         List<InventorySlot> slotList2 = SlotListFactory(new InventorySlot(banana, 3));
         Inventory exchangedItems = new Inventory(slotList2);
 
-        // Test exchanging items between inventories
-        inventory.ExchangeItems(_senderInventory, exchangedItems); // Perform exchange
+        inventory.ExchangeItems(_senderInventory, exchangedItems);
 
         // Check if items were exchanged correctly
-        Assert.AreEqual(3, inventory.SearchItem(banana)); // Check bananas in main inventory
-        Assert.AreEqual(2, _senderInventory.SearchItem(banana)); // Check remaining bananas in sender inventory
+        Assert.AreEqual(3, inventory.SearchItem(banana));
+        Assert.AreEqual(2, _senderInventory.SearchItem(banana));
     }
 
     [Test]

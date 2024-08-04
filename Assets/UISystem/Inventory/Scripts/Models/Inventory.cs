@@ -20,6 +20,43 @@ namespace UISystem
             slots = initialSlots ?? new List<InventorySlot>();
         }
 
+        public Inventory(InventoryItem item, int ammount, int initialSlotCount){
+            Inventory inventory = new Inventory(initialSlotCount);
+            int remainingItems = amount;
+
+            foreach (InventorySlot slot in inventory.slots)
+            {
+                if (slot.ItemIsNull)
+                {
+                    if (item.MaxAmount >= remainingItems)
+                    {
+                        slot.SetItem(item, remainingItems);ini
+                        remainingItems = 0;
+                    }
+                    else
+                    {
+                        slot.SetItem(item, item.MaxAmount);
+                        remainingItems -= item.MaxAmount;
+                    }
+                }
+                else if (slot.CurrentItem == item)
+                {
+                    int spaceLeftInSlot = item.MaxAmount - slot.CurrentAmount;
+
+                    if (spaceLeftInSlot >= remainingItems)
+                    {
+                        slot.CurrentAmount += remainingItems;
+                        remainingItems = 0;
+                    }
+                    else
+                    {
+                        slot.CurrentAmount = item.MaxAmount;
+                        remainingItems -= spaceLeftInSlot;
+                    }
+                }
+            }
+        }
+
         public int CurrentSlotCount
         {
             get
@@ -89,29 +126,30 @@ namespace UISystem
 
         public Inventory SubtractItem(Inventory sourceInventory)
         {
-            Inventory remainingInventory = sourceInventory;
+            Inventory remainingInventory = new Inventory(sourceInventory.CurrentSlotCount);
 
             foreach (InventorySlot slot in sourceInventory.slots)
             {
                 if (slot.CurrentAmount > 0)
                 {
-                    InventoryItem item = slot.CurrentItem;
-                    int remainingItems = slot.CurrentAmount;
+                    InventorySlot remainingSlot = slot;
 
                     foreach (InventorySlot _slot in slots)
                     {
-                        if (_slot.CurrentItem != item) continue;
+                        if (_slot.CurrentItem != remainingSlot.CurrentItem) continue;
 
-                        if (_slot.CurrentAmount >= remainingItems)
+                        if (_slot.CurrentAmount >= remainingSlot.CurrentAmount)
                         {
-                            _slot.CurrentAmount -= remainingItems;
-                            remainingItems = 0;
+                            _slot.CurrentAmount -= remainingSlot.CurrentAmount;
+                            remainingSlot.CurrentAmount = 0;
                             break;
                         }
                         else
                         {
-                            remainingItems -= _slot.CurrentAmount;
+                            remainingSlot.CurrentAmount -= _slot.CurrentAmount;
                             _slot.CurrentAmount = 0;
+
+                            remainingInventory.AddItem(new Inventory(new List<InventorySlot> { remainingSlot }));
                         }
                     }
                 }
