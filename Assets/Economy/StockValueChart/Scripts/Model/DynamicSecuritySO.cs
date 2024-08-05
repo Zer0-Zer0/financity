@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
@@ -23,9 +25,7 @@ namespace Economy
         [SerializeField]
         private float minValue;
 
-        private int minTendency;
         private int maxTendency;
-
         private int tendencyAmount;
         private float tendency;
 
@@ -83,7 +83,7 @@ namespace Economy
 
         private void ApplyTendency()
         {
-            float tendencyPercentage = Random.Range(0.0001f, 1.0f);
+            float tendencyPercentage = UnityEngine.Random.Range(0.0001f, 1.0f);
             float trendFactor = 1 + trendPersistence * (tendency - 1);
 
             currentValue +=
@@ -103,8 +103,8 @@ namespace Economy
 
         private void SetNewTendency()
         {
-            tendency = Random.Range(-1.0f, 1.0f);
-            tendencyAmount = Random.Range(minTendency, maxTendency);
+            tendency = UnityEngine.Random.Range(-1.0f, 1.0f);
+            tendencyAmount = UnityEngine.Random.Range(1, maxTendency);
         }
 
         private void CloseVolatileValue()
@@ -119,17 +119,12 @@ namespace Economy
 
         private void UpdateTendencyLimits()
         {
-            // Calculate min and max tendency based on instability
             if (instability <= 0)
-            {
-                minTendency = int.MaxValue; // or some large number
-                maxTendency = int.MaxValue; // or some large number
-            }
+                throw new ArgumentOutOfRangeException(
+                    "ERROR: Instability can't be lower than Zero"
+                );
             else
-            {
-                minTendency = 1; // Minimum tendency when instability is 1
-                maxTendency = Mathf.CeilToInt(1 / instability); // Maximum tendency based on instability
-            }
+                maxTendency = Mathf.CeilToInt(Mathf.Pow(2, (1 - instability) * 10));
         }
     }
 }
