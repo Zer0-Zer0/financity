@@ -15,6 +15,8 @@ namespace Economy
 
         [Header("Update frequency")]
         [SerializeField]
+        private int tickIntervalToClose = 4;
+        private int ticksRemainingToClose;
         private float updateInterval = 1.0f;
 
         private float updateTimer;
@@ -22,9 +24,10 @@ namespace Economy
         private void Start()
         {
             foreach (var security in securities)
-            {
-                security.Init(updateInterval);
-            }
+                security.Init();
+
+            ticksRemainingToClose = tickIntervalToClose;
+
             OnEconomyTick.Raise(this, securities);
         }
 
@@ -41,14 +44,28 @@ namespace Economy
         private void UpdateSecurities()
         {
             foreach (var security in securities)
-            {
                 security.Tick();
+
+            ticksRemainingToClose--;
+
+            if (ticksRemainingToClose == 0)
+            {
+                foreach (var security in securities)
+                    security.CloseTick();
+                ticksRemainingToClose = tickIntervalToClose;
+                HandleStockUpdate();
+                foreach (var security in securities)
+                    security.Reset();
             }
         }
 
-        private void HandleStockUpdate(float open, float close, float high, float low)
+        private void HandleStockUpdate()
         {
-            Debug.Log($"Stock Update: Open: {open}, Close: {close}, High: {high}, Low: {low}");
+            foreach (var security in securities)
+                Debug.Log(
+                    $"Stock Update: Open: {security.openValue}, Close: {security.closeValue}, High: {security.highShadow}, Low: {security.lowShadow}"
+                );
+            OnEconomyTick.Raise(this, securities);
         }
     }
 }

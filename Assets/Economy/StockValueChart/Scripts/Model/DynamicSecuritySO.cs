@@ -37,9 +37,6 @@ namespace Economy
         public float currentValue;
 
         [HideInInspector]
-        public float currentDelay;
-
-        [HideInInspector]
         public float highShadow;
 
         [HideInInspector]
@@ -51,29 +48,27 @@ namespace Economy
         [HideInInspector]
         public float closeValue;
 
-        private float initialDelay;
         private const float trendPersistence = 0.7f;
         private const float meanReversionFactor = 0.05f;
 
-        public void Init(float delay)
+        public void Init()
         {
             currentValue = openValue = lowShadow = initialValue;
-            currentDelay = delay;
-            initialDelay = delay;
         }
 
         public void Tick()
         {
-            if (currentDelay > 0)
-            {
-                UpdateCurrentValue();
-                currentDelay -= Time.fixedDeltaTime;
-            }
-            else
-            {
-                CloseVolatileValue();
-                ResetForNextTick();
-            }
+            UpdateCurrentValue();
+        }
+
+        public void CloseTick()
+        {
+            CloseVolatileValue();
+        }
+
+        public void Reset()
+        {
+            ResetForNextTick();
         }
 
         private void UpdateCurrentValue()
@@ -123,7 +118,6 @@ namespace Economy
         private void ResetForNextTick()
         {
             highShadow = lowShadow = openValue = currentValue;
-            currentDelay = initialDelay;
         }
     }
 }
