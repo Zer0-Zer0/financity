@@ -27,8 +27,8 @@ namespace Economy
 
         private int maxTrendCount;
         private int remainingCurrentTrend;
-        private int trendDirection;
         private float trend;
+
 
         [HideInInspector]
         public float currentValue;
