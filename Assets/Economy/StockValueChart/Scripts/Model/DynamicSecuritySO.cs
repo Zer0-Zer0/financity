@@ -4,11 +4,11 @@ using UnityEngine;
 namespace Economy
 {
     [CreateAssetMenu(
-        fileName = "FluctuatingValueSO",
-        menuName = "Economy/FluctuatingValueSO",
+        fileName = "DynamicSecuritySO",
+        menuName = "Economy/DynamicSecuritySO",
         order = 0
     )]
-    public class FluctuatingValueSO : ScriptableObject
+    public class DynamicSecuritySO : ScriptableObject
     {
         [Header("Initial Values")]
         [SerializeField]
@@ -71,7 +71,7 @@ namespace Economy
             }
             else
             {
-                CloseFloatingValue();
+                CloseVolatileValue();
                 ResetForNextTick();
             }
         }
@@ -115,7 +115,7 @@ namespace Economy
             tendencyAmount = Random.Range(minTendency, maxTendency);
         }
 
-        private void CloseFloatingValue()
+        private void CloseVolatileValue()
         {
             closeValue = currentValue;
         }
