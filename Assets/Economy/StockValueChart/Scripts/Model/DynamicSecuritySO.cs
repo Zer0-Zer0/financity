@@ -29,9 +29,14 @@ namespace Economy
         private int remainingCurrentTrend;
         private float trend;
 
-
         [HideInInspector]
         public float currentValue;
+
+        [HideInInspector]
+        public float historicalMaximum;
+
+        [HideInInspector]
+        public float historicalMinimum;
 
         [HideInInspector]
         public float highShadow;
@@ -51,6 +56,7 @@ namespace Economy
         public void Init()
         {
             ResetValues();
+            InitHistoricalValues();
             UpdateTrendLimits();
         }
 
@@ -99,6 +105,9 @@ namespace Economy
             // Update shadows
             highShadow = Mathf.Max(highShadow, currentValue);
             lowShadow = Mathf.Min(lowShadow, currentValue);
+
+            historicalMaximum = Mathf.Max(historicalMaximum, highShadow);
+            historicalMinimum = Mathf.Min(historicalMinimum, lowShadow);
         }
 
         private void SetNewTrend()
@@ -115,6 +124,11 @@ namespace Economy
         private void ResetValues()
         {
             highShadow = lowShadow = openValue = currentValue;
+        }
+
+        private void InitHistoricalValues()
+        {
+            historicalMaximum = historicalMinimum = currentValue;
         }
 
         private void UpdateTrendLimits()
