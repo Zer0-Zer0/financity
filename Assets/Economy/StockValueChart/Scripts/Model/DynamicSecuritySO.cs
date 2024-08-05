@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Economy
@@ -25,9 +25,10 @@ namespace Economy
         [SerializeField]
         private float minValue;
 
-        private int maxTendency;
-        private int tendencyAmount;
-        private float tendency;
+        private int maxTrendCount;
+        private int remainingCurrentTrend;
+        private int trendDirection;
+        private float trend;
 
         [HideInInspector]
         public float currentValue;
@@ -49,8 +50,8 @@ namespace Economy
 
         public void Init()
         {
-            currentValue = openValue = lowShadow = initialValue;
-            UpdateTendencyLimits();
+            ResetValues();
+            UpdateTrendLimits();
         }
 
         public void Tick()
@@ -65,29 +66,28 @@ namespace Economy
 
         public void Reset()
         {
-            ResetForNextTick();
+            ResetValues();
         }
 
         private void UpdateCurrentValue()
         {
-            if (tendencyAmount > 0)
+            if (remainingCurrentTrend > 0)
             {
-                ApplyTendency();
-                tendencyAmount--;
+                ApplyTrend();
+                remainingCurrentTrend--;
             }
             else
             {
-                SetNewTendency();
+                SetNewTrend();
             }
         }
 
-        private void ApplyTendency()
+        private void ApplyTrend()
         {
-            float tendencyPercentage = UnityEngine.Random.Range(0.0001f, 1.0f);
-            float trendFactor = 1 + trendPersistence * (tendency - 1);
+            float trendPercentage = UnityEngine.Random.Range(0.0001f, 1.0f);
+            float trendFactor = 1 + trendPersistence * (trend - 1);
 
-            currentValue +=
-                currentValue * instability * tendency * tendencyPercentage * trendFactor;
+            currentValue += currentValue * instability * trend * trendPercentage * trendFactor;
 
             // Mean reversion
             float meanReversion = (initialValue - currentValue) * meanReversionFactor;
@@ -101,10 +101,10 @@ namespace Economy
             lowShadow = Mathf.Min(lowShadow, currentValue);
         }
 
-        private void SetNewTendency()
+        private void SetNewTrend()
         {
-            tendency = UnityEngine.Random.Range(-1.0f, 1.0f);
-            tendencyAmount = UnityEngine.Random.Range(1, maxTendency);
+            trend = UnityEngine.Random.Range(-1.0f, 1.0f);
+            remainingCurrentTrend = UnityEngine.Random.Range(1, maxTrendCount);
         }
 
         private void CloseVolatileValue()
@@ -112,19 +112,19 @@ namespace Economy
             closeValue = currentValue;
         }
 
-        private void ResetForNextTick()
+        private void ResetValues()
         {
             highShadow = lowShadow = openValue = currentValue;
         }
 
-        private void UpdateTendencyLimits()
+        private void UpdateTrendLimits()
         {
             if (instability <= 0)
                 throw new ArgumentOutOfRangeException(
                     "ERROR: Instability can't be lower than Zero"
                 );
             else
-                maxTendency = Mathf.CeilToInt(Mathf.Pow(2, (1 - instability) * 10));
+                maxTrendCount = Mathf.CeilToInt(Mathf.Pow(2, (1 - instability) * 10));
         }
     }
 }
