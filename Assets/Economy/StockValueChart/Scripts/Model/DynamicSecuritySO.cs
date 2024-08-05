@@ -23,12 +23,8 @@ namespace Economy
         [SerializeField]
         private float minValue;
 
-        [Header("Tendency Settings")]
-        [SerializeField]
-        private int minTendency = 1;
-
-        [SerializeField]
-        private int maxTendency = 1;
+        private int minTendency;
+        private int maxTendency;
 
         private int tendencyAmount;
         private float tendency;
@@ -54,6 +50,7 @@ namespace Economy
         public void Init()
         {
             currentValue = openValue = lowShadow = initialValue;
+            UpdateTendencyLimits();
         }
 
         public void Tick()
@@ -118,6 +115,21 @@ namespace Economy
         private void ResetForNextTick()
         {
             highShadow = lowShadow = openValue = currentValue;
+        }
+
+        private void UpdateTendencyLimits()
+        {
+            // Calculate min and max tendency based on instability
+            if (instability <= 0)
+            {
+                minTendency = int.MaxValue; // or some large number
+                maxTendency = int.MaxValue; // or some large number
+            }
+            else
+            {
+                minTendency = 1; // Minimum tendency when instability is 1
+                maxTendency = Mathf.CeilToInt(1 / instability); // Maximum tendency based on instability
+            }
         }
     }
 }
