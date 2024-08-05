@@ -58,6 +58,14 @@ namespace UISystem
 
         public List<InventorySlot> GetInventorySlots() => slots;
 
+        public float GetInventoryValue()
+        {
+            float value = 0;
+            foreach (InventorySlot slot in slots)
+                value += slot.CurrentItem.GetCurrentValue();
+            return value;
+        }
+
         public void ExpandSlots(int additionalSlots)
         {
             if (additionalSlots < 0)

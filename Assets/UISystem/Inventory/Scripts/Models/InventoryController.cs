@@ -12,9 +12,12 @@ namespace UISystem
         [SerializeField]
         private Inventory _initialInventory;
 
-        [Header("Event")]
+        [Header("Events")]
         [SerializeField]
         private GameEvent OnInventoryChanged;
+
+        [SerializeField]
+        private GameEvent OnInventoryValueChanged;
 
         private Inventory _inventory;
 
@@ -25,7 +28,13 @@ namespace UISystem
 
         private void Start()
         {
+            RaiseEvents();
+        }
+
+        private void RaiseEvents()
+        {
             OnInventoryChanged.Raise(this, _inventory.GetInventorySlots());
+            OnInventoryValueChanged.Raise(this, _inventory.GetInventoryValue());
         }
 
         public void OnInventoryItemSubtracted(Component sender, object data)
@@ -38,7 +47,7 @@ namespace UISystem
                 throw new InvalidDataException(
                     $"ERROR: Not possible to subtract from inventory data of type {data.GetType()} sent from {sender}"
                 );
-            OnInventoryChanged.Raise(this, _inventory.GetInventorySlots());
+            RaiseEvents();
         }
 
         public void OnInventoryItemAdded(Component sender, object data)
@@ -51,7 +60,7 @@ namespace UISystem
                 throw new InvalidDataException(
                     $"ERROR: Not possible to add to inventory data of type {data.GetType()} sent from {sender}"
                 );
-            OnInventoryChanged.Raise(this, _inventory.GetInventorySlots());
+            RaiseEvents();
         }
     }
 }

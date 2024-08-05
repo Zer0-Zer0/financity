@@ -1,3 +1,4 @@
+using Economy;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,11 @@ public class InventoryItem : ScriptableObject
     public string Name;
     public int MaxAmount;
     public string Description;
+    [SerializeField ]private DynamicSecuritySO securitySO;
+
+    public float GetCurrentValue(){
+        return securitySO.currentValue;
+    }
 
     public override string ToString()
     {
