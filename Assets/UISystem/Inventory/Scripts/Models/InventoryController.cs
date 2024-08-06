@@ -9,6 +9,11 @@ namespace UISystem
 {
     public class InventoryController : MonoBehaviour
     {
+        [Header("UI structure")]
+        [SerializeField]
+        private Text _currentTotalInventoryValue;
+
+        [Header("Inventory")]
         [SerializeField]
         private Inventory _initialInventory;
 
@@ -29,6 +34,7 @@ namespace UISystem
         private void Start()
         {
             RaiseEvents();
+            UpdateText();
         }
 
         private void RaiseEvents()
@@ -48,6 +54,7 @@ namespace UISystem
                     $"ERROR: Not possible to subtract from inventory data of type {data.GetType()} sent from {sender}"
                 );
             RaiseEvents();
+            UpdateText();
         }
 
         public void OnInventoryItemAdded(Component sender, object data)
@@ -61,6 +68,13 @@ namespace UISystem
                     $"ERROR: Not possible to add to inventory data of type {data.GetType()} sent from {sender}"
                 );
             RaiseEvents();
+            UpdateText();
+        }
+
+        private void UpdateText()
+        {
+            string formattedText = String.Format("{0:C2}BRL", _inventory.GetInventoryValue());
+            _currentTotalInventoryValue.SetText(formattedText);
         }
     }
 }

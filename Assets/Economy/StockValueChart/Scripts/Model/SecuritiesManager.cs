@@ -62,10 +62,10 @@ namespace Economy
         private void HandleStockUpdate()
         {
             foreach (var security in securities)
-                Debug.Log(
-                    $"Stock Update: Open: {security.openValue}, Close: {security.closeValue}, High: {security.highShadow}, Low: {security.lowShadow}"
-                );
-            OnEconomyTick.Raise(this, securities);
+                /* Debug.Log(
+                     $"Stock Update: Open: {security.openValue}, Close: {security.closeValue}, High: {security.highShadow}, Low: {security.lowShadow}"
+                 );*/
+                OnEconomyTick.Raise(this, securities);
         }
     }
 }

@@ -62,7 +62,8 @@ namespace UISystem
         {
             float value = 0;
             foreach (InventorySlot slot in slots)
-                value += slot.CurrentItem.GetCurrentValue();
+                if (slot.CurrentItem != null)
+                    value += slot.CurrentItem.GetCurrentValue() * slot.CurrentAmount;
             return value;
         }
 
