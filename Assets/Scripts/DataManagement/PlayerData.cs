@@ -1,3 +1,7 @@
+using System;
+using UnityEngine;
+using UnityEngine.Events;
+
 [System.Serializable]
 public class PlayerData
 {
@@ -16,17 +20,20 @@ public class PlayerData
     [SerializeField]
     bool _missionOneCompleted = false;
 
+    [SerializeField]
+    float _currentHealth = 100;
+
+    public const float MaxHealth = 100;
+
     public UnityEvent CurrentAmmoChanged;
     public UnityEvent TotalAmmoChanged;
     public UnityEvent CurrentBalanceChanged;
     public UnityEvent FirstTimeChanged;
     public UnityEvent MissionOneCompleted;
+    public UnityEvent CurrentHealthChanged;
 
     // Getter and Setter for CurrentAmmo
-    public int GetCurrentAmmo()
-    {
-        return _currentAmmo;
-    }
+    public int GetCurrentAmmo() => _currentAmmo;
 
     public void SetCurrentAmmo(int value)
     {
@@ -35,10 +42,7 @@ public class PlayerData
     }
 
     // Getter and Setter for TotalAmmo
-    public int GetTotalAmmo()
-    {
-        return _totalAmmo;
-    }
+    public int GetTotalAmmo() => _totalAmmo;
 
     public void SetTotalAmmo(int value)
     {
@@ -47,10 +51,7 @@ public class PlayerData
     }
 
     // Getter and Setter for CurrentBalance
-    public float GetCurrentBalance()
-    {
-        return _currentBalance;
-    }
+    public float GetCurrentBalance() => _currentBalance;
 
     public void SetCurrentBalance(float value)
     {
@@ -58,11 +59,16 @@ public class PlayerData
         CurrentBalanceChanged?.Invoke();
     }
 
-    // Getter and Setter for FirstTime
-    public bool GetFirstTime()
+    public float GetCurrentHealth() => _currentHealth;
+
+    public void SetCurrentHealth(float value)
     {
-        return _firstTime;
+        _currentHealth = Math.Min(value, MaxHealth);
+        CurrentHealthChanged?.Invoke();
     }
+
+    // Getter and Setter for FirstTime
+    public bool GetFirstTime() => _firstTime;
 
     public void SetFirstTime(bool value)
     {
@@ -70,10 +76,7 @@ public class PlayerData
         FirstTimeChanged?.Invoke();
     }
 
-    public bool GetMissionOneStatus()
-    {
-        return _missionOneCompleted;
-    }
+    public bool GetMissionOneStatus() => _missionOneCompleted;
 
     public void CompleteMissionOne()
     {
