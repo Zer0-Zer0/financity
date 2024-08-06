@@ -17,19 +17,19 @@ namespace UISystem
 
         [SerializeField]
         private GameObject _InventorySlotsParent;
-        private List<InventorySlotView> _InventorySlotViews;
+        private List<InventorySlotViewModel> _InventorySlotViewModels;
 
         [SerializeField]
-        private InventorySlotView _InventorySlotViewPrefab;
+        private InventorySlotViewModel _InventorySlotViewPrefab;
         private int _slotCount
         {
-            get { return _InventorySlotViews.Count; }
+            get { return _InventorySlotViewModels.Count; }
         }
 
         protected override void Setup()
         {
-            _InventorySlotViews = new List<InventorySlotView>(
-                _InventorySlotsParent.GetComponentsInChildren<InventorySlotView>()
+            _InventorySlotViewModels = new List<InventorySlotViewModel>(
+                _InventorySlotsParent.GetComponentsInChildren<InventorySlotViewModel>()
             );
         }
 
@@ -60,11 +60,11 @@ namespace UISystem
         {
             for (int i = 0; i < slotsToAdd; i++)
             {
-                InventorySlotView newSlotView = Instantiate(
+                InventorySlotViewModel newSlotView = Instantiate(
                     _InventorySlotViewPrefab,
                     _InventorySlotsParent.transform
                 );
-                _InventorySlotViews.Add(newSlotView);
+                _InventorySlotViewModels.Add(newSlotView);
             }
         }
 
@@ -72,8 +72,8 @@ namespace UISystem
         {
             for (int i = 0; i < slotsToRemove; i++)
             {
-                InventorySlotView slotToRemove = _InventorySlotViews[_InventorySlotViews.Count - 1];
-                _InventorySlotViews.RemoveAt(_InventorySlotViews.Count - 1);
+                InventorySlotViewModel slotToRemove = _InventorySlotViewModels[_InventorySlotViewModels.Count - 1];
+                _InventorySlotViewModels.RemoveAt(_InventorySlotViewModels.Count - 1);
                 Destroy(slotToRemove.gameObject);
             }
         }
@@ -82,7 +82,7 @@ namespace UISystem
         {
             for (int index = 0; index < slots.Count; index++)
             {
-                _InventorySlotViews[index].UpdateSlotGraphics(slots[index]);
+                _InventorySlotViewModels[index].UpdateSlotGraphics(slots[index]);
             }
         }
     }
