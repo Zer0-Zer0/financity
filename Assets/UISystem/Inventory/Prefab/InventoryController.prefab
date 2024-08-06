@@ -1,0 +1,199 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3563308964162910757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3617789838395708780}
+  - component: {fileID: 510514048599692039}
+  - component: {fileID: 1352498513754934906}
+  - component: {fileID: 6163984773849569123}
+  - component: {fileID: 7248009571566575675}
+  - component: {fileID: 4767383813610725944}
+  m_Layer: 0
+  m_Name: InventoryController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3617789838395708780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563308964162910757}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &510514048599692039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563308964162910757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf04412f44e5bf3419e50aa1b024060d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentTotalInventoryValue: {fileID: 0}
+  _initialInventory:
+    slots:
+    - _currentItem: {fileID: 11400000, guid: abbe5b33cf962f22db8375b74d5ee6bc, type: 2}
+      _currentAmount: 4
+    - _currentItem: {fileID: 11400000, guid: 3c76fc6e54a8cb3b0810adf5ddf0d60d, type: 2}
+      _currentAmount: 3
+    - _currentItem: {fileID: 11400000, guid: 09465445c54be3643aa7e0f02ddc3db2, type: 2}
+      _currentAmount: 3
+    - _currentItem: {fileID: 11400000, guid: a1064d11dcee97c4fa1570bacbffd117, type: 2}
+      _currentAmount: 3
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+    - _currentItem: {fileID: 0}
+      _currentAmount: 0
+  OnInventoryChanged: {fileID: 11400000, guid: 82fe49751a5a2174f95ae278aeee44e6, type: 2}
+  OnInventoryValueChanged: {fileID: 11400000, guid: 2f83f9cdda6cd6712bb0f329aea17c18, type: 2}
+--- !u!114 &1352498513754934906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563308964162910757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 06adedac3b041cbd9a158dcdec691364, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 510514048599692039}
+        m_TargetAssemblyTypeName: UISystem.InventoryController, Assembly-CSharp
+        m_MethodName: OnInventoryItemAdded
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6163984773849569123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563308964162910757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 24ff15d30b5b40f5db855977e29d2f3a, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 510514048599692039}
+        m_TargetAssemblyTypeName: UISystem.InventoryController, Assembly-CSharp
+        m_MethodName: OnInventoryItemSubtracted
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7248009571566575675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563308964162910757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 40bd7f6c3f1394d269e4d1c8235b7a5e, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 510514048599692039}
+        m_TargetAssemblyTypeName: UISystem.InventoryController, Assembly-CSharp
+        m_MethodName: OnInventoryItemAdded
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4767383813610725944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563308964162910757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 02dc42b5cf2b8b154be7cc6abc2fc993, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 510514048599692039}
+        m_TargetAssemblyTypeName: UISystem.InventoryController, Assembly-CSharp
+        m_MethodName: OnEconomyTick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
