@@ -26,6 +26,8 @@ namespace UISystem
 
         private Inventory _inventory;
 
+        private InventorySlot _selectedSlot;
+
         private void Awake()
         {
             _inventory = _initialInventory;
@@ -35,6 +37,36 @@ namespace UISystem
         {
             RaiseEvents();
             UpdateText();
+        }
+
+        void Update()
+        {
+            CheckForInput();
+        }
+
+        private void CheckForInput()
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+                ConsumeSelectedItem();
+            if (Input.GetKeyDown(KeyCode.Q))
+                RemoveSelectedItem(1);
+        }
+
+        private void RemoveSelectedItem(int amount)
+        {
+            Inventory.SubtractItem(_inventory, _selectedSlot.CurrentItem, amount);
+            RaiseEvents();
+        }
+
+        private void ConsumeSelectedItem()
+        {
+            bool isSlotNull = _selectedSlot == null;
+            bool isItemNull = _selectedSlot.CurrentItem == null;
+            if (isSlotNull || isItemNull)
+                return;
+
+            _selectedSlot.CurrentItem.OnItemConsumeEvent.Raise(this, _selectedSlot.CurrentItem);
+            RemoveSelectedItem(1);
         }
 
         private void RaiseEvents()
@@ -75,6 +107,12 @@ namespace UISystem
         {
             OnInventoryValueChanged.Raise(this, _inventory.GetInventoryValue());
             UpdateText();
+        }
+
+        public void OnMouseHover(Component sender, object data)
+        {
+            if (data is InventorySlot slot)
+                _selectedSlot = slot;
         }
 
         private void UpdateText()

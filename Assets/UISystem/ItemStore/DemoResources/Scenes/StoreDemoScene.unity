@@ -610,6 +610,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1765526954}
   m_CullTransparentMesh: 1
+--- !u!1 &1830720960 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3563308964162910757, guid: 0866241312875e4d980101c72c4cfd29, type: 3}
+  m_PrefabInstance: {fileID: 190062903119956034}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1830720961 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 510514048599692039, guid: 0866241312875e4d980101c72c4cfd29, type: 3}
+  m_PrefabInstance: {fileID: 190062903119956034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830720960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf04412f44e5bf3419e50aa1b024060d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1830720967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830720960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 45b152ac9615738d6995258e2c7ecd70, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1830720961}
+        m_TargetAssemblyTypeName: UISystem.InventoryController, Assembly-CSharp
+        m_MethodName: OnMouseHover
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1969584419
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +829,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3563308964162910757, guid: 0866241312875e4d980101c72c4cfd29, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1830720967}
   m_SourcePrefab: {fileID: 100100000, guid: 0866241312875e4d980101c72c4cfd29, type: 3}
 --- !u!1001 &767529214624050198
 PrefabInstance:
