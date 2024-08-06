@@ -123,7 +123,7 @@ namespace Economy
 
         private void ResetValues()
         {
-            highShadow = lowShadow = openValue = currentValue;
+            highShadow = lowShadow = openValue = currentValue = initialValue;
         }
 
         private void InitHistoricalValues()
@@ -138,7 +138,7 @@ namespace Economy
                     "ERROR: Instability can't be lower than Zero"
                 );
             else
-                maxTrendCount = Mathf.CeilToInt(Mathf.Pow(2, (1 - instability) * 10));
+                maxTrendCount = Mathf.CeilToInt(Mathf.Pow(2, (1 - instability) * 2));
         }
     }
 }
