@@ -25,7 +25,8 @@ namespace UISystem
         [SerializeField]
         private TextMeshProUGUI _itemValue;
 
-        protected override void Setup() { }
+        protected override void Setup() { 
+        }
 
         protected override void Configure()
         {

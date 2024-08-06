@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace UISystem
@@ -7,9 +8,17 @@ namespace UISystem
         [SerializeField]
         private StoreSlotView storeSlotView;
 
-        public void UpdateSlotGraphics(InventorySlot slot)
+        [SerializeField]
+        private InventoryItem item;
+
+        private void Awake()
         {
-            storeSlotView.UpdateSlotGraphics(slot);
+            storeSlotView.UpdateSlotGraphics(new InventorySlot(item, 1));
+        }
+
+        public void UpdateSlotGraphics(Component sender, object data)
+        {
+            storeSlotView.UpdateSlotGraphics(new InventorySlot(item, 1));
         }
     }
 }
