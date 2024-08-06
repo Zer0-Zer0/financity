@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6163984773849569123}
   - component: {fileID: 7248009571566575675}
   - component: {fileID: 4767383813610725944}
+  - component: {fileID: 3475271241096551205}
   m_Layer: 0
   m_Name: InventoryController
   m_TagString: Untagged
@@ -85,6 +86,7 @@ MonoBehaviour:
       _currentAmount: 0
   OnInventoryChanged: {fileID: 11400000, guid: 82fe49751a5a2174f95ae278aeee44e6, type: 2}
   OnInventoryValueChanged: {fileID: 11400000, guid: 2f83f9cdda6cd6712bb0f329aea17c18, type: 2}
+  OnItemConsuption: {fileID: 11400000, guid: a2715180f3773c86ea265eeea593b6fd, type: 2}
 --- !u!114 &1352498513754934906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +190,34 @@ MonoBehaviour:
       - m_Target: {fileID: 510514048599692039}
         m_TargetAssemblyTypeName: UISystem.InventoryController, Assembly-CSharp
         m_MethodName: OnEconomyTick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3475271241096551205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563308964162910757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 45b152ac9615738d6995258e2c7ecd70, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 510514048599692039}
+        m_TargetAssemblyTypeName: UISystem.InventoryController, Assembly-CSharp
+        m_MethodName: OnMouseHover
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
