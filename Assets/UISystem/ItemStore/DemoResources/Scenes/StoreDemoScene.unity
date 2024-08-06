@@ -873,6 +873,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Container_Rows
       objectReference: {fileID: 0}
+    - target: {fileID: 7837605880335307700, guid: 827871e4c4738274dbb743bb52c7a8ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8622856992718874370, guid: 827871e4c4738274dbb743bb52c7a8ac, type: 3}
       propertyPath: paddingData
       value: 
@@ -977,6 +981,7 @@ MonoBehaviour:
   _itemCurrentAmount: {fileID: 34817113}
   _itemTotalAmount: {fileID: 1475813749}
   _itemValue: {fileID: 2147296922}
+  _hideWhenNoItem: {fileID: 842403735}
 --- !u!114 &660571317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,6 +1049,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4901cbdf38278047b4b3fa6e9f20a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &842403735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7837605880335307700, guid: 827871e4c4738274dbb743bb52c7a8ac, type: 3}
+  m_PrefabInstance: {fileID: 386822376}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &961739749
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,10 +1335,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1767599847}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 417.5, y: -257}
-  m_SizeDelta: {x: 0, y: 514}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 417.5, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1130521752
 MonoBehaviour:

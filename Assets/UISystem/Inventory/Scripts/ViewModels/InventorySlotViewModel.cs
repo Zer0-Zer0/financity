@@ -28,7 +28,7 @@ namespace UISystem
         public void OnPointerExit(PointerEventData eventData)
         {
             //Debug.Log("Mouse exited: " + currentSlotData.ToString()); // Demo stuff
-            OnMouseEnterGameEvent.Raise(this, null);
+            OnMouseEnterGameEvent.Raise(this, new InventorySlot());
         }
     }
 }

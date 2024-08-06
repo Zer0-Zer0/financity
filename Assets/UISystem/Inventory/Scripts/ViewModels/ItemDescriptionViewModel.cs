@@ -7,6 +7,11 @@ namespace UISystem
         [SerializeField]
         ItemDescriptionView itemDescriptionView;
 
+        private void Start()
+        {
+            itemDescriptionView.UpdateItemDescription(new InventorySlot());
+        }
+
         public void OnMarketTickUpdate(Component sender, object data)
         {
             if (data is InventorySlot slot)
@@ -16,7 +21,7 @@ namespace UISystem
         public void OnMouseChangedSlot(Component sender, object data)
         {
             if (data is InventorySlot slot)
-                itemDescriptionView.SetItemDescription(slot);
+                itemDescriptionView.UpdateItemDescription(slot);
         }
     }
 }
