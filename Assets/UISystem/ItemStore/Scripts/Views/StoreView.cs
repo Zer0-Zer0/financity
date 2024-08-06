@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace UISystem
 {
-    public class InventoryView : CustomUIComponent
+    public class StoreView : CustomUIComponent
     {
         [SerializeField]
         private Style _style;
@@ -16,20 +16,20 @@ namespace UISystem
         private Image _backgroundImage;
 
         [SerializeField]
-        private GameObject _InventorySlotsParent;
-        private List<InventorySlotView> _InventorySlotViews;
+        private GameObject _StoreSlotsParent;
+        private List<StoreSlotView> _StoreSlotViews;
 
         [SerializeField]
-        private InventorySlotView _InventorySlotViewPrefab;
+        private StoreSlotView _StoreSlotViewPrefab;
         private int _slotCount
         {
-            get { return _InventorySlotViews.Count; }
+            get { return _StoreSlotViews.Count; }
         }
 
         protected override void Setup()
         {
-            _InventorySlotViews = new List<InventorySlotView>(
-                _InventorySlotsParent.GetComponentsInChildren<InventorySlotView>()
+            _StoreSlotViews = new List<StoreSlotView>(
+                _StoreSlotViewPrefab.GetComponentsInChildren<StoreSlotView>()
             );
         }
 
@@ -60,11 +60,8 @@ namespace UISystem
         {
             for (int i = 0; i < slotsToAdd; i++)
             {
-                InventorySlotView newSlotView = Instantiate(
-                    _InventorySlotViewPrefab,
-                    _InventorySlotsParent.transform
-                );
-                _InventorySlotViews.Add(newSlotView);
+                StoreSlotView newSlotView = Instantiate(_StoreSlotViewPrefab);
+                _StoreSlotViews.Add(newSlotView);
             }
         }
 
@@ -72,8 +69,8 @@ namespace UISystem
         {
             for (int i = 0; i < slotsToRemove; i++)
             {
-                InventorySlotView slotToRemove = _InventorySlotViews[_InventorySlotViews.Count - 1];
-                _InventorySlotViews.RemoveAt(_InventorySlotViews.Count - 1);
+                StoreSlotView slotToRemove = _StoreSlotViews[_StoreSlotViews.Count - 1];
+                _StoreSlotViews.RemoveAt(_StoreSlotViews.Count - 1);
                 Destroy(slotToRemove.gameObject);
             }
         }
@@ -82,7 +79,7 @@ namespace UISystem
         {
             for (int index = 0; index < slots.Count; index++)
             {
-                _InventorySlotViews[index].UpdateSlotGraphics(slots[index]);
+                _StoreSlotViews[index].UpdateSlotGraphics(slots[index]);
             }
         }
     }
