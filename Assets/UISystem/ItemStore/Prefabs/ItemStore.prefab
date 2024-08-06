@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281019179
-  m_fontColor: {r: 0.16862746, g: 0.16862746, b: 0.16862746, a: 1}
+    rgba: 4278255381
+  m_fontColor: {r: 0.08220887, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -293,8 +293,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5305920178413246873}
-  - component: {fileID: 1728599411144453437}
-  - component: {fileID: 1052099655135410276}
+  - component: {fileID: 2293953315612850304}
+  - component: {fileID: 5858794262884862862}
   m_Layer: 5
   m_Name: ItemStore
   m_TagString: Untagged
@@ -324,7 +324,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1728599411144453437
+--- !u!114 &2293953315612850304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,16 +333,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6027980683858628116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84ae33eaf8f38dc4c9102b49946c7e07, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f3b1ed4b5a647a54abff652ddf75c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OverwriteTheme: {fileID: 0}
+  OverwriteTheme: {fileID: 11400000, guid: df26947f79d2c8c88b4cb66b16716cdf, type: 2}
   _textData: {fileID: 11400000, guid: 2e6c81ee42132854691003871c338cbe, type: 2}
   _style: 0
   _slotIcon: {fileID: 7522378093498229342}
   _slotBackground: {fileID: 2410593007093955093}
-  _itemCounter: {fileID: 8182094568205753017}
---- !u!114 &1052099655135410276
+  _itemValue: {fileID: 8182094568205753017}
+--- !u!114 &5858794262884862862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6027980683858628116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bd2a101b1dbf6d42b47b9f49df9f8dc, type: 3}
+  m_Script: {fileID: 11500000, guid: cf1dc34b863d74c8ba4ca25bd4cca813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventorySlotView: {fileID: 1728599411144453437}
+  storeSlotView: {fileID: 2293953315612850304}
