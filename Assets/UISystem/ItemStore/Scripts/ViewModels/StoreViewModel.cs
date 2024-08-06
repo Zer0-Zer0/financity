@@ -10,10 +10,11 @@ namespace UISystem
         [SerializeField]
         private StoreView _storeView;
 
-        public void OnInventoryChanged(Component sender, object data)
+        public void OnEconomyTick(Component sender, object data)
         {
+            /*TODO: MAKE THIS USEFULL
             if (data is List<InventorySlot> slots)
-                _storeView.UpdateSlotsGraphics(slots);
+                _storeView.UpdateSlotsGraphics(slots);*/
         }
     }
 }

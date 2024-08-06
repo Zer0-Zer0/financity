@@ -79,7 +79,7 @@ namespace UISystem
         {
             for (int index = 0; index < slots.Count; index++)
             {
-                _StoreSlotViews[index].UpdateSlotGraphics(slots[index]);
+                _StoreSlotViews[index].UpdateSlotGraphics(slots[index].CurrentItem);
             }
         }
     }

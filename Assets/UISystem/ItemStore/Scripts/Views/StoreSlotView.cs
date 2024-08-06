@@ -25,8 +25,7 @@ namespace UISystem
         [SerializeField]
         private TextMeshProUGUI _itemValue;
 
-        protected override void Setup() { 
-        }
+        protected override void Setup() { }
 
         protected override void Configure()
         {
@@ -40,30 +39,26 @@ namespace UISystem
             _itemValue.fontSize = _textData.size;
         }
 
-        public void UpdateSlotGraphics(InventorySlot slot)
+        public void UpdateSlotGraphics(InventoryItem item)
         {
-            if (slot == null || slot.CurrentItem == null)
+            if (item == null)
                 Reset();
             else
-                SetGraphics(slot);
+                SetGraphics(item);
         }
 
-        private void SetGraphics(InventorySlot slot)
+        private void SetGraphics(InventoryItem item)
         {
-            if (slot.CurrentAmount <= 0)
-                throw new ArgumentOutOfRangeException(
-                    "CurrentAmount needs to be bigger than zero."
-                );
-
-            if (slot.CurrentItem == null)
+            if (item == null)
             {
                 Reset();
                 return;
             }
 
-            _slotIcon.sprite = slot.CurrentItem.Icon;
+            _slotIcon.sprite = item.Icon;
             _slotIcon.color = Color.white;
-            _itemValue.SetText(slot.CurrentItem.GetCurrentValue().ToString());
+            float itemValue = item.GetCurrentValue();
+            _itemValue.SetText(itemValue.ToString());
         }
 
         private void Reset()
