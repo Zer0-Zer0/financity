@@ -7,13 +7,15 @@ public class InventoryItem : ScriptableObject
 {
     public Sprite Icon;
     public string Name;
-    public int MaxAmount;
     public string Description;
+    public int MaxAmount;
 
+    [Header("Scriptable Objects")]
     [SerializeField]
     private DynamicSecuritySO securitySO;
 
-    public GameEvent OnItemConsumeEvent { get; private set; }
+    [SerializeField]
+    public GameEvent OnItemConsumeEvent;
 
     public float GetCurrentValue()
     {
