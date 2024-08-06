@@ -15,12 +15,16 @@ namespace UISystem
     {
         public PaddingSO paddingData;
         private VerticalLayoutGroup verticalLayoutGroup;
+
         protected override void Setup()
         {
             verticalLayoutGroup = GetComponent<VerticalLayoutGroup>();
         }
+
         protected override void Configure()
         {
+            if (paddingData == null)
+                return;
             verticalLayoutGroup.padding = paddingData.padding;
             verticalLayoutGroup.spacing = paddingData.spacing;
         }
