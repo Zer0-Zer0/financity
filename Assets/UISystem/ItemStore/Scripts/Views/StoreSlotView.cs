@@ -55,7 +55,7 @@ namespace UISystem
             _slotIcon.sprite = item.Icon;
             _slotIcon.color = Color.white;
             float itemValue = item.GetCurrentValue();
-            string formattedText = String.Format("{0:C2}BRL", itemValue);
+            string formattedText = String.Format("{0:N2}BRL", itemValue);
             _itemValue.SetText(formattedText);
         }
 

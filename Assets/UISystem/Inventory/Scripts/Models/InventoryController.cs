@@ -71,9 +71,15 @@ namespace UISystem
             UpdateText();
         }
 
+        public void OnEconomyTick(Component sender, object data)
+        {
+            OnInventoryValueChanged.Raise(this, _inventory.GetInventoryValue());
+            UpdateText();
+        }
+
         private void UpdateText()
         {
-            string formattedText = String.Format("{0:C2}BRL", _inventory.GetInventoryValue());
+            string formattedText = String.Format("{0:N2}BRL", _inventory.GetInventoryValue());
             _currentTotalInventoryValue.SetText(formattedText);
         }
     }
