@@ -18,7 +18,7 @@ namespace UISystem
                 itemDescriptionView.UpdateItemValue(slot);
         }
 
-        public void OnMouseChangedSlot(Component sender, object data)
+        public void UpdateItemDescription(Component sender, object data)
         {
             if (data is InventorySlot slot)
                 itemDescriptionView.UpdateItemDescription(slot);

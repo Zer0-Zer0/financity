@@ -24,6 +24,9 @@ namespace UISystem
         [SerializeField]
         private GameEvent OnInventoryValueChanged;
 
+        [SerializeField]
+        private GameEvent OnItemConsuption;
+
         private Inventory _inventory;
 
         private InventorySlot _selectedSlot;
@@ -55,7 +58,9 @@ namespace UISystem
         private void RemoveSelectedItem(int amount)
         {
             Inventory.SubtractItem(_inventory, _selectedSlot.CurrentItem, amount);
+            OnItemConsuption.Raise(this, _selectedSlot);
             RaiseEvents();
+            UpdateText();
         }
 
         private void ConsumeSelectedItem()
