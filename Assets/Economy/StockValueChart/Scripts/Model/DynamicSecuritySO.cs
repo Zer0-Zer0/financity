@@ -16,7 +16,7 @@ namespace Economy
         [SerializeField]
         private float initialValue;
 
-        [SerializeField]
+        [SerializeField, Range(0f, 1f)]
         private float instability;
 
         [SerializeField]
