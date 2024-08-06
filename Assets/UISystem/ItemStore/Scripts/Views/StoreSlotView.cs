@@ -23,7 +23,7 @@ namespace UISystem
         private Image _slotBackground;
 
         [SerializeField]
-        private TextMeshProUGUI _itemValue;
+        private Text _itemValue;
 
         protected override void Setup() { }
 
@@ -34,9 +34,6 @@ namespace UISystem
                 return;
 
             _slotBackground.color = theme.GetBackgroundColor(_style);
-            _itemValue.color = theme.GetTextColor(_style);
-            _itemValue.font = _textData.font;
-            _itemValue.fontSize = _textData.size;
         }
 
         public void UpdateSlotGraphics(InventoryItem item)
