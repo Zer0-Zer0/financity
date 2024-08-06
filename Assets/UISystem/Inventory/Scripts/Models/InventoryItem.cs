@@ -9,9 +9,14 @@ public class InventoryItem : ScriptableObject
     public string Name;
     public int MaxAmount;
     public string Description;
-    [SerializeField ]private DynamicSecuritySO securitySO;
 
-    public float GetCurrentValue(){
+    [SerializeField]
+    private DynamicSecuritySO securitySO;
+
+    public GameEvent OnItemConsumeEvent { get; private set; }
+
+    public float GetCurrentValue()
+    {
         return securitySO.currentValue;
     }
 
