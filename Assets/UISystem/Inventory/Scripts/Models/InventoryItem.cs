@@ -10,6 +10,9 @@ public class InventoryItem : ScriptableObject
     public string Description;
     public int MaxAmount;
 
+    [Header("Value Once")]
+    public float data; //TODO: MAKE THIS SOME ABSTRACT VALUE
+
     [Header("Scriptable Objects")]
     [SerializeField]
     private DynamicSecuritySO securitySO;
