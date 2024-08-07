@@ -1106,6 +1106,10 @@ PrefabInstance:
       propertyPath: _currentTotalInventoryValue
       value: 
       objectReference: {fileID: 668796792}
+    - target: {fileID: 510514048599692039, guid: 0866241312875e4d980101c72c4cfd29, type: 3}
+      propertyPath: _initialInventory.slots.Array.size
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3563308964162910757, guid: 0866241312875e4d980101c72c4cfd29, type: 3}
       propertyPath: m_Name
       value: InventoryController
@@ -3094,7 +3098,11 @@ PrefabInstance:
       value: StructuredInventory
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8923524286736987864, guid: 6dafd8d2a430aa5c090e1c5c9ccb212c, type: 3}
+    - {fileID: 3612140412429064850, guid: 6dafd8d2a430aa5c090e1c5c9ccb212c, type: 3}
+    - {fileID: 6644131610687783240, guid: 6dafd8d2a430aa5c090e1c5c9ccb212c, type: 3}
+    - {fileID: 7048670026720764991, guid: 6dafd8d2a430aa5c090e1c5c9ccb212c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dafd8d2a430aa5c090e1c5c9ccb212c, type: 3}
@@ -3462,7 +3470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5476377993991397275, guid: ae015ab9dde6a2a5b9ecea3ca4568f93, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 417.5
+      value: 392.5
       objectReference: {fileID: 0}
     - target: {fileID: 5476377993991397275, guid: ae015ab9dde6a2a5b9ecea3ca4568f93, type: 3}
       propertyPath: m_AnchoredPosition.y

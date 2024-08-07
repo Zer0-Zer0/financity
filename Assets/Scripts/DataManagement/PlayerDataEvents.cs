@@ -138,6 +138,11 @@ public class PlayerDataEvents : MonoBehaviour
         playerData.SetCurrentBalance(CurrentBalance - value);
     }
 
+    public float GetCurrentHealth()
+    {
+        return CurrentHealth;
+    }
+
     public void SetCurrentHealth(float value)
     {
         playerData.SetCurrentHealth(value);

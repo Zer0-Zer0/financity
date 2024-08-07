@@ -21,9 +21,9 @@ public class PlayerData
     bool _missionOneCompleted = false;
 
     [SerializeField]
-    float _currentHealth = 100;
+    float _currentHealth = 5;
 
-    public const float MaxHealth = 100;
+    public const float MaxHealth = 10;
 
     public UnityEvent CurrentAmmoChanged;
     public UnityEvent TotalAmmoChanged;
