@@ -21,14 +21,14 @@ namespace UISystem
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (currentSlotData != null)
+            if (currentSlotData != null && currentSlotData.CurrentItem != null)
                 Debug.Log("Mouse entered: " + currentSlotData.ToString()); // Demo stuff
             OnMouseEnterGameEvent.Raise(this, currentSlotData);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (currentSlotData != null)
+            if (currentSlotData != null && currentSlotData.CurrentItem != null)
                 Debug.Log("Mouse exited: " + currentSlotData.ToString()); // Demo stuff
             OnMouseEnterGameEvent.Raise(this, new InventorySlot());
         }
