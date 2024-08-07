@@ -9,6 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2144922987261473055}
+  - component: {fileID: 7972574459175692418}
+  - component: {fileID: 2186632897628685926}
+  - component: {fileID: 3534862130157282363}
+  - component: {fileID: 2548123456096949939}
   m_Layer: 5
   m_Name: StoreTab
   m_TagString: Untagged
@@ -36,6 +40,88 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7972574459175692418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680749779430989725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42ae53894312c6e40b1463df4b4e50fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventoryView: {fileID: 5832758505831415014}
+--- !u!114 &2186632897628685926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680749779430989725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 82fe49751a5a2174f95ae278aeee44e6, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7972574459175692418}
+        m_TargetAssemblyTypeName: UISystem.InventoryViewModel, Assembly-CSharp
+        m_MethodName: OnInventoryChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3534862130157282363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680749779430989725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b84b63672b0501d0b68de2340cc2655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _storeView: {fileID: 1653002874749285507}
+--- !u!114 &2548123456096949939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680749779430989725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 02dc42b5cf2b8b154be7cc6abc2fc993, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3534862130157282363}
+        m_TargetAssemblyTypeName: UISystem.StoreViewModel, Assembly-CSharp
+        m_MethodName: OnEconomyTick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3150071732936272721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,7 +1609,9 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2030943361565823719, guid: 4d9712bd750bd73f6a7b5ec26979889d, type: 3}
+    - {fileID: 4232224808970715277, guid: 4d9712bd750bd73f6a7b5ec26979889d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1533,6 +1621,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 970488415512373011, guid: 4d9712bd750bd73f6a7b5ec26979889d, type: 3}
   m_PrefabInstance: {fileID: 1113981535528206882}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1653002874749285507 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1838890413769995937, guid: 4d9712bd750bd73f6a7b5ec26979889d, type: 3}
+  m_PrefabInstance: {fileID: 1113981535528206882}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f00bf656ce942fad92ecc5fea05ac8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4869832306922049675
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2153,7 +2252,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: StructuredInventory
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7836326723685189772, guid: 6dafd8d2a430aa5c090e1c5c9ccb212c, type: 3}
+    - {fileID: 4526779857066173311, guid: 6dafd8d2a430aa5c090e1c5c9ccb212c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2163,3 +2264,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5165742745370695548, guid: 6dafd8d2a430aa5c090e1c5c9ccb212c, type: 3}
   m_PrefabInstance: {fileID: 4869832306922049675}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5832758505831415014 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1398086603141246061, guid: 6dafd8d2a430aa5c090e1c5c9ccb212c, type: 3}
+  m_PrefabInstance: {fileID: 4869832306922049675}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f5b9c6c955a6d4ca8e36fc9e6aae1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
