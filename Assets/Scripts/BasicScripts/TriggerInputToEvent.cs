@@ -19,14 +19,14 @@ public class TriggerInputToEvent : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+/*    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             PlayerInTrigger?.Invoke();
             _isPlayerInRange = true;
         }
-    }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
