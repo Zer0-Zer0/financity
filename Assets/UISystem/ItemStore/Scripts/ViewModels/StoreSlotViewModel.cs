@@ -11,14 +11,11 @@ namespace UISystem
         [SerializeField]
         private InventoryItem item;
 
-        private void Start()
-        {
-            storeSlotView.UpdateSlotGraphics(item);
-        }
+        private void Start() => storeSlotView.UpdateSlotGraphics(item);
 
-        public void UpdateSlotGraphics(Component sender, object data)
-        {
+        private void OnEnable() => storeSlotView.UpdateSlotGraphics(item);
+
+        public void UpdateSlotGraphics(Component sender, object data) =>
             storeSlotView.UpdateSlotGraphics(item);
-        }
     }
 }
