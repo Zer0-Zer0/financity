@@ -12,30 +12,47 @@ public class MouseLockScript : MonoBehaviour
 
     private void Start()
     {
+        HideCursor();
+    }
+
+    private void OnEnable()
+    {
+        HideCursor();
+    }
+
+    private void HideCursor()
+    {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    private void ShowCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void InputLogic()
+    {
+        bool _hasClicked = Input.GetKeyDown(KeyCode.Mouse0);
+        bool _hasPressedTab = Input.GetKeyDown(KeyCode.Tab);
+        if (_hasClicked && !tabbedIn)
+            HideCursor();
+        else if (_hasPressedTab)
+            InventoryTabLogic();
+    }
+
+    private void InventoryTabLogic()
+    {
+        tabbedIn = !tabbedIn;
+        if (tabbedIn)
+            ShowCursor();
+        else
+            HideCursor();
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !tabbedIn)
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            tabbedIn = !tabbedIn;
-            if (tabbedIn == true)
-            {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }
-            else
-            {
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-        }
+        InputLogic();
     }
 }
