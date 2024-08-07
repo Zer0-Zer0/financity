@@ -10,15 +10,11 @@ public class MouseLockScript : MonoBehaviour
 
     private bool tabbedIn = false;
 
-    private void Start()
-    {
-        HideCursor();
-    }
+    private void Start() => HideCursor();
 
-    private void OnEnable()
-    {
-        HideCursor();
-    }
+    private void OnEnable() => HideCursor();
+
+    private void Update() => InputLogic();
 
     private void HideCursor()
     {
@@ -49,10 +45,5 @@ public class MouseLockScript : MonoBehaviour
             ShowCursor();
         else
             HideCursor();
-    }
-
-    private void Update()
-    {
-        InputLogic();
     }
 }
