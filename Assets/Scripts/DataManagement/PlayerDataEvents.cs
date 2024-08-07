@@ -9,6 +9,7 @@ public class PlayerDataEvents : MonoBehaviour
     public UnityEvent TotalAmmoChanged;
     public UnityEvent CurrentBalanceChanged;
     public UnityEvent FirstTimeChanged;
+    public UnityEvent CurrentHealthChanged;
     public UnityEvent MissionOneCompleted;
     public UnityEvent IfIsFirstTime;
     public UnityEvent IfNotFirstTime;
@@ -26,6 +27,11 @@ public class PlayerDataEvents : MonoBehaviour
     float CurrentBalance
     {
         get { return playerData.GetCurrentBalance(); }
+    }
+
+    float CurrentHealth
+    {
+        get { return playerData.GetCurrentHealth(); }
     }
 
     bool FirstTime
@@ -76,6 +82,11 @@ public class PlayerDataEvents : MonoBehaviour
         CurrentBalanceChanged?.Invoke();
     }
 
+    public void OnCurrentHealthChanged()
+    {
+        CurrentHealthChanged?.Invoke();
+    }
+
     public void OnFirstTimeChanged()
     {
         FirstTimeChanged?.Invoke();
@@ -106,6 +117,12 @@ public class PlayerDataEvents : MonoBehaviour
         playerData.SetTotalAmmo(TotalAmmo + value);
     }
 
+    public void AddToTotalAmmo(Component sender, object data)
+    {
+        if (data is InventoryItem item)
+            playerData.SetTotalAmmo(TotalAmmo + ((int)item.data));
+    }
+
     public void SetCurrentBalance(float value)
     {
         playerData.SetCurrentBalance(value);
@@ -119,6 +136,27 @@ public class PlayerDataEvents : MonoBehaviour
     public void RemoveFromCurrentBalance(float value)
     {
         playerData.SetCurrentBalance(CurrentBalance - value);
+    }
+
+    public void SetCurrentHealth(float value)
+    {
+        playerData.SetCurrentHealth(value);
+    }
+
+    public void AddToCurrentHealth(float value)
+    {
+        playerData.SetCurrentHealth(CurrentHealth + value);
+    }
+
+    public void AddToCurrentHealth(Component sender, object data)
+    {
+        if (data is InventoryItem item)
+            playerData.SetCurrentHealth(TotalAmmo + ((int)item.data));
+    }
+
+    public void RemoveFromCurrentHealth(float value)
+    {
+        playerData.SetCurrentHealth(CurrentHealth - value);
     }
 
     public void SetFirstTime(bool value)
