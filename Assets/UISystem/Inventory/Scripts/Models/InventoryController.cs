@@ -63,6 +63,11 @@ namespace UISystem
 
         private void RemoveSelectedItem(int amount)
         {
+            bool isSlotNull = _selectedSlot == null;
+            bool isItemNull = _selectedSlot.CurrentItem == null;
+            if (isSlotNull || isItemNull)
+                return;
+
             Inventory.SubtractItem(_inventory, _selectedSlot.CurrentItem, amount);
             OnItemConsuption.Raise(this, _selectedSlot);
             RaiseEvents();
