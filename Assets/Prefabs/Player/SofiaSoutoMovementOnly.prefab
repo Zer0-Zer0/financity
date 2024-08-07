@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 748669949429112478}
   m_Layer: 0
-  m_Name: cadeirante@Wheelchair
+  m_Name: SofiaSoutoMovementOnly
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -344,7 +344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8bb36e4d79e357ed4939a41aa0e26cb5, type: 3}
       propertyPath: m_Name
-      value: cadeirante@Wheelchair
+      value: SofiaSouto@Wheelchair
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8bb36e4d79e357ed4939a41aa0e26cb5, type: 3}
       propertyPath: m_IsActive
@@ -374,12 +374,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8bb36e4d79e357ed4939a41aa0e26cb5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6022784218997770264}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8bb36e4d79e357ed4939a41aa0e26cb5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4440308712392215773}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8bb36e4d79e357ed4939a41aa0e26cb5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9009470739324237398}
   m_SourcePrefab: {fileID: 100100000, guid: 8bb36e4d79e357ed4939a41aa0e26cb5, type: 3}
 --- !u!1 &1002462303201147254 stripped
 GameObject:
@@ -428,35 +422,6 @@ MonoBehaviour:
   _rotationSpeed: 100
   _wheelLeft: {fileID: 6748430497899746629}
   _wheelRight: {fileID: 5700841765201354195}
---- !u!114 &4440308712392215773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1002462303201147254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87960fa97730cadfbacb2c67fe54bb1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textComponent: {fileID: 0}
-  velocidade: 0
-  delayParaProximaFala: 1
-  slider2: {fileID: 0}
---- !u!114 &9009470739324237398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1002462303201147254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97e85fb1dd29f28a0bef8b176e1ca950, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textoSaldo: {fileID: 0}
 --- !u!4 &1002462303201147255 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8bb36e4d79e357ed4939a41aa0e26cb5, type: 3}
