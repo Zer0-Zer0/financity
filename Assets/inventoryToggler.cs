@@ -26,4 +26,6 @@ public class inventoryToggler : MonoBehaviour
         if (Store.activeSelf == true)
             Inventory.SetActive(false);
     }
+
+    public void ChangeStoreVisibility() => Store.SetActive(!Store.activeSelf);
 }
