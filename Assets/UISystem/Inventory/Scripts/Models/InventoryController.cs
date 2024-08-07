@@ -42,6 +42,12 @@ namespace UISystem
             UpdateText();
         }
 
+        private void OnEnable()
+        {
+            RaiseEvents();
+            UpdateText();
+        }
+
         void Update()
         {
             CheckForInput();
