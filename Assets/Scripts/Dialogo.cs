@@ -1,9 +1,9 @@
-using System.Collections;
 using System;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
+using System.Collections;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Dialogo : MonoBehaviour
 {
@@ -13,7 +13,8 @@ public class Dialogo : MonoBehaviour
         Olhe a void Awake, la tem todos os objetos que voce tera que adicionar como filho
         SE HOUVER MAIS DE UM SCRIPT DESSE EM UMA CENA, UM ERRO SERA OUTPUTEADO
     */
-    [SerializeField] private KeyCode _inputProximaFrase = KeyCode.Return;
+    [SerializeField]
+    private KeyCode _inputProximaFrase = KeyCode.Return;
     public static Dialogo Instance { get; private set; }
 
     private int index;
@@ -21,9 +22,11 @@ public class Dialogo : MonoBehaviour
     [Serializable]
     public struct Frases
     {
-        [TextArea] public string Texto;
+        [TextArea]
+        public string Texto;
         public UnityEvent FraseAcabou;
     }
+
     private Frases[] frases;
     private Coroutine typingCoroutine;
 
@@ -74,7 +77,7 @@ public class Dialogo : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             //throw new Exception("ERROR: Atempted to add a second instance to the Dialogo singleton");
-            Destroy(gameObject);//Temporariamente adicionado
+            Destroy(gameObject); //Temporariamente adicionado
         }
         else
         {
@@ -83,7 +86,8 @@ public class Dialogo : MonoBehaviour
 
         _painelDialogo = AchaCrianca("PainelDialogo").gameObject;
         _textoNome = AchaCrianca("TextoNome", _painelDialogo.transform).GetComponent<TMP_Text>();
-        _textoDialogo = AchaCrianca("TextoDialogo", _painelDialogo.transform).GetComponent<TypewriterEffect>();
+        _textoDialogo = AchaCrianca("TextoDialogo", _painelDialogo.transform)
+            .GetComponent<TypewriterEffect>();
         _painelDialogo.SetActive(false);
     }
 
@@ -115,6 +119,7 @@ public class Dialogo : MonoBehaviour
         {
             _textoDialogo.ClearText();
             _painelDialogo.SetActive(false);
+            InteracaoNPC.InteracaoOcorrendo = false;
             DialogoAcabou?.Invoke();
         }
     }

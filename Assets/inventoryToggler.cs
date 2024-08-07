@@ -11,6 +11,8 @@ public class inventoryToggler : MonoBehaviour
     [SerializeField]
     GameObject Inventory;
 
+    bool canStoreAppear = false;
+
     void Start()
     {
         Inventory.SetActive(false);
@@ -23,9 +25,14 @@ public class inventoryToggler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab) && Store.activeSelf == false)
             Inventory.SetActive(!Inventory.activeSelf);
 
+        if (Input.GetKeyDown(KeyCode.X) && canStoreAppear)
+            ChangeStoreVisibility();
+
         if (Store.activeSelf == true)
             Inventory.SetActive(false);
     }
 
-    public void ChangeStoreVisibility() => Store.SetActive(!Store.activeSelf);
+    private void ChangeStoreVisibility() => Store.SetActive(!Store.activeSelf);
+
+    public void ChangeStoreCanAppear() => canStoreAppear = !canStoreAppear;
 }

@@ -23,11 +23,13 @@ public class InteracaoNPC : MonoBehaviour
     [SerializeField]
     private Dialogo.Frases[] _mensagens;
     private bool _interacaoPossivel = false;
+    public static bool InteracaoOcorrendo = false;
 
     void Update()
     {
-        if (Input.GetKeyDown(_teclaInteracao) && _interacaoPossivel)
+        if (Input.GetKeyDown(_teclaInteracao) && _interacaoPossivel && !InteracaoOcorrendo)
         {
+            InteracaoOcorrendo = true;
             DialogoIniciou?.Invoke();
             ChecaMensagens();
             Dialogo.Instance.InicializarDialogo(_mensagens, nomeNPC);
