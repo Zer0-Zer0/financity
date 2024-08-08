@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 using TMPro;
-using Microsoft.Unity.VisualStudio.Editor;
 
 public class RankGlobal : MonoBehaviour
 {
