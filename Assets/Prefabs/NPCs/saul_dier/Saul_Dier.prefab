@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7867053597339557310}
   - component: {fileID: 1787058958736421294}
   - component: {fileID: 1881994849611891016}
+  - component: {fileID: 1577553482252253524}
+  - component: {fileID: 5064506115981630230}
   m_Layer: 0
   m_Name: Saul_Dier
   m_TagString: Untagged
@@ -28,12 +30,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2069384093708580162}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.023417693, z: -0, w: 0.9997258}
+  m_LocalRotation: {x: 0, y: 0.023420183, z: 0, w: 0.99972576}
   m_LocalPosition: {x: 84.412, y: -1.8912731, z: 27.888}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5102255524794839435}
+  - {fileID: 6037673745744085892}
+  - {fileID: 4147374063512298266}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 2.684, z: 0}
 --- !u!95 &7762295610970612587
@@ -108,13 +112,52 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2069384093708580162}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28d4b9f3fd7d1a0fd8ed5da72ce60b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _teclaInteracao: 101
   nomeNPC: Mercenario
+  DialogoIniciou:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InvokableGenericEvent, Assembly-CSharp
+        m_MethodName: InvokeEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8623415353252788866}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _mensagens:
   - Texto: RECRUTA!
     FraseAcabou:
@@ -129,7 +172,7 @@ MonoBehaviour:
     FraseAcabou:
       m_PersistentCalls:
         m_Calls: []
-  - Texto: "A UMA SEMANA ATR\xC1S, EU ENVIEI UM PELOT\xC3O DE CALOUROS COMO VOC\xCA
+  - Texto: "H\xC1 UMA SEMANA ATR\xC1S, EU ENVIEI UM PELOT\xC3O DE CALOUROS COMO VOC\xCA
       PARA UMA MISS\xC3O DE ESCOLTA ..."
     FraseAcabou:
       m_PersistentCalls:
@@ -138,15 +181,289 @@ MonoBehaviour:
     FraseAcabou:
       m_PersistentCalls:
         m_Calls: []
-  - Texto: "TE PE\xC7O PARA IR PARA L\xC1 E VER O QUE ACONTECEU. DOIS EM UM, OU PERDEMOS
-      HOMENS OU ELES EST\xC3O EM UM PARA\xCDSO E N\xC3O QUEREM VOLTAR."
+  - Texto: "TE PE\xC7O PARA IR PARA L\xC1 E RECUPERAR O QUE \xC9 DE VALOR. DOIS EM
+      UM, OU PERDEMOS HOMENS OU ELES EST\xC3O EM UM PARA\xCDSO E N\xC3O QUEREM VOLTAR."
     FraseAcabou:
       m_PersistentCalls:
         m_Calls: []
-  - Texto: "\xC9 CLARO, VOC\xCA SER\xC1 BONIFICADO."
+  - Texto: "\xC9 CLARO, VOC\xCA SER\xC1 BONIFICADO [1500 BRL]."
     FraseAcabou:
       m_PersistentCalls:
         m_Calls: []
+  - Texto: "DE QUALQUER FORMA, ELES SA\xCDRAM PELO GRANDE PORT\xC3O HEXAGONAL, BOA
+      SORTE EM SUA MISS\xC3O"
+    FraseAcabou:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: InvokableGenericEvent, Assembly-CSharp
+          m_MethodName: InvokeEvent
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1881994849611891016}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8623415353252788866}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+          m_MethodName: set_text
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: "Saia pelo port\xE3o hexagonal"
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1577553482252253524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069384093708580162}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28d4b9f3fd7d1a0fd8ed5da72ce60b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _teclaInteracao: 101
+  nomeNPC: Mercenario
+  DialogoIniciou:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8623415353252788866}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2155192770629655068}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _mensagens:
+  - Texto: "UAU ... VOC\u1EBE CHEGOU VIVE!"
+    FraseAcabou:
+      m_PersistentCalls:
+        m_Calls: []
+  - Texto: UHHHHHHHHH
+    FraseAcabou:
+      m_PersistentCalls:
+        m_Calls: []
+  - Texto: "N\xC3O ESTAVA IMAGINANDO QUE VOC\xCA CONSEGUIRIA VOLTAR ..."
+    FraseAcabou:
+      m_PersistentCalls:
+        m_Calls: []
+  - Texto: "DE QUALQUER FORMA, AQUI EST\xC1 A BONIFICA\xC7\xC3O QUE TE PROMETI"
+    FraseAcabou:
+      m_PersistentCalls:
+        m_Calls: []
+  - Texto: "[1500.00 BRL adicionados \xE0 sua conta]"
+    FraseAcabou:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5064506115981630230}
+          m_TargetAssemblyTypeName: PlayerDataEvents, Assembly-CSharp
+          m_MethodName: AddToCurrentBalance
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1500
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &5064506115981630230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069384093708580162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c102af5669f6c88778a684c46d542fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentAmmoChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  TotalAmmoChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  CurrentBalanceChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  FirstTimeChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  CurrentHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  MissionOneCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  IfIsFirstTime:
+    m_PersistentCalls:
+      m_Calls: []
+  IfNotFirstTime:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1001 &4581407804658618023
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2090986831217945440}
+    m_Modifications:
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 899250540004934747, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_text
+      value: "Ele se recusa a falar com voc\xEA (Converse com os outros primeiro)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2485044128799249595, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_Name
+      value: ConverseComOsOutrosAntes
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950739360936877198, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_Radius
+      value: 2.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+--- !u!1 &2155192770629655068 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2485044128799249595, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+  m_PrefabInstance: {fileID: 4581407804658618023}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4147374063512298266 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+  m_PrefabInstance: {fileID: 4581407804658618023}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4702992902422713952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -212,4 +529,83 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 567b42116b423b8f5a4f2e000aab3714, type: 3}
   m_PrefabInstance: {fileID: 4702992902422713952}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6183478482966146617
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2090986831217945440}
+    m_Modifications:
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 899250540004934747, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_text
+      value: Pressione E para conversar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2485044128799249595, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_Name
+      value: PressioneEParaConversar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2485044128799249595, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950739360936877198, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: m_Radius
+      value: 2.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+--- !u!4 &6037673745744085892 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 439664615072247229, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+  m_PrefabInstance: {fileID: 6183478482966146617}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8623415353252788866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2485044128799249595, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+  m_PrefabInstance: {fileID: 6183478482966146617}
   m_PrefabAsset: {fileID: 0}
