@@ -9,10 +9,6 @@ namespace UISystem
 {
     public class InventoryController : MonoBehaviour
     {
-        [Header("UI structure")]
-        [SerializeField]
-        private Text _currentTotalInventoryValue;
-
         [Header("Inventory")]
         [SerializeField]
         private Inventory _initialInventory;
@@ -31,27 +27,13 @@ namespace UISystem
 
         private InventorySlot _selectedSlot;
 
-        private void Awake()
-        {
-            _inventory = _initialInventory;
-        }
+        private void Awake() => _inventory = _initialInventory;
 
-        private void Start()
-        {
-            RaiseEvents();
-            UpdateText();
-        }
+        private void Start() => RaiseEvents();
 
-        private void OnEnable()
-        {
-            RaiseEvents();
-            UpdateText();
-        }
+        private void OnEnable() => RaiseEvents();
 
-        void Update()
-        {
-            CheckForInput();
-        }
+        void Update() => CheckForInput();
 
         private void CheckForInput()
         {
@@ -74,7 +56,6 @@ namespace UISystem
             Inventory.SubtractItem(_inventory, _selectedSlot.CurrentItem, amount);
             OnItemConsuption.Raise(this, _selectedSlot);
             RaiseEvents();
-            UpdateText();
         }
 
         private void ConsumeSelectedItem()
@@ -108,7 +89,6 @@ namespace UISystem
                     $"ERROR: Not possible to subtract from inventory data of type {data.GetType()} sent from {sender}"
                 );
             RaiseEvents();
-            UpdateText();
         }
 
         public void OnInventoryItemAdded(Component sender, object data)
@@ -122,25 +102,17 @@ namespace UISystem
                     $"ERROR: Not possible to add to inventory data of type {data.GetType()} sent from {sender}"
                 );
             RaiseEvents();
-            UpdateText();
         }
 
         public void OnEconomyTick(Component sender, object data)
         {
             OnInventoryValueChanged.Raise(this, _inventory.GetInventoryValue());
-            UpdateText();
         }
 
         public void OnMouseHover(Component sender, object data)
         {
             if (data is InventorySlot slot)
                 _selectedSlot = slot;
-        }
-
-        private void UpdateText()
-        {
-            string formattedText = String.Format("{0:N2}BRL", _inventory.GetInventoryValue());
-            _currentTotalInventoryValue.SetText(formattedText);
         }
     }
 }
