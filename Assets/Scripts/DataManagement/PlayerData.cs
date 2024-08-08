@@ -15,10 +15,10 @@ public class PlayerData
     float _currentBalance = 1440f;
 
     [SerializeField]
-    bool _firstTime = true;
+    bool _firstTime = false;
 
     [SerializeField]
-    bool _missionOneCompleted = false;
+    bool _missionOneCompleted = true;
 
     [SerializeField]
     float _currentHealth = 5;
