@@ -9,7 +9,7 @@ namespace Economy
 
         public void GenerateRandomLoans()
         {
-            foreach (LoanViewModel loanViewModel in loanViewModels)
+            foreach (var loanViewModel in loanViewModels)
                 loanViewModel.ResetLoanView(this, null);
         }
 

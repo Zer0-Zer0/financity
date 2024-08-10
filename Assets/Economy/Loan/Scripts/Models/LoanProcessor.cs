@@ -21,38 +21,28 @@ namespace Economy
         public UnityEvent<LoanData> InstallmentPaymentLate;
         public UnityEvent PersistenceChanged;
 
-        [SerializeField] private LoanData _loan;
+        [SerializeField] private LoanData loanData;
         public LoanData Loan
         {
-            get => _loan;
-            set => _loan = value;
+            get => loanData;
+            set => loanData = value;
         }
 
-        float _remainingValue;
-        float _remainingInstallments;
-        float InstallmentValue
-        {
-            get => _remainingValue / _remainingInstallments;
-        }
+        private float remainingValue;
+        private float remainingInstallments;
+        private float InstallmentValue => remainingValue / remainingInstallments;
 
-        int _remainingPenaltyInstallments;
-        float _rawRemainingPenalty;
+        private int remainingPenaltyInstallments;
+        private float rawRemainingPenalty;
 
-        float CalculatedRemainingPenalty
-        {
-            get => LoanData.CalculateTotalFromCompoundInterest(_rawRemainingPenalty, Loan.Rate, _remainingPenaltyInstallments);
-        }
-        float RemainingPenaltyInstallmentsValue
-        {
-            get => CalculatedRemainingPenalty / _remainingPenaltyInstallments;
-        }
+        private float RemainingPenalty => LoanData.CalculateTotalFromCompoundInterest(rawRemainingPenalty, Loan.Rate, remainingPenaltyInstallments);
+        private float RemainingPenaltyInstallmentValue => CalculateRemainingPenaltyInstallmentValue();
+        public float TotalToPay => CalculateTotalToPay();
 
-        float TotalToPay
-        {
-            get => CalculatedRemainingPenalty + _remainingValue;
-        }
+        private bool isPersistent;
 
-        bool _isPersistent;
+        private float CalculateTotalToPay() => RemainingPenalty + remainingValue;
+        private float CalculateRemainingPenaltyInstallmentValue() => RemainingPenalty / remainingPenaltyInstallments;
 
         public void SetLoanData(LoanData loan) => Loan = loan;
 
@@ -60,12 +50,12 @@ namespace Economy
         /// Called when an installment arrives.
         /// </summary>
         /// <param name="wallet">The player's wallet data.</param>
-        public void InstallmentArrival(WalletData wallet)
+        public void OnInstallmentArrival(WalletData wallet)
         {
             if (wallet.CurrentDigitalMoney >= InstallmentValue)
-                InstallmentPayment(wallet);
+                ProcessInstallmentPayment(wallet);
             else
-                LateInstallmentPayment(wallet);
+                ProcessLateInstallmentPayment(wallet);
             InstallmentArrivalOccurred?.Invoke(Loan);
         }
 
@@ -73,20 +63,20 @@ namespace Economy
         /// Called when an installment is paid.
         /// </summary>
         /// <param name="wallet">The player's wallet data.</param>
-        private void InstallmentPayment(WalletData wallet)
+        private void ProcessInstallmentPayment(WalletData wallet)
         {
             Transaction transaction;
-            if (_remainingPenaltyInstallments != 0)
+            if (remainingPenaltyInstallments != 0)
             {
-                transaction = new Transaction(RemainingPenaltyInstallmentsValue, TransactionType.Digital, null, wallet);
-                _rawRemainingPenalty -= RemainingPenaltyInstallmentsValue;
-                _remainingPenaltyInstallments--;
+                transaction = new Transaction(RemainingPenaltyInstallmentValue, TransactionType.Digital, null, wallet);
+                rawRemainingPenalty -= RemainingPenaltyInstallmentValue;
+                remainingPenaltyInstallments--;
             }
             else
             {
                 transaction = new Transaction(InstallmentValue, TransactionType.Digital, null, wallet);
-                _remainingValue -= InstallmentValue;
-                _remainingInstallments--;
+                remainingValue -= InstallmentValue;
+                remainingInstallments--;
             }
             wallet.Transactions.Add(transaction);
             InstallmentPaymentMade?.Invoke(Loan);
@@ -96,32 +86,32 @@ namespace Economy
         /// Called when an installment is late.
         /// </summary>
         /// <param name="wallet">The player's wallet data.</param>
-        private void LateInstallmentPayment(WalletData wallet)
+        private void ProcessLateInstallmentPayment(WalletData wallet)
         {
-            if (_remainingPenaltyInstallments != 0)
+            if (remainingPenaltyInstallments != 0)
             {
-                _rawRemainingPenalty -= wallet.CurrentDigitalMoney;
+                rawRemainingPenalty -= wallet.CurrentDigitalMoney;
             }
             else
             {
-                _remainingValue -= wallet.CurrentDigitalMoney;
-                _remainingInstallments--;
+                remainingValue -= wallet.CurrentDigitalMoney;
+                remainingInstallments--;
             }
 
             Transaction transaction = new Transaction(wallet.CurrentDigitalMoney, TransactionType.Digital, null, wallet);
             wallet.Transactions.Add(transaction);
 
-            if (_remainingInstallments != 0)
+            if (remainingInstallments != 0)
             {
                 // Moves the installment value from normal to the penalty one
-                _rawRemainingPenalty += InstallmentValue;
-                _remainingPenaltyInstallments++;
+                rawRemainingPenalty += InstallmentValue;
+                remainingPenaltyInstallments++;
 
-                _remainingValue -= InstallmentValue;
-                _remainingInstallments--;
+                remainingValue -= InstallmentValue;
+                remainingInstallments--;
             }
             else
-                _remainingPenaltyInstallments++;
+                remainingPenaltyInstallments++;
 
             InstallmentPaymentLate?.Invoke(Loan);
         }
@@ -130,10 +120,10 @@ namespace Economy
         /// Called when a loan is fully repaid by the player.
         /// </summary>
         /// <param name="wallet">The player's wallet data.</param>
-        private void LoanFullyRepaid(WalletData wallet)
+        private void ProcessLoanFullyRepaid(WalletData wallet)
         {
             Transaction transaction = new Transaction(TotalToPay, TransactionType.Digital, null, wallet);
-            wallet.Transactions.Add(transaction); 
+            wallet.Transactions.Add(transaction);
             ResetLoanProcessor();
 
             PersistenceChanged?.Invoke();
@@ -144,15 +134,15 @@ namespace Economy
         /// Called when a loan is granted to the player.
         /// </summary>
         /// <param name="wallet">The player's wallet data.</param>
-        public void LoanGrant(WalletData wallet)
+        public void GrantLoan(WalletData wallet)
         {
             Transaction transaction = new Transaction(Loan.Principal, TransactionType.Digital, wallet);
             wallet.Transactions.Add(transaction);
-            wallet.Loans.Add(Loan);
+            wallet.Loans.Add(this);
 
-            _remainingValue = Loan.Total;
-            _remainingInstallments = Loan.Installments;
-            _isPersistent = true;
+            remainingValue = Loan.Total;
+            remainingInstallments = Loan.Installments;
+            isPersistent = true;
             PersistenceChanged?.Invoke();
             LoanGrantOccurred?.Invoke(Loan);
         }
@@ -162,23 +152,23 @@ namespace Economy
         /// </summary>
         public void ResetLoanProcessor()
         {
-            _remainingValue = 0;
-            _remainingInstallments = 0;
-            _remainingPenaltyInstallments = 0;
-            _rawRemainingPenalty = 0;
-            _isPersistent = false;
-            NewLocalRandomLoan();
+            remainingValue = 0;
+            remainingInstallments = 0;
+            remainingPenaltyInstallments = 0;
+            rawRemainingPenalty = 0;
+            isPersistent = false;
+            GenerateNewLocalRandomLoan();
         }
 
         /// <summary>
         /// Generates a new local random loan if the current loan is not persistent.
         /// </summary>
-        public void NewLocalRandomLoan()
+        public void GenerateNewLocalRandomLoan()
         {
-            if (!_isPersistent)
+            if (!isPersistent)
             {
-                LoanData _newLoan = GenerateRandomLoan(Loan.LoanType);
-                SetLoanData(_newLoan);
+                LoanData newLoan = GenerateRandomLoan(Loan.LoanType);
+                SetLoanData(newLoan);
             }
         }
 
@@ -195,11 +185,11 @@ namespace Economy
         /// <returns>A new LoanData object with randomly generated principal, rate, installments, and type.</returns>
         public static LoanData GenerateRandomLoan(LoanData.Type type, float minPrincipal = 1000, float maxPrincipal = 1500, float minRate = 0.10f, float maxRate = 0.30f, int minInstallments = 4, int maxInstallments = 7)
         {
-            float _principal = UnityEngine.Random.Range(minPrincipal, maxPrincipal);
-            float _rate = UnityEngine.Random.Range(minRate, maxRate);
-            int _installments = UnityEngine.Random.Range(minInstallments, maxInstallments + 1);
+            float principal = UnityEngine.Random.Range(minPrincipal, maxPrincipal);
+            float rate = UnityEngine.Random.Range(minRate, maxRate);
+            int installments = UnityEngine.Random.Range(minInstallments, maxInstallments + 1);
 
-            return new LoanData(_principal, _rate, _installments, type);
+            return new LoanData(principal, rate, installments, type);
         }
     }
 }

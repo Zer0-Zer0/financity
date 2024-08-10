@@ -18,8 +18,8 @@ namespace Economy
             set => _transactions = value;
         }
 
-        [SerializeField] List<LoanData> _loans;
-        public List<LoanData> Loans
+        [SerializeField] List<LoanProcessor> _loans;
+        public List<LoanProcessor> Loans
         {
             get => _loans;
             set => _loans = value;
@@ -35,7 +35,8 @@ namespace Economy
         public float CurrentDebt => CalculateCurrentDebt();
         public float CurrentMaxDebt => CalculateCurrentMaxDebt();
 
-        private float _currentMaxDebt = 800f;
+        [SerializeField]
+        private float _currentMaxDebt = 1500f;
 
         private float CalculateCurrentDigitalMoney()
         {
@@ -59,9 +60,8 @@ namespace Economy
         private float CalculateCurrentDebt()
         {
             float totalDebt = 0f;
-            foreach (var transaction in Transactions)
-                if (transaction.Type == TransactionType.Digital && transaction.Value < 0)
-                    totalDebt += -transaction.Value;
+            foreach (var loan in Loans)
+                    totalDebt += loan.TotalToPay;
             return totalDebt;
         }
 
