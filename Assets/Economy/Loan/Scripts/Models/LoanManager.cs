@@ -55,7 +55,7 @@ public class LoanManager : MonoBehaviour
     {
         get
         {
-            return CalculatedRemainingPenalty / _remainingPenaltyInstallments;
+            return CalculatedRemainingPenalty / _remainingPenaltyInstallments; 
         }
     }
 
@@ -81,13 +81,9 @@ public class LoanManager : MonoBehaviour
     public void InstallmentArrivalOccurredHandler(WalletData wallet)
     {
         if (wallet.CurrentDigitalMoney >= InstallmentValue)
-        {
             InstallmentPaymentMadeHandler(wallet);
-        }
         else
-        {
             InstallmentPaymentLateHandler(wallet);
-        }
         InstallmentArrivalOccurred?.Invoke(Loan);
     }
 
@@ -141,9 +137,8 @@ public class LoanManager : MonoBehaviour
             _remainingInstallments--;
         }
         else
-        {
             _remainingPenaltyInstallments++;
-        }
+
         InstallmentPaymentLate?.Invoke(Loan);
     }
 
