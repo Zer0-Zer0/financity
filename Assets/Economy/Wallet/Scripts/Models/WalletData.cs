@@ -33,7 +33,7 @@ namespace Economy
         public float CurrentDigitalMoney => CalculateCurrentDigitalMoney();
         public float CurrentPhysicalMoney => CalculateCurrentPhysicalMoney();
         public float CurrentDebt => CalculateCurrentDebt();
-        public float CurrentMaxDebt => CalculateCurrentMaxDebt();
+        public float CurrentMaxDebt => _currentMaxDebt;
 
         [SerializeField]
         private float _currentMaxDebt = 1500f;
@@ -64,7 +64,5 @@ namespace Economy
                 totalDebt += loan.TotalToPay;
             return totalDebt;
         }
-
-        private float CalculateCurrentMaxDebt() => _currentMaxDebt;
     }
 }

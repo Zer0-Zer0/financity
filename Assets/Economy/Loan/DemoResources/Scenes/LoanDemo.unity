@@ -324,6 +324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 565851235}
   - component: {fileID: 565851234}
+  - component: {fileID: 565851236}
   m_Layer: 0
   m_Name: WalletManager
   m_TagString: Untagged
@@ -345,16 +346,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Wallet:
     _walletName: 
-    _transactions:
-    - _name: 
-      _value: 0
-      _type: 0
-    _loans:
-    - loanData:
-        _principal: 0
-        _rate: 0
-        _installments: 0
-        LoanType: 0
+    _transactions: []
+    _loans: []
     _currentMaxDebt: 1500
 --- !u!4 &565851235
 Transform:
@@ -365,12 +358,40 @@ Transform:
   m_GameObject: {fileID: 565851233}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.816334, y: 11.868481, z: 18.200634}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &565851236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565851233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: ecb965ec6095c7849b86e04cc75d8ac8, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 565851234}
+        m_TargetAssemblyTypeName: Economy.WalletManager, Assembly-CSharp
+        m_MethodName: OnLoanRecieved
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &725523784
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +760,30 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3506303183457491693, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -1231,6 +1276,30 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3506303183457491693, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -4579,6 +4648,30 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3506303183457491693, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552760796056633667, guid: ab0d9cabf25267b4f91a9e896444a118, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}

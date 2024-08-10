@@ -32,7 +32,10 @@ namespace Economy
         private float RemainingPenaltyInstallmentValue => CalculateRemainingPenaltyInstallmentValue();
         public float TotalToPay => CalculateTotalToPay();
 
-        private bool isPersistent;
+        public LoanProcessor(LoanData loanData)
+        {
+            Loan = loanData;
+        }
 
         private float CalculateTotalToPay() => RemainingPenalty + remainingValue;
         private float CalculateRemainingPenaltyInstallmentValue() => RemainingPenalty / remainingPenaltyInstallments;
@@ -128,7 +131,6 @@ namespace Economy
 
             remainingValue = Loan.Total;
             remainingInstallments = Loan.Installments;
-            isPersistent = true;
         }
 
         /// <summary>
@@ -140,7 +142,6 @@ namespace Economy
             remainingInstallments = 0;
             remainingPenaltyInstallments = 0;
             rawRemainingPenalty = 0;
-            isPersistent = false;
             GenerateNewLocalRandomLoan();
         }
 
@@ -149,11 +150,8 @@ namespace Economy
         /// </summary>
         public void GenerateNewLocalRandomLoan()
         {
-            if (!isPersistent)
-            {
-                LoanData newLoan = GenerateRandomLoan(Loan.LoanType);
-                SetLoanData(newLoan);
-            }
+            LoanData newLoan = GenerateRandomLoan(Loan.LoanType);
+            SetLoanData(newLoan);
         }
 
         /// <summary>

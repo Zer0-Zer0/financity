@@ -19,8 +19,6 @@ namespace Economy
         /// </summary>
         public WalletData Wallet;
 
-        public event Action<Transaction> OnTransactionCompleted; // Event to notify when a transaction is completed
-
         public Transaction MakeTransaction(float value, WalletData receiver, TransactionType type)
         {
             Transaction transactionToMake = new Transaction(value, type, Wallet, receiver);
@@ -67,13 +65,18 @@ namespace Economy
         {
             UpdateWallets(transaction);
             transaction.OnTransactionAccepted?.RemoveListener(OnTransactionAcceptedEventHandler);
-            OnTransactionCompleted?.Invoke(transaction); // Notify subscribers that the transaction is completed
         }
 
         private void UpdateWallets(Transaction transaction)
         {
             transaction.Receiver.Transactions.Add(transaction);
             transaction.Sender.Transactions.Add(transaction);
+        }
+
+        public void OnLoanRecieved(Component sender, object data){
+            if(data is LoanProcessor loanProcessor){
+                Wallet.Loans.Add(loanProcessor);
+            }
         }
     }
 }

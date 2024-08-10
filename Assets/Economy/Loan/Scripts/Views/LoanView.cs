@@ -20,6 +20,9 @@ namespace UISystem
 
         [SerializeField]
         Text _loanType;
+
+        [SerializeField]
+        AcceptLoanButtonViewModel acceptLoanButtonViewModel;
         protected override void Setup() { }
         protected override void Configure() { }
 
@@ -34,6 +37,10 @@ namespace UISystem
             _loanRate.SetText(_formatedRate);
             _loanInstallments.SetText(_formatedInstallments);
             _loanType.SetText(_formatedLoanType);
+
+            LoanProcessor loanProcessor = new LoanProcessor(data);
+
+            acceptLoanButtonViewModel.Data = loanProcessor;
         }
 
         private string FormatLoanType(LoanData.Type loanType)
