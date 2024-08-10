@@ -1,23 +1,22 @@
 using UnityEngine;
+using Economy;
+using UISystem;
 
-
-namespace UISystem
+public class LoanViewModel : MonoBehaviour
 {
-    public class LoanViewModel : MonoBehaviour
+    [SerializeField] LoanView loanView;
+    [SerializeField] LoanProcessor loanProcessor;
+    public void LoanChanged(Component sender, object data)
     {
-        [SerializeField] LoanView loanView;
-        [SerializeField] LoanProcessor loanProcessor;
-        public void LoanChanged(Component sender, object data)
+        if (data is LoanData loanData)
         {
-            if (data is LoanData loanData)
-            {
-                loanProcessor.Loan = loanData;
-                loanView.SetLoan(loanData);
-            }
+            loanProcessor.Loan = loanData;
+            loanView.SetLoan(loanData);
         }
-        public void ResetLoanView(Component sender, object data){
-            loanProcessor.ResetLoanProcessor();
-            loanView.SetLoan(loanProcessor.Loan);
-        }
+    }
+    public void ResetLoanView(Component sender, object data)
+    {
+        loanProcessor.ResetLoanProcessor();
+        loanView.SetLoan(loanProcessor.Loan);
     }
 }

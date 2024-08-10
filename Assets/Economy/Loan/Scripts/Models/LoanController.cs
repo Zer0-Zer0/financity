@@ -1,15 +1,18 @@
 using UnityEngine;
 using UISystem;
 
-public class LoanController : MonoBehaviour
+namespace Economy
 {
-    [SerializeField] LoanViewModel[] loanViewModels;
-
-    public void GenerateRandomLoans()
+    public class LoanController : MonoBehaviour
     {
-        foreach (LoanViewModel loanViewModel in loanViewModels)
-            loanViewModel.ResetLoanView(this, null);
-    }
+        [SerializeField] LoanViewModel[] loanViewModels;
 
-    private void OnEnable() => GenerateRandomLoans();
+        public void GenerateRandomLoans()
+        {
+            foreach (LoanViewModel loanViewModel in loanViewModels)
+                loanViewModel.ResetLoanView(this, null);
+        }
+
+        private void OnEnable() => GenerateRandomLoans();
+    }
 }
