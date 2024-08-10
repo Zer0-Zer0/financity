@@ -6,9 +6,6 @@ using UnityEngine.Events;
 
 namespace Economy
 {
-    /// <summary>
-    /// Enum representing the type of transaction.
-    /// </summary>
     public enum TransactionType
     {
         Physical,
@@ -18,53 +15,39 @@ namespace Economy
     /// <summary>
     /// Represents a transaction between two wallets.
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public struct Transaction
     {
-        /// <summary>
-        /// The name of the transaction.
-        /// </summary>
-        [SerializeField] private readonly string _name;
+        [SerializeField] private string _name;
         public string Name => _name;
 
         /// <summary>
         /// The value of the transaction.
         /// </summary>
-        [SerializeField] private readonly float _value;
+        [SerializeField] private float _value;
         public float Value => _value;
 
         /// <summary>
         /// The wallet data of the sender.
         /// </summary>
-        [SerializeField] private readonly WalletData _sender;
+        private WalletData _sender;//Not Serializable to avoid cyclic dependences
         public WalletData Sender => _sender;
 
         /// <summary>
         /// The wallet data of the receiver.
         /// </summary>
-        [SerializeField] private readonly WalletData _receiver;
+        private WalletData _receiver;//Not Serializable to avoid cyclic dependences
         public WalletData Receiver => _receiver;
 
         /// <summary>
         /// The type of the transaction.
         /// </summary>
-        [SerializeField] private readonly TransactionType _type;
+        [SerializeField] private TransactionType _type;
         public TransactionType Type => _type;
 
-        /// <summary>
-        /// Event triggered when a transaction is pending.
-        /// </summary>
-        public UnityEvent<Transaction> OnTransactionPending { get; }
-
-        /// <summary>
-        /// Event triggered when a transfer is accepted.
-        /// </summary>
-        public UnityEvent<Transaction> OnTransactionAccepted { get; }
-
-        /// <summary>
-        /// Event triggered when a transfer is refused.
-        /// </summary>
-        public UnityEvent<Transaction> OnTransactionRefused { get; }
+        public UnityEvent<Transaction> OnTransactionPending { get; private set; }
+        public UnityEvent<Transaction> OnTransactionAccepted { get; private set; }
+        public UnityEvent<Transaction> OnTransactionRefused { get; private set; }
 
         /// <summary>
         /// Constructor for creating a new transaction.

@@ -6,8 +6,8 @@ using UnityEngine.Events;
 
 namespace Economy
 {
-    [CreateAssetMenu(fileName = "WalletData", menuName = "WalletData", order = 0)]
-    public class WalletData : ScriptableObject
+    [Serializable]
+    public class WalletData
     {
         [SerializeField] string _walletName;
         [SerializeField] List<Transaction> _transactions;
@@ -61,7 +61,7 @@ namespace Economy
         {
             float totalDebt = 0f;
             foreach (var loan in Loans)
-                    totalDebt += loan.TotalToPay;
+                totalDebt += loan.TotalToPay;
             return totalDebt;
         }
 

@@ -14,13 +14,6 @@ namespace Economy
     [Serializable]
     public class LoanProcessor
     {
-        public UnityEvent<LoanData> LoanGrantOccurred;
-        public UnityEvent<LoanData> LoanFullyRepaidEvent;
-        public UnityEvent<LoanData> InstallmentPaymentMade;
-        public UnityEvent<LoanData> InstallmentArrivalOccurred;
-        public UnityEvent<LoanData> InstallmentPaymentLate;
-        public UnityEvent PersistenceChanged;
-
         [SerializeField] private LoanData loanData;
         public LoanData Loan
         {
@@ -56,7 +49,6 @@ namespace Economy
                 ProcessInstallmentPayment(wallet);
             else
                 ProcessLateInstallmentPayment(wallet);
-            InstallmentArrivalOccurred?.Invoke(Loan);
         }
 
         /// <summary>
@@ -79,7 +71,6 @@ namespace Economy
                 remainingInstallments--;
             }
             wallet.Transactions.Add(transaction);
-            InstallmentPaymentMade?.Invoke(Loan);
         }
 
         /// <summary>
@@ -112,8 +103,6 @@ namespace Economy
             }
             else
                 remainingPenaltyInstallments++;
-
-            InstallmentPaymentLate?.Invoke(Loan);
         }
 
         /// <summary>
@@ -125,9 +114,6 @@ namespace Economy
             Transaction transaction = new Transaction(TotalToPay, TransactionType.Digital, null, wallet);
             wallet.Transactions.Add(transaction);
             ResetLoanProcessor();
-
-            PersistenceChanged?.Invoke();
-            LoanFullyRepaidEvent?.Invoke(Loan);
         }
 
         /// <summary>
@@ -143,8 +129,6 @@ namespace Economy
             remainingValue = Loan.Total;
             remainingInstallments = Loan.Installments;
             isPersistent = true;
-            PersistenceChanged?.Invoke();
-            LoanGrantOccurred?.Invoke(Loan);
         }
 
         /// <summary>
