@@ -7,7 +7,6 @@ namespace UISystem
         [SerializeField]
         ItemDescriptionView itemDescriptionView;
 
-        private void Start() => itemDescriptionView.UpdateItemDescription(new InventorySlot());
         private void OnEnable() => itemDescriptionView.UpdateItemDescription(new InventorySlot());
 
         public void OnMarketTickUpdate(Component sender, object data)

@@ -40,17 +40,10 @@ namespace UISystem
             buttonText.color = theme.GetTextColor(style);
         }
 
-        private void OnEnable() {
-            button.onClick.AddListener(OnClickMethod);
-        }
+        private void OnEnable() => button.onClick.AddListener(OnClickMethod);
 
-        private void OnDisable(){
-            button.onClick.RemoveListener(OnClickMethod);
-        }
+        private void OnDisable() => button.onClick.RemoveListener(OnClickMethod);
 
-        public void OnClickMethod()
-        {
-            onClickEvent?.Invoke();
-        }
+        public void OnClickMethod() => onClickEvent?.Invoke();
     }
 }
