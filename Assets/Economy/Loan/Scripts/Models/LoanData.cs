@@ -38,13 +38,9 @@ public struct LoanData
         private set
         {
             if (value <= 0)
-            {
                 throw new Exception("Attempted to set the Total value to negative or null");
-            }
             else
-            {
                 _total = value;
-            }
         }
     }
 
@@ -58,17 +54,11 @@ public struct LoanData
         private set
         {
             if (value <= 0)
-            {
                 throw new Exception("Attempted to set the Principal value to negative or null");
-            }
             else if (value > Total)
-            {
                 throw new Exception("Attempted to set the Principal value to bigger than the Total");
-            }
             else
-            {
                 _principal = value;
-            }
         }
     }
 
@@ -82,13 +72,9 @@ public struct LoanData
         private set
         {
             if (value <= 0)
-            {
                 throw new Exception("Attempted to set the Rate value to negative or null");
-            }
             else
-            {
                 _rate = value;
-            }
         }
     }
 
@@ -102,19 +88,11 @@ public struct LoanData
         private set
         {
             if (value <= 0)
-            {
                 throw new Exception("Attempted to set the Installments quantity value to negative or null");
-            }
             else
-            {
                 _installments = value;
-            }
         }
     }
-
-    public LoanData.Type LoanType;
-    public static UnityEvent<LoanData> OnLoanPaymentComplete;
-    public static UnityEvent<LoanData> OnInstallmentPayment;
 
     public float InstallmentValue
     {
@@ -125,9 +103,7 @@ public struct LoanData
         private set
         {
             if (value <= 0)
-            {
                 throw new Exception("Attempted to set the value of the individual installment, that is not intended");
-            }
         }
     }
 
@@ -139,6 +115,10 @@ public struct LoanData
         SimpleInterest,
         CompoundInterest
     }
+
+    public LoanData.Type LoanType;
+    public static UnityEvent<LoanData> OnLoanPaymentComplete;
+    public static UnityEvent<LoanData> OnInstallmentPayment;
 
     public LoanData(float principal, float rate, int installments, LoanData.Type type, string name = "") : this()
     {
