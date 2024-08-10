@@ -16,7 +16,7 @@ namespace UISystem
             }
         }
         public void ResetLoanView(Component sender, object data){
-            loanProcessor.ResetLoanManager();
+            loanProcessor.ResetLoanProcessor();
             loanView.SetLoan(loanProcessor.Loan);
         }
     }

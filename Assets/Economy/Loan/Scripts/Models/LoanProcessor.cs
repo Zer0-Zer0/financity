@@ -79,12 +79,12 @@ public class LoanProcessor
     /// Called when an installment arrives.
     /// </summary>
     /// <param name="wallet">The player's wallet data.</param>
-    public void InstallmentArrivalOccurredHandler(WalletData wallet)
+    public void InstallmentArrival(WalletData wallet)
     {
         if (wallet.CurrentDigitalMoney >= InstallmentValue)
-            InstallmentPaymentMadeHandler(wallet);
+            InstallmentPayment(wallet);
         else
-            InstallmentPaymentLateHandler(wallet);
+            LateInstallmentPayment(wallet);
         InstallmentArrivalOccurred?.Invoke(Loan);
     }
 
@@ -92,7 +92,7 @@ public class LoanProcessor
     /// Called when an installment is paid.
     /// </summary>
     /// <param name="wallet">The player's wallet data.</param>
-    public void InstallmentPaymentMadeHandler(WalletData wallet)
+    private void InstallmentPayment(WalletData wallet)
     {
         if (_remainingPenaltyInstallments != 0)
         {
@@ -113,7 +113,7 @@ public class LoanProcessor
     /// Called when an installment is late.
     /// </summary>
     /// <param name="wallet">The player's wallet data.</param>
-    public void InstallmentPaymentLateHandler(WalletData wallet)
+    private void LateInstallmentPayment(WalletData wallet)
     {
         if (_remainingPenaltyInstallments != 0)
         {
@@ -130,7 +130,7 @@ public class LoanProcessor
         wallet.CurrentDigitalMoney = 0;
         if (_remainingInstallments != 0)
         {
-            //Moves the installment value from normal to the penalty one
+            // Moves the installment value from normal to the penalty one
             _rawRemainingPenalty += InstallmentValue;
             _remainingPenaltyInstallments++;
 
@@ -147,10 +147,10 @@ public class LoanProcessor
     /// Called when a loan is fully repaid by the player.
     /// </summary>
     /// <param name="wallet">The player's wallet data.</param>
-    public void LoanFullyRepaidEventHandler(WalletData wallet)
+    private void LoanFullyRepaid(WalletData wallet)
     {
         wallet.CurrentDigitalMoney -= TotalToPay;
-        ResetLoanManager();
+        ResetLoanProcessor();
 
         PersistenceChanged?.Invoke();
         LoanFullyRepaidEvent?.Invoke(Loan);
@@ -160,7 +160,7 @@ public class LoanProcessor
     /// Called when a loan is granted to the player.
     /// </summary>
     /// <param name="wallet">The player's wallet data.</param>
-    public void LoanGrantOccurredHandler(WalletData wallet)
+    public void LoanGrant(WalletData wallet)
     {
         wallet.CurrentDigitalMoney += Loan.Principal;
         wallet.CurrentDebt += Loan.Total;
@@ -172,11 +172,10 @@ public class LoanProcessor
         LoanGrantOccurred?.Invoke(Loan);
     }
 
-
     /// <summary>
     /// Resets the loan to its initial state and generates a new local random loan.
     /// </summary>
-    public void ResetLoanManager()
+    public void ResetLoanProcessor()
     {
         _remainingValue = 0;
         _remainingInstallments = 0;
@@ -185,7 +184,6 @@ public class LoanProcessor
         _isPersistent = false;
         NewLocalRandomLoan();
     }
-
 
     /// <summary>
     /// Generates a new local random loan if the current loan is not persistent.
@@ -210,7 +208,7 @@ public class LoanProcessor
     /// <param name="maxInstallments">The maximum number of installments for the loan.</param>
     /// <param name="type">The type of the loan.</param>
     /// <returns>A new LoanData object with randomly generated principal, rate, installments, and type.</returns>
-    public static LoanData GenerateRandomLoan(LoanData.Type type, float minPrincipal = 300, float maxPrincipal = 800, float minRate = 0.05f, float maxRate = 0.15f, int minInstallments = 1, int maxInstallments = 3)
+    public static LoanData GenerateRandomLoan(LoanData.Type type, float minPrincipal = 1000, float maxPrincipal = 1500, float minRate = 0.10f, float maxRate = 0.30f, int minInstallments = 4, int maxInstallments = 7)
     {
         float _principal = UnityEngine.Random.Range(minPrincipal, maxPrincipal);
         float _rate = UnityEngine.Random.Range(minRate, maxRate);
