@@ -7,6 +7,15 @@ using UnityEngine.Events;
 namespace Economy
 {
     /// <summary>
+    /// Enum representing the type of transaction.
+    /// </summary>
+    public enum TransactionType
+    {
+        Physical,
+        Digital
+    }
+
+    /// <summary>
     /// Represents a transaction between two wallets.
     /// </summary>
     [System.Serializable]
@@ -43,15 +52,6 @@ namespace Economy
         public TransactionType Type => _type;
 
         /// <summary>
-        /// Enum representing the type of transaction.
-        /// </summary>
-        public enum TransactionType
-        {
-            Physical,
-            Digital
-        }
-
-        /// <summary>
         /// Event triggered when a transaction is pending.
         /// </summary>
         public UnityEvent<Transaction> OnTransactionPending { get; }
@@ -74,7 +74,7 @@ namespace Economy
         /// <param name="sender">The wallet data of the sender.</param>
         /// <param name="receiver">The wallet data of the receiver.</param>
         /// <param name="transactionType">The type of the transaction (Physical or Digital).</param>
-        public Transaction(float value, WalletData sender, WalletData receiver, TransactionType type, string name = "")
+        public Transaction(float value, TransactionType type, WalletData receiver = null, WalletData sender = null, string name = "")
         {
             _name = name;
             _value = value;

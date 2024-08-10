@@ -10,134 +10,61 @@ namespace Economy
     public class WalletData : ScriptableObject
     {
         [SerializeField] string _walletName;
-        [SerializeField] float _initialDigitalMoney = 800f;
-        [SerializeField] float _initialPhysicalMoney = 0f;
-        [SerializeField] float _initialDebt = 800f;
-        [SerializeField] float _initialMaxDebt = 800f;
+        [SerializeField] List<Transaction> _transactions;
 
-        [SerializeField] Transaction[] _transactions;
-        public Transaction[] Transactions
+        public List<Transaction> Transactions
         {
-            get
-            {
-                return _transactions;
-            }
-            set
-            {
-                _transactions = value;
-            }
+            get => _transactions;
+            set => _transactions = value;
         }
 
-        [SerializeField] LoanData[] _loans;
-        public LoanData[] Loans
+        [SerializeField] List<LoanData> _loans;
+        public List<LoanData> Loans
         {
-            get
-            {
-                return _loans;
-            }
-            set
-            {
-                _loans = value;
-            }
+            get => _loans;
+            set => _loans = value;
         }
-
         public string WalletName
         {
-            get
-            {
-                return _walletName;
-            }
-            private set
-            {
-                _walletName = value;
-            }
+            get => _walletName;
+            private set => _walletName = value;
         }
 
-        private float _currentDigitalMoney;
-        public float CurrentDigitalMoney
+        public float CurrentDigitalMoney => CalculateCurrentDigitalMoney();
+        public float CurrentPhysicalMoney => CalculateCurrentPhysicalMoney();
+        public float CurrentDebt => CalculateCurrentDebt();
+        public float CurrentMaxDebt => CalculateCurrentMaxDebt();
+
+        private float _currentMaxDebt = 800f;
+
+        private float CalculateCurrentDigitalMoney()
         {
-            get
-            {
-                return _currentDigitalMoney;
-            }
-            set
-            {
-                if (value < 0f)
-                    throw new Exception("Attempted to spend digital money and the value in the account got negative.");
-                _currentDigitalMoney = value;
-                OnDigitalMoneyUpdate?.Invoke(_currentDigitalMoney);
-            }
+            float total = 0f;
+            foreach (var transaction in Transactions)
+                if (transaction.Type == TransactionType.Digital)
+                    total += transaction.Value;
+
+            return total;
         }
 
-        private float _currentPhysicalMoney;
-        public float CurrentPhysicalMoney
+        private float CalculateCurrentPhysicalMoney()
         {
-            get
-            {
-                return _currentPhysicalMoney;
-            }
-            set
-            {
-                if (value < 0f)
-                    throw new Exception("Attempted to spend physical money and the value in the account got negative.");
-                _currentPhysicalMoney = value;
-                OnPhysicalMoneyUpdate?.Invoke(_currentPhysicalMoney);
-            }
+            float total = 0f;
+            foreach (var transaction in Transactions)
+                if (transaction.Type == TransactionType.Physical)
+                    total += transaction.Value;
+            return total;
         }
 
-        private float _currentMaxDebt;
-        public float CurrentMaxDebt
+        private float CalculateCurrentDebt()
         {
-            get
-            {
-                return _currentMaxDebt;
-            }
-            set
-            {
-                if (value < 0f)
-                    throw new Exception("Attempted to input a negative max debt value.");
-                _currentMaxDebt = value;
-                OnMaxDebtUpdate?.Invoke(_currentMaxDebt);
-            }
+            float totalDebt = 0f;
+            foreach (var transaction in Transactions)
+                if (transaction.Type == TransactionType.Digital && transaction.Value < 0)
+                    totalDebt += -transaction.Value;
+            return totalDebt;
         }
 
-        private float _currentDebt;
-        public float CurrentDebt
-        {
-            get
-            {
-                return _currentDebt;
-            }
-            set
-            {
-                if (value < 0f)
-                    throw new Exception("Attempted to input a negative debt value.");
-                else if (value > CurrentMaxDebt)
-                    throw new Exception("Attempted to input a bigger than allowed debt value.");
-                _currentDebt = value;
-                OnDebtUpdate?.Invoke(_currentDebt);
-            }
-        }
-
-        public UnityEvent<float> OnDigitalMoneyUpdate;
-        public UnityEvent<float> OnPhysicalMoneyUpdate;
-        public UnityEvent<float> OnDebtUpdate;
-        public UnityEvent<float> OnMaxDebtUpdate;
-
-        /// <summary>
-        /// Initializes the wallet with initial values, Awake() is better than Start() for this.
-        /// </summary>
-        void Awake()
-        {
-            CurrentDigitalMoney = _initialDigitalMoney;
-            CurrentPhysicalMoney = _initialPhysicalMoney;
-            CurrentMaxDebt = _initialMaxDebt;
-            CurrentDebt = _initialDebt;
-        }
-
-        public void AddTransaction(Transaction transaction)
-        {
-
-        }
+        private float CalculateCurrentMaxDebt() => _currentMaxDebt;
     }
 }

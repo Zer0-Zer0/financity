@@ -24,24 +24,15 @@ namespace Economy
         [SerializeField] private LoanData _loan;
         public LoanData Loan
         {
-            get
-            {
-                return _loan;
-            }
-            set
-            {
-                _loan = value;
-            }
+            get => _loan;
+            set => _loan = value;
         }
 
         float _remainingValue;
         float _remainingInstallments;
         float InstallmentValue
         {
-            get
-            {
-                return _remainingValue / _remainingInstallments;
-            }
+            get => _remainingValue / _remainingInstallments;
         }
 
         int _remainingPenaltyInstallments;
@@ -49,33 +40,21 @@ namespace Economy
 
         float CalculatedRemainingPenalty
         {
-            get
-            {
-                return LoanData.CalculateTotalFromCompoundInterest(_rawRemainingPenalty, Loan.Rate, _remainingPenaltyInstallments);
-            }
+            get => LoanData.CalculateTotalFromCompoundInterest(_rawRemainingPenalty, Loan.Rate, _remainingPenaltyInstallments);
         }
         float RemainingPenaltyInstallmentsValue
         {
-            get
-            {
-                return CalculatedRemainingPenalty / _remainingPenaltyInstallments;
-            }
+            get => CalculatedRemainingPenalty / _remainingPenaltyInstallments;
         }
 
         float TotalToPay
         {
-            get
-            {
-                return CalculatedRemainingPenalty + _remainingValue;
-            }
+            get => CalculatedRemainingPenalty + _remainingValue;
         }
 
         bool _isPersistent;
 
-        public void SetLoanData(LoanData loan)
-        {
-            Loan = loan;
-        }
+        public void SetLoanData(LoanData loan) => Loan = loan;
 
         /// <summary>
         /// Called when an installment arrives.
@@ -96,18 +75,20 @@ namespace Economy
         /// <param name="wallet">The player's wallet data.</param>
         private void InstallmentPayment(WalletData wallet)
         {
+            Transaction transaction;
             if (_remainingPenaltyInstallments != 0)
             {
-                wallet.CurrentDigitalMoney -= RemainingPenaltyInstallmentsValue;
+                transaction = new Transaction(RemainingPenaltyInstallmentsValue, TransactionType.Digital, null, wallet);
                 _rawRemainingPenalty -= RemainingPenaltyInstallmentsValue;
                 _remainingPenaltyInstallments--;
             }
             else
             {
-                wallet.CurrentDigitalMoney -= InstallmentValue;
+                transaction = new Transaction(InstallmentValue, TransactionType.Digital, null, wallet);
                 _remainingValue -= InstallmentValue;
                 _remainingInstallments--;
             }
+            wallet.Transactions.Add(transaction);
             InstallmentPaymentMade?.Invoke(Loan);
         }
 
@@ -120,16 +101,16 @@ namespace Economy
             if (_remainingPenaltyInstallments != 0)
             {
                 _rawRemainingPenalty -= wallet.CurrentDigitalMoney;
-                wallet.CurrentDigitalMoney = 0;
             }
             else
             {
                 _remainingValue -= wallet.CurrentDigitalMoney;
-                wallet.CurrentDigitalMoney = 0;
                 _remainingInstallments--;
             }
 
-            wallet.CurrentDigitalMoney = 0;
+            Transaction transaction = new Transaction(wallet.CurrentDigitalMoney, TransactionType.Digital, null, wallet);
+            wallet.Transactions.Add(transaction);
+
             if (_remainingInstallments != 0)
             {
                 // Moves the installment value from normal to the penalty one
@@ -151,7 +132,8 @@ namespace Economy
         /// <param name="wallet">The player's wallet data.</param>
         private void LoanFullyRepaid(WalletData wallet)
         {
-            wallet.CurrentDigitalMoney -= TotalToPay;
+            Transaction transaction = new Transaction(TotalToPay, TransactionType.Digital, null, wallet);
+            wallet.Transactions.Add(transaction); 
             ResetLoanProcessor();
 
             PersistenceChanged?.Invoke();
@@ -164,8 +146,9 @@ namespace Economy
         /// <param name="wallet">The player's wallet data.</param>
         public void LoanGrant(WalletData wallet)
         {
-            wallet.CurrentDigitalMoney += Loan.Principal;
-            wallet.CurrentDebt += Loan.Total;
+            Transaction transaction = new Transaction(Loan.Principal, TransactionType.Digital, wallet);
+            wallet.Transactions.Add(transaction);
+            wallet.Loans.Add(Loan);
 
             _remainingValue = Loan.Total;
             _remainingInstallments = Loan.Installments;

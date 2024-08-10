@@ -1,10 +1,14 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Economy
 {
+    public enum TransactionPosition
+    {
+        Receiver,
+        Sender
+    }
+
     /// <summary>
     /// Manages the wallet data and updates UI elements accordingly.
     /// </summary>
@@ -15,15 +19,11 @@ namespace Economy
         /// </summary>
         public WalletData Wallet;
 
-        public enum TransactionPosition
-        {
-            Receiver,
-            Sender
-        }
+        public event Action<Transaction> OnTransactionCompleted; // Event to notify when a transaction is completed
 
-        public Transaction MakeTransaction(float value, WalletData receiver, Transaction.TransactionType type)
+        public Transaction MakeTransaction(float value, WalletData receiver, TransactionType type)
         {
-            Transaction transactionToMake = new Transaction(value, Wallet, receiver, type);
+            Transaction transactionToMake = new Transaction(value, type, Wallet, receiver);
             TransactionValidation(transactionToMake);
             transactionToMake.OnTransactionAccepted.AddListener(OnTransactionAcceptedEventHandler);
             return transactionToMake;
@@ -35,56 +35,45 @@ namespace Economy
             transaction.OnTransactionAccepted?.Invoke(transaction);
         }
 
-        public TransactionPosition VerifyTransactionPosition(Transaction transaction)
+        private TransactionPosition VerifyTransactionPosition(Transaction transaction)
         {
             if (transaction.Sender == Wallet)
                 return TransactionPosition.Sender;
             else if (transaction.Receiver == Wallet)
                 return TransactionPosition.Receiver;
             else
-                throw new Exception("ERROR ON TRANSACTION POSITION VERIFICATION: A Wallet that was neither the sender nor the receiver tried to validate a transaction.");
+                throw new InvalidOperationException("Transaction verification failed: Wallet is neither sender nor receiver.");
         }
 
-        public TransactionPosition TransactionValidation(Transaction transaction)
+        private void TransactionValidation(Transaction transaction)
         {
             VerifySenderMoney(transaction);
-            return VerifyTransactionPosition(transaction);
+            VerifyTransactionPosition(transaction);
         }
 
-        public static void VerifySenderMoney(Transaction transaction)
+        private static void VerifySenderMoney(Transaction transaction)
         {
-            switch (transaction.Type)
+            float senderBalance = transaction.Type == TransactionType.Physical
+                ? transaction.Sender.CurrentPhysicalMoney
+                : transaction.Sender.CurrentDigitalMoney;
+
+            if (senderBalance < transaction.Value)
             {
-                case Transaction.TransactionType.Physical:
-                    if (transaction.Sender.CurrentPhysicalMoney < transaction.Value)
-                        throw new Exception("ERROR VERIFYING SENDER'S MONEY: Tried to make a PHYSICAL money transaction bigger than the value in the sender wallet itself.");
-                    break;
-                case Transaction.TransactionType.Digital:
-                    if (transaction.Sender.CurrentDigitalMoney < transaction.Value)
-                        throw new Exception("ERROR VERIFYING SENDER'S MONEY: Tried to make a DIGITAL money transaction bigger than the value in the sender wallet itself.");
-                    break;
-                default:
-                    throw new Exception("ERROR VERIFYING SENDER'S MONEY: Impossible transaction type.");
+                throw new InvalidOperationException($"Transaction validation failed: Insufficient funds in sender's wallet for {transaction.Type} transaction.");
             }
         }
 
-        void OnTransactionAcceptedEventHandler(Transaction transaction)
+        private void OnTransactionAcceptedEventHandler(Transaction transaction)
         {
-            TransactionValidation(transaction);
-            switch (transaction.Type)
-            {
-                case Transaction.TransactionType.Physical:
-                    transaction.Receiver.CurrentPhysicalMoney += transaction.Value;
-                    transaction.Sender.CurrentPhysicalMoney -= transaction.Value;
-                    break;
-                case Transaction.TransactionType.Digital:
-                    transaction.Receiver.CurrentDigitalMoney += transaction.Value;
-                    transaction.Sender.CurrentDigitalMoney -= transaction.Value;
-                    break;
-                default:
-                    throw new Exception("ERROR ON ACCEPTED TRANSACTION EVENT HANDLER: Impossible transaction type.");
-            }
+            UpdateWallets(transaction);
             transaction.OnTransactionAccepted?.RemoveListener(OnTransactionAcceptedEventHandler);
+            OnTransactionCompleted?.Invoke(transaction); // Notify subscribers that the transaction is completed
+        }
+
+        private void UpdateWallets(Transaction transaction)
+        {
+            transaction.Receiver.Transactions.Add(transaction);
+            transaction.Sender.Transactions.Add(transaction);
         }
     }
 }

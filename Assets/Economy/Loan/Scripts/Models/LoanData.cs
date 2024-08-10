@@ -21,10 +21,7 @@ namespace Economy
         private float _total;
         public float Total
         {
-            get
-            {
-                return _total;
-            }
+            get => _total;
             private set
             {
                 if (value <= 0)
@@ -37,10 +34,7 @@ namespace Economy
         [SerializeField] private float _principal;
         public float Principal
         {
-            get
-            {
-                return _principal;
-            }
+            get => _principal;
             private set
             {
                 if (value <= 0)
@@ -55,10 +49,8 @@ namespace Economy
         [SerializeField] private float _rate;
         public float Rate
         {
-            get
-            {
-                return _rate;
-            }
+            get => _rate;
+
             private set
             {
                 if (value <= 0)
@@ -71,10 +63,8 @@ namespace Economy
         [SerializeField] private int _installments;
         public int Installments
         {
-            get
-            {
-                return _installments;
-            }
+            get => _installments;
+
             private set
             {
                 if (value <= 0)
@@ -86,10 +76,8 @@ namespace Economy
 
         public float InstallmentValue
         {
-            get
-            {
-                return Total / Installments;
-            }
+            get => Total / Installments;
+
             private set
             {
                 if (value <= 0)
