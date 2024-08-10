@@ -9,6 +9,7 @@ using UnityEngine.Events;
 /// This class provides events for loan-related actions, such as loan granting, installment payment, and loan repayment.
 /// It also generates new random loans when the current loan is fully repaid.
 /// </summary>
+[Serializable]
 public class LoanProcessor
 {
     public UnityEvent<LoanData> LoanGrantOccurred;

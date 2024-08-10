@@ -15,20 +15,7 @@ using UnityEngine.Events;
 [System.Serializable]
 public struct LoanData
 {
-    [SerializeField] private string _name;
-    public string Name
-    {
-        get
-        {
-            return _name;
-        }
-        private set
-        {
-            _name = value;
-        }
-    }
-
-    [SerializeField] private float _total;
+    private float _total;
     public float Total
     {
         get
@@ -120,7 +107,7 @@ public struct LoanData
     public static UnityEvent<LoanData> OnLoanPaymentComplete;
     public static UnityEvent<LoanData> OnInstallmentPayment;
 
-    public LoanData(float principal, float rate, int installments, LoanData.Type type, string name = "") : this()
+    public LoanData(float principal, float rate, int installments, LoanData.Type type) : this()
     {
         switch (type)
         {
@@ -131,8 +118,6 @@ public struct LoanData
                 this.Total = CalculateTotalFromCompoundInterest(principal, rate, installments);
                 break;
         }
-
-        this.Name = name;
         this.Principal = principal;
         this.Rate = rate;
         this.Installments = installments;

@@ -15,12 +15,10 @@ public class LoanDataTests
         float _principal = 1000f;
         float _rate = 0.1f;
         int _installments = 12;
-        string _name = "TestLoan";
-
-        Assert.That(() => new LoanData(_principal * -1, _rate, _installments, _loanType, _name), Throws.TypeOf<Exception>());
-        Assert.That(() => new LoanData(_principal, _rate * -1, _installments, _loanType, _name), Throws.TypeOf<Exception>());
-        Assert.That(() => new LoanData(_principal, _rate * -1, _installments * -1, _loanType, _name), Throws.TypeOf<Exception>());
-        LoanData _loanData = new LoanData(_principal, _rate, _installments, _loanType, _name);
+        Assert.That(() => new LoanData(_principal * -1, _rate, _installments, _loanType), Throws.TypeOf<Exception>());
+        Assert.That(() => new LoanData(_principal, _rate * -1, _installments, _loanType), Throws.TypeOf<Exception>());
+        Assert.That(() => new LoanData(_principal, _rate * -1, _installments * -1, _loanType), Throws.TypeOf<Exception>());
+        LoanData _loanData = new LoanData(_principal, _rate, _installments, _loanType);
     }
 
     [Test]
@@ -81,7 +79,7 @@ public class LoanDataTests
         float _rate = 0.1f;
         int _installments = 12;
 
-        LoanData _loanData = new LoanData(_principal, _rate, _installments, _loanType, "TestLoan");
+        LoanData _loanData = new LoanData(_principal, _rate, _installments, _loanType);
 
         float _expectedResult = 146.76f;
         float _result = _loanData.InstallmentValue;

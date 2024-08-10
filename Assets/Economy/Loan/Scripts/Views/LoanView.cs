@@ -25,9 +25,9 @@ namespace UISystem
         public void SetLoan(LoanData data)
         {
             string _formatedPrincipal = $"{FormatMoney(data.Principal)}";
-            string _formatedRate = $"Taxa de juros (ao dia): {FormatPercentage(data.Rate)}";
-            string _formatedInstallments = $"Parcelas: {data.Installments}";
-            string _formatedLoanType = $"Tipo de emprestimo {data.LoanType.ToString()}";
+            string _formatedRate = $"{FormatPercentage(data.Rate)}(ao dia)";
+            string _formatedInstallments = $"{data.Installments} Parcelas";
+            string _formatedLoanType = $"{FormatLoanType(data.LoanType)}";
 
             _loanPrincipal.SetText(_formatedPrincipal);
             _loanRate.SetText(_formatedRate);
@@ -35,13 +35,27 @@ namespace UISystem
             _loanType.SetText(_formatedLoanType);
         }
 
+        private string FormatLoanType(LoanData.Type loanType)
+        {
+            switch (loanType)
+            {
+                case LoanData.Type.SimpleInterest:
+                    return "Juros Simples";
+                case LoanData.Type.CompoundInterest:
+                    return "Juros Composto";
+                default:
+                    throw new Exception("ERROR: Not implemented loan.");
+            }
+        }
+
         private string FormatMoney(float value)
         {
-            string result = String.Format("{0:N2}BRL", value.ToString());
+            string result = String.Format("{0:N2}BRL", value);
             return result;
         }
 
-        private string FormatPercentage(float value){
+        private string FormatPercentage(float value)
+        {
             string result = value.ToString("P");
             return result;
         }
