@@ -1,8 +1,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using Economy;
+using Inventory;
 
-[System.Serializable]
+[Serializable]
 public class PlayerData
 {
     [SerializeField]
@@ -13,6 +15,9 @@ public class PlayerData
 
     [SerializeField]
     float _currentBalance = 1440f;
+
+    public WalletData walletData;
+    public Inventory.Inventory inventory;
 
     [SerializeField]
     bool _firstTime = true;

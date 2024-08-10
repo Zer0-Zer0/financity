@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UISystem;
+using Inventory;
 
 public class DeductItemValueFromPlayerData : MonoBehaviour
 {
