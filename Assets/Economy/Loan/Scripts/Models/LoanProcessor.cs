@@ -150,7 +150,8 @@ namespace Economy
         /// </summary>
         public void GenerateNewLocalRandomLoan()
         {
-            LoanData newLoan = GenerateRandomLoan(Loan.LoanType);
+            LoanType type = RandomEnum.GetRandomEnumValue<LoanType>();
+            LoanData newLoan = GenerateRandomLoan(type);
             SetLoanData(newLoan);
         }
 
@@ -165,7 +166,7 @@ namespace Economy
         /// <param name="maxInstallments">The maximum number of installments for the loan.</param>
         /// <param name="type">The type of the loan.</param>
         /// <returns>A new LoanData object with randomly generated principal, rate, installments, and type.</returns>
-        public static LoanData GenerateRandomLoan(LoanData.Type type, float minPrincipal = 1000, float maxPrincipal = 1500, float minRate = 0.10f, float maxRate = 0.30f, int minInstallments = 4, int maxInstallments = 7)
+        public static LoanData GenerateRandomLoan(LoanType type, float minPrincipal = 1000, float maxPrincipal = 1500, float minRate = 0.10f, float maxRate = 0.30f, int minInstallments = 4, int maxInstallments = 7)
         {
             float principal = UnityEngine.Random.Range(minPrincipal, maxPrincipal);
             float rate = UnityEngine.Random.Range(minRate, maxRate);

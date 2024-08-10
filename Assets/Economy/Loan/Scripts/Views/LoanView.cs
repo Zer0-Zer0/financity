@@ -43,13 +43,13 @@ namespace UISystem
             acceptLoanButtonViewModel.Data = loanProcessor;
         }
 
-        private string FormatLoanType(LoanData.Type loanType)
+        private string FormatLoanType(LoanType loanType)
         {
             switch (loanType)
             {
-                case LoanData.Type.SimpleInterest:
+                case LoanType.SimpleInterest:
                     return "Juros Simples";
-                case LoanData.Type.CompoundInterest:
+                case LoanType.CompoundInterest:
                     return "Juros Composto";
                 default:
                     throw new Exception("ERROR: Not implemented loan.");

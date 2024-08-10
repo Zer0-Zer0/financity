@@ -4,9 +4,18 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-
 namespace Economy
 {
+    /// <summary>
+    /// Represents the type of loan, which can be Simple Interest or Compound Interest.
+    /// </summary>
+    public enum LoanType
+    {
+        SimpleInterest,
+        CompoundInterest
+    }
+
+
     /// <summary>
     /// Represents data for a loan, including total value, principal value, interest rate, installment value, and installments value.
     /// </summary>
@@ -14,7 +23,7 @@ namespace Economy
     /// <param name="Principal">The principal value of the loan.</param>
     /// <param name="Rate">The interest rate of the loan, in percent.</param>
     /// <param name="Installments">The installments duration of the loan.</param>
-    /// <param name="LoanData.Type">The type of loan.</param>
+    /// <param name="LoanType">The type of loan.</param>
     [System.Serializable]
     public struct LoanData
     {
@@ -85,24 +94,15 @@ namespace Economy
             }
         }
 
-        /// <summary>
-        /// Represents the type of loan, which can be Simple Interest or Compound Interest.
-        /// </summary>
-        public enum Type
-        {
-            SimpleInterest,
-            CompoundInterest
-        }
-
-        public LoanData.Type LoanType;
+        public LoanType LoanType;
         public static UnityEvent<LoanData> OnLoanPaymentComplete;
         public static UnityEvent<LoanData> OnInstallmentPayment;
 
-        public LoanData(float principal, float rate, int installments, LoanData.Type type) : this()
+        public LoanData(float principal, float rate, int installments, LoanType type) : this()
         {
             switch (type)
             {
-                case LoanData.Type.SimpleInterest:
+                case LoanType.SimpleInterest:
                     this.Total = CalculateTotalFromSimpleInterest(principal, rate);
                     break;
                 default:
