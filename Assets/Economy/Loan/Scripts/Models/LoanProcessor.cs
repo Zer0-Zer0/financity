@@ -9,7 +9,7 @@ using UnityEngine.Events;
 /// This class provides events for loan-related actions, such as loan granting, installment payment, and loan repayment.
 /// It also generates new random loans when the current loan is fully repaid.
 /// </summary>
-public class LoanManager : MonoBehaviour
+public class LoanProcessor
 {
     public UnityEvent<LoanData> LoanGrantOccurred;
     public UnityEvent<LoanData> LoanFullyRepaidEvent;
@@ -175,7 +175,7 @@ public class LoanManager : MonoBehaviour
     /// <summary>
     /// Resets the loan to its initial state and generates a new local random loan.
     /// </summary>
-    void ResetLoanManager()
+    public void ResetLoanManager()
     {
         _remainingValue = 0;
         _remainingInstallments = 0;

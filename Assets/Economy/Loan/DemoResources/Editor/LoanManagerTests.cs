@@ -5,13 +5,12 @@ public class LoanManagerTests
 {
     private WalletData _walletData;
     private GameObject _testObject;
-    private LoanManager _loanManager;
+    private LoanProcessor _loanManager;
 
     [SetUp]
     public void Setup()
     {
-        _testObject = new GameObject();
-        _loanManager = _testObject.AddComponent<LoanManager>();
+        _loanManager = new LoanProcessor();
         _walletData = ScriptableObject.CreateInstance<WalletData>();
         _walletData.CurrentDigitalMoney = 0f;
         _walletData.CurrentPhysicalMoney = 0f;
@@ -31,7 +30,7 @@ public class LoanManagerTests
         int _minInstallments = 1;
         int _maxInstallments = 3;
 
-        LoanData randomLoan = LoanManager.GenerateRandomLoan(_loanType, _minPrincipal, _maxPrincipal, _minRate, _maxRate, _minInstallments, _maxInstallments);
+        LoanData randomLoan = LoanProcessor.GenerateRandomLoan(_loanType, _minPrincipal, _maxPrincipal, _minRate, _maxRate, _minInstallments, _maxInstallments);
 
         Assert.GreaterOrEqual(randomLoan.Principal, _minPrincipal);
         Assert.LessOrEqual(randomLoan.Principal, _maxPrincipal);
