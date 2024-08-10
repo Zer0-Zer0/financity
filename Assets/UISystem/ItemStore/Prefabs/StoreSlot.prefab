@@ -266,9 +266,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _button: {fileID: 117035541440187494}
   _onClickEvent: {fileID: 11400000, guid: 40bd7f6c3f1394d269e4d1c8235b7a5e, type: 2}
-  _data:
+  Data:
     _currentItem: {fileID: 0}
-    _currentAmount: 1
+    _currentAmount: 0
 --- !u!1001 &109166941408510964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -467,7 +467,23 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 300205172312279724, guid: 827871e4c4738274dbb743bb52c7a8ac, type: 3}
+      propertyPath: m_Padding.m_Top
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 300205172312279724, guid: 827871e4c4738274dbb743bb52c7a8ac, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 300205172312279724, guid: 827871e4c4738274dbb743bb52c7a8ac, type: 3}
       propertyPath: m_ChildScaleWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 300205172312279724, guid: 827871e4c4738274dbb743bb52c7a8ac, type: 3}
+      propertyPath: m_Padding.m_Right
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 300205172312279724, guid: 827871e4c4738274dbb743bb52c7a8ac, type: 3}
+      propertyPath: m_Padding.m_Bottom
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 300205172312279724, guid: 827871e4c4738274dbb743bb52c7a8ac, type: 3}
