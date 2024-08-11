@@ -70,7 +70,7 @@ namespace Economy
         private void ProcessInstallmentPayment(WalletData wallet)
         {
             Transaction transaction;
-            transaction = new Transaction(-InstallmentValue, null, wallet);
+            transaction = new Transaction(InstallmentValue, null, wallet);
 
             remainingValue -= InstallmentValue;
             remainingInstallments--;
@@ -97,7 +97,7 @@ namespace Economy
         private void ProcessLoanFullyRepaid(WalletData wallet)
         {
             Transaction transaction = new Transaction(
-                -TotalToPay,
+                TotalToPay,
                 null,
                 wallet
             );

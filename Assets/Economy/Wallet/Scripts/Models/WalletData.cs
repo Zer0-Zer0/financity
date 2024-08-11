@@ -46,7 +46,10 @@ namespace Economy
         {
             float total = 0f;
             foreach (var transaction in Transactions)
-                total += transaction.Value;
+                if (this == transaction.Receiver)
+                    total += transaction.Value;
+                else
+                    total -= transaction.Value;
 
             //Debug.Log($"Total money in wallet: {total}");
             return total;

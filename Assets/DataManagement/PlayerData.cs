@@ -119,7 +119,7 @@ public class PlayerData
         if (value > GetCurrentBalance())
             throw new InvalidOperationException("Cannot remove more than the current balance.");
 
-        Transaction transaction = new Transaction(-value, _walletData);
+        Transaction transaction = new Transaction(value, null, _walletData);
         _walletData.Transactions.Add(transaction);
         CurrentBalanceChanged?.Invoke();
     }

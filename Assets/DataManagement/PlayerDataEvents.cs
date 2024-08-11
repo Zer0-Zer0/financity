@@ -87,10 +87,10 @@ public class PlayerDataEvents : MonoBehaviour
     }
 
     public void AddToCurrentBalance(float value) =>
-        playerData.AddToCurrentBalance(CurrentBalance + value);
+        playerData.AddToCurrentBalance(value);
 
     public void RemoveFromCurrentBalance(float value) =>
-        playerData.RemoveFromCurrentBalance(CurrentBalance - value);
+        playerData.RemoveFromCurrentBalance(value);
 
     public void SetCurrentHealth(float value) => playerData.SetCurrentHealth(value);
 

@@ -14,7 +14,7 @@ public class DeductItemValueFromPlayerData : MonoBehaviour
     {
         if (data is InventorySlot slot)
         {
-            playerDataEvents.AddToCurrentBalance(slot.CurrentItem.GetCurrentValue() * -1);
+            playerDataEvents.RemoveFromCurrentBalance(slot.CurrentItem.GetCurrentValue());
         }
     }
 }
