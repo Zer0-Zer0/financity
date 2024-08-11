@@ -115,15 +115,16 @@ namespace Economy
         private void ProcessLateInstallmentPayment(WalletData wallet)
         {
             Transaction transaction;
+            float remainingValueToPay;
             if (remainingPenaltyInstallments != 0)
             {
-                float remainingValueToPay = RemainingPenaltyInstallmentValue - wallet.CurrentDigitalMoney;
+                remainingValueToPay = RemainingPenaltyInstallmentValue - wallet.CurrentDigitalMoney;
 
                 rawRemainingPenalty -= wallet.CurrentDigitalMoney;
             }
             else
             {
-                float remainingValueToPay = InstallmentValue - wallet.CurrentDigitalMoney;
+                remainingValueToPay = InstallmentValue - wallet.CurrentDigitalMoney;
 
                 remainingValue -= InstallmentValue;
                 remainingInstallments--;
