@@ -22,11 +22,12 @@ namespace Economy
         }
 
         private float remainingValue;
-        private float remainingInstallments;
+        private int remainingInstallments;
         private float InstallmentValue => remainingValue / remainingInstallments;
 
         private int remainingPenaltyInstallments;
         private float rawRemainingPenalty;
+        public int TotalRemainingInstallments => remainingPenaltyInstallments + remainingInstallments;
 
         private float RemainingPenalty => LoanData.CalculateTotalFromCompoundInterest(rawRemainingPenalty, Loan.Rate, remainingPenaltyInstallments);
         private float RemainingPenaltyInstallmentValue => CalculateRemainingPenaltyInstallmentValue();
@@ -63,13 +64,13 @@ namespace Economy
             Transaction transaction;
             if (remainingPenaltyInstallments != 0)
             {
-                transaction = new Transaction(RemainingPenaltyInstallmentValue, TransactionType.Digital, null, wallet);
+                transaction = new Transaction(-RemainingPenaltyInstallmentValue, TransactionType.Digital, null, wallet);
                 rawRemainingPenalty -= RemainingPenaltyInstallmentValue;
                 remainingPenaltyInstallments--;
             }
             else
             {
-                transaction = new Transaction(InstallmentValue, TransactionType.Digital, null, wallet);
+                transaction = new Transaction(-InstallmentValue, TransactionType.Digital, null, wallet);
                 remainingValue -= InstallmentValue;
                 remainingInstallments--;
             }
@@ -92,7 +93,7 @@ namespace Economy
                 remainingInstallments--;
             }
 
-            Transaction transaction = new Transaction(wallet.CurrentDigitalMoney, TransactionType.Digital, null, wallet);
+            Transaction transaction = new Transaction(-wallet.CurrentDigitalMoney, TransactionType.Digital, null, wallet);
             wallet.Transactions.Add(transaction);
 
             if (remainingInstallments != 0)
@@ -114,7 +115,7 @@ namespace Economy
         /// <param name="wallet">The player's wallet data.</param>
         private void ProcessLoanFullyRepaid(WalletData wallet)
         {
-            Transaction transaction = new Transaction(TotalToPay, TransactionType.Digital, null, wallet);
+            Transaction transaction = new Transaction(-TotalToPay, TransactionType.Digital, null, wallet);
             wallet.Transactions.Add(transaction);
             ResetLoanProcessor();
         }
@@ -143,6 +144,15 @@ namespace Economy
             remainingPenaltyInstallments = 0;
             rawRemainingPenalty = 0;
             GenerateNewLocalRandomLoan();
+        }
+
+        public void Cleanup(WalletData wallet)
+        {
+            if (wallet.Loans.Contains(this))
+                wallet.Loans.Remove(this);
+
+            // Reset the loan data
+            ResetLoanProcessor();
         }
 
         /// <summary>

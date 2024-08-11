@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Economy
@@ -73,10 +75,29 @@ namespace Economy
             transaction.Sender.Transactions.Add(transaction);
         }
 
-        public void OnLoanRecieved(Component sender, object data){
-            if(data is LoanProcessor loanProcessor){
-                Wallet.Loans.Add(loanProcessor);
+        public void OnLoanRecieved(Component sender, object data)
+        {
+            if (data is LoanProcessor loanProcessor)
+                loanProcessor.GrantLoan(Wallet);
+        }
+
+        public void PayInstallments(Component sender, object data)
+        {
+            if (Wallet == null || Wallet.Loans == null)
+                return;
+
+            List<LoanProcessor> loansToRemove = new List<LoanProcessor>();
+
+            foreach (var loan in Wallet.Loans)
+            {
+                if (loan.TotalRemainingInstallments == 0)
+                    loansToRemove.Add(loan);
+                else
+                    loan.OnInstallmentArrival(Wallet);
             }
+
+            foreach (var loan in loansToRemove)
+                loan.Cleanup(Wallet);
         }
     }
 }
