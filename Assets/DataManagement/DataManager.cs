@@ -12,9 +12,8 @@ public static class DataManager
         get
         {
             if (_playerData == null)
-            {
                 _playerData = LoadPlayerData();
-            }
+                
             return _playerData;
         }
         set { _playerData = value; }

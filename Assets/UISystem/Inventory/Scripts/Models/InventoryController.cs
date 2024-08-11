@@ -29,6 +29,8 @@ namespace Inventory
 
         private void Awake() => _inventory = _initialInventory;
 
+        private void Start() => RaiseEvents();
+
         private void OnEnable() => RaiseEvents();
 
         void Update() => CheckForInput();
