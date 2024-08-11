@@ -126,6 +126,7 @@ public class PlayerData
     }
 
     public Inventory GetCurrentInventory() => _inventory;
+    public void SetCurrentInventory(Inventory value) => _inventory = value;
 
     // Getter and Setter for FirstTime
     public bool GetFirstTime() => _firstTime;

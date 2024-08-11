@@ -20,15 +20,20 @@ namespace InventorySystem
         private GameEvent OnItemConsuption;
 
         private Inventory _currentInventory;
-        public Inventory CurrentInventory{
-            get{
+        public Inventory CurrentInventory
+        {
+            get
+            {
                 Inventory savedInventory = DataManager.playerData.GetCurrentInventory();
                 if (_currentInventory == null)
                     _currentInventory = DataManager.playerData.GetCurrentInventory();
                 return _currentInventory;
             }
-
-            set => _currentInventory = value;
+            set
+            {
+                _currentInventory = value;
+                SaveInventory();
+            }
         }
 
         private InventorySlot _selectedSlot;
@@ -38,6 +43,9 @@ namespace InventorySystem
         private void OnEnable() => RaiseEvents();
 
         void Update() => CheckForInput();
+
+        private void SaveInventory() =>
+            DataManager.playerData.SetCurrentInventory(CurrentInventory);
 
         private void CheckForInput()
         {
@@ -59,6 +67,7 @@ namespace InventorySystem
 
             Inventory.SubtractItem(CurrentInventory, _selectedSlot.CurrentItem, amount);
             OnItemConsuption.Raise(this, _selectedSlot);
+            SaveInventory();
             RaiseEvents();
         }
 
@@ -105,6 +114,7 @@ namespace InventorySystem
                 throw new InvalidDataException(
                     $"ERROR: Not possible to add to inventory data of type {data.GetType()} sent from {sender}"
                 );
+            SaveInventory();
             RaiseEvents();
         }
 
