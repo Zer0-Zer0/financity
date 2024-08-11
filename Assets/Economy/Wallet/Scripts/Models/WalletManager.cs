@@ -1,16 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Economy
 {
-    public enum TransactionPosition
-    {
-        Receiver,
-        Sender
-    }
-
     /// <summary>
     /// Manages the wallet data and updates UI elements accordingly.
     /// </summary>
@@ -19,17 +12,23 @@ namespace Economy
         /// <summary>
         /// Reference to the WalletData scriptable object.
         /// </summary>
-        public WalletData Wallet;
+        public WalletData Wallet => DataManager.playerData.GetCurrentWallet();
 
-        public void OnLoanRecieved(Component sender, object data)
+        /// <summary>
+        /// Handles the event when a loan is received.
+        /// </summary>
+        public void OnLoanReceived(Component sender, object data)
         {
             if (data is LoanProcessor loanProcessor)
                 loanProcessor.GrantLoan(Wallet);
         }
 
-        public void PayInstallments(Component sender, object data)
+        /// <summary>
+        /// Processes the installment payments for all loans in the wallet.
+        /// </summary>
+        public void ProcessInstallments(Component sender, object data)
         {
-            if (Wallet == null || Wallet.Loans == null)
+            if (Wallet?.Loans == null || Wallet.Loans.Count == 0)
                 return;
 
             List<LoanProcessor> loansToRemove = new List<LoanProcessor>();

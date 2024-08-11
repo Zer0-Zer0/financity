@@ -9,23 +9,27 @@ namespace Economy
     [Serializable]
     public class WalletData
     {
-        [SerializeField] float _currentMaxDebt = 1500f;
+        [SerializeField]
+        float _currentMaxDebt = 1500f;
 
-        [SerializeField] List<Transaction> _transactions;
+        [SerializeField]
+        List<Transaction> _transactions;
         public List<Transaction> Transactions
         {
             get => _transactions;
             set => _transactions = value;
         }
 
-        [SerializeField] List<LoanProcessor> _loans;
+        [SerializeField]
+        List<LoanProcessor> _loans;
         public List<LoanProcessor> Loans
         {
             get => _loans;
             set => _loans = value;
         }
 
-        [SerializeField] string _walletName;
+        [SerializeField]
+        string _walletName;
         public string WalletName
         {
             get => _walletName;
@@ -42,8 +46,9 @@ namespace Economy
         {
             float total = 0f;
             foreach (var transaction in Transactions)
-                    total += transaction.Value;
+                total += transaction.Value;
 
+            Debug.Log(total);
             return total;
         }
 

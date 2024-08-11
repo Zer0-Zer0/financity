@@ -1103,12 +1103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b538277f7a087b1ce80fd0df95d8b2c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wallet:
-    _currentMaxDebt: 1500
-    _transactions: []
-    _loans: []
-    _walletName: Player Wallet
-    UnableToPay: {fileID: 11400000, guid: c3100ddb1e2a4c562b0c142866459804, type: 2}
 --- !u!114 &5991219356741026937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1127,7 +1121,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 732539637240855108}
         m_TargetAssemblyTypeName: Economy.WalletManager, Assembly-CSharp
-        m_MethodName: OnLoanRecieved
+        m_MethodName: OnLoanReceived
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1155,7 +1149,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 732539637240855108}
         m_TargetAssemblyTypeName: Economy.WalletManager, Assembly-CSharp
-        m_MethodName: PayInstallments
+        m_MethodName: ProcessInstallments
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -117,6 +117,10 @@ public class PlayerData
         CurrentBalanceChanged?.Invoke();
     }
 
+    public WalletData GetCurrentWallet() => _walletData;
+
+    public void SetCurrentWallet(WalletData value) => _walletData = value;
+
     public float GetCurrentHealth() => _currentHealth;
 
     public void SetCurrentHealth(float value)
@@ -126,6 +130,7 @@ public class PlayerData
     }
 
     public Inventory GetCurrentInventory() => _inventory;
+
     public void SetCurrentInventory(Inventory value) => _inventory = value;
 
     // Getter and Setter for FirstTime
