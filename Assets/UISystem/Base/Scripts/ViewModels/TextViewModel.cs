@@ -12,9 +12,9 @@ namespace UISystem
 {
     public class TextViewModel : MonoBehaviour
     {
-        [SerializeField] private Text _textView;
+        [SerializeField] protected Text _textView;
 
-        public void OnValueChanged(Component sender, object data){
+        public virtual void OnValueChanged(Component sender, object data){
             if (data is not null){
                     string dataString = data.ToString();
                     _textView.SetText(dataString);
