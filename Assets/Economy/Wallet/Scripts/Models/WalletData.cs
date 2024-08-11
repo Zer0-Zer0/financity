@@ -48,7 +48,7 @@ namespace Economy
             foreach (var transaction in Transactions)
                 total += transaction.Value;
 
-            Debug.Log($"Total money in wallet: {total}");
+            //Debug.Log($"Total money in wallet: {total}");
             return total;
         }
 
