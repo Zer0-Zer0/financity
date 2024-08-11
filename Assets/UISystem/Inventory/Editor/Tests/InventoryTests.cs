@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
+using UISystem;
 
-namespace UISystem.Tests
+namespace Inventory
 {
     [TestFixture]
     public class InventoryTests

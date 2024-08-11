@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace UISystem
+namespace Inventory
 {
     [System.Serializable]
     public class InventorySlot

@@ -1,36 +1,35 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UISystem;
+using Inventory;
 
-namespace UISystem
+public class InventorySlotViewModel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public class InventorySlotViewModel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    [SerializeField]
+    private InventorySlotView inventorySlotView;
+
+    [SerializeField]
+    private GameEvent OnMouseEnterGameEvent;
+
+    private InventorySlot currentSlotData;
+
+    public void UpdateSlotGraphics(InventorySlot slot)
     {
-        [SerializeField]
-        private InventorySlotView inventorySlotView;
+        currentSlotData = slot;
+        inventorySlotView.UpdateSlotGraphics(currentSlotData);
+    }
 
-        [SerializeField]
-        private GameEvent OnMouseEnterGameEvent;
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (currentSlotData != null && currentSlotData.CurrentItem != null)
+            Debug.Log("Mouse entered: " + currentSlotData.ToString()); // Demo stuff
+        OnMouseEnterGameEvent.Raise(this, currentSlotData);
+    }
 
-        private InventorySlot currentSlotData;
-
-        public void UpdateSlotGraphics(InventorySlot slot)
-        {
-            currentSlotData = slot;
-            inventorySlotView.UpdateSlotGraphics(currentSlotData);
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            if (currentSlotData != null && currentSlotData.CurrentItem != null)
-                Debug.Log("Mouse entered: " + currentSlotData.ToString()); // Demo stuff
-            OnMouseEnterGameEvent.Raise(this, currentSlotData);
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            if (currentSlotData != null && currentSlotData.CurrentItem != null)
-                Debug.Log("Mouse exited: " + currentSlotData.ToString()); // Demo stuff
-            OnMouseEnterGameEvent.Raise(this, new InventorySlot());
-        }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (currentSlotData != null && currentSlotData.CurrentItem != null)
+            Debug.Log("Mouse exited: " + currentSlotData.ToString()); // Demo stuff
+        OnMouseEnterGameEvent.Raise(this, new InventorySlot());
     }
 }

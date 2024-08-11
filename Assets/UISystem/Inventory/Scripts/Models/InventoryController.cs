@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace UISystem
+namespace Inventory
 {
     public class InventoryController : MonoBehaviour
     {
@@ -28,8 +28,6 @@ namespace UISystem
         private InventorySlot _selectedSlot;
 
         private void Awake() => _inventory = _initialInventory;
-
-        private void Start() => RaiseEvents();
 
         private void OnEnable() => RaiseEvents();
 

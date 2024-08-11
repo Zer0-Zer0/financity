@@ -18,21 +18,12 @@ namespace UISystem
         [SerializeField] private GameEvent _onClickEvent;
 
         [Header("EventData")]
-        public T _data;
+        public T Data;
 
-        private void OnEnable()
-        {
-            _button.onClickEvent.AddListener(OnClickMethod);
-        }
+        private void OnEnable() => _button.onClickEvent.AddListener(OnClickMethod);
 
-        private void OnDisable()
-        {
-            _button.onClickEvent.RemoveListener(OnClickMethod);
-        }
+        private void OnDisable() => _button.onClickEvent.RemoveListener(OnClickMethod);
 
-        private void OnClickMethod()
-        {
-            _onClickEvent.Raise(this, _data);
-        }
+        private void OnClickMethod() => _onClickEvent.Raise(this, Data);
     }
 }

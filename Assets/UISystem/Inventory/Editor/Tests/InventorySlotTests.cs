@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using NUnit.Framework;
 using UISystem;
+using Inventory;
 
 [TestFixture]
 public class InventorySlotTests
