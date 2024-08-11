@@ -486,7 +486,7 @@ MonoBehaviour:
     _transactions: []
     _loans: []
     _walletName: 
-    UnableToPay: {fileID: 0}
+    UnableToPay: {fileID: 11400000, guid: c3100ddb1e2a4c562b0c142866459804, type: 2}
 --- !u!4 &565851235
 Transform:
   m_ObjectHideFlags: 0
@@ -1181,6 +1181,7 @@ GameObject:
   - component: {fileID: 1236935622}
   - component: {fileID: 1236935623}
   - component: {fileID: 1236935624}
+  - component: {fileID: 1236935625}
   m_Layer: 5
   m_Name: ChooseALoan
   m_TagString: Untagged
@@ -1240,10 +1241,10 @@ MonoBehaviour:
   response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1236935621}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1236935625}
+        m_TargetAssemblyTypeName: GenericDestroy, Assembly-CSharp
+        m_MethodName: DestroyTarget
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1252,6 +1253,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1236935625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236935621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8276a2106d2045cb7007e73259f52d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 1236935621}
+  _time: 0.32
+  TargetDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1415953417
 PrefabInstance:
   m_ObjectHideFlags: 0
