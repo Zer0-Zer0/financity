@@ -42,7 +42,9 @@ namespace Economy
             else if (transaction.Receiver == Wallet)
                 return TransactionPosition.Receiver;
             else
-                throw new InvalidOperationException("Transaction verification failed: Wallet is neither sender nor receiver.");
+                throw new InvalidOperationException(
+                    "Transaction verification failed: Wallet is neither sender nor receiver."
+                );
         }
 
         private void TransactionValidation(Transaction transaction)
@@ -53,13 +55,16 @@ namespace Economy
 
         private static void VerifySenderMoney(Transaction transaction)
         {
-            float senderBalance = transaction.Type == TransactionType.Physical
-                ? transaction.Sender.CurrentPhysicalMoney
-                : transaction.Sender.CurrentDigitalMoney;
+            float senderBalance =
+                transaction.Type == TransactionType.Physical
+                    ? transaction.Sender.CurrentPhysicalMoney
+                    : transaction.Sender.CurrentDigitalMoney;
 
             if (senderBalance < transaction.Value)
             {
-                throw new InvalidOperationException($"Transaction validation failed: Insufficient funds in sender's wallet for {transaction.Type} transaction.");
+                throw new InvalidOperationException(
+                    $"Transaction validation failed: Insufficient funds in sender's wallet for {transaction.Type} transaction."
+                );
             }
         }
 
@@ -90,10 +95,9 @@ namespace Economy
 
             foreach (var loan in Wallet.Loans)
             {
+                loan.OnInstallmentArrival(Wallet);
                 if (loan.TotalRemainingInstallments == 0)
                     loansToRemove.Add(loan);
-                else
-                    loan.OnInstallmentArrival(Wallet);
             }
 
             foreach (var loan in loansToRemove)
