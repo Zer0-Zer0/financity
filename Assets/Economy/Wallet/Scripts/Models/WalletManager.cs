@@ -10,17 +10,12 @@ namespace Economy
     public class WalletManager : MonoBehaviour
     {
         /// <summary>
-        /// Reference to the WalletData scriptable object.
-        /// </summary>
-        public WalletData Wallet => DataManager.playerData.GetCurrentWallet();
-
-        /// <summary>
         /// Handles the event when a loan is received.
         /// </summary>
         public void OnLoanReceived(Component sender, object data)
         {
             if (data is LoanProcessor loanProcessor)
-                loanProcessor.GrantLoan(Wallet);
+                loanProcessor.GrantLoan(DataManager.playerData.GetCurrentWallet());
         }
 
         /// <summary>
@@ -28,20 +23,23 @@ namespace Economy
         /// </summary>
         public void ProcessInstallments(Component sender, object data)
         {
-            if (Wallet?.Loans == null || Wallet.Loans.Count == 0)
+            if (
+                DataManager.playerData.GetCurrentWallet()?.Loans == null
+                || DataManager.playerData.GetCurrentWallet().Loans.Count == 0
+            )
                 return;
 
             List<LoanProcessor> loansToRemove = new List<LoanProcessor>();
 
-            foreach (var loan in Wallet.Loans)
+            foreach (var loan in DataManager.playerData.GetCurrentWallet().Loans)
             {
-                loan.OnInstallmentArrival(Wallet);
+                loan.OnInstallmentArrival(DataManager.playerData.GetCurrentWallet());
                 if (loan.TotalRemainingInstallments == 0)
                     loansToRemove.Add(loan);
             }
 
             foreach (var loan in loansToRemove)
-                loan.Cleanup(Wallet);
+                loan.Cleanup(DataManager.playerData.GetCurrentWallet());
         }
     }
 }

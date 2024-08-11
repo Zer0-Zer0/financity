@@ -12,11 +12,11 @@ namespace UISystem
         [SerializeField]
         private Text _text;
 
-        void Start()
+        /*void Start()
         {
             DataManager.playerData.CurrentBalanceChanged.AddListener(OnCurrentBalanceChanged);
             OnCurrentBalanceChanged();
-        }
+        }*/
 
         void OnCurrentBalanceChanged()
         {
@@ -26,5 +26,7 @@ namespace UISystem
             );
             _text.SetText(_formatedText);
         }
+
+        void Update() => OnCurrentBalanceChanged();
     }
 }

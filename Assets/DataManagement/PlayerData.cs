@@ -7,6 +7,8 @@ using UnityEngine.Events;
 [Serializable]
 public class PlayerData
 {
+    #region Fields
+
     [SerializeField]
     int _currentAmmo;
 
@@ -30,6 +32,10 @@ public class PlayerData
 
     public const float MaxHealth = 10;
 
+    #endregion
+
+    #region Unity Events
+
     public UnityEvent CurrentAmmoChanged;
     public UnityEvent TotalAmmoChanged;
     public UnityEvent CurrentBalanceChanged;
@@ -37,7 +43,9 @@ public class PlayerData
     public UnityEvent MissionOneCompleted;
     public UnityEvent CurrentHealthChanged;
 
-    // Constructor
+    #endregion
+
+    #region Constructor
     public PlayerData(
         int currentAmmo = 30,
         int totalAmmo = 120,
@@ -72,7 +80,9 @@ public class PlayerData
         CurrentHealthChanged = new UnityEvent();
     }
 
-    // Getter and Setter for CurrentAmmo
+    #endregion
+
+    #region Getters and Setters
     public int GetCurrentAmmo() => _currentAmmo;
 
     public void SetCurrentAmmo(int value)
@@ -81,7 +91,6 @@ public class PlayerData
         CurrentAmmoChanged?.Invoke();
     }
 
-    // Getter and Setter for TotalAmmo
     public int GetTotalAmmo() => _totalAmmo;
 
     public void SetTotalAmmo(int value)
@@ -89,8 +98,6 @@ public class PlayerData
         _totalAmmo = value;
         TotalAmmoChanged?.Invoke();
     }
-
-    // Getter and Setter for CurrentBalance
 
     public float GetCurrentBalance() => _walletData.CurrentMoney;
 
@@ -133,7 +140,6 @@ public class PlayerData
 
     public void SetCurrentInventory(Inventory value) => _inventory = value;
 
-    // Getter and Setter for FirstTime
     public bool GetFirstTime() => _firstTime;
 
     public void SetFirstTime(bool value)
@@ -150,8 +156,14 @@ public class PlayerData
         MissionOneCompleted?.Invoke();
     }
 
+    #endregion
+
+    #region Overrides
+
     public override string ToString()
     {
         return $"Current Ammo: {GetCurrentAmmo()}, Total Ammo: {GetTotalAmmo()}, Current Balance: {GetCurrentBalance()}, First Time: {GetFirstTime()}";
     }
+
+    #endregion
 }
