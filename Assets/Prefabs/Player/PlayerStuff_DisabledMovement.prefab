@@ -164,6 +164,10 @@ PrefabInstance:
       propertyPath: fsm.preprocessed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 408100419489758041, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
+      propertyPath: fsm.states.Array.data[0].actionData.fsmObjectParams.Array.data[0].value
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 463364501107687983, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -267,6 +271,10 @@ PrefabInstance:
     - target: {fileID: 702147583675749870, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
       propertyPath: fsm.preprocessed
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 702147583675749870, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
+      propertyPath: fsm.states.Array.data[3].actionData.fsmObjectParams.Array.data[0].value
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 736796634229119122, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -935,6 +943,30 @@ PrefabInstance:
     - target: {fileID: 2301287929854434890, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
       propertyPath: fsm.preprocessed
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301287929854434890, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
+      propertyPath: fsm.states.Array.data[0].actionData.fsmObjectParams.Array.data[0].value
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301287929854434890, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
+      propertyPath: fsm.states.Array.data[0].actionData.fsmObjectParams.Array.data[1].value
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301287929854434890, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
+      propertyPath: fsm.states.Array.data[5].actionData.fsmObjectParams.Array.data[0].value
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301287929854434890, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
+      propertyPath: fsm.states.Array.data[5].actionData.fsmObjectParams.Array.data[1].value
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301287929854434890, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
+      propertyPath: fsm.states.Array.data[6].actionData.fsmObjectParams.Array.data[0].value
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301287929854434890, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
+      propertyPath: fsm.states.Array.data[6].actionData.fsmObjectParams.Array.data[1].value
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2535183597634391972, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2918,7 +2950,52 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2883315759563386099, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
+    - {fileID: 5305251835429708777, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9110401274215963931, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2717650350540574635}
   m_SourcePrefab: {fileID: 100100000, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
+--- !u!1 &6399260229393252970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9110401274215963931, guid: 6e9416d4eeae831219bbb6543612373a, type: 3}
+  m_PrefabInstance: {fileID: 2783252016714850161}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2717650350540574635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6399260229393252970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c102af5669f6c88778a684c46d542fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentAmmoChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  TotalAmmoChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  CurrentBalanceChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  FirstTimeChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  CurrentHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  MissionOneCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  IfIsFirstTime:
+    m_PersistentCalls:
+      m_Calls: []
+  IfNotFirstTime:
+    m_PersistentCalls:
+      m_Calls: []

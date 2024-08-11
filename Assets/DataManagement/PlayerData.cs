@@ -8,25 +8,25 @@ using Inventory;
 public class PlayerData
 {
     [SerializeField]
-    int _currentAmmo = 30;
+    int _currentAmmo;
 
     [SerializeField]
-    int _totalAmmo = 120;
+    int _totalAmmo;
 
     [SerializeField]
-    float _currentBalance = 1440f;
+    float _currentBalance;
 
     public WalletData walletData;
     public Inventory.Inventory inventory;
 
     [SerializeField]
-    bool _firstTime = true;
+    bool _firstTime;
 
     [SerializeField]
-    bool _missionOneCompleted = false;
+    bool _missionOneCompleted;
 
     [SerializeField]
-    float _currentHealth = 5;
+    float _currentHealth;
 
     public const float MaxHealth = 10;
 
@@ -36,6 +36,25 @@ public class PlayerData
     public UnityEvent FirstTimeChanged;
     public UnityEvent MissionOneCompleted;
     public UnityEvent CurrentHealthChanged;
+
+    // Constructor
+    public PlayerData(int currentAmmo = 30, int totalAmmo = 120, float currentBalance = 1440f, bool firstTime = true, bool missionOneCompleted = false, float currentHealth = 5)
+    {
+        _currentAmmo = currentAmmo;
+        _totalAmmo = totalAmmo;
+        _currentBalance = currentBalance;
+        _firstTime = firstTime;
+        _missionOneCompleted = missionOneCompleted;
+        _currentHealth = currentHealth;
+        
+        // Initialize UnityEvents
+        CurrentAmmoChanged = new UnityEvent();
+        TotalAmmoChanged = new UnityEvent();
+        CurrentBalanceChanged = new UnityEvent();
+        FirstTimeChanged = new UnityEvent();
+        MissionOneCompleted = new UnityEvent();
+        CurrentHealthChanged = new UnityEvent();
+    }
 
     // Getter and Setter for CurrentAmmo
     public int GetCurrentAmmo() => _currentAmmo;
