@@ -33,8 +33,6 @@ public class PlayerDataEvents : MonoBehaviour
         SubscribeEvents();
         FirstTimeChecker();
 
-        Debug.Log(CurrentHealth);
-
         if (playerData.GetMissionOneStatus())
             MissionOneCompleted?.Invoke();
     }
