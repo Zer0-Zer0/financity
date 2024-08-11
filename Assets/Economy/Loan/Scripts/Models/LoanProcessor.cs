@@ -115,9 +115,7 @@ namespace Economy
         private void ProcessLateInstallmentPayment(WalletData wallet)
         {
             if (remainingPenaltyInstallments != 0)
-            {
                 rawRemainingPenalty -= wallet.CurrentDigitalMoney;
-            }
             else
             {
                 remainingValue -= wallet.CurrentDigitalMoney;
