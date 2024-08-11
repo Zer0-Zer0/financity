@@ -6,6 +6,10 @@ namespace Economy
 {
     public class WalletManager : MonoBehaviour
     {
+        public GameEvent OnLoanUnpaid;
+
+        private void OnEnable() => DataManager.playerData.GetCurrentWallet().UnableToPay = OnLoanUnpaid;
+
         /// <summary>
         /// Handles the event triggered when a loan is received.
         /// Grants the loan to the current wallet using the provided LoanProcessor.
@@ -40,7 +44,11 @@ namespace Economy
             var currentWallet = DataManager.playerData.GetCurrentWallet();
 
             // Exit early if there are no loans to process
-            if (currentWallet == null || currentWallet.Loans == null || currentWallet.Loans.Count == 0)
+            if (
+                currentWallet == null
+                || currentWallet.Loans == null
+                || currentWallet.Loans.Count == 0
+            )
                 return;
 
             List<LoanProcessor> loansToRemove = new List<LoanProcessor>();
@@ -60,7 +68,11 @@ namespace Economy
         /// <param name="loan">The loan to process for installment payment.</param>
         /// <param name="currentWallet">The current wallet containing the loan.</param>
         /// <param name="loansToRemove">A list that will hold loans marked for removal after processing.</param>
-        private void ProcessLoanInstallment(LoanProcessor loan, WalletData currentWallet, List<LoanProcessor> loansToRemove)
+        private void ProcessLoanInstallment(
+            LoanProcessor loan,
+            WalletData currentWallet,
+            List<LoanProcessor> loansToRemove
+        )
         {
             loan.OnInstallmentArrival(currentWallet);
             // Check if the loan has no remaining installments
@@ -74,7 +86,10 @@ namespace Economy
         /// </summary>
         /// <param name="loansToRemove">The list of loans that have been fully paid and are ready for cleanup.</param>
         /// <param name="currentWallet">The current wallet containing the loans to be cleaned up.</param>
-        private void CleanupProcessedLoans(List<LoanProcessor> loansToRemove, WalletData currentWallet)
+        private void CleanupProcessedLoans(
+            List<LoanProcessor> loansToRemove,
+            WalletData currentWallet
+        )
         {
             foreach (var loan in loansToRemove)
                 loan.Cleanup(currentWallet);
