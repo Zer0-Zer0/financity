@@ -31,15 +31,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2292405488986251009}
-  - {fileID: 8320345765492698462}
-  - {fileID: 7999865739597333975}
   m_Father: {fileID: 2259709074338545456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -175, y: -350}
-  m_SizeDelta: {x: -550, y: -900}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -175, y: 100}
+  m_SizeDelta: {x: -550, y: 180}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &8514640344322287491
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -109,13 +107,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6925977707084589088}
+  m_Father: {fileID: 2259709074338545456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -602, y: 118.043}
-  m_SizeDelta: {x: -1070.58, y: -122.086}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -777, y: 279.08603}
+  m_SizeDelta: {x: -1620.58, y: 57.914}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &225961740262327948
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -257,13 +255,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6925977707084589088}
+  m_Father: {fileID: 2259709074338545456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -602, y: -118}
-  m_SizeDelta: {x: -1070.58, y: -122.086}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -777, y: 43.043}
+  m_SizeDelta: {x: -1620.58, y: 57.914}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &5331783340883894341
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -405,7 +403,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8320345765492698462}
   - {fileID: 6925977707084589088}
+  - {fileID: 7999865739597333975}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -627,7 +627,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _normalDelay: 0.05
   _fastDelay: 0.01
-  delayInterPhrase: 1
   TypingFinished:
     m_PersistentCalls:
       m_Calls: []
