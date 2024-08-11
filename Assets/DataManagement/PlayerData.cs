@@ -55,7 +55,7 @@ public class PlayerData
             _walletData = wallet;
 
         if (_inventory == null)
-            _inventory = new Inventory();
+            _inventory = new Inventory(12);
         else
             _inventory = inventory;
 
@@ -124,6 +124,8 @@ public class PlayerData
         _currentHealth = Math.Min(value, MaxHealth);
         CurrentHealthChanged?.Invoke();
     }
+
+    public Inventory GetCurrentInventory() => _inventory;
 
     // Getter and Setter for FirstTime
     public bool GetFirstTime() => _firstTime;

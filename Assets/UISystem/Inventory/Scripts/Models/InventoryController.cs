@@ -9,10 +9,6 @@ namespace InventorySystem
 {
     public class InventoryController : MonoBehaviour
     {
-        [Header("Inventory")]
-        [SerializeField]
-        private Inventory _initialInventory;
-
         [Header("Events")]
         [SerializeField]
         private GameEvent OnInventoryChanged;
@@ -23,11 +19,19 @@ namespace InventorySystem
         [SerializeField]
         private GameEvent OnItemConsuption;
 
-        private Inventory _inventory;
+        private Inventory _currentInventory;
+        public Inventory CurrentInventory{
+            get{
+                Inventory savedInventory = DataManager.playerData.GetCurrentInventory();
+                if (_currentInventory == null)
+                    _currentInventory = DataManager.playerData.GetCurrentInventory();
+                return _currentInventory;
+            }
+
+            set => _currentInventory = value;
+        }
 
         private InventorySlot _selectedSlot;
-
-        private void Awake() => _inventory = _initialInventory;
 
         private void Start() => RaiseEvents();
 
@@ -53,7 +57,7 @@ namespace InventorySystem
             if (isItemNull)
                 return;
 
-            Inventory.SubtractItem(_inventory, _selectedSlot.CurrentItem, amount);
+            Inventory.SubtractItem(CurrentInventory, _selectedSlot.CurrentItem, amount);
             OnItemConsuption.Raise(this, _selectedSlot);
             RaiseEvents();
         }
@@ -74,16 +78,16 @@ namespace InventorySystem
 
         private void RaiseEvents()
         {
-            OnInventoryChanged.Raise(this, _inventory.GetInventorySlots());
-            OnInventoryValueChanged.Raise(this, _inventory.GetInventoryValue());
+            OnInventoryChanged.Raise(this, CurrentInventory.GetInventorySlots());
+            OnInventoryValueChanged.Raise(this, CurrentInventory.GetInventoryValue());
         }
 
         public void OnInventoryItemSubtracted(Component sender, object data)
         {
             if (data is Inventory items)
-                Inventory.SubtractItem(_inventory, items);
+                Inventory.SubtractItem(CurrentInventory, items);
             else if (data is InventorySlot slot)
-                Inventory.SubtractItem(_inventory, slot);
+                Inventory.SubtractItem(CurrentInventory, slot);
             else
                 throw new InvalidDataException(
                     $"ERROR: Not possible to subtract from inventory data of type {data.GetType()} sent from {sender}"
@@ -94,9 +98,9 @@ namespace InventorySystem
         public void OnInventoryItemAdded(Component sender, object data)
         {
             if (data is Inventory items)
-                Inventory.AddItem(_inventory, items);
+                Inventory.AddItem(CurrentInventory, items);
             else if (data is InventorySlot slot)
-                Inventory.AddItem(_inventory, slot);
+                Inventory.AddItem(CurrentInventory, slot);
             else
                 throw new InvalidDataException(
                     $"ERROR: Not possible to add to inventory data of type {data.GetType()} sent from {sender}"
@@ -106,7 +110,7 @@ namespace InventorySystem
 
         public void OnEconomyTick(Component sender, object data)
         {
-            OnInventoryValueChanged.Raise(this, _inventory.GetInventoryValue());
+            OnInventoryValueChanged.Raise(this, CurrentInventory.GetInventoryValue());
         }
 
         public void OnMouseHover(Component sender, object data)
