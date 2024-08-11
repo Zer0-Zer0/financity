@@ -88,11 +88,11 @@ public class PlayerDataEvents : MonoBehaviour
             SetTotalAmmo(TotalAmmo + (int)item.data);
     }
 
-    public void SetCurrentBalance(float value) => playerData.SetCurrentBalance(value);
+    public void AddToCurrentBalance(float value) =>
+        playerData.AddToCurrentBalance(CurrentBalance + value);
 
-    public void AddToCurrentBalance(float value) => SetCurrentBalance(CurrentBalance + value);
-
-    public void RemoveFromCurrentBalance(float value) => SetCurrentBalance(CurrentBalance - value);
+    public void RemoveFromCurrentBalance(float value) =>
+        playerData.RemoveFromCurrentBalance(CurrentBalance - value);
 
     public void SetCurrentHealth(float value) => playerData.SetCurrentHealth(value);
 

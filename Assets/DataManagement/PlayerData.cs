@@ -1,8 +1,8 @@
 using System;
+using Economy;
+using InventorySystem;
 using UnityEngine;
 using UnityEngine.Events;
-using Economy;
-using Inventory;
 
 [Serializable]
 public class PlayerData
@@ -14,10 +14,10 @@ public class PlayerData
     int _totalAmmo;
 
     [SerializeField]
-    float _currentBalance;
+    WalletData _walletData;
 
-    public WalletData walletData;
-    public Inventory.Inventory inventory;
+    [SerializeField]
+    Inventory _inventory;
 
     [SerializeField]
     bool _firstTime;
@@ -38,15 +38,31 @@ public class PlayerData
     public UnityEvent CurrentHealthChanged;
 
     // Constructor
-    public PlayerData(int currentAmmo = 30, int totalAmmo = 120, float currentBalance = 1440f, bool firstTime = true, bool missionOneCompleted = false, float currentHealth = 5)
+    public PlayerData(
+        int currentAmmo = 30,
+        int totalAmmo = 120,
+        WalletData wallet = null,
+        Inventory inventory = null,
+        float currentHealth = 5
+    )
     {
         _currentAmmo = currentAmmo;
         _totalAmmo = totalAmmo;
-        _currentBalance = currentBalance;
-        _firstTime = firstTime;
-        _missionOneCompleted = missionOneCompleted;
+
+        if (wallet == null)
+            _walletData = new WalletData();
+        else
+            _walletData = wallet;
+
+        if (_inventory == null)
+            _inventory = new Inventory();
+        else
+            _inventory = inventory;
+
+        _firstTime = true;
+        _missionOneCompleted = false;
         _currentHealth = currentHealth;
-        
+
         // Initialize UnityEvents
         CurrentAmmoChanged = new UnityEvent();
         TotalAmmoChanged = new UnityEvent();
@@ -75,11 +91,29 @@ public class PlayerData
     }
 
     // Getter and Setter for CurrentBalance
-    public float GetCurrentBalance() => _currentBalance;
 
-    public void SetCurrentBalance(float value)
+    public float GetCurrentBalance() => _walletData.CurrentDigitalMoney;
+
+    public void AddToCurrentBalance(float value)
     {
-        _currentBalance = value;
+        if (value <= 0)
+            throw new ArgumentException("Cannot add a non-positive amount to the balance.");
+
+        Transaction transaction = new Transaction(value, TransactionType.Digital, _walletData);
+        _walletData.Transactions.Add(transaction);
+        CurrentBalanceChanged?.Invoke();
+    }
+
+    public void RemoveFromCurrentBalance(float value)
+    {
+        if (value <= 0)
+            throw new ArgumentException("Cannot remove a non-positive amount from the balance.");
+
+        if (value > GetCurrentBalance())
+            throw new InvalidOperationException("Cannot remove more than the current balance.");
+
+        Transaction transaction = new Transaction(-value, TransactionType.Digital, _walletData);
+        _walletData.Transactions.Add(transaction);
         CurrentBalanceChanged?.Invoke();
     }
 
