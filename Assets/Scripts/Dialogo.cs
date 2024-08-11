@@ -3,125 +3,81 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class Dialogo : MonoBehaviour
 {
     /*
-        Para funcionar:
-        Adicione isso a caixa de texto na qual o dialogo sera exibido
-        Olhe a void Awake, la tem todos os objetos que voce tera que adicionar como filho
-        SE HOUVER MAIS DE UM SCRIPT DESSE EM UMA CENA, UM ERRO SERA OUTPUTEADO
+        Instruções para uso:
+        - Este script deve ser único na cena. Se houver mais de uma instância, um aviso será exibido no console.
     */
-    [SerializeField]
-    private KeyCode _inputProximaFrase = KeyCode.Return;
-    public static Dialogo Instance { get; private set; }
 
-    private int index;
+    [SerializeField] KeyCode _inputProximaFrase = KeyCode.Return; // Tecla para avançar para a próxima frase
+    public static Dialogo Instance { get; private set; } // Instância única do Dialogo
+
+    private int index; // Índice da frase atual
 
     [Serializable]
     public struct Frases
     {
         [TextArea]
-        public string Texto;
-        public UnityEvent FraseAcabou;
+        public string Texto; // Texto da frase
+        public UnityEvent FraseAcabou; // Evento a ser chamado quando a frase termina
     }
 
-    private Frases[] frases;
-    private Coroutine typingCoroutine;
+    private Frases[] frases; // Array de frases
+    private Coroutine typingCoroutine; // Coroutine para digitar a frase
 
-    private TypewriterEffect _textoDialogo;
-    private TMP_Text _textoNome;
-    private GameObject _painelDialogo;
+    [SerializeField] TypewriterEffect _textoDialogo; // Efeito de digitação
+    [SerializeField] TMP_Text _textoNome; // Texto do nome do falante
+    [SerializeField] GameObject _caixaDialogo; // Caixa de diálogo
 
-    public UnityEvent DialogoAcabou;
-
-    /// <summary>
-    /// Encontra e retorna o Transform do objeto filho com o nome especificado.
-    /// </summary>
-    /// <param name="nome">O nome do objeto filho a ser encontrado.</param>
-    /// <returns>O Transform do objeto filho encontrado.</returns>
-    /// <exception cref="System.Exception">É lançada se o objeto filho com o nome especificado não for encontrado.</exception>
-    private Transform AchaCrianca(string nome, Transform pai = null)
-    {
-        if (pai == null)
-        {
-            pai = transform;
-        }
-
-        Transform child = pai.Find(nome);
-
-        if (child == null)
-        {
-            throw new Exception($"Child object with the name {nome} not found.");
-        }
-        return child;
-    }
-
-    /// <summary>
-    /// Encontra e retorna um array de botões que são descendentes do Transform pai com o nome especificado.
-    /// </summary>
-    /// <param name="nomePai">O nome do objeto pai a ser encontrado.</param>
-    /// <returns>Um array de botões que são descendentes do objeto pai encontrado.</returns>
-    public Button[] AchaBotoes(string nomePai)
-    {
-        Transform pai = transform.Find(nomePai);
-
-        Button[] children = pai.GetComponentsInChildren<Button>();
-
-        return children;
-    }
+    public UnityEvent DialogoAcabou; // Evento a ser chamado quando o diálogo termina
 
     private void Awake()
     {
+        // Verifica se já existe uma instância do Dialogo
         if (Instance != null && Instance != this)
-        {
-            //throw new Exception("ERROR: Atempted to add a second instance to the Dialogo singleton");
             Debug.LogWarning("Mais de um objeto dialogo na cena");
-            Destroy(gameObject); //Temporariamente adicionado
-        }
         else
-        {
             Instance = this;
-        }
 
-        _painelDialogo = AchaCrianca("PainelDialogo").gameObject;
-        _textoNome = AchaCrianca("TextoNome", _painelDialogo.transform).GetComponent<TMP_Text>();
-        _textoDialogo = AchaCrianca("TextoDialogo", _painelDialogo.transform)
-            .GetComponent<TypewriterEffect>();
-        _painelDialogo.SetActive(false);
+        _caixaDialogo.SetActive(false); // Desativa a caixa de diálogo inicialmente
     }
 
     public void InicializarDialogo(Frases[] frasesDialogo, string nomeFalante = "")
     {
+        // Inicializa o diálogo com as frases e o nome do falante
         frases = frasesDialogo;
         index = 0;
         _textoNome.text = nomeFalante;
-        _painelDialogo.SetActive(true);
-        typingCoroutine = StartCoroutine(TypeLine());
+        _caixaDialogo.SetActive(true); // Ativa a caixa de diálogo
+        typingCoroutine = StartCoroutine(TypeLine()); // Inicia a digitação da primeira frase
     }
 
     public IEnumerator TypeLine()
     {
+        // Mostra a frase atual com efeito de digitação
         yield return _textoDialogo.ShowText(frases[index].Texto);
-        yield return Waiters.InputWaiter(_inputProximaFrase);
-        frases[index].FraseAcabou?.Invoke();
-        ProximaFrase();
+        yield return Waiters.InputWaiter(_inputProximaFrase); // Espera pela entrada do usuário
+        frases[index].FraseAcabou?.Invoke(); // Invoca o evento de frase acabada
+        ProximaFrase(); // Avança para a próxima frase
     }
 
     void ProximaFrase()
     {
+        // Verifica se há mais frases para mostrar
         if (index < frases.Length - 1)
         {
-            index++;
-            typingCoroutine = StartCoroutine(TypeLine());
+            index++; // Incrementa o índice
+            typingCoroutine = StartCoroutine(TypeLine()); // Inicia a digitação da próxima frase
         }
         else
         {
+            // Se não houver mais frases, limpa o texto e desativa a caixa de diálogo
             _textoDialogo.ClearText();
-            _painelDialogo.SetActive(false);
-            InteracaoNPC.InteracaoOcorrendo = false;
-            DialogoAcabou?.Invoke();
+            _caixaDialogo.SetActive(false);
+            InteracaoNPC.InteracaoOcorrendo = false; // Finaliza a interação com o NPC
+            DialogoAcabou?.Invoke(); // Invoca o evento de diálogo acabado
         }
     }
 }
