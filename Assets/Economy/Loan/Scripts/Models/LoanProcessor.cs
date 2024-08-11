@@ -15,6 +15,10 @@ namespace Economy
     public class LoanProcessor
     {
         [SerializeField] private LoanData loanData;
+
+        /// <summary>
+        /// Gets or sets the loan data associated with this loan processor.
+        /// </summary>
         public LoanData Loan
         {
             get => loanData;
@@ -27,24 +31,49 @@ namespace Economy
 
         private int remainingPenaltyInstallments;
         private float rawRemainingPenalty;
+
+        /// <summary>
+        /// Gets the total number of remaining installments, including penalties.
+        /// </summary>
         public int TotalRemainingInstallments => remainingPenaltyInstallments + remainingInstallments;
 
+        /// <summary>
+        /// Calculates the remaining penalty amount based on the raw penalty and interest rate.
+        /// </summary>
         private float RemainingPenalty => LoanData.CalculateTotalFromCompoundInterest(rawRemainingPenalty, Loan.Rate, remainingPenaltyInstallments);
+
+        /// <summary>
+        /// Calculates the value of the remaining penalty installment.
+        /// </summary>
         private float RemainingPenaltyInstallmentValue => CalculateRemainingPenaltyInstallmentValue();
+
+        /// <summary>
+        /// Calculates the total amount to be paid, including penalties and remaining loan value.
+        /// </summary>
         public float TotalToPay => CalculateTotalToPay();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoanProcessor"/> class with the specified loan data.
+        /// </summary>
+        /// <param name="loanData">The loan data to initialize the processor with.</param>
         public LoanProcessor(LoanData loanData)
         {
             Loan = loanData;
         }
 
         private float CalculateTotalToPay() => RemainingPenalty + remainingValue;
+
         private float CalculateRemainingPenaltyInstallmentValue() => RemainingPenalty / remainingPenaltyInstallments;
 
+        /// <summary>
+        /// Sets the loan data for this loan processor.
+        /// </summary>
+        /// <param name="loan">The loan data to set.</param>
         public void SetLoanData(LoanData loan) => Loan = loan;
 
         /// <summary>
-        /// Called when an installment arrives.
+        /// Called when an installment payment is due.
+        /// Processes the payment based on the player's wallet data.
         /// </summary>
         /// <param name="wallet">The player's wallet data.</param>
         public void OnInstallmentArrival(WalletData wallet)
@@ -56,7 +85,8 @@ namespace Economy
         }
 
         /// <summary>
-        /// Called when an installment is paid.
+        /// Processes a regular installment payment.
+        /// Updates the wallet and loan state accordingly.
         /// </summary>
         /// <param name="wallet">The player's wallet data.</param>
         private void ProcessInstallmentPayment(WalletData wallet)
@@ -78,7 +108,8 @@ namespace Economy
         }
 
         /// <summary>
-        /// Called when an installment is late.
+        /// Processes a late installment payment.
+        /// Updates the wallet and loan state, potentially moving to penalty installments.
         /// </summary>
         /// <param name="wallet">The player's wallet data.</param>
         private void ProcessLateInstallmentPayment(WalletData wallet)
@@ -110,7 +141,8 @@ namespace Economy
         }
 
         /// <summary>
-        /// Called when a loan is fully repaid by the player.
+        /// Processes the event when a loan is fully repaid by the player.
+        /// Updates the wallet and resets the loan processor.
         /// </summary>
         /// <param name="wallet">The player's wallet data.</param>
         private void ProcessLoanFullyRepaid(WalletData wallet)
@@ -121,7 +153,7 @@ namespace Economy
         }
 
         /// <summary>
-        /// Called when a loan is granted to the player.
+        /// Grants a loan to the player and updates their wallet.
         /// </summary>
         /// <param name="wallet">The player's wallet data.</param>
         public void GrantLoan(WalletData wallet)
@@ -135,7 +167,7 @@ namespace Economy
         }
 
         /// <summary>
-        /// Resets the loan to its initial state and generates a new local random loan.
+        /// Resets the loan processor to its initial state and generates a new local random loan.
         /// </summary>
         public void ResetLoanProcessor()
         {
@@ -146,6 +178,10 @@ namespace Economy
             GenerateNewLocalRandomLoan();
         }
 
+        /// <summary>
+        /// Cleans up the loan processor by removing it from the wallet's loans and resetting its state.
+        /// </summary>
+        /// <param name="wallet">The player's wallet data.</param>
         public void Cleanup(WalletData wallet)
         {
             if (wallet.Loans.Contains(this))
@@ -168,14 +204,14 @@ namespace Economy
         /// <summary>
         /// Generates a random loan with specified parameters.
         /// </summary>
+        /// <param name="type">The type of the loan.</param>
         /// <param name="minPrincipal">The minimum principal amount for the loan.</param>
         /// <param name="maxPrincipal">The maximum principal amount for the loan.</param>
         /// <param name="minRate">The minimum interest rate for the loan.</param>
         /// <param name="maxRate">The maximum interest rate for the loan.</param>
         /// <param name="minInstallments">The minimum number of installments for the loan.</param>
         /// <param name="maxInstallments">The maximum number of installments for the loan.</param>
-        /// <param name="type">The type of the loan.</param>
-        /// <returns>A new LoanData object with randomly generated principal, rate, installments, and type.</returns>
+        /// <returns>A new <see cref="LoanData"/> object with randomly generated principal, rate, installments, and type.</returns>
         public static LoanData GenerateRandomLoan(LoanType type, float minPrincipal = 1000, float maxPrincipal = 1500, float minRate = 0.10f, float maxRate = 0.30f, int minInstallments = 4, int maxInstallments = 7)
         {
             float principal = UnityEngine.Random.Range(minPrincipal, maxPrincipal);
