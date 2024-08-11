@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Inventory
+namespace InventorySystem
 {
     [System.Serializable]
     public class Inventory

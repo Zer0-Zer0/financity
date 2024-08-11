@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Inventory;
+using InventorySystem;
 using UISystem;
 using UnityEngine;
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UISystem;
-using Inventory;
+using InventorySystem;
 
 public class InventorySlotViewModel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {

@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Inventory
+namespace InventorySystem
 {
     public class InventoryController : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UISystem;
-using Inventory;
+using InventorySystem;
 
 public class StoreSlotViewModel : MonoBehaviour
 {

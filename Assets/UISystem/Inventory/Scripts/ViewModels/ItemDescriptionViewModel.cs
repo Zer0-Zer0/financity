@@ -1,6 +1,6 @@
 using UnityEngine;
 using UISystem;
-using Inventory;
+using InventorySystem;
 
 public class ItemDescriptionViewModel : MonoBehaviour
 {

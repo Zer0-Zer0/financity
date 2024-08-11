@@ -7,7 +7,7 @@ Fontes de inspiração:
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Inventory;
+using InventorySystem;
 
 namespace UISystem
 {

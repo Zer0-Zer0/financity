@@ -4,7 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UISystem;
 
-namespace Inventory
+namespace InventorySystem
 {
     [TestFixture]
     public class InventoryTests

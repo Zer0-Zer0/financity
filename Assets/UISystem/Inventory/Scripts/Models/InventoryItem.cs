@@ -2,7 +2,7 @@ using Economy;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Inventory
+namespace InventorySystem
 {
     [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
     public class InventoryItem : ScriptableObject
