@@ -33,6 +33,8 @@ public class PlayerDataEvents : MonoBehaviour
         SubscribeEvents();
         FirstTimeChecker();
 
+        Debug.Log(CurrentHealth);
+
         if (playerData.GetMissionOneStatus())
             MissionOneCompleted?.Invoke();
     }
@@ -117,6 +119,8 @@ public class PlayerDataEvents : MonoBehaviour
     public float GetCurrentBalance() => CurrentBalance;
 
     public bool GetFirstTime() => FirstTime;
+
+    public float GetCurrentHealth() => CurrentHealth;
     #endregion
 
     #region Data Management

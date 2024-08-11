@@ -13,7 +13,7 @@ public static class DataManager
         {
             if (_playerData == null)
                 _playerData = LoadPlayerData();
-                
+
             return _playerData;
         }
         set { _playerData = value; }
@@ -25,22 +25,24 @@ public static class DataManager
         System.IO.File.WriteAllText(_playerDataPath, json);
     }
 
-    public static void ClearPlayerData(){
+    public static void ClearPlayerData()
+    {
         PlayerData EmptySave = new PlayerData();
         SavePlayerData(EmptySave);
     }
 
     public static PlayerData LoadPlayerData()
     {
-        // Load data
+        Debug.Log(_playerDataPath);
         if (!File.Exists(_playerDataPath))
             return new PlayerData();
-        else
-        {
-            string json = System.IO.File.ReadAllText(_playerDataPath);
-            PlayerData loadedData = JsonUtility.FromJson<PlayerData>(json);
 
+        string json = System.IO.File.ReadAllText(_playerDataPath);
+        PlayerData loadedData = JsonUtility.FromJson<PlayerData>(json);
+
+        if (loadedData.GetCurrentHealth() <= 0)
+            return new PlayerData();
+        else
             return loadedData;
-        }
     }
 }
