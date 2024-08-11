@@ -9,9 +9,9 @@ namespace Economy
     [Serializable]
     public class WalletData
     {
-        [SerializeField] string _walletName;
-        [SerializeField] List<Transaction> _transactions;
+        [SerializeField] float _currentMaxDebt = 1500f;
 
+        [SerializeField] List<Transaction> _transactions;
         public List<Transaction> Transactions
         {
             get => _transactions;
@@ -24,19 +24,20 @@ namespace Economy
             get => _loans;
             set => _loans = value;
         }
+
+        [SerializeField] string _walletName;
         public string WalletName
         {
             get => _walletName;
             private set => _walletName = value;
         }
 
+        public GameEvent UnableToPay;
+
         public float CurrentDigitalMoney => CalculateCurrentDigitalMoney();
         public float CurrentPhysicalMoney => CalculateCurrentPhysicalMoney();
         public float CurrentDebt => CalculateCurrentDebt();
         public float CurrentMaxDebt => _currentMaxDebt;
-
-        [SerializeField]
-        private float _currentMaxDebt = 1500f;
 
         private float CalculateCurrentDigitalMoney()
         {

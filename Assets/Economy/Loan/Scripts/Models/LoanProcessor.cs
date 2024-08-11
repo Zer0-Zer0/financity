@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,62 +14,40 @@ namespace Economy
     [Serializable]
     public class LoanProcessor
     {
-        [SerializeField] private LoanData loanData;
+        [SerializeField]
+        private LoanData loan;
 
         /// <summary>
         /// Gets or sets the loan data associated with this loan processor.
         /// </summary>
         public LoanData Loan
         {
-            get => loanData;
-            set => loanData = value;
+            get => loan;
+            set => loan = value;
         }
 
         private float remainingValue;
         private int remainingInstallments;
         private float InstallmentValue => remainingValue / remainingInstallments;
 
-        private int remainingPenaltyInstallments;
-        private float rawRemainingPenalty;
-
         /// <summary>
         /// Gets the total number of remaining installments, including penalties.
         /// </summary>
-        public int TotalRemainingInstallments => remainingPenaltyInstallments + remainingInstallments;
-
-        /// <summary>
-        /// Calculates the remaining penalty amount based on the raw penalty and interest rate.
-        /// </summary>
-        private float RemainingPenalty => LoanData.CalculateTotalFromCompoundInterest(rawRemainingPenalty, Loan.Rate, remainingPenaltyInstallments);
-
-        /// <summary>
-        /// Calculates the value of the remaining penalty installment.
-        /// </summary>
-        private float RemainingPenaltyInstallmentValue => CalculateRemainingPenaltyInstallmentValue();
+        public int TotalRemainingInstallments => remainingInstallments;
 
         /// <summary>
         /// Calculates the total amount to be paid, including penalties and remaining loan value.
         /// </summary>
-        public float TotalToPay => CalculateTotalToPay();
+        public float TotalToPay => remainingValue;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LoanProcessor"/> class with the specified loan data.
         /// </summary>
-        /// <param name="loanData">The loan data to initialize the processor with.</param>
-        public LoanProcessor(LoanData loanData)
+        /// <param name="loan">The loan data to initialize the processor with.</param>
+        public LoanProcessor(LoanData loan)
         {
-            Loan = loanData;
+            Loan = loan;
         }
-
-        private float CalculateTotalToPay() => RemainingPenalty + remainingValue;
-
-        private float CalculateRemainingPenaltyInstallmentValue() => RemainingPenalty / remainingPenaltyInstallments;
-
-        /// <summary>
-        /// Sets the loan data for this loan processor.
-        /// </summary>
-        /// <param name="loan">The loan data to set.</param>
-        public void SetLoanData(LoanData loan) => Loan = loan;
 
         /// <summary>
         /// Called when an installment payment is due.
@@ -92,18 +70,11 @@ namespace Economy
         private void ProcessInstallmentPayment(WalletData wallet)
         {
             Transaction transaction;
-            if (remainingPenaltyInstallments != 0)
-            {
-                transaction = new Transaction(-RemainingPenaltyInstallmentValue, TransactionType.Digital, null, wallet);
-                rawRemainingPenalty -= RemainingPenaltyInstallmentValue;
-                remainingPenaltyInstallments--;
-            }
-            else
-            {
-                transaction = new Transaction(-InstallmentValue, TransactionType.Digital, null, wallet);
-                remainingValue -= InstallmentValue;
-                remainingInstallments--;
-            }
+            transaction = new Transaction(-InstallmentValue, TransactionType.Digital, null, wallet);
+
+            remainingValue -= InstallmentValue;
+            remainingInstallments--;
+
             wallet.Transactions.Add(transaction);
         }
 
@@ -114,26 +85,8 @@ namespace Economy
         /// <param name="wallet">The player's wallet data.</param>
         private void ProcessLateInstallmentPayment(WalletData wallet)
         {
-            Transaction transaction;
-            float remainingValueToPay;
-            if (remainingPenaltyInstallments != 0)
-            {
-                remainingValueToPay = RemainingPenaltyInstallmentValue - wallet.CurrentDigitalMoney;
-
-                rawRemainingPenalty -= wallet.CurrentDigitalMoney;
-            }
-            else
-            {
-                remainingValueToPay = InstallmentValue - wallet.CurrentDigitalMoney;
-
-                remainingValue -= wallet.CurrentDigitalMoney;
-                remainingInstallments--;
-            }
-            remainingPenaltyInstallments++;
-            rawRemainingPenalty += remainingValueToPay;
-
-            transaction = new Transaction(-wallet.CurrentDigitalMoney, TransactionType.Digital, null, wallet);
-            wallet.Transactions.Add(transaction);
+            Debug.Log("Loose Condition or player looses the Item it gave for the loan");
+            wallet.UnableToPay.Raise(null, Loan);
         }
 
         /// <summary>
@@ -143,7 +96,12 @@ namespace Economy
         /// <param name="wallet">The player's wallet data.</param>
         private void ProcessLoanFullyRepaid(WalletData wallet)
         {
-            Transaction transaction = new Transaction(-TotalToPay, TransactionType.Digital, null, wallet);
+            Transaction transaction = new Transaction(
+                -TotalToPay,
+                TransactionType.Digital,
+                null,
+                wallet
+            );
             wallet.Transactions.Add(transaction);
             ResetLoanProcessor();
         }
@@ -154,7 +112,11 @@ namespace Economy
         /// <param name="wallet">The player's wallet data.</param>
         public void GrantLoan(WalletData wallet)
         {
-            Transaction transaction = new Transaction(Loan.Principal, TransactionType.Digital, wallet);
+            Transaction transaction = new Transaction(
+                Loan.Principal,
+                TransactionType.Digital,
+                wallet
+            );
             wallet.Transactions.Add(transaction);
             wallet.Loans.Add(this);
 
@@ -169,8 +131,6 @@ namespace Economy
         {
             remainingValue = 0;
             remainingInstallments = 0;
-            remainingPenaltyInstallments = 0;
-            rawRemainingPenalty = 0;
             GenerateNewLocalRandomLoan();
         }
 
@@ -194,7 +154,7 @@ namespace Economy
         {
             LoanType type = RandomEnum.GetRandomEnumValue<LoanType>();
             LoanData newLoan = GenerateRandomLoan(type);
-            SetLoanData(newLoan);
+            Loan = newLoan;
         }
 
         /// <summary>
@@ -208,7 +168,15 @@ namespace Economy
         /// <param name="minInstallments">The minimum number of installments for the loan.</param>
         /// <param name="maxInstallments">The maximum number of installments for the loan.</param>
         /// <returns>A new <see cref="LoanData"/> object with randomly generated principal, rate, installments, and type.</returns>
-        public static LoanData GenerateRandomLoan(LoanType type, float minPrincipal = 1000, float maxPrincipal = 1500, float minRate = 0.10f, float maxRate = 0.30f, int minInstallments = 4, int maxInstallments = 7)
+        public static LoanData GenerateRandomLoan(
+            LoanType type,
+            float minPrincipal = 1000,
+            float maxPrincipal = 1500,
+            float minRate = 0.10f,
+            float maxRate = 0.30f,
+            int minInstallments = 4,
+            int maxInstallments = 7
+        )
         {
             float principal = UnityEngine.Random.Range(minPrincipal, maxPrincipal);
             float rate = UnityEngine.Random.Range(minRate, maxRate);
