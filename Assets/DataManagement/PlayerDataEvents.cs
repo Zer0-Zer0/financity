@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Inventory;
 using UnityEngine;
 using UnityEngine.Events;
-using Inventory;
 
 public class PlayerDataEvents : MonoBehaviour
 {
+    #region Unity Events
     public UnityEvent CurrentAmmoChanged;
     public UnityEvent TotalAmmoChanged;
     public UnityEvent CurrentBalanceChanged;
@@ -14,38 +15,41 @@ public class PlayerDataEvents : MonoBehaviour
     public UnityEvent MissionOneCompleted;
     public UnityEvent IfIsFirstTime;
     public UnityEvent IfNotFirstTime;
+    #endregion
 
+    #region Properties
     int CurrentAmmo
     {
-        get { return playerData.GetCurrentAmmo(); }
+        get => playerData.GetCurrentAmmo();
     }
 
     int TotalAmmo
     {
-        get { return playerData.GetTotalAmmo(); }
+        get => playerData.GetTotalAmmo();
     }
 
     float CurrentBalance
     {
-        get { return playerData.GetCurrentBalance(); }
+        get => playerData.GetCurrentBalance();
     }
 
     float CurrentHealth
     {
-        get { return playerData.GetCurrentHealth(); }
+        get => playerData.GetCurrentHealth();
     }
 
     bool FirstTime
     {
-        get { return playerData.GetFirstTime(); }
+        get => playerData.GetFirstTime();
     }
 
     PlayerData playerData
     {
-        get { return DataManager.playerData; }
+        get => DataManager.playerData;
     }
+    #endregion
 
-    // Start is called before the first frame update
+    #region Unity Methods
     void Start()
     {
         playerData.CurrentAmmoChanged.AddListener(OnCurrentAmmoChanged);
@@ -53,51 +57,29 @@ public class PlayerDataEvents : MonoBehaviour
         playerData.CurrentBalanceChanged.AddListener(OnCurrentBalanceChanged);
         playerData.FirstTimeChanged.AddListener(OnFirstTimeChanged);
         playerData.MissionOneCompleted.AddListener(OnMissionOneCompleted);
+        
         if (playerData.GetFirstTime())
-        {
             IfIsFirstTime?.Invoke();
-        }
         else
-        {
             IfNotFirstTime?.Invoke();
-        }
 
         if (playerData.GetMissionOneStatus())
-        {
             OnMissionOneCompleted();
-        }
     }
+    #endregion
 
-    public void OnCurrentAmmoChanged()
-    {
-        CurrentAmmoChanged?.Invoke();
-    }
+    #region Event Handlers
+    void InvokeEvent(UnityEvent unityEvent) => unityEvent?.Invoke();
 
-    public void OnTotalAmmoChanged()
-    {
-        TotalAmmoChanged?.Invoke();
-    }
+    void OnCurrentAmmoChanged() => InvokeEvent(CurrentAmmoChanged);
+    void OnTotalAmmoChanged() => InvokeEvent(TotalAmmoChanged);
+    void OnCurrentBalanceChanged() => InvokeEvent(CurrentBalanceChanged);
+    void OnCurrentHealthChanged() => InvokeEvent(CurrentHealthChanged);
+    void OnFirstTimeChanged() => InvokeEvent(FirstTimeChanged);
+    void OnMissionOneCompleted() => InvokeEvent(MissionOneCompleted);
+    #endregion
 
-    public void OnCurrentBalanceChanged()
-    {
-        CurrentBalanceChanged?.Invoke();
-    }
-
-    public void OnCurrentHealthChanged()
-    {
-        CurrentHealthChanged?.Invoke();
-    }
-
-    public void OnFirstTimeChanged()
-    {
-        FirstTimeChanged?.Invoke();
-    }
-
-    public void OnMissionOneCompleted()
-    {
-        MissionOneCompleted?.Invoke();
-    }
-
+    #region Player Data Manipulation
     public void SetCurrentAmmo(int value)
     {
         playerData.SetCurrentAmmo(value);
@@ -105,7 +87,7 @@ public class PlayerDataEvents : MonoBehaviour
 
     public void AddToCurrentAmmo(int value)
     {
-        playerData.SetCurrentAmmo(CurrentAmmo + value);
+        SetCurrentAmmo(CurrentAmmo + value);
     }
 
     public void SetTotalAmmo(int value)
@@ -115,13 +97,13 @@ public class PlayerDataEvents : MonoBehaviour
 
     public void AddToTotalAmmo(int value)
     {
-        playerData.SetTotalAmmo(TotalAmmo + value);
+        SetTotalAmmo(TotalAmmo + value);
     }
 
     public void AddToTotalAmmo(Component sender, object data)
     {
         if (data is InventoryItem item)
-            playerData.SetTotalAmmo(TotalAmmo + ((int)item.data));
+            SetTotalAmmo(TotalAmmo + ((int)item.data));
     }
 
     public void SetCurrentBalance(float value)
@@ -131,12 +113,12 @@ public class PlayerDataEvents : MonoBehaviour
 
     public void AddToCurrentBalance(float value)
     {
-        playerData.SetCurrentBalance(CurrentBalance + value);
+        SetCurrentBalance(CurrentBalance + value);
     }
 
     public void RemoveFromCurrentBalance(float value)
     {
-        playerData.SetCurrentBalance(CurrentBalance - value);
+        SetCurrentBalance(CurrentBalance - value);
     }
 
     public float GetCurrentHealth()
@@ -151,18 +133,18 @@ public class PlayerDataEvents : MonoBehaviour
 
     public void AddToCurrentHealth(float value)
     {
-        playerData.SetCurrentHealth(CurrentHealth + value);
+        SetCurrentHealth(CurrentHealth + value);
     }
 
     public void AddToCurrentHealth(Component sender, object data)
     {
         if (data is InventoryItem item)
-            playerData.SetCurrentHealth(TotalAmmo + ((int)item.data));
+            playerData.SetCurrentHealth(CurrentHealth + ((int)item.data));
     }
 
     public void RemoveFromCurrentHealth(float value)
     {
-        playerData.SetCurrentHealth(CurrentHealth - value);
+        SetCurrentHealth(CurrentHealth - value);
     }
 
     public void SetFirstTime(bool value)
@@ -174,29 +156,19 @@ public class PlayerDataEvents : MonoBehaviour
     {
         playerData.CompleteMissionOne();
     }
+    #endregion
 
-    public int GetCurrentAmmo()
-    {
-        return CurrentAmmo;
-    }
+    #region Getters
+    public int GetCurrentAmmo() => CurrentAmmo;
+    public int GetTotalAmmo() => TotalAmmo;
+    public float GetCurrentBalance() => CurrentBalance;
+    public bool GetFirstTime() => FirstTime;
+    #endregion
 
-    public int GetTotalAmmo()
-    {
-        return TotalAmmo;
-    }
-
-    public float GetCurrentBalance()
-    {
-        return CurrentBalance;
-    }
-
-    public bool GetFirstTime()
-    {
-        return FirstTime;
-    }
-
+    #region Data Management
     public void SaveData()
     {
         DataManager.SavePlayerData(DataManager.playerData);
     }
+    #endregion
 }
