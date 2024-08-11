@@ -126,7 +126,7 @@ namespace Economy
             {
                 remainingValueToPay = InstallmentValue - wallet.CurrentDigitalMoney;
 
-                remainingValue -= InstallmentValue;
+                remainingValue -= wallet.CurrentDigitalMoney;
                 remainingInstallments--;
             }
             remainingPenaltyInstallments++;
