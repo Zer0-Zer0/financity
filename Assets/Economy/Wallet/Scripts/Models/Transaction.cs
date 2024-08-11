@@ -6,12 +6,6 @@ using UnityEngine.Events;
 
 namespace Economy
 {
-    public enum TransactionType
-    {
-        Physical,
-        Digital
-    }
-
     /// <summary>
     /// Represents a transaction between two wallets.
     /// </summary>
@@ -39,12 +33,6 @@ namespace Economy
         private WalletData _receiver;//Not Serializable to avoid cyclic dependences
         public WalletData Receiver => _receiver;
 
-        /// <summary>
-        /// The type of the transaction.
-        /// </summary>
-        [SerializeField] private TransactionType _type;
-        public TransactionType Type => _type;
-
         public UnityEvent<Transaction> OnTransactionPending { get; private set; }
         public UnityEvent<Transaction> OnTransactionAccepted { get; private set; }
         public UnityEvent<Transaction> OnTransactionRefused { get; private set; }
@@ -57,13 +45,12 @@ namespace Economy
         /// <param name="sender">The wallet data of the sender.</param>
         /// <param name="receiver">The wallet data of the receiver.</param>
         /// <param name="transactionType">The type of the transaction (Physical or Digital).</param>
-        public Transaction(float value, TransactionType type, WalletData receiver = null, WalletData sender = null, string name = "")
+        public Transaction(float value, WalletData receiver = null, WalletData sender = null, string name = "")
         {
             _name = name;
             _value = value;
             _sender = sender;
             _receiver = receiver;
-            _type = type;
 
             OnTransactionPending = new UnityEvent<Transaction>();
             OnTransactionAccepted = new UnityEvent<Transaction>();

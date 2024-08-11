@@ -34,27 +34,16 @@ namespace Economy
 
         public GameEvent UnableToPay;
 
-        public float CurrentDigitalMoney => CalculateCurrentDigitalMoney();
-        public float CurrentPhysicalMoney => CalculateCurrentPhysicalMoney();
+        public float CurrentMoney => CalculateCurrentMoney();
         public float CurrentDebt => CalculateCurrentDebt();
         public float CurrentMaxDebt => _currentMaxDebt;
 
-        private float CalculateCurrentDigitalMoney()
+        private float CalculateCurrentMoney()
         {
             float total = 0f;
             foreach (var transaction in Transactions)
-                if (transaction.Type == TransactionType.Digital)
                     total += transaction.Value;
 
-            return total;
-        }
-
-        private float CalculateCurrentPhysicalMoney()
-        {
-            float total = 0f;
-            foreach (var transaction in Transactions)
-                if (transaction.Type == TransactionType.Physical)
-                    total += transaction.Value;
             return total;
         }
 

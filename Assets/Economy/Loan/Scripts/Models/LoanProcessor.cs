@@ -56,7 +56,7 @@ namespace Economy
         /// <param name="wallet">The player's wallet data.</param>
         public void OnInstallmentArrival(WalletData wallet)
         {
-            if (wallet.CurrentDigitalMoney >= InstallmentValue)
+            if (wallet.CurrentMoney >= InstallmentValue)
                 ProcessInstallmentPayment(wallet);
             else
                 ProcessLateInstallmentPayment(wallet);
@@ -70,7 +70,7 @@ namespace Economy
         private void ProcessInstallmentPayment(WalletData wallet)
         {
             Transaction transaction;
-            transaction = new Transaction(-InstallmentValue, TransactionType.Digital, null, wallet);
+            transaction = new Transaction(-InstallmentValue, null, wallet);
 
             remainingValue -= InstallmentValue;
             remainingInstallments--;
@@ -98,7 +98,6 @@ namespace Economy
         {
             Transaction transaction = new Transaction(
                 -TotalToPay,
-                TransactionType.Digital,
                 null,
                 wallet
             );
@@ -114,7 +113,6 @@ namespace Economy
         {
             Transaction transaction = new Transaction(
                 Loan.Principal,
-                TransactionType.Digital,
                 wallet
             );
             wallet.Transactions.Add(transaction);

@@ -92,14 +92,14 @@ public class PlayerData
 
     // Getter and Setter for CurrentBalance
 
-    public float GetCurrentBalance() => _walletData.CurrentDigitalMoney;
+    public float GetCurrentBalance() => _walletData.CurrentMoney;
 
     public void AddToCurrentBalance(float value)
     {
         if (value <= 0)
             throw new ArgumentException("Cannot add a non-positive amount to the balance.");
 
-        Transaction transaction = new Transaction(value, TransactionType.Digital, _walletData);
+        Transaction transaction = new Transaction(value, _walletData);
         _walletData.Transactions.Add(transaction);
         CurrentBalanceChanged?.Invoke();
     }
@@ -112,7 +112,7 @@ public class PlayerData
         if (value > GetCurrentBalance())
             throw new InvalidOperationException("Cannot remove more than the current balance.");
 
-        Transaction transaction = new Transaction(-value, TransactionType.Digital, _walletData);
+        Transaction transaction = new Transaction(-value, _walletData);
         _walletData.Transactions.Add(transaction);
         CurrentBalanceChanged?.Invoke();
     }
