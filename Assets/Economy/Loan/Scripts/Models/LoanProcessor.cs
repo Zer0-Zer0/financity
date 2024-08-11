@@ -114,28 +114,25 @@ namespace Economy
         /// <param name="wallet">The player's wallet data.</param>
         private void ProcessLateInstallmentPayment(WalletData wallet)
         {
+            Transaction transaction;
             if (remainingPenaltyInstallments != 0)
+            {
+                float remainingValueToPay = RemainingPenaltyInstallmentValue - wallet.CurrentDigitalMoney;
+
                 rawRemainingPenalty -= wallet.CurrentDigitalMoney;
+            }
             else
             {
-                remainingValue -= wallet.CurrentDigitalMoney;
-                remainingInstallments--;
-            }
-
-            Transaction transaction = new Transaction(-wallet.CurrentDigitalMoney, TransactionType.Digital, null, wallet);
-            wallet.Transactions.Add(transaction);
-
-            if (remainingInstallments != 0)
-            {
-                // Moves the installment value from normal to the penalty one
-                rawRemainingPenalty += InstallmentValue;
-                remainingPenaltyInstallments++;
+                float remainingValueToPay = InstallmentValue - wallet.CurrentDigitalMoney;
 
                 remainingValue -= InstallmentValue;
                 remainingInstallments--;
             }
-            else
-                remainingPenaltyInstallments++;
+            remainingPenaltyInstallments++;
+            rawRemainingPenalty += remainingValueToPay;
+
+            transaction = new Transaction(-wallet.CurrentDigitalMoney, TransactionType.Digital, null, wallet);
+            wallet.Transactions.Add(transaction);
         }
 
         /// <summary>
