@@ -7404,7 +7404,7 @@ Light:
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 25
+  m_BounceIntensity: 50
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 4.5668e-41, y: 1.84e-43, z: 0, w: -1.0532971e+14}
@@ -20268,7 +20268,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1004608081809668, guid: bd12278208b1cb2439520aa9a587592b, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1234014745587384, guid: bd12278208b1cb2439520aa9a587592b, type: 3}
       propertyPath: m_Name
@@ -20276,39 +20276,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1234014745587384, guid: bd12278208b1cb2439520aa9a587592b, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1237224721152476, guid: bd12278208b1cb2439520aa9a587592b, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1417464072718416, guid: bd12278208b1cb2439520aa9a587592b, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1520303913185204, guid: bd12278208b1cb2439520aa9a587592b, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1740470825312696, guid: bd12278208b1cb2439520aa9a587592b, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1741839059160338, guid: bd12278208b1cb2439520aa9a587592b, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1828411453413448, guid: bd12278208b1cb2439520aa9a587592b, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1940982264445298, guid: bd12278208b1cb2439520aa9a587592b, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 1951931552304210, guid: bd12278208b1cb2439520aa9a587592b, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4292317123249144, guid: bd12278208b1cb2439520aa9a587592b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22388,7 +22388,7 @@ LightProbeGroup:
   - {x: 16.351013, y: 9.971973, z: 10.64748}
   - {x: -24.673286, y: 9.971973, z: -6.4045906}
   - {x: 27.136711, y: -1.2580178, z: 25.788807}
-  - {x: 33.490456, y: 14.267348, z: 29.20914}
+  - {x: 31.651978, y: 14.267348, z: 28.211842}
   - {x: 13.101013, y: 14.267348, z: 3.0857468}
   - {x: 8.755402, y: 14.267348, z: 24.507183}
   - {x: -14.292786, y: 14.267348, z: 26.85072}
@@ -22440,6 +22440,57 @@ LightProbeGroup:
   - {x: 7.266945, y: -1.2075877, z: 48.1117}
   - {x: -8.4403305, y: -1.2075877, z: 46.34789}
   - {x: -8.733719, y: 49.74724, z: 45.744694}
+  - {x: -20.430199, y: 0.8325348, z: 18.801926}
+  - {x: -15.573265, y: 0.8325348, z: 17.573513}
+  - {x: 5.0365753, y: 0.8325348, z: 16.764912}
+  - {x: -5.4817886, y: 0.8325348, z: 18.612953}
+  - {x: -20.430199, y: -1.0501251, z: 21.605312}
+  - {x: -15.573265, y: -1.0501251, z: 20.3769}
+  - {x: 5.0365753, y: -1.0501251, z: 19.568298}
+  - {x: -5.4817886, y: -1.0501251, z: 21.41634}
+  - {x: -20.430199, y: -2.651291, z: 29.258163}
+  - {x: -14.938004, y: -2.651291, z: 29.1404}
+  - {x: 5.0365753, y: -2.651291, z: 27.22115}
+  - {x: -5.4817886, y: -2.651291, z: 29.069191}
+  - {x: 0.5070343, y: -0.2796631, z: 12.632893}
+  - {x: 7.015602, y: -0.2796631, z: 7.199898}
+  - {x: 6.262512, y: -0.2796631, z: 1.2328377}
+  - {x: 2.0705109, y: -0.2796631, z: -2.1977577}
+  - {x: -24.137161, y: -1, z: 11.74345}
+  - {x: -26.054413, y: -1, z: 17.57716}
+  - {x: -18.462921, y: -1, z: 7.6509094}
+  - {x: -16.125267, y: -1, z: 0.8738785}
+  - {x: -18.984558, y: -1, z: -1.9994621}
+  - {x: -15.374855, y: -1, z: -5.5176277}
+  - {x: -8.942841, y: -1, z: -7.3860703}
+  - {x: -3.5479736, y: -1, z: -5.6645584}
+  - {x: -18.887299, y: 0.4790802, z: 4.079273}
+  - {x: -19.222328, y: 1.5723419, z: 12.277473}
+  - {x: -9.835495, y: 0.15629578, z: 15.405071}
+  - {x: -9.7164, y: -2.651291, z: 28.379261}
+  - {x: -0.011291504, y: -2.651291, z: 23.55653}
+  - {x: -6.2046204, y: -2.651291, z: 23.81097}
+  - {x: -11.866905, y: -2.651291, z: 23.425098}
+  - {x: -17.5037, y: -2.651291, z: 23.739689}
+  - {x: -22.577751, y: -2.1843414, z: 24.053959}
+  - {x: -27.639214, y: -2.1843414, z: 24.242718}
+  - {x: -31.86306, y: -2.1843414, z: 25.241543}
+  - {x: 5.6847076, y: -2.0519714, z: 24.680614}
+  - {x: 10.9379425, y: -2.0519714, z: 24.44331}
+  - {x: 16.415512, y: -2.0519714, z: 24.235477}
+  - {x: 21.60978, y: -2.0519714, z: 25.051579}
+  - {x: 21.60978, y: -1.2823334, z: 21.223316}
+  - {x: 31.522713, y: -0.4883728, z: 22.28938}
+  - {x: 10.9379425, y: -1.2823334, z: 20.615047}
+  - {x: 16.415512, y: -1.2823334, z: 20.407215}
+  - {x: 21.60978, y: -0.06491089, z: 18.824219}
+  - {x: 27.136711, y: 0.7290497, z: 19.561447}
+  - {x: 10.9379425, y: -0.06491089, z: 18.21595}
+  - {x: 16.415512, y: -0.06491089, z: 18.008118}
+  - {x: 21.60978, y: 1.5880737, z: 16.239494}
+  - {x: 27.136711, y: 2.3820343, z: 16.976723}
+  - {x: 10.9379425, y: 1.5880737, z: 15.631226}
+  - {x: 16.415512, y: 1.5880737, z: 15.423393}
   m_Dering: 1
 --- !u!4 &1491534571
 Transform:
