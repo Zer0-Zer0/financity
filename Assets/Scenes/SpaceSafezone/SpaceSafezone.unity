@@ -28135,6 +28135,62 @@ PrefabInstance:
       propertyPath: m_Name
       value: Medkit
       objectReference: {fileID: 0}
+    - target: {fileID: 8533543555396724511, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+      propertyPath: EventToInvoke.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533543555396724511, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+      propertyPath: EventToInvoke.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533543555396724511, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+      propertyPath: EventToInvoke.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533543555396724511, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+      propertyPath: EventToInvoke.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2020248487}
+    - target: {fileID: 8533543555396724511, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+      propertyPath: EventToInvoke.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 2020248486}
+    - target: {fileID: 8533543555396724511, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+      propertyPath: EventToInvoke.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetCurrentHealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533543555396724511, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+      propertyPath: EventToInvoke.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SendEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533543555396724511, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+      propertyPath: EventToInvoke.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: DestroyTarget
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533543555396724511, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+      propertyPath: EventToInvoke.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PlayMakerFSM, PlayMaker
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533543555396724511, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+      propertyPath: EventToInvoke.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: GenericDestroy, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533543555396724511, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+      propertyPath: EventToInvoke.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533543555396724511, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+      propertyPath: EventToInvoke.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533543555396724511, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+      propertyPath: EventToInvoke.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: HEALTHSET
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533543555396724511, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+      propertyPath: EventToInvoke.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8578254485972194016, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.523
@@ -28187,6 +28243,28 @@ PrefabInstance:
       addedObject: {fileID: 1071366944}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+--- !u!114 &2020248486 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3676821450409221091, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+  m_PrefabInstance: {fileID: 2020248485}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8276a2106d2045cb7007e73259f52d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2020248487 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 234327680257868619, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
+  m_PrefabInstance: {fileID: 2020248485}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1384774831, guid: aa5f7f06166acea47ab3d38c356f6e0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2021104099 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 458460, guid: b39d34f9ee12e3d4f8a61720146b7939, type: 3}
