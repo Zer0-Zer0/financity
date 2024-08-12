@@ -27313,6 +27313,34 @@ PrefabInstance:
       propertyPath: _sceneName
       value: SpaceOutside
       objectReference: {fileID: 0}
+    - target: {fileID: 3242799357772427943, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: OnSceneLoad.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3242799357772427943, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: OnSceneLoad.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3242799357772427943, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: OnSceneLoad.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1947810323}
+    - target: {fileID: 3242799357772427943, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: OnSceneLoad.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3242799357772427943, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: OnSceneLoad.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetFirstTime
+      objectReference: {fileID: 0}
+    - target: {fileID: 3242799357772427943, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: OnSceneLoad.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerDataEvents, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3242799357772427943, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      propertyPath: OnSceneLoad.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5950739360936877198, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
     m_RemovedGameObjects: []
@@ -27321,6 +27349,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2485044128799249595, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1947810322}
+    - targetCorrespondingSourceObject: {fileID: 2485044128799249595, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1947810323}
   m_SourcePrefab: {fileID: 100100000, guid: c744cc648a3670c93b82788e737e9d3c, type: 3}
 --- !u!4 &1947810320 stripped
 Transform:
@@ -27353,6 +27384,42 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 41.070107, y: 23.364326, z: 3.035211}
   m_Center: {x: 4.1733646, y: 11.18219, z: 1.0176009}
+--- !u!114 &1947810323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947810321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c102af5669f6c88778a684c46d542fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentAmmoChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  TotalAmmoChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  CurrentBalanceChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  FirstTimeChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  CurrentHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  MissionOneCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  IfIsFirstTime:
+    m_PersistentCalls:
+      m_Calls: []
+  IfNotFirstTime:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1952354275
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12,11 +12,13 @@ public class LoadSceneOnTrigger : MonoBehaviour
 
     public UnityEvent PlayerIsInRange;
     public UnityEvent PlayerOutOfRange;
+    public UnityEvent OnSceneLoad;
 
     void Update()
     {
         if (_isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
+            OnSceneLoad?.Invoke();
             DataManager.SavePlayerData(DataManager.playerData);
             SceneManager.LoadScene(_sceneName);
         }
