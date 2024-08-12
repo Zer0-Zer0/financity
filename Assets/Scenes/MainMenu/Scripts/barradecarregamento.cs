@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class barradecarregamento : MonoBehaviour
 {
     public TextMeshProUGUI texto;
-    public Image imagem;
+    public GameObject background;
     public Slider loading;
 
     private int frasenum;
@@ -15,7 +15,7 @@ public class barradecarregamento : MonoBehaviour
     {
         DataManager.ClearPlayerData();
         StartCoroutine(Carregar());
-        imagem.gameObject.SetActive(true);
+        background.SetActive(true);
         frase();
         Cursor.visible = false;
     }
