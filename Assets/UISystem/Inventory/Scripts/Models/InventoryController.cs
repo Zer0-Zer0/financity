@@ -118,6 +118,25 @@ namespace InventorySystem
             RaiseEvents();
         }
 
+        public void OnBuyItem(Component sender, object data)
+        {
+            if (data is InventorySlot slot)
+            {
+                float _itemValue = slot.CurrentItem.GetCurrentValue();
+                if (DataManager.playerData.GetCurrentBalance() >= _itemValue)
+                {
+                    Inventory.AddItem(CurrentInventory, slot);
+                    DataManager.playerData.RemoveFromCurrentBalance(_itemValue);
+                }
+            }
+            else
+                throw new InvalidDataException(
+                    $"ERROR: Not possible to add to inventory data of type {data.GetType()} sent from {sender}"
+                );
+            SaveInventory();
+            RaiseEvents();
+        }
+
         public void OnEconomyTick(Component sender, object data)
         {
             OnInventoryValueChanged.Raise(this, CurrentInventory.GetInventoryValue());
