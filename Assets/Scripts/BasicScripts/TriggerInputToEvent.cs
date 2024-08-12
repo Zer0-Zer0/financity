@@ -13,7 +13,7 @@ public class TriggerInputToEvent : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(ButtonToPress) && _isPlayerInRange)
+        if (Input.GetKeyDown(ButtonToPress) && _isPlayerInRange)
         {
             EventToInvoke?.Invoke();
         }
