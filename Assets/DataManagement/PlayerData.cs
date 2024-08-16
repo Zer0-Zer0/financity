@@ -32,6 +32,9 @@ public class PlayerData
 
     public const float MaxHealth = 10;
 
+    [SerializeField]
+    Gênero _gênero;
+
     #endregion
 
     #region Unity Events
@@ -51,6 +54,7 @@ public class PlayerData
         int totalAmmo = 120,
         WalletData wallet = null,
         Inventory inventory = null,
+        Gênero gênero = Gênero.Neutro,
         float currentHealth = 5
     )
     {
@@ -66,6 +70,8 @@ public class PlayerData
             _inventory = new Inventory(12);
         else
             _inventory = inventory;
+
+        _gênero = gênero;
 
         _firstTime = true;
         _missionOneCompleted = false;
@@ -147,6 +153,8 @@ public class PlayerData
         _firstTime = value;
         FirstTimeChanged?.Invoke();
     }
+
+    public Gênero getGender() => _gênero;
 
     public bool GetMissionOneStatus() => _missionOneCompleted;
 
