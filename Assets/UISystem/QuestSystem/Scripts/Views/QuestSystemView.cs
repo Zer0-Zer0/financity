@@ -9,7 +9,7 @@ namespace UISystem
     {
         [SerializeField] Text _otherObjectives;
 
-        private List<string> _objectives;
+        private List<string> _objectives = new List<string>();
 
         protected override void Setup() { }
 

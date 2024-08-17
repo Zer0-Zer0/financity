@@ -2693,6 +2693,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4530765485161848447, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174203586627425143, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641404045638559075, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
+      propertyPath: _otherObjectives
+      value: 
+      objectReference: {fileID: 6518612272187900116}
     - target: {fileID: 8918815782374043074, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
       propertyPath: m_Name
       value: QuestSystem
@@ -2700,13 +2712,134 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8918815782374043074, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8179498779938511679}
+    - targetCorrespondingSourceObject: {fileID: 8918815782374043074, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5000542345586072565}
+    - targetCorrespondingSourceObject: {fileID: 1864066125378757009, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6800520257521801259}
   m_SourcePrefab: {fileID: 100100000, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
 --- !u!224 &288214316806665217 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1343917187953040919, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
   m_PrefabInstance: {fileID: 1250167720449337878}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &614462798193281927 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1864066125378757009, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
+  m_PrefabInstance: {fileID: 1250167720449337878}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6800520257521801259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614462798193281927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: c105409e0c34a0f1bbe44546036bc6ca, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7016094687155388227}
+        m_TargetAssemblyTypeName: UISystem.TextViewModel, Assembly-CSharp
+        m_MethodName: OnValueChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6518612272187900116 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5417759674135603906, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
+  m_PrefabInstance: {fileID: 1250167720449337878}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4901cbdf38278047b4b3fa6e9f20a2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7016094687155388227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8072508933801776469, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
+  m_PrefabInstance: {fileID: 1250167720449337878}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614462798193281927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01abddd91c9d4ca4a9e32d9a91661722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7400843385447255925 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8641404045638559075, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
+  m_PrefabInstance: {fileID: 1250167720449337878}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7682159479349544916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 141b4110c0e58641cbe2a60389b7d5e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &7682159479349544916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8918815782374043074, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
+  m_PrefabInstance: {fileID: 1250167720449337878}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8179498779938511679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7682159479349544916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b609064ce9d8ecdebb50b2a8e95259a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questSystemView: {fileID: 7400843385447255925}
+--- !u!114 &5000542345586072565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7682159479349544916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: c105409e0c34a0f1bbe44546036bc6ca, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8179498779938511679}
+        m_TargetAssemblyTypeName: QuestSystemViewModel, Assembly-CSharp
+        m_MethodName: OnNewQuestAppeared
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1306025239204883230
 PrefabInstance:
   m_ObjectHideFlags: 0
