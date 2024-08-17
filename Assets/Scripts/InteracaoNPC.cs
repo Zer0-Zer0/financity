@@ -11,18 +11,18 @@ public class InteracaoNPC : MonoBehaviour
     melhor distancia é x 5 y 5 z 5
     */
 
-    [SerializeField]
-    private KeyCode _teclaInteracao = KeyCode.E;
+    [SerializeField] KeyCode _teclaInteracao = KeyCode.E;
 
-    [SerializeField]
-    private string nomeNPC;
+    [SerializeField] string nomeNPC;
 
-    [SerializeField]
-    private UnityEvent DialogoIniciou;
+    [SerializeField] UnityEvent DialogoIniciou;
 
-    [SerializeField]
-    private Dialogo.Frases[] _mensagens;
-    private bool _interacaoPossivel = false;
+    [TextArea]
+    [SerializeField] string[] Mensagens;
+
+    [SerializeField] UnityEvent DialogoTerminou;
+
+    bool _interacaoPossivel = false;
     public static bool InteracaoOcorrendo = false;
 
     void Update()
@@ -32,13 +32,19 @@ public class InteracaoNPC : MonoBehaviour
             InteracaoOcorrendo = true;
             DialogoIniciou?.Invoke();
             ChecaMensagens();
-            Dialogo.Instance.InicializarDialogo(_mensagens, nomeNPC);
+            Dialogo.Instance.DialogoAcabou.AddListener(OnDialogoAcabou);
+            Dialogo.Instance.InicializarDialogo(Mensagens, nomeNPC);
         }
+    }
+
+    void OnDialogoAcabou(){
+        DialogoTerminou?.Invoke();
+        Dialogo.Instance.DialogoAcabou.RemoveListener(OnDialogoAcabou);
     }
 
     void ChecaMensagens()
     {
-        if (_mensagens == null || _mensagens.Length == 0)
+        if (Mensagens == null || Mensagens.Length == 0)
         {
             throw new Exception("Nao ha frases para falar");
         }

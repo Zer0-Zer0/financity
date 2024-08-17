@@ -16,15 +16,7 @@ public class Dialogo : MonoBehaviour
 
     private int index; // Índice da frase atual
 
-    [Serializable]
-    public struct Frases
-    {
-        [TextArea]
-        public string Texto; // Texto da frase
-        public UnityEvent FraseAcabou; // Evento a ser chamado quando a frase termina
-    }
-
-    private Frases[] frases; // Array de frases
+    private string[] frases; // Array de frases
     private Coroutine typingCoroutine; // Coroutine para digitar a frase
 
     [SerializeField] TypewriterEffect _textoDialogo; // Efeito de digitação
@@ -44,7 +36,7 @@ public class Dialogo : MonoBehaviour
         _caixaDialogo.SetActive(false); // Desativa a caixa de diálogo inicialmente
     }
 
-    public void InicializarDialogo(Frases[] frasesDialogo, string nomeFalante = "")
+    public void InicializarDialogo(string[] frasesDialogo, string nomeFalante = "")
     {
         // Inicializa o diálogo com as frases e o nome do falante
         frases = frasesDialogo;
@@ -57,9 +49,8 @@ public class Dialogo : MonoBehaviour
     public IEnumerator TypeLine()
     {
         // Mostra a frase atual com efeito de digitação
-        yield return _textoDialogo.ShowText(frases[index].Texto);
+        yield return _textoDialogo.ShowText(frases[index]);
         yield return Waiters.InputWaiter(_inputProximaFrase); // Espera pela entrada do usuário
-        frases[index].FraseAcabou?.Invoke(); // Invoca o evento de frase acabada
         ProximaFrase(); // Avança para a próxima frase
     }
 

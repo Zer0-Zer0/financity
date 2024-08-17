@@ -526,83 +526,57 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _mensagens:
-  - Texto: "Olha s\xF3! Voc\xEA deve ser um dos novos recrutas!"
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "De acordo com o censo do m\xEAs passado, 99% dos antigos recrutas falharam
-      por n\xE3o terem comprado produtos o suficiente na minha m\xE3o!"
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "Se voc\xEA n\xE3o estiver interessado em ser um deles... Aproveite os
-      kits de primeiro socorros espalhados pelo mapa!"
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "Independentemente de como eles chegaram l\xE1, eu ainda tenho acesso
-      \xE0 eles e sei quando e quem est\xE1 usando."
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "De qualquer forma, esses detalhes n\xE3o importam, o que importa \xE9
-      que voc\xEA deve saber que ir\xE1 pagar para usar eles."
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "Tente usar aquele kit de amostra al\xED, esse primeiro eu n\xE3o cobro."
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3785050130626186676}
-          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-          m_MethodName: set_enabled
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: MultiConditionalEvent, Assembly-CSharp
-          m_MethodName: OneConditionMet
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 4516671856070809267}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: InvokableGenericEvent, Assembly-CSharp
-          m_MethodName: InvokeEvent
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
+  _mensagens: []
+  Mensagens:
+  - "Olha s\xF3! Voc\xEA deve ser um dos novos recrutas!"
+  - "De acordo com o censo do m\xEAs passado, 99% dos antigos recrutas falharam por
+    n\xE3o terem comprado produtos o suficiente na minha m\xE3o!"
+  - "Se voc\xEA n\xE3o estiver interessado em ser um deles... Aproveite os kits de
+    primeiro socorros espalhados pelo mapa!"
+  - "Independentemente de como eles chegaram l\xE1, eu ainda tenho acesso \xE0 eles
+    e sei quando e quem est\xE1 usando."
+  - "De qualquer forma, esses detalhes n\xE3o importam, o que importa \xE9 que voc\xEA
+    deve saber que ir\xE1 pagar para usar eles."
+  - "Tente usar aquele kit de amostra al\xED, esse primeiro eu n\xE3o cobro."
+  DialogoTerminou:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3785050130626186676}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MultiConditionalEvent, Assembly-CSharp
+        m_MethodName: OneConditionMet
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InvokableGenericEvent, Assembly-CSharp
+        m_MethodName: InvokeEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &4696427758255296382
 SphereCollider:
   m_ObjectHideFlags: 0

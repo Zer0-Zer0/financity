@@ -880,96 +880,82 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _mensagens:
-  - Texto: "Sauda\xE7\xF5es, sinta-se \xE0 vontade por aqui!"
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "Essa arma na sua m\xE3o est\xE1 digitalmente bloqueada, voc\xEA n\xE3o
-      vai conseguir atirar em nada com ela."
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "Qualquer arma que voc\xEA encontrar afora j\xE1 teve um dono, mas se
-      voc\xEA trouxer elas para mim eu posso desbloquear elas para voc\xEA! Por um
-      pre\xE7o \xE9 claro."
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "Eu sempre soube que eles eram reais ... o motivo deles n\xE3o terem me
-      respondido nos anos 20 foi por eles serem NOSSOS INIMIGOS!"
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "De qualquer forma, vou desbloquear esse seu rifle para voc\xEA, te darei
-      um desconto dessa vez por voc\xEA ser verde."
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 9223244127067752555}
-          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-          m_MethodName: set_enabled
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: MultiConditionalEvent, Assembly-CSharp
-          m_MethodName: OneConditionMet
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 1922778792594967122}
-          m_TargetAssemblyTypeName: PlayerDataEvents, Assembly-CSharp
-          m_MethodName: RemoveFromCurrentBalance
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 450
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - Texto: "[RIFLE DE ASSALTO] foi destravado. [LOJA] dispon\xEDvel."
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: InvokableGenericEvent, Assembly-CSharp
-          m_MethodName: InvokeEvent
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 499
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 1163657234312957211}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 499
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
+  _mensagens: []
+  Mensagens:
+  - "Sauda\xE7\xF5es, sinta-se \xE0 vontade por aqui!"
+  - "Essa arma na sua m\xE3o est\xE1 digitalmente bloqueada, voc\xEA n\xE3o vai conseguir
+    atirar em nada com ela."
+  - "Qualquer arma que voc\xEA encontrar afora j\xE1 teve um dono, mas se voc\xEA
+    trouxer elas para mim eu posso desbloquear elas para voc\xEA! Por um pre\xE7o
+    \xE9 claro."
+  - "Eu sempre soube que eles eram reais ... o motivo deles n\xE3o terem me respondido
+    nos anos 20 foi por eles serem NOSSOS INIMIGOS!"
+  - "De qualquer forma, vou desbloquear esse seu rifle para voc\xEA, te darei um
+    desconto dessa vez por voc\xEA ser verde."
+  - "[RIFLE DE ASSALTO] foi destravado. [LOJA] dispon\xEDvel."
+  DialogoTerminou:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9223244127067752555}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1922778792594967122}
+        m_TargetAssemblyTypeName: PlayerDataEvents, Assembly-CSharp
+        m_MethodName: RemoveFromCurrentBalance
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 499
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InvokableGenericEvent, Assembly-CSharp
+        m_MethodName: InvokeEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1163657234312957211}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MultiConditionalEvent, Assembly-CSharp
+        m_MethodName: OneConditionMet
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &2041077483393102751
 SphereCollider:
   m_ObjectHideFlags: 0

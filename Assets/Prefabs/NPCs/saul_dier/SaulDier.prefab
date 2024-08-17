@@ -113,115 +113,73 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _mensagens:
-  - Texto: RECRUTA!
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "AQUELE PORT\xC3O ENORME COBRINDO A ENTRADA DA CAVERNA \xC9 UM MAL NECESS\xC1RIO"
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "ELE IMPEDE A ENTRADA DE PRECIOSA LUZ, MAS TAMB\xC9M ADIA A INVAS\xC3O
-      DO ... INIMIGO!!!!"
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "H\xC1 UMA SEMANA ATR\xC1S, EU ENVIEI UM PELOT\xC3O DE CALOUROS COMO VOC\xCA
-      PARA UMA MISS\xC3O DE ESCOLTA ..."
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "ELES AINDA N\xC3O VOLTARAM."
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "TE PE\xC7O PARA IR PARA L\xC1 E RECUPERAR O QUE \xC9 DE VALOR. DOIS EM
-      UM, OU PERDEMOS HOMENS OU ELES EST\xC3O EM UM PARA\xCDSO E N\xC3O QUEREM VOLTAR."
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "\xC9 CLARO, VOC\xCA SER\xC1 BONIFICADO [1500 BRL]."
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "DE QUALQUER FORMA, ELES SA\xCDRAM PELO GRANDE PORT\xC3O HEXAGONAL, BOA
-      SORTE EM SUA MISS\xC3O"
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: InvokableGenericEvent, Assembly-CSharp
-          m_MethodName: InvokeEvent
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 1881994849611891016}
-          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-          m_MethodName: set_enabled
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 8623415353252788866}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-          m_MethodName: set_text
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: "Saia pelo port\xE3o hexagonal"
-            m_BoolArgument: 0
-          m_CallState: 2
+  _mensagens: []
+  Mensagens:
+  - RECRUTA!
+  - "AQUELE PORT\xC3O ENORME COBRINDO A ENTRADA DA CAVERNA \xC9 UM MAL NECESS\xC1RIO"
+  - "ELE IMPEDE A ENTRADA DE PRECIOSA LUZ, MAS TAMB\xC9M ADIA A INVAS\xC3O DO ...
+    INIMIGO!!!!"
+  - "H\xC1 UMA SEMANA ATR\xC1S, EU ENVIEI UM PELOT\xC3O DE CALOUROS COMO VOC\xCA
+    PARA UMA MISS\xC3O DE ESCOLTA ..."
+  - "H\xC1 UMA SEMANA ATR\xC1S, EU ENVIEI UM PELOT\xC3O DE CALOUROS COMO VOC\xCA
+    PARA UMA MISS\xC3O DE ESCOLTA ..."
+  - "ELES AINDA N\xC3O VOLTARAM."
+  - "TE PE\xC7O PARA IR PARA L\xC1 E RECUPERAR O QUE \xC9 DE VALOR. DOIS EM UM, OU
+    PERDEMOS HOMENS OU ELES EST\xC3O EM UM PARA\xCDSO E N\xC3O QUEREM VOLTAR."
+  - "\xC9 CLARO, VOC\xCA SER\xC1 BONIFICADO [1500 BRL]."
+  - "DE QUALQUER FORMA, ELES SA\xCDRAM PELO GRANDE PORT\xC3O HEXAGONAL, BOA SORTE
+    EM SUA MISS\xC3O"
+  DialogoTerminou:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1881994849611891016}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InvokableGenericEvent, Assembly-CSharp
+        m_MethodName: InvokeEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1577553482252253524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,51 +233,40 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _mensagens:
-  - Texto: "UAU ... VOC\u1EBE SOBREVIVEU!"
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: UHHHHHHHHH
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "N\xC3O ESTAVA IMAGINANDO QUE VOC\xCA CONSEGUIRIA VOLTAR ..."
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "DE QUALQUER FORMA, AQUI EST\xC1 A BONIFICA\xC7\xC3O QUE TE PROMETI"
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls: []
-  - Texto: "[1500.00 BRL adicionados \xE0 sua conta]"
-    FraseAcabou:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5064506115981630230}
-          m_TargetAssemblyTypeName: PlayerDataEvents, Assembly-CSharp
-          m_MethodName: AddToCurrentBalance
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 1500
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1577553482252253524}
-          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-          m_MethodName: set_enabled
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 1500
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  _mensagens: []
+  Mensagens:
+  - "UAU ... VOC\u1EBE SOBREVIVEU!"
+  - UHHHHHHHHH
+  - "N\xC3O ESTAVA IMAGINANDO QUE VOC\xCA CONSEGUIRIA VOLTAR ..."
+  - "DE QUALQUER FORMA, AQUI EST\xC1 A BONIFICA\xC7\xC3O QUE TE PROMETI"
+  - "[1500.00 BRL adicionados \xE0 sua conta]"
+  DialogoTerminou:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5064506115981630230}
+        m_TargetAssemblyTypeName: PlayerDataEvents, Assembly-CSharp
+        m_MethodName: AddToCurrentBalance
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1500
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1577553482252253524}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5064506115981630230
 MonoBehaviour:
   m_ObjectHideFlags: 0
