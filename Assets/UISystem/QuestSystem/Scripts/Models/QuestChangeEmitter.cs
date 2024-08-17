@@ -6,5 +6,5 @@ public class QuestChangeEmitter : MonoBehaviour
 {
     [SerializeField] GameEvent OnQuestChanged;
     [SerializeField] string NewObjective;
-    public void ChangeQuest(Component component, object data) => OnQuestChanged.Raise(this, NewObjective);
+    public void ChangeQuest() => OnQuestChanged.Raise(this, NewObjective);
 }

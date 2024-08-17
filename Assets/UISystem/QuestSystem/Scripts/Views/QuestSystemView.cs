@@ -8,6 +8,7 @@ namespace UISystem
     public class QuestSystemView : CustomUIComponent
     {
         [SerializeField] Text _otherObjectives;
+        [SerializeField] Text mainObjective;
 
         private List<string> _objectives = new List<string>();
 
@@ -22,6 +23,7 @@ namespace UISystem
         {
             string formattedObjective = $"-{objective}.\n";
             _objectives.Add(formattedObjective);
+            mainObjective.SetText(objective);
             UpdateGraphics();
         }
 

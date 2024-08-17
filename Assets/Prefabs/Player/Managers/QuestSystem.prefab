@@ -542,6 +542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OverwriteTheme: {fileID: 0}
   _otherObjectives: {fileID: 5417759674135603906}
+  mainObjective: {fileID: 6205811036125567816}
 --- !u!114 &5195500684336961227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,6 +556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questSystemView: {fileID: 8641404045638559075}
+  initialObjective: 
 --- !u!114 &8723836200886309048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -867,60 +869,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6925585474546381803, guid: f09a3fafeacfca049b3d9eaa7df8cc4f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8072508933801776469}
-    - targetCorrespondingSourceObject: {fileID: 6925585474546381803, guid: f09a3fafeacfca049b3d9eaa7df8cc4f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5837915332682364853}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f09a3fafeacfca049b3d9eaa7df8cc4f, type: 3}
---- !u!1 &1864066125378757009 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6925585474546381803, guid: f09a3fafeacfca049b3d9eaa7df8cc4f, type: 3}
-  m_PrefabInstance: {fileID: 8773822450677518970}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8072508933801776469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1864066125378757009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01abddd91c9d4ca4a9e32d9a91661722, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textView: {fileID: 6205811036125567816}
---- !u!114 &5837915332682364853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1864066125378757009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: c105409e0c34a0f1bbe44546036bc6ca, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8072508933801776469}
-        m_TargetAssemblyTypeName: UISystem.TextViewModel, Assembly-CSharp
-        m_MethodName: OnValueChanged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!224 &6054127511791775688 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3298453438597152178, guid: f09a3fafeacfca049b3d9eaa7df8cc4f, type: 3}
@@ -931,7 +881,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3449081430889302322, guid: f09a3fafeacfca049b3d9eaa7df8cc4f, type: 3}
   m_PrefabInstance: {fileID: 8773822450677518970}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1864066125378757009}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4901cbdf38278047b4b3fa6e9f20a2a, type: 3}
