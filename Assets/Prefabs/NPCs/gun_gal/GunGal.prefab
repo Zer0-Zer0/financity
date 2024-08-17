@@ -800,6 +800,7 @@ GameObject:
   - component: {fileID: 2482352791359865060}
   - component: {fileID: 9223244127067752555}
   - component: {fileID: 2041077483393102751}
+  - component: {fileID: 1922778792594967122}
   m_Layer: 0
   m_Name: GunGal
   m_TagString: Untagged
@@ -880,7 +881,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _mensagens:
-  - Texto: "Ol\xE1 novate, seja bem-vinde por aqui!"
+  - Texto: "Sauda\xE7\xF5es, sinta-se \xE0 vontade por aqui!"
     FraseAcabou:
       m_PersistentCalls:
         m_Calls: []
@@ -901,7 +902,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   - Texto: "De qualquer forma, vou desbloquear esse seu rifle para voc\xEA, te darei
-      um desconto dessa vez por voc\xEA ser nove por aqui."
+      um desconto dessa vez por voc\xEA ser verde."
     FraseAcabou:
       m_PersistentCalls:
         m_Calls:
@@ -929,15 +930,15 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: FinanceManager, Assembly-CSharp
-          m_MethodName: AddPurchase
+        - m_Target: {fileID: 1922778792594967122}
+          m_TargetAssemblyTypeName: PlayerDataEvents, Assembly-CSharp
+          m_MethodName: RemoveFromCurrentBalance
           m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 499
+            m_FloatArgument: 450
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
@@ -990,6 +991,42 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1922778792594967122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2970341772083075678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c102af5669f6c88778a684c46d542fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentAmmoChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  TotalAmmoChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  CurrentBalanceChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  FirstTimeChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  CurrentHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  MissionOneCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  IfIsFirstTime:
+    m_PersistentCalls:
+      m_Calls: []
+  IfNotFirstTime:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3206293000515862310
 GameObject:
   m_ObjectHideFlags: 0
@@ -2643,11 +2680,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8382462645567086350, guid: a8120bf140500067ca19c2506426774b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0007766853
+      value: -0.0007766852
       objectReference: {fileID: 0}
     - target: {fileID: -8382462645567086350, guid: a8120bf140500067ca19c2506426774b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.03414444
+      value: -0.034144435
       objectReference: {fileID: 0}
     - target: {fileID: -8382462645567086350, guid: a8120bf140500067ca19c2506426774b, type: 3}
       propertyPath: m_LocalRotation.w
