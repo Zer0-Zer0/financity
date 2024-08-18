@@ -58,6 +58,7 @@ public class PlayerDataEvents : MonoBehaviour
         playerData.CurrentAmmoChanged.AddListener(OnCurrentAmmoChanged);
         playerData.TotalAmmoChanged.AddListener(OnTotalAmmoChanged);
         playerData.CurrentBalanceChanged.AddListener(OnCurrentBalanceChanged);
+        playerData.CurrentHealthChanged.AddListener(OnCurrentHealthChanged);
         playerData.FirstTimeChanged.AddListener(OnFirstTimeChanged);
         playerData.MissionOneCompleted.AddListener(OnMissionOneCompleted);
     }
