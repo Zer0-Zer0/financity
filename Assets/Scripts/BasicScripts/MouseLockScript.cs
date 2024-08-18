@@ -66,4 +66,7 @@ public class MouseLockScript : MonoBehaviour
         else
             Mouse.Hide();
     }
+
+    public void ShowMouse() => Mouse.Show();
+    public void HideMouse() => Mouse.Hide();
 }
