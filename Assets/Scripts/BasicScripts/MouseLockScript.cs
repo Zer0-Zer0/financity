@@ -34,14 +34,13 @@ public class MouseLockScript : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    private void Start() => MLSDebug();
+
+    private void MLSDebug()
     {
-        Mouse.Hide();
         string objectName = gameObject.name;
         Debug.Log($"The {objectName} has MouseLockScript");
     }
-
-    private void OnEnable() => Mouse.Hide();
 
     private void Update() => InputLogic();
 
@@ -68,5 +67,15 @@ public class MouseLockScript : MonoBehaviour
     }
 
     public void ShowMouse() => Mouse.Show();
-    public void HideMouse() => Mouse.Hide();
+    public void ShowMouseTabbed()
+    {
+        Mouse.Show();
+        tabbedIn = true;
+    }
+
+    public void HideMouse()
+    {
+        Mouse.Hide();
+        tabbedIn = false;
+    }
 }
