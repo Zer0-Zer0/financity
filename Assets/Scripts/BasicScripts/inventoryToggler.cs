@@ -11,7 +11,7 @@ public class inventoryToggler : MonoBehaviour
     [SerializeField]
     GameObject Inventory;
 
-    bool canStoreAppear = false;
+    public static bool canStoreAppear = false;
 
     void Start()
     {

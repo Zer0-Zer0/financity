@@ -1,49 +1,69 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class MouseLockScript : MonoBehaviour
+public static class Mouse
 {
-    [SerializeField]
-    private Texture2D Empty;
-
-    private bool tabbedIn = false;
-
-    private void Start() => HideCursor();
-
-    private void OnEnable() => HideCursor();
-
-    private void Update() => InputLogic();
-
-    private void HideCursor()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    private void ShowCursor()
+    public static void Show()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
+    public static void Hide()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+}
+
+public class MouseLockScript : MonoBehaviour
+{
+    public static MouseLockScript Instance { get; private set; }
+
+    private bool tabbedIn = false;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Debug.LogWarning("WARNING: Two MouseLockScripts in this scene");
+            return;
+        }
+
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        Mouse.Hide();
+        string objectName = gameObject.name;
+        Debug.Log($"The {objectName} has MouseLockScript");
+    }
+
+    private void OnEnable() => Mouse.Hide();
+
+    private void Update() => InputLogic();
+
     private void InputLogic()
     {
         bool _hasClicked = Input.GetKeyDown(KeyCode.Mouse0);
         bool _hasPressedTab = Input.GetKeyDown(KeyCode.Tab);
+        bool _hasPressedX = Input.GetKeyDown(KeyCode.X);
+        bool _hasOpenedStore = _hasPressedX && inventoryToggler.canStoreAppear;
+
         if (_hasClicked && !tabbedIn)
-            HideCursor();
-        else if (_hasPressedTab)
-            InventoryTabLogic();
+            Mouse.Hide();
+        else if (_hasPressedTab || _hasOpenedStore)
+            TabLogic();
     }
 
-    private void InventoryTabLogic()
+    private void TabLogic()
     {
         tabbedIn = !tabbedIn;
         if (tabbedIn)
-            ShowCursor();
+            Mouse.Show();
         else
-            HideCursor();
+            Mouse.Hide();
     }
 }
