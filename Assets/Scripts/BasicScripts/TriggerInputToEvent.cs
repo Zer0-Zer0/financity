@@ -13,20 +13,20 @@ public class TriggerInputToEvent : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(ButtonToPress) && _isPlayerInRange)
+        if (Input.GetKeyUp(ButtonToPress) && _isPlayerInRange)
         {
             EventToInvoke?.Invoke();
         }
     }
 
-/*    private void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             PlayerInTrigger?.Invoke();
             _isPlayerInRange = true;
         }
-    }*/
+    }
 
     private void OnTriggerEnter(Collider other)
     {

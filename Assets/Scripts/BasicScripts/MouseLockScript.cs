@@ -46,14 +46,16 @@ public class MouseLockScript : MonoBehaviour
 
     private void InputLogic()
     {
-        bool _hasClicked = Input.GetKeyDown(KeyCode.Mouse0);
-        bool _hasPressedTab = Input.GetKeyDown(KeyCode.Tab);
-        bool _hasPressedX = Input.GetKeyDown(KeyCode.X);
+        bool _hasClicked = Input.GetKeyUp(KeyCode.Mouse0);
+        bool _hasPressedTab = Input.GetKeyUp(KeyCode.Tab);
+        bool _hasPressedX = Input.GetKeyUp(KeyCode.X);
         bool _hasOpenedStore = _hasPressedX && inventoryToggler.canStoreAppear;
 
         if (_hasClicked && !tabbedIn)
             Mouse.Hide();
-        else if (_hasPressedTab || _hasOpenedStore)
+        else if (_hasOpenedStore)
+            TabLogic();
+        else if (_hasPressedTab)
             TabLogic();
     }
 

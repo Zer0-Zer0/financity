@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 1678778686715300089}
   - component: {fileID: 1084839463705160209}
   - component: {fileID: 7926511145975594141}
+  - component: {fileID: 8731304787910568255}
   m_Layer: 0
   m_Name: StoreOpener
   m_TagString: Untagged
@@ -333,6 +334,42 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8731304787910568255}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7203706335497325509}
+        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
+        m_MethodName: ChangeQuest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7926511145975594141}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   PlayerInTrigger:
     m_PersistentCalls:
       m_Calls:
@@ -348,9 +385,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: inventoryToggler, Assembly-CSharp
-        m_MethodName: ChangeStoreCanAppear
+      - m_Target: {fileID: 7053541682345568376}
+        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
+        m_MethodName: ChangeQuest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -375,9 +412,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: inventoryToggler, Assembly-CSharp
-        m_MethodName: ChangeStoreCanAppear
+      - m_Target: {fileID: 2265823043609854281}
+        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
+        m_MethodName: ChangeQuest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -387,6 +424,88 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8731304787910568255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163657234312957211}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 353ee85bee157fb7fa84a34923f3a763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonToPress: 120
+  EventToInvoke:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7926511145975594141}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1899103626453385483}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7889008054237463636}
+        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
+        m_MethodName: ChangeQuest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 8731304787910568255}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  PlayerInTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7053541682345568376}
+        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
+        m_MethodName: ChangeQuest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  PlayerOutOfTrigger:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1295756866785301296
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,6 +920,8 @@ GameObject:
   - component: {fileID: 9223244127067752555}
   - component: {fileID: 2041077483393102751}
   - component: {fileID: 1922778792594967122}
+  - component: {fileID: 2827183526541059958}
+  - component: {fileID: 758176356958891140}
   m_Layer: 0
   m_Name: GunGal
   m_TagString: Untagged
@@ -825,6 +946,8 @@ Transform:
   - {fileID: 346155106214630448}
   - {fileID: 6481913195332796293}
   - {fileID: 2736411536335120145}
+  - {fileID: 8003019864198456809}
+  - {fileID: 9088884459605674720}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 95.609, z: 0}
 --- !u!114 &9223244127067752555
@@ -856,9 +979,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InvokableGenericEvent, Assembly-CSharp
-        m_MethodName: InvokeEvent
+      - m_Target: {fileID: 758176356958891140}
+        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
+        m_MethodName: ChangeQuest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -880,7 +1003,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _mensagens: []
   Mensagens:
   - "Sauda\xE7\xF5es, sinta-se \xE0 vontade por aqui!"
   - "Essa arma na sua m\xE3o est\xE1 digitalmente bloqueada, voc\xEA n\xE3o vai conseguir
@@ -920,9 +1042,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InvokableGenericEvent, Assembly-CSharp
-        m_MethodName: InvokeEvent
+      - m_Target: {fileID: 2827183526541059958}
+        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
+        m_MethodName: ChangeQuest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1013,6 +1135,34 @@ MonoBehaviour:
   IfNotFirstTime:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2827183526541059958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2970341772083075678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b345375eedaae0f999cf881be0327bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnQuestChanged: {fileID: 11400000, guid: e417c2b8d7c1b7f5488d253a63db5e3f, type: 2}
+  NewObjective: 
+--- !u!114 &758176356958891140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2970341772083075678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b345375eedaae0f999cf881be0327bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnQuestChanged: {fileID: 11400000, guid: 9845d8972c5ed756cae9c5a6d7bdd537, type: 2}
+  NewObjective: 
 --- !u!1 &3206293000515862310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,6 +2033,67 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7697798083558258202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8003019864198456809}
+  - component: {fileID: 7889008054237463636}
+  - component: {fileID: 7203706335497325509}
+  m_Layer: 0
+  m_Name: PlayerStopper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8003019864198456809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7697798083558258202}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2482352791359865060}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7889008054237463636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7697798083558258202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b345375eedaae0f999cf881be0327bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnQuestChanged: {fileID: 11400000, guid: e417c2b8d7c1b7f5488d253a63db5e3f, type: 2}
+  NewObjective: 
+--- !u!114 &7203706335497325509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7697798083558258202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b345375eedaae0f999cf881be0327bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnQuestChanged: {fileID: 11400000, guid: 9845d8972c5ed756cae9c5a6d7bdd537, type: 2}
+  NewObjective: 
 --- !u!1 &7772394875321425322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2568,6 +2779,67 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &9212582154932401827
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9088884459605674720}
+  - component: {fileID: 7053541682345568376}
+  - component: {fileID: 2265823043609854281}
+  m_Layer: 0
+  m_Name: StoreShower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9088884459605674720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9212582154932401827}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2482352791359865060}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7053541682345568376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9212582154932401827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b345375eedaae0f999cf881be0327bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnQuestChanged: {fileID: 11400000, guid: c190ed705bfa667e69fcc1c18c0d8a0d, type: 2}
+  NewObjective: 
+--- !u!114 &2265823043609854281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9212582154932401827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b345375eedaae0f999cf881be0327bfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnQuestChanged: {fileID: 11400000, guid: 30cc5d9e83be1e6e09b43c3046697281, type: 2}
+  NewObjective: 
 --- !u!1001 &2736411536335120143
 PrefabInstance:
   m_ObjectHideFlags: 0

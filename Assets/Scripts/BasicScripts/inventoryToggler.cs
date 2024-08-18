@@ -35,4 +35,7 @@ public class inventoryToggler : MonoBehaviour
     private void ChangeStoreVisibility() => Store.SetActive(!Store.activeSelf);
 
     public void ChangeStoreCanAppear() => canStoreAppear = !canStoreAppear;
+
+    public void StoreCanAppear() => canStoreAppear = true;
+    public void StoreCanNotAppear() => canStoreAppear = false;
 }

@@ -460,60 +460,6 @@ MonoBehaviour:
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
   eventHandlerComponentsAdded: 1
---- !u!1 &373960820026341427
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5931915602193564237}
-  - component: {fileID: 4896102081458396746}
-  m_Layer: 0
-  m_Name: PlayMakerGUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5931915602193564237
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373960820026341427}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.959, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5005356687380992144}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4896102081458396746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 373960820026341427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -73581967, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  previewOnGUI: 1
-  enableGUILayout: 1
-  drawStateLabels: 1
-  enableStateLabelsInBuilds: 0
-  GUITextureStateLabels: 0
-  GUITextStateLabels: 0
-  filterLabelsWithDistance: 0
-  maxLabelDistance: 10
-  controlMouseCursor: 0
-  labelScale: 1
 --- !u!1 &481329530688261856
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,6 +549,8 @@ GameObject:
   - component: {fileID: 5879471496410592044}
   - component: {fileID: 2371393672227323825}
   - component: {fileID: 1036227312134559493}
+  - component: {fileID: 3023838884810416910}
+  - component: {fileID: 8573623120766200407}
   m_Layer: 5
   m_Name: InventoryCanvas
   m_TagString: Untagged
@@ -710,6 +658,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Store: {fileID: 6203610391363464544}
   Inventory: {fileID: 1100463824318690617}
+--- !u!114 &3023838884810416910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484833099992313341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: c190ed705bfa667e69fcc1c18c0d8a0d, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1036227312134559493}
+        m_TargetAssemblyTypeName: inventoryToggler, Assembly-CSharp
+        m_MethodName: StoreCanAppear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8573623120766200407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484833099992313341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 30cc5d9e83be1e6e09b43c3046697281, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1036227312134559493}
+        m_TargetAssemblyTypeName: inventoryToggler, Assembly-CSharp
+        m_MethodName: StoreCanNotAppear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &860568824805380351
 GameObject:
   m_ObjectHideFlags: 0
@@ -2230,7 +2234,6 @@ Transform:
   - {fileID: 5927613463573566130}
   - {fileID: 3366451929732182423}
   - {fileID: 3347166162380487676}
-  - {fileID: 5931915602193564237}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5824193732774258088
@@ -2782,6 +2785,10 @@ PrefabInstance:
     - target: {fileID: 1343917187953040919, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5195500684336961227, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
+      propertyPath: initialObjective
+      value: Converse com os habitantes
       objectReference: {fileID: 0}
     - target: {fileID: 8918815782374043074, guid: 83b890b8bf8d7397485b7dc20e178d22, type: 3}
       propertyPath: m_Name
