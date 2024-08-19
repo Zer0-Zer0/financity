@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -10,12 +11,14 @@ public class DungeonPart : MonoBehaviour
     [SerializeField]
     private Collider blockSize; // Trigger collider encapsulating the entire DungeonPart
 
-    private DungeonPart[] _adjacentBlocks; // References to all connected dungeon parts
+    private List<DungeonPart> _adjacentBlocks; // References to all connected dungeon parts
     private DungeonPart _parent; // Parent of this DungeonPart, may be null
     private GameObject _exit; // Exit of this DungeonPart, may be null
+    private int _spawnCount = 0; // Counter to limit spawning
 
     public DungeonPart Parent { get => _parent; set => _parent = value; }
     public GameObject Exit { get => _exit; set => _exit = value; }
+    public int SpawnCount { get => _spawnCount; set => _spawnCount = value; }
 
     private void OnEnable()
     {
@@ -25,7 +28,6 @@ public class DungeonPart : MonoBehaviour
 
     private void CheckForCollisions()
     {
-        // Check if this DungeonPart is colliding with other DungeonParts
         Collider[] colliders = Physics.OverlapBox(blockSize.bounds.center, blockSize.bounds.extents, Quaternion.identity);
         foreach (Collider collider in colliders)
         {
@@ -38,42 +40,38 @@ public class DungeonPart : MonoBehaviour
                 return;
             }
         }
+        Debug.Log("No collisions detected.");
     }
 
     private void CheckExitsAndSpawn()
     {
         foreach (GameObject exit in exits)
         {
-            // Check if the exit has an adjacent block connected
-            bool hasAdjacentBlock = false;
             if (_adjacentBlocks != null)
-            {
                 foreach (DungeonPart adjacent in _adjacentBlocks)
-                {
                     if (adjacent != null && adjacent.Exit == exit)
-                    {
-                        hasAdjacentBlock = true;
-                        break;
-                    }
-                }
-            }
+                        continue;
 
-            if (!hasAdjacentBlock)
-            {
-                // Instantiate a random DungeonPart from the SpawnableBlocks list
-                SpawnRandomDungeonPart(exit);
-            }
+            SpawnRandomDungeonPart(exit);
         }
     }
-
     public void SpawnRandomDungeonPart(GameObject place)
     {
+        if (SpawnCount >= 10)
+        {
+            Debug.LogWarning("Spawn limit reached.");
+            return;
+        }
+
         if (spawnableBlocks != null && spawnableBlocks.dungeonParts.Length > 0)
         {
             int randomIndex = Random.Range(0, spawnableBlocks.dungeonParts.Length);
-            DungeonPart newPart = Instantiate(spawnableBlocks.dungeonParts[randomIndex], place.transform.position, Quaternion.identity);
+            DungeonPart newPart = Instantiate(spawnableBlocks.dungeonParts[randomIndex], place.transform.position, place.transform.rotation);
             newPart.Parent = this; // Set the parent of the new DungeonPart
             newPart.Exit = place; // Set the exit of the new DungeonPart
+            newPart.SpawnCount = _spawnCount + 1;
+            if (newPart != null)
+                _adjacentBlocks.Add(newPart);
             Debug.Log($"Spawned new DungeonPart: {newPart.name} at {place}");
         }
         else
