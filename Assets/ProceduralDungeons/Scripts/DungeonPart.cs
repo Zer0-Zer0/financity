@@ -6,19 +6,18 @@ public class DungeonPart : MonoBehaviour
     [SerializeField]
     private GameObject[] exits; // References to all the exits of the dungeon part
     [SerializeField]
-    private DungeonPart[] adjacentBlocks; // References to all connected dungeon parts
-    [SerializeField]
     private SpawnableBlocks spawnableBlocks; // Scriptable object containing spawnable dungeon parts
     [SerializeField]
     private Collider blockSize; // Trigger collider encapsulating the entire DungeonPart
 
+    private DungeonPart[] _adjacentBlocks; // References to all connected dungeon parts
     private DungeonPart _parent; // Parent of this DungeonPart, may be null
     private GameObject _exit; // Exit of this DungeonPart, may be null
 
     public DungeonPart Parent { get => _parent; set => _parent = value; }
     public GameObject Exit { get => _exit; set => _exit = value; }
 
-    private void Awake()
+    private void OnEnable()
     {
         CheckForCollisions();
         CheckExitsAndSpawn();
@@ -47,12 +46,15 @@ public class DungeonPart : MonoBehaviour
         {
             // Check if the exit has an adjacent block connected
             bool hasAdjacentBlock = false;
-            foreach (DungeonPart adjacent in adjacentBlocks)
+            if (_adjacentBlocks != null)
             {
-                if (adjacent != null && adjacent.gameObject == exit)
+                foreach (DungeonPart adjacent in _adjacentBlocks)
                 {
-                    hasAdjacentBlock = true;
-                    break;
+                    if (adjacent != null && adjacent.Exit == exit)
+                    {
+                        hasAdjacentBlock = true;
+                        break;
+                    }
                 }
             }
 
