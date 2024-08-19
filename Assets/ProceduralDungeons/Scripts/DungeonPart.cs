@@ -21,22 +21,30 @@ public class DungeonPart : MonoBehaviour
     public GameObject Exit { get => _exit; set => _exit = value; }
     public int SpawnCount { get => _spawnCount; set => _spawnCount = value; }
 
+    private static int index = 0;
+
     private void OnEnable()
     {
         CheckForCollisions();
         CheckExitsAndSpawn();
+        PutIndexOnName();
+    }
+
+    private void PutIndexOnName(){
+        gameObject.name = $"{index} - {gameObject.name}";
+        index++;
     }
 
     private void CheckForCollisions()
     {
         Collider[] colliders = Physics.OverlapBox(blockSize.bounds.center, blockSize.bounds.extents, Quaternion.identity);
-        Debug.Log($"Detected {colliders.Length} colliders.");
+        Debug.Log($"{gameObject.name}: Detected {colliders.Length} colliders.");
         foreach (Collider collider in colliders)
         {
             DungeonPart otherPart = collider.GetComponent<DungeonPart>();
             if (otherPart != null && otherPart != this)
             {
-                Debug.LogWarning($"Collision detected with {otherPart.name}. Initiating destruction of this DungeonPart.");
+                Debug.LogWarning($"{gameObject.name}: Collision detected with {otherPart.name}. Initiating destruction of this DungeonPart.");
                 StartCoroutine(DestroyDungeonPart());
                 return;
             }
@@ -86,7 +94,7 @@ public class DungeonPart : MonoBehaviour
     {
         if (Parent != null)
             yield return Parent.SpawnRandomDungeonPart(Exit); // Spawn a new part in the parent
-        Destroy(this); // Destroy this DungeonPart
+        Destroy(gameObject); // Destroy this DungeonPart
     }
 }
 
