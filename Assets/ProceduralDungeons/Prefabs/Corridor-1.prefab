@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4230270659515170020}
   - component: {fileID: 7482761323502213195}
+  - component: {fileID: 6678481507267689810}
   m_Layer: 0
   m_Name: Corridor-1
   m_TagString: Untagged
@@ -49,7 +50,28 @@ MonoBehaviour:
   exits:
   - {fileID: 6067080301465883648}
   spawnableBlocks: {fileID: 11400000, guid: ffe68598ad1009a64a72c68a576403d0, type: 2}
-  blockSize: {fileID: 3759339561712735617}
+  blockSize: {fileID: 6678481507267689810}
+--- !u!65 &6678481507267689810
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4086009393693799268}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.99, y: 2.99, z: 2.99}
+  m_Center: {x: 0, y: 0, z: 1.5}
 --- !u!1 &6067080301465883648
 GameObject:
   m_ObjectHideFlags: 0

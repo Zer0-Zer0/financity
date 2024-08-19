@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7705941803109211927}
   - component: {fileID: 7328724903414212686}
+  - component: {fileID: 7393616922857321115}
   m_Layer: 0
   m_Name: Corridor-Cross
   m_TagString: Untagged
@@ -221,7 +222,28 @@ MonoBehaviour:
   - {fileID: 5046735777898082906}
   - {fileID: 7268920205372114638}
   spawnableBlocks: {fileID: 11400000, guid: ffe68598ad1009a64a72c68a576403d0, type: 2}
-  blockSize: {fileID: 6003165794948922669}
+  blockSize: {fileID: 7393616922857321115}
+--- !u!65 &7393616922857321115
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5348788948179316165}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 8.99, y: 2.99, z: 8.99}
+  m_Center: {x: 0, y: 0, z: 4.5}
 --- !u!1 &7268920205372114638
 GameObject:
   m_ObjectHideFlags: 0

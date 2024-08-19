@@ -30,6 +30,7 @@ public class DungeonPart : MonoBehaviour
     private void CheckForCollisions()
     {
         Collider[] colliders = Physics.OverlapBox(blockSize.bounds.center, blockSize.bounds.extents, Quaternion.identity);
+        Debug.Log($"Detected {colliders.Length} colliders.");
         foreach (Collider collider in colliders)
         {
             DungeonPart otherPart = collider.GetComponent<DungeonPart>();
@@ -83,9 +84,9 @@ public class DungeonPart : MonoBehaviour
 
     private IEnumerator DestroyDungeonPart()
     {
-        yield return null;
-        StartCoroutine(Parent?.SpawnRandomDungeonPart(Exit));
-        Destroy(gameObject); // Destroy this DungeonPart
+        if (Parent != null)
+            yield return Parent.SpawnRandomDungeonPart(Exit); // Spawn a new part in the parent
+        Destroy(this); // Destroy this DungeonPart
     }
 }
 
