@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class DungeonPart : MonoBehaviour
     [SerializeField]
     private Collider blockSize; // Trigger collider encapsulating the entire DungeonPart
 
-    private List<DungeonPart> _adjacentBlocks; // References to all connected dungeon parts
+    private List<DungeonPart> _adjacentBlocks = new List<DungeonPart>(); // References to all connected dungeon parts
     private DungeonPart _parent; // Parent of this DungeonPart, may be null
     private GameObject _exit; // Exit of this DungeonPart, may be null
     private int _spawnCount = 0; // Counter to limit spawning
@@ -34,9 +35,8 @@ public class DungeonPart : MonoBehaviour
             DungeonPart otherPart = collider.GetComponent<DungeonPart>();
             if (otherPart != null && otherPart != this)
             {
-                Debug.LogWarning($"Collision detected with {otherPart.name}. Destroying this DungeonPart.");
-                Destroy(gameObject); // Destroy this DungeonPart
-                Parent?.SpawnRandomDungeonPart(Exit); // Notify parent to create another part
+                Debug.LogWarning($"Collision detected with {otherPart.name}. Initiating destruction of this DungeonPart.");
+                StartCoroutine(DestroyDungeonPart());
                 return;
             }
         }
@@ -52,32 +52,40 @@ public class DungeonPart : MonoBehaviour
                     if (adjacent != null && adjacent.Exit == exit)
                         continue;
 
-            SpawnRandomDungeonPart(exit);
+            StartCoroutine(SpawnRandomDungeonPart(exit));
         }
     }
-    public void SpawnRandomDungeonPart(GameObject place)
+
+    public IEnumerator SpawnRandomDungeonPart(GameObject place)
     {
+        yield return null;
         if (SpawnCount >= 10)
         {
             Debug.LogWarning("Spawn limit reached.");
-            return;
-        }
-
-        if (spawnableBlocks != null && spawnableBlocks.dungeonParts.Length > 0)
-        {
-            int randomIndex = Random.Range(0, spawnableBlocks.dungeonParts.Length);
-            DungeonPart newPart = Instantiate(spawnableBlocks.dungeonParts[randomIndex], place.transform.position, place.transform.rotation);
-            newPart.Parent = this; // Set the parent of the new DungeonPart
-            newPart.Exit = place; // Set the exit of the new DungeonPart
-            newPart.SpawnCount = _spawnCount + 1;
-            if (newPart != null)
-                _adjacentBlocks.Add(newPart);
-            Debug.Log($"Spawned new DungeonPart: {newPart.name} at {place}");
         }
         else
         {
-            Debug.LogWarning("No spawnable dungeon parts available.");
+            if (spawnableBlocks != null && spawnableBlocks.dungeonParts.Length > 0)
+            {
+                int randomIndex = Random.Range(0, spawnableBlocks.dungeonParts.Length);
+                DungeonPart newPart = Instantiate(spawnableBlocks.dungeonParts[randomIndex], place.transform.position, place.transform.rotation);
+                newPart.Parent = this; // Set the parent of the new DungeonPart
+                newPart.Exit = place; // Set the exit of the new DungeonPart
+                newPart.SpawnCount = _spawnCount + 1;
+                if (newPart != null)
+                    _adjacentBlocks.Add(newPart);
+                Debug.Log($"Spawned new DungeonPart: {newPart.name} at {place}");
+            }
+            else
+                Debug.LogWarning("No spawnable dungeon parts available.");
         }
+    }
+
+    private IEnumerator DestroyDungeonPart()
+    {
+        yield return null;
+        StartCoroutine(Parent?.SpawnRandomDungeonPart(Exit));
+        Destroy(gameObject); // Destroy this DungeonPart
     }
 }
 
