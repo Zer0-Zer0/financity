@@ -6,54 +6,47 @@ using System.Linq;
 [System.Serializable]
 public class DungeonPart : MonoBehaviour
 {
-    [SerializeField] GameObject[] exits; // References to all the exits of the dungeon part
-    [SerializeField] SpawnableBlocks spawnableBlocks; // Scriptable object containing spawnable dungeon parts
-    [SerializeField] Collider blockSize; // Trigger collider encapsulating the entire DungeonPart
-    [SerializeField] bool _isRoot = false;
+    [SerializeField] private GameObject[] exits; // References to all the exits of the dungeon part
+    [SerializeField] private SpawnableBlocks spawnableBlocks; // Scriptable object containing spawnable dungeon parts
+    [SerializeField] private Collider blockSize; // Trigger collider encapsulating the entire DungeonPart
+    [SerializeField] private bool isRoot = false;
 
-    private List<DungeonPart> _adjacentBlocks = new List<DungeonPart>(); // References to all connected dungeon parts
-    private DungeonPart _parent; // Parent of this DungeonPart, may be null
-    private GameObject _exit; // Exit of this DungeonPart, may be null
-    private int _spawnCount = 0; // Counter to limit spawning
-    private static int _index = 0;
-    private int _hardIndex; // The location of the object in relation to the scriptable object
+    private List<DungeonPart> adjacentBlocks = new List<DungeonPart>(); // References to all connected dungeon parts
+    private DungeonPart parent; // Parent of this DungeonPart, may be null
+    private GameObject exit; // Exit of this DungeonPart, may be null
+    private int spawnCount = 0; // Counter to limit spawning
+    private static int index = 0;
+    private int hardIndex; // The location of the object in relation to the scriptable object
+    private List<int> triedIndexes = new List<int>();
 
-    public DungeonPart Parent
-    {
-        get => _parent;
-        set
-        {
-            _parent = value;
-            Init();
-        }
-    }
-    public GameObject Exit { get => _exit; set => _exit = value; }
-    public int SpawnCount { get => _spawnCount; set => _spawnCount = value; }
-    public int HardIndex { get => _hardIndex; set => _hardIndex = value; }
+    public DungeonPart Parent { get => parent; set => parent = value; }
+    public GameObject Exit { get => exit; set => exit = value; }
+    public int SpawnCount { get => spawnCount; set => spawnCount = value; }
+    public int HardIndex { get => hardIndex; set => hardIndex = value; }
 
     private void OnEnable()
     {
-        if (_isRoot)
-            Init();
+        if (isRoot)
+            Initialize();
     }
 
-    public void Init()
+    private void Initialize()
     {
-        PutIndexOnName();
-        CheckParent();
+        SetIndexOnName();
+        ValidateParent();
         CheckForCollisions();
         CheckExitsAndSpawn();
     }
 
-    private void PutIndexOnName()
+    private void SetIndexOnName()
     {
-        gameObject.name = $"{_index} - {gameObject.name}";
-        _index++;
+        gameObject.name = $"{index} - {gameObject.name}";
+        index++;
     }
 
-    private void CheckParent()
+    private void ValidateParent()
     {
-        if (Parent == null && !_isRoot)
+        if (Parent == null && !isRoot)
         {
             Debug.Log($"{gameObject.name}: has no parent, destroying");
             StartCoroutine(DestroyDungeonPart());
@@ -62,8 +55,8 @@ public class DungeonPart : MonoBehaviour
 
     private void CheckForCollisions()
     {
-        if(blockSize == null)
-            return;
+        if (blockSize == null) return;
+
         Collider[] colliders = Physics.OverlapBox(blockSize.bounds.center, blockSize.bounds.extents, Quaternion.identity);
         Debug.Log($"{gameObject.name}: Detected {colliders.Length} colliders.");
 
@@ -90,25 +83,26 @@ public class DungeonPart : MonoBehaviour
 
     private bool IsExitAlreadyConnected(GameObject exit)
     {
-        return _adjacentBlocks.Any(adjacent => adjacent != null && adjacent.Exit == exit);
+        return adjacentBlocks.Any(adjacent => adjacent != null && adjacent.Exit == exit);
     }
 
-    private List<int> _triedIndexes = new List<int>();
     public IEnumerator SpawnRandomDungeonPart(GameObject place)
     {
         yield return null;
 
         if (SpawnCount >= 10)
-            SpawnLimitReached(place);
-        else if (spawnableBlocks != null && spawnableBlocks.dungeonParts.Count > 0)
-            SpawnDungeonPart(place);
-        else
-            Debug.LogWarning("No spawnable dungeon parts available.");
-    }
-
-    private void SpawnLimitReached(GameObject place){
+        {
             SpawnWall(place);
             Debug.LogWarning("Spawn limit reached.");
+        }
+        else if (spawnableBlocks != null && spawnableBlocks.dungeonParts.Count > 0)
+        {
+            SpawnDungeonPart(place);
+        }
+        else
+        {
+            Debug.LogWarning("No spawnable dungeon parts available.");
+        }
     }
 
     private void SpawnWall(GameObject place)
@@ -125,7 +119,7 @@ public class DungeonPart : MonoBehaviour
             return;
         }
 
-        _triedIndexes.Add(HardIndex);
+        triedIndexes.Add(HardIndex);
         int randomIndex = GetRandomIndex();
 
         if (randomIndex == -1)
@@ -142,16 +136,14 @@ public class DungeonPart : MonoBehaviour
 
     private int GetRandomIndex()
     {
-        List<int> indexRange = Range(spawnableBlocks.dungeonParts);
-        bool containsAll = indexRange.TrueForAll(i => _triedIndexes.Contains(i));
-
-        if (containsAll) return -1; // Indicates all options have been tried
+        if (triedIndexes.Count >= spawnableBlocks.dungeonParts.Count)
+            return -1; // Indicates all options have been tried
 
         int randomIndex;
         do
         {
-            randomIndex = Random.Range(0, spawnableBlocks.dungeonParts.Count - 1);
-        } while (_triedIndexes.Contains(randomIndex));
+            randomIndex = Random.Range(0, spawnableBlocks.dungeonParts.Count);
+        } while (triedIndexes.Contains(randomIndex));
 
         return randomIndex;
     }
@@ -162,12 +154,13 @@ public class DungeonPart : MonoBehaviour
         newPart.transform.parent = this.transform;
         newPart.Exit = place; // Set the exit of the new DungeonPart
         newPart.HardIndex = randomIndex;
-        newPart.SpawnCount = _spawnCount + 1;
+        newPart.SpawnCount = spawnCount + 1;
+        newPart.Initialize();
 
         if (newPart != null)
         {
-            _adjacentBlocks.Add(newPart);
-            _triedIndexes.Clear();
+            adjacentBlocks.Add(newPart);
+            triedIndexes.Clear();
             Debug.Log($"Spawned new DungeonPart: {newPart.name} at {place}");
         }
     }
@@ -179,16 +172,11 @@ public class DungeonPart : MonoBehaviour
         Destroy(gameObject); // Destroy this DungeonPart
     }
 
-    private List<int> Range(List<DungeonPart> list)
-    {
-        return Enumerable.Range(0, list.Count).ToList();
-    }
-
     public override string ToString()
     {
         string parentName = Parent != null ? Parent.gameObject.name : "None";
         string exitsInfo = exits != null ? string.Join(", ", exits.Select(exit => exit.name)) : "No exits";
-        string adjacentCount = _adjacentBlocks.Count.ToString();
+        string adjacentCount = adjacentBlocks.Count.ToString();
 
         return $"DungeonPart: {gameObject.name}, Parent: {parentName}, Exits: [{exitsInfo}], Adjacent Count: {adjacentCount}, Spawn Count: {SpawnCount}, Hard Index: {HardIndex}";
     }
