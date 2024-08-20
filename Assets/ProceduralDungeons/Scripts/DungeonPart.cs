@@ -16,12 +16,13 @@ public class DungeonPart : MonoBehaviour
     private DungeonPart _parent; // Parent of this DungeonPart, may be null
     private GameObject _exit; // Exit of this DungeonPart, may be null
     private int _spawnCount = 0; // Counter to limit spawning
+    private static int _index = 0;
+    private int _hardIndex; //The location of the object in relation to the scriptable object
 
     public DungeonPart Parent { get => _parent; set => _parent = value; }
     public GameObject Exit { get => _exit; set => _exit = value; }
     public int SpawnCount { get => _spawnCount; set => _spawnCount = value; }
-
-    private static int index = 0;
+    public int HardIndex { get => _hardIndex; set => _hardIndex = value; }
 
     private void OnEnable()
     {
@@ -30,9 +31,10 @@ public class DungeonPart : MonoBehaviour
         PutIndexOnName();
     }
 
-    private void PutIndexOnName(){
-        gameObject.name = $"{index} - {gameObject.name}";
-        index++;
+    private void PutIndexOnName()
+    {
+        gameObject.name = $"{_index} - {gameObject.name}";
+        _index++;
     }
 
     private void CheckForCollisions()
@@ -65,29 +67,39 @@ public class DungeonPart : MonoBehaviour
         }
     }
 
+    private List<int> _triedIndexes = new List<int>();
     public IEnumerator SpawnRandomDungeonPart(GameObject place)
     {
         yield return null;
         if (SpawnCount >= 10)
         {
+            DungeonPart newPart = Instantiate(spawnableBlocks.wall, place.transform.position, place.transform.rotation);
+            newPart.Parent = this; // Set the parent of the new DungeonPart
+            newPart.Exit = place; // Set the exit of the new DungeonPart
             Debug.LogWarning("Spawn limit reached.");
         }
-        else
+        else if (spawnableBlocks != null && spawnableBlocks.dungeonParts.Length > 0)
         {
-            if (spawnableBlocks != null && spawnableBlocks.dungeonParts.Length > 0)
+            _triedIndexes.Add(HardIndex);
+            int randomIndex = HardIndex;
+            while (_triedIndexes.Contains(randomIndex))
+                randomIndex = Random.Range(0, spawnableBlocks.dungeonParts.Length);
+            DungeonPart newPart = Instantiate(spawnableBlocks.dungeonParts[randomIndex], place.transform.position, place.transform.rotation);
+            newPart.HardIndex = randomIndex;
+            newPart.Parent = this; // Set the parent of the new DungeonPart
+            newPart.Exit = place; // Set the exit of the new DungeonPart
+            newPart.SpawnCount = _spawnCount + 1;
+            if (newPart != null)
             {
-                int randomIndex = Random.Range(0, spawnableBlocks.dungeonParts.Length);
-                DungeonPart newPart = Instantiate(spawnableBlocks.dungeonParts[randomIndex], place.transform.position, place.transform.rotation);
-                newPart.Parent = this; // Set the parent of the new DungeonPart
-                newPart.Exit = place; // Set the exit of the new DungeonPart
-                newPart.SpawnCount = _spawnCount + 1;
-                if (newPart != null)
-                    _adjacentBlocks.Add(newPart);
+                _adjacentBlocks.Add(newPart);
+                _triedIndexes.Clear();
                 Debug.Log($"Spawned new DungeonPart: {newPart.name} at {place}");
             }
             else
-                Debug.LogWarning("No spawnable dungeon parts available.");
+                _triedIndexes.Add(randomIndex);
         }
+        else
+            Debug.LogWarning("No spawnable dungeon parts available.");
     }
 
     private IEnumerator DestroyDungeonPart()
@@ -103,4 +115,5 @@ public class DungeonPart : MonoBehaviour
 public class SpawnableBlocks : ScriptableObject
 {
     public DungeonPart[] dungeonParts; // Array of spawnable dungeon parts
+    public DungeonPart wall; //A wall to cap the ends
 }
