@@ -1,16 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using System.Linq;
 
 [System.Serializable]
 public class DungeonPart : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject[] exits; // References to all the exits of the dungeon part
-    [SerializeField]
-    private SpawnableBlocks spawnableBlocks; // Scriptable object containing spawnable dungeon parts
-    [SerializeField]
-    private Collider blockSize; // Trigger collider encapsulating the entire DungeonPart
+    [SerializeField] GameObject[] exits; // References to all the exits of the dungeon part
+    [SerializeField] SpawnableBlocks spawnableBlocks; // Scriptable object containing spawnable dungeon parts
+    [SerializeField] Collider blockSize; // Trigger collider encapsulating the entire DungeonPart
+    [SerializeField] bool _isRoot = false;
 
     private List<DungeonPart> _adjacentBlocks = new List<DungeonPart>(); // References to all connected dungeon parts
     private DungeonPart _parent; // Parent of this DungeonPart, may be null
@@ -19,12 +18,25 @@ public class DungeonPart : MonoBehaviour
     private static int _index = 0;
     private int _hardIndex; //The location of the object in relation to the scriptable object
 
-    public DungeonPart Parent { get => _parent; set => _parent = value; }
+    public DungeonPart Parent
+    {
+        get => _parent; set
+        {
+            _parent = value;
+            Init();
+        }
+    }
     public GameObject Exit { get => _exit; set => _exit = value; }
     public int SpawnCount { get => _spawnCount; set => _spawnCount = value; }
     public int HardIndex { get => _hardIndex; set => _hardIndex = value; }
 
     private void OnEnable()
+    {
+        if (_isRoot)
+            Init();
+    }
+
+    public void Init()
     {
         CheckForCollisions();
         CheckExitsAndSpawn();
@@ -44,7 +56,9 @@ public class DungeonPart : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             DungeonPart otherPart = collider.GetComponent<DungeonPart>();
-            if (otherPart != null && otherPart != this)
+            if (Parent == null && !_isRoot)
+                StartCoroutine(DestroyDungeonPart());
+            if (otherPart != null && otherPart != this && otherPart != Parent)
             {
                 Debug.LogWarning($"{gameObject.name}: Collision detected with {otherPart.name}. Initiating destruction of this DungeonPart.");
                 StartCoroutine(DestroyDungeonPart());
@@ -78,25 +92,41 @@ public class DungeonPart : MonoBehaviour
             newPart.Exit = place; // Set the exit of the new DungeonPart
             Debug.LogWarning("Spawn limit reached.");
         }
-        else if (spawnableBlocks != null && spawnableBlocks.dungeonParts.Length > 0)
+        else if (spawnableBlocks != null && spawnableBlocks.dungeonParts.Count > 0)
         {
             _triedIndexes.Add(HardIndex);
             int randomIndex = HardIndex;
+
+            List<int> indexRange = Range(spawnableBlocks.dungeonParts);
+            bool containsAll = true;
+            foreach (var i in indexRange)
+                if (!_triedIndexes.Contains(i))
+                    containsAll = false;
+
             while (_triedIndexes.Contains(randomIndex))
-                randomIndex = Random.Range(0, spawnableBlocks.dungeonParts.Length);
-            DungeonPart newPart = Instantiate(spawnableBlocks.dungeonParts[randomIndex], place.transform.position, place.transform.rotation);
-            newPart.HardIndex = randomIndex;
-            newPart.Parent = this; // Set the parent of the new DungeonPart
-            newPart.Exit = place; // Set the exit of the new DungeonPart
-            newPart.SpawnCount = _spawnCount + 1;
-            if (newPart != null)
+                randomIndex = Random.Range(0, spawnableBlocks.dungeonParts.Count);
+
+            if (containsAll)
             {
-                _adjacentBlocks.Add(newPart);
-                _triedIndexes.Clear();
-                Debug.Log($"Spawned new DungeonPart: {newPart.name} at {place}");
+                Instantiate(spawnableBlocks.wall, place.transform.position, place.transform.rotation);
+                Debug.Log("Tried every option, wall it is");
             }
             else
-                _triedIndexes.Add(randomIndex);
+            {
+                DungeonPart newPart = Instantiate(spawnableBlocks.dungeonParts[randomIndex], place.transform.position, place.transform.rotation);
+                newPart.Parent = this; // Set the parent of the new DungeonPart
+                newPart.Exit = place; // Set the exit of the new DungeonPart
+                newPart.HardIndex = randomIndex;
+                newPart.SpawnCount = _spawnCount + 1;
+                if (newPart != null)
+                {
+                    _adjacentBlocks.Add(newPart);
+                    _triedIndexes.Clear();
+                    Debug.Log($"Spawned new DungeonPart: {newPart.name} at {place}");
+                }
+                else
+                    _triedIndexes.Add(randomIndex);
+            }
         }
         else
             Debug.LogWarning("No spawnable dungeon parts available.");
@@ -108,12 +138,22 @@ public class DungeonPart : MonoBehaviour
             yield return Parent.SpawnRandomDungeonPart(Exit); // Spawn a new part in the parent
         Destroy(gameObject); // Destroy this DungeonPart
     }
+
+    List<int> Range(List<DungeonPart> list)
+    {
+        List<int> range = new List<int>();
+
+        for (int number = 0; number < list.Count; number++)
+            range.Add(number);
+
+        return range;
+    }
 }
 
 // ScriptableObject to hold spawnable dungeon parts
 [CreateAssetMenu(fileName = "SpawnableBlocks", menuName = "ScriptableObjects/SpawnableBlocks")]
 public class SpawnableBlocks : ScriptableObject
 {
-    public DungeonPart[] dungeonParts; // Array of spawnable dungeon parts
+    public List<DungeonPart> dungeonParts; // Array of spawnable dungeon parts
     public DungeonPart wall; //A wall to cap the ends
 }
