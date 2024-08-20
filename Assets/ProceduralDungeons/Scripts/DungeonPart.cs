@@ -177,4 +177,13 @@ public class DungeonPart : MonoBehaviour
     {
         return Enumerable.Range(0, list.Count).ToList();
     }
+
+    public override string ToString()
+    {
+        string parentName = Parent != null ? Parent.gameObject.name : "None";
+        string exitsInfo = exits != null ? string.Join(", ", exits.Select(exit => exit.name)) : "No exits";
+        string adjacentCount = _adjacentBlocks.Count.ToString();
+
+        return $"DungeonPart: {gameObject.name}, Parent: {parentName}, Exits: [{exitsInfo}], Adjacent Count: {adjacentCount}, Spawn Count: {SpawnCount}, Hard Index: {HardIndex}";
+    }
 }
