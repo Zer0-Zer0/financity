@@ -107,8 +107,7 @@ public class DungeonPart : MonoBehaviour
     private void SpawnWall(GameObject place)
     {
         DungeonPart newPart = Instantiate(spawnableBlocks.wall, place.transform.position, place.transform.rotation);
-        newPart.Parent = this; // Set the parent of the new DungeonPart
-        newPart.Exit = place; // Set the exit of the new DungeonPart
+        InitializeNewPart(newPart, place, -1);
         Debug.LogWarning("Spawn limit reached.");
     }
 
@@ -154,6 +153,7 @@ public class DungeonPart : MonoBehaviour
     private void InitializeNewPart(DungeonPart newPart, GameObject place, int randomIndex)
     {
         newPart.Parent = this; // Set the parent of the new DungeonPart
+        newPart.transform.parent = this.transform;
         newPart.Exit = place; // Set the exit of the new DungeonPart
         newPart.HardIndex = randomIndex;
         newPart.SpawnCount = _spawnCount + 1;
@@ -177,12 +177,4 @@ public class DungeonPart : MonoBehaviour
     {
         return Enumerable.Range(0, list.Count).ToList();
     }
-}
-
-// ScriptableObject to hold spawnable dungeon parts
-[CreateAssetMenu(fileName = "SpawnableBlocks", menuName = "ScriptableObjects/SpawnableBlocks")]
-public class SpawnableBlocks : ScriptableObject
-{
-    public List<DungeonPart> dungeonParts; // Array of spawnable dungeon parts
-    public DungeonPart wall; // A wall to cap the ends
 }
