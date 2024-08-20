@@ -62,6 +62,8 @@ public class DungeonPart : MonoBehaviour
 
     private void CheckForCollisions()
     {
+        if(blockSize == null)
+            return;
         Collider[] colliders = Physics.OverlapBox(blockSize.bounds.center, blockSize.bounds.extents, Quaternion.identity);
         Debug.Log($"{gameObject.name}: Detected {colliders.Length} colliders.");
 
@@ -97,18 +99,22 @@ public class DungeonPart : MonoBehaviour
         yield return null;
 
         if (SpawnCount >= 10)
-            SpawnWall(place);
+            SpawnLimitReached(place);
         else if (spawnableBlocks != null && spawnableBlocks.dungeonParts.Count > 0)
             SpawnDungeonPart(place);
         else
             Debug.LogWarning("No spawnable dungeon parts available.");
     }
 
+    private void SpawnLimitReached(GameObject place){
+            SpawnWall(place);
+            Debug.LogWarning("Spawn limit reached.");
+    }
+
     private void SpawnWall(GameObject place)
     {
         DungeonPart newPart = Instantiate(spawnableBlocks.wall, place.transform.position, place.transform.rotation);
         InitializeNewPart(newPart, place, -1);
-        Debug.LogWarning("Spawn limit reached.");
     }
 
     private void SpawnDungeonPart(GameObject place)
@@ -124,7 +130,7 @@ public class DungeonPart : MonoBehaviour
 
         if (randomIndex == -1)
         {
-            Instantiate(spawnableBlocks.wall, place.transform.position, place.transform.rotation);
+            SpawnWall(place);
             Debug.Log("Tried every option, wall it is");
         }
         else
@@ -137,7 +143,7 @@ public class DungeonPart : MonoBehaviour
     private int GetRandomIndex()
     {
         List<int> indexRange = Range(spawnableBlocks.dungeonParts);
-        bool containsAll = indexRange.All(i => _triedIndexes.Contains(i));
+        bool containsAll = indexRange.TrueForAll(i => _triedIndexes.Contains(i));
 
         if (containsAll) return -1; // Indicates all options have been tried
 
