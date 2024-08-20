@@ -3,25 +3,43 @@ using System.Collections;
 using UnityEngine;
 using System.Linq;
 
+/// <summary>
+/// Represents a part of a dungeon, which can spawn other dungeon parts and manage connections between them.
+/// </summary>
 [System.Serializable]
 public class DungeonPart : MonoBehaviour
 {
     [SerializeField] private GameObject[] exits; // References to all the exits of the dungeon part
     [SerializeField] private SpawnableBlocks spawnableBlocks; // Scriptable object containing spawnable dungeon parts
     [SerializeField] private Collider blockSize; // Trigger collider encapsulating the entire DungeonPart
-    [SerializeField] private bool isRoot = false;
+    [SerializeField] private bool isRoot = false; // Indicates if this is the root dungeon part
 
     private List<DungeonPart> adjacentBlocks = new List<DungeonPart>(); // References to all connected dungeon parts
     private DungeonPart parent; // Parent of this DungeonPart, may be null
     private GameObject exit; // Exit of this DungeonPart, may be null
     private int spawnCount = 0; // Counter to limit spawning
-    private static int index = 0;
+    private static int index = 0; // Static index for naming dungeon parts
     private int hardIndex; // The location of the object in relation to the scriptable object
-    private List<int> triedIndexes = new List<int>();
+    private List<int> triedIndexes = new List<int>(); // List of indexes that have been tried for spawning
 
+    /// <summary>
+    /// Gets or sets the parent DungeonPart.
+    /// </summary>
     public DungeonPart Parent { get => parent; set => parent = value; }
+
+    /// <summary>
+    /// Gets or sets the exit GameObject of this DungeonPart.
+    /// </summary>
     public GameObject Exit { get => exit; set => exit = value; }
+
+    /// <summary>
+    /// Gets or sets the spawn count of this DungeonPart.
+    /// </summary>
     public int SpawnCount { get => spawnCount; set => spawnCount = value; }
+
+    /// <summary>
+    /// Gets or sets the hard index of this DungeonPart.
+    /// </summary>
     public int HardIndex { get => hardIndex; set => hardIndex = value; }
 
     private void OnEnable()
@@ -30,6 +48,9 @@ public class DungeonPart : MonoBehaviour
             Initialize();
     }
 
+    /// <summary>
+    /// Initializes the DungeonPart by setting its index, validating its parent, checking for collisions, and checking exits to spawn new parts.
+    /// </summary>
     private void Initialize()
     {
         SetIndexOnName();
@@ -38,12 +59,18 @@ public class DungeonPart : MonoBehaviour
         CheckExitsAndSpawn();
     }
 
+    /// <summary>
+    /// Sets the index of the DungeonPart in its name for identification.
+    /// </summary>
     private void SetIndexOnName()
     {
         gameObject.name = $"{index} - {gameObject.name}";
         index++;
     }
 
+    /// <summary>
+    /// Validates that the DungeonPart has a parent if it is not a root part.
+    /// </summary>
     private void ValidateParent()
     {
         if (Parent == null && !isRoot)
@@ -53,6 +80,9 @@ public class DungeonPart : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks for collisions with other colliders in the vicinity of the DungeonPart.
+    /// </summary>
     private void CheckForCollisions()
     {
         if (blockSize == null) return;
@@ -64,6 +94,10 @@ public class DungeonPart : MonoBehaviour
             HandleCollision(collider);
     }
 
+    /// <summary>
+    /// Handles a collision with another collider, potentially destroying this DungeonPart if it collides with another DungeonPart.
+    /// </summary>
+    /// <param name="collider">The collider that this DungeonPart collided with.</param>
     private void HandleCollision(Collider collider)
     {
         DungeonPart otherPart = collider.GetComponent<DungeonPart>();
@@ -74,6 +108,9 @@ public class DungeonPart : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks the exits of this DungeonPart and spawns new parts if they are not already connected.
+    /// </summary>
     private void CheckExitsAndSpawn()
     {
         foreach (GameObject exit in exits)
@@ -81,11 +118,21 @@ public class DungeonPart : MonoBehaviour
                 StartCoroutine(SpawnRandomDungeonPart(exit));
     }
 
+    /// <summary>
+    /// Checks if the specified exit is already connected to an adjacent DungeonPart.
+    /// </summary>
+    /// <param name="exit">The exit GameObject to check.</param>
+    /// <returns>True if the exit is already connected; otherwise, false.</returns>
     private bool IsExitAlreadyConnected(GameObject exit)
     {
         return adjacentBlocks.Any(adjacent => adjacent != null && adjacent.Exit == exit);
     }
 
+    /// <summary>
+    /// Spawns a random dungeon part at the specified location.
+    /// </summary>
+    /// <param name="place">The location where the new dungeon part should be spawned.</param>
+    /// <returns>An enumerator for coroutine execution.</returns>
     public IEnumerator SpawnRandomDungeonPart(GameObject place)
     {
         yield return null;
@@ -105,12 +152,20 @@ public class DungeonPart : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawns a wall at the specified location.
+    /// </summary>
+    /// <param name="place">The location where the wall should be spawned.</param>
     private void SpawnWall(GameObject place)
     {
         DungeonPart newPart = Instantiate(spawnableBlocks.wall, place.transform.position, place.transform.rotation);
         InitializeNewPart(newPart, place, -1);
     }
 
+    /// <summary>
+    /// Spawns a dungeon part at the specified location.
+    /// </summary>
+    /// <param name="place">The location where the dungeon part should be spawned.</param>
     private void SpawnDungeonPart(GameObject place)
     {
         if (place == null)
@@ -134,6 +189,10 @@ public class DungeonPart : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gets a random index for spawning a dungeon part that has not been tried yet.
+    /// </summary>
+    /// <returns>A random index or -1 if all options have been tried.</returns>
     private int GetRandomIndex()
     {
         if (triedIndexes.Count >= spawnableBlocks.dungeonParts.Count)
@@ -148,6 +207,12 @@ public class DungeonPart : MonoBehaviour
         return randomIndex;
     }
 
+    /// <summary>
+    /// Initializes a newly spawned DungeonPart.
+    /// </summary>
+    /// <param name="newPart">The new DungeonPart to initialize.</param>
+    /// <param name="place">The location where the new DungeonPart was spawned.</param>
+    /// <param name="randomIndex">The index of the spawned DungeonPart in the spawnable blocks.</param>
     private void InitializeNewPart(DungeonPart newPart, GameObject place, int randomIndex)
     {
         newPart.Parent = this; // Set the parent of the new DungeonPart
@@ -165,6 +230,10 @@ public class DungeonPart : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Destroys this DungeonPart and potentially spawns a new part in its parent.
+    /// </summary>
+    /// <returns>An enumerator for coroutine execution.</returns>
     private IEnumerator DestroyDungeonPart()
     {
         if (Parent != null)
@@ -172,6 +241,10 @@ public class DungeonPart : MonoBehaviour
         Destroy(gameObject); // Destroy this DungeonPart
     }
 
+    /// <summary>
+    /// Returns a string representation of the DungeonPart, including its name, parent, exits, adjacent count, spawn count, and hard index.
+    /// </summary>
+    /// <returns>A string representation of the DungeonPart.</returns>
     public override string ToString()
     {
         string parentName = Parent != null ? Parent.gameObject.name : "None";
