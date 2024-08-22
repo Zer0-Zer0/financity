@@ -1,12 +1,14 @@
-using UnityEngine; // Importing UnityEngine for MonoBehaviour functionality.
-using Unity.Entities; // Importing Unity.Entities for ECS functionality.
-using Unity.Mathematics; // Importing Unity.Mathematics for mathematical structures.
-using Unity.Collections; // Importing Unity.Collections for using Native collections like NativeArray.
+using UnityEngine;
+using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Collections;
+using Unity.Burst;
 
 /// <summary>
 /// Authoring component for creating a DungeonComponent in the Unity Entity Component System (ECS).
 /// This class allows you to define dungeon properties in the Unity Inspector.
 /// </summary>
+[BurstCompile]
 public class DungeonComponentAuthoring : MonoBehaviour
 {
     // Public properties to hold dungeon data, accessible in the Unity Inspector.

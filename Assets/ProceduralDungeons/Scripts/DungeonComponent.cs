@@ -1,10 +1,12 @@
-using Unity.Entities; // Importing the Unity Entities namespace for ECS (Entity Component System) functionality.
-using Unity.Mathematics; // Importing the Unity Mathematics namespace for mathematical structures and operations.
-using Unity.Collections; // Importing the Unity Collections namespace for using Native collections like NativeArray.
+using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Collections;
+using Unity.Burst;
 
 /// <summary>
 /// Represents a component that holds data related to a dungeon in the game.
 /// </summary>
+[BurstCompile]
 public struct DungeonComponent : IComponentData
 {
     /// <summary>
