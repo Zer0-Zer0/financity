@@ -8,16 +8,17 @@ using Unity.Collections; // Importing the Unity Collections namespace for using 
 public struct DungeonComponent : IComponentData
 {
     /// <summary>
-    /// An array of exit locations in the dungeon, represented as 2D vectors (float3x2).
+    /// An array of exit locations in the dungeon, represented as 3D vectors (float3).
     /// Each exit location can be used to determine where entities can exit the dungeon.
     /// </summary>
-    public NativeArray<float3x2> exitLocations; 
+    public NativeArray<float3> exitLocations; 
     
+
     /// <summary>
-    /// An array of all the spawnable blocks in a dungeon.
-    /// This entity will contain all blocks a given dungeon part is allowed to spawn.
+    /// An array of exit rotations in the dungeon, represented as Quaternions.
+    /// Each exit location can be used to determine where entities can exit the dungeon.
     /// </summary>
-    public NativeArray<Entity> spawnableDungeonBlocks; 
+    public NativeArray<quaternion> exitRotations; 
     
     /// <summary>
     /// The size of each block in the dungeon, represented as a float3.

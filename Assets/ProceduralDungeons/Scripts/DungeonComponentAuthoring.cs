@@ -10,8 +10,8 @@ using Unity.Collections; // Importing Unity.Collections for using Native collect
 public class DungeonComponentAuthoring : MonoBehaviour
 {
     // Public properties to hold dungeon data, accessible in the Unity Inspector.
-    public NativeArray<float3x2> exitLocations { private set; get; } // Array of exit locations in the dungeon.
-    public NativeArray<Entity> spawnableDungeonBlocks { private set; get; } // Array of spawnable blocks in the dungeon.
+    public NativeArray<float3> exitLocations { private set; get; } // Array of exit locations in the dungeon.
+    public NativeArray<quaternion> exitRotations { private set; get; } // Array of exit rotations in the dungeon.
     public float3 blockSize { private set; get; } // Size of each block in the dungeon.
     public bool isRoot { private set; get; } // Flag indicating if this is the root of the dungeon hierarchy.
 
@@ -32,10 +32,10 @@ public class DungeonComponentAuthoring : MonoBehaviour
             // Add the DungeonComponent to the entity, populating it with data from the authoring component.
             AddComponent(entity, new DungeonComponent
             {
-                exitLocations = authoring.exitLocations, // Assign exit locations.
-                spawnableDungeonBlocks = authoring.spawnableDungeonBlocks, // Assign spawnable blocks.
-                blockSize = authoring.blockSize, // Assign block size.
-                isRoot = authoring.isRoot // Assign root flag.
+                exitLocations = authoring.exitLocations,
+                exitRotations = authoring.exitRotations,
+                blockSize = authoring.blockSize,
+                isRoot = authoring.isRoot
             });
         }
     }
