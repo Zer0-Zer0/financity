@@ -30,8 +30,4 @@ public partial struct DungeonPartSystem : ISystem
         }
         state.Enabled = false;
     }
-
-    public void PositionSelf(){
-
-    }
 }
