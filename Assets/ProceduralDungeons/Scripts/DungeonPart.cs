@@ -21,6 +21,7 @@ public class DungeonPart : MonoBehaviour
     private static int index = 0; // Static index for naming dungeon parts
     private int hardIndex; // The location of the object in relation to the scriptable object
     private List<int> triedIndexes = new List<int>(); // List of indexes that have been tried for spawning
+    private bool isBeingDestroyed = false;
 
     /// <summary>
     /// Gets or sets the parent DungeonPart.
@@ -44,6 +45,8 @@ public class DungeonPart : MonoBehaviour
 
     private void OnEnable()
     {
+        if (isBeingDestroyed)
+            return;
         if (isRoot)
             Initialize();
     }
@@ -85,7 +88,7 @@ public class DungeonPart : MonoBehaviour
     /// </summary>
     private void CheckForCollisions()
     {
-        if (blockSize == null) return;
+        if (blockSize == null || isBeingDestroyed) return;
 
         Collider[] colliders = Physics.OverlapBox(blockSize.bounds.center, blockSize.bounds.extents, Quaternion.identity);
         Debug.Log($"{gameObject.name}: Detected {colliders.Length} colliders.");
@@ -101,7 +104,7 @@ public class DungeonPart : MonoBehaviour
     private void HandleCollision(Collider collider)
     {
         DungeonPart otherPart = collider.GetComponent<DungeonPart>();
-        if (otherPart != null && otherPart != this && otherPart != Parent)
+        if (otherPart != null && otherPart != this && otherPart != Parent && !isBeingDestroyed)
         {
             Debug.LogWarning($"{gameObject.name}: Collision detected with {otherPart.name}. Initiating destruction of this DungeonPart.");
             StartCoroutine(DestroyDungeonPart());
@@ -113,9 +116,19 @@ public class DungeonPart : MonoBehaviour
     /// </summary>
     private void CheckExitsAndSpawn()
     {
+        if (isBeingDestroyed)
+            return;
+
         foreach (GameObject exit in exits)
+        {
+            if (exit == null)
+            {
+                Debug.LogWarning($"{gameObject.name}: Exit is null, skipping.");
+                continue;
+            }
             if (!IsExitAlreadyConnected(exit))
                 StartCoroutine(SpawnRandomDungeonPart(exit));
+        }
     }
 
     /// <summary>
@@ -135,9 +148,10 @@ public class DungeonPart : MonoBehaviour
     /// <returns>An enumerator for coroutine execution.</returns>
     public IEnumerator SpawnRandomDungeonPart(GameObject place)
     {
+        if (isBeingDestroyed) yield break;
         yield return null;
 
-        if (SpawnCount >= 10)
+        if (SpawnCount >= 4)
         {
             SpawnWall(place);
             Debug.LogWarning("Spawn limit reached.");
@@ -181,6 +195,7 @@ public class DungeonPart : MonoBehaviour
         {
             SpawnWall(place);
             Debug.Log("Tried every option, wall it is");
+            return; // Exit the method after spawning the wall
         }
         else
         {
@@ -236,6 +251,9 @@ public class DungeonPart : MonoBehaviour
     /// <returns>An enumerator for coroutine execution.</returns>
     private IEnumerator DestroyDungeonPart()
     {
+        if (isBeingDestroyed) yield break; // Prevent re-entry
+        isBeingDestroyed = true;
+
         if (Parent != null)
             yield return Parent.SpawnRandomDungeonPart(Exit); // Spawn a new part in the parent
         Destroy(gameObject); // Destroy this DungeonPart
