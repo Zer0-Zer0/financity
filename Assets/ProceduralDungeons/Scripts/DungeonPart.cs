@@ -18,7 +18,6 @@ public class DungeonPart : MonoBehaviour
     private DungeonPart parent; // Parent of this DungeonPart, may be null
     private GameObject exit; // Exit of this DungeonPart, may be null
     private int spawnCount = 0; // Counter to limit spawning
-    private static int index = 0; // Static index for naming dungeon parts
     private int hardIndex; // The location of the object in relation to the scriptable object
     private List<int> triedIndexes = new List<int>(); // List of indexes that have been tried for spawning
     private bool isBeingDestroyed = false;
@@ -65,8 +64,7 @@ public class DungeonPart : MonoBehaviour
     /// </summary>
     private void SetIndexOnName()
     {
-        gameObject.name = $"{index} - {gameObject.name}";
-        index++;
+        gameObject.name = $"{gameObject.name} - {System.Guid.NewGuid()}";
     }
 
     /// <summary>
