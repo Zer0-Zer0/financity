@@ -250,12 +250,13 @@ public class DungeonPart : MonoBehaviour
     /// <returns>An enumerator for coroutine execution.</returns>
     private IEnumerator DestroyDungeonPart()
     {
-        if (isBeingDestroyed) yield break; // Prevent re-entry
+        if (isBeingDestroyed) yield break;
         isBeingDestroyed = true;
 
         if (Parent != null)
-            yield return Parent.SpawnRandomDungeonPart(Exit); // Spawn a new part in the parent
-        Destroy(gameObject); // Destroy this DungeonPart
+            yield return Parent.SpawnRandomDungeonPart(Exit);
+        triedIndexes.Clear();
+        Destroy(gameObject);
     }
 
     /// <summary>
