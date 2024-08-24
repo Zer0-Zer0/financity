@@ -90,8 +90,6 @@ public class DungeonPart : MonoBehaviour
         if (isBeingDestroyed || blockSize == null) return;
 
         Collider[] colliders = Physics.OverlapBox(blockSize.bounds.center, blockSize.bounds.extents, Quaternion.identity);
-        Debug.Log($"{gameObject.name}: Detected {colliders.Length} colliders.");
-
         foreach (Collider collider in colliders)
             HandleCollision(collider);
     }
@@ -146,7 +144,7 @@ public class DungeonPart : MonoBehaviour
     /// </summary>
     /// <param name="place">The location where the new dungeon part should be spawned.</param>
     /// <returns>An enumerator for coroutine execution.</returns>
-    public IEnumerator SpawnRandomDungeonPart(GameObject place)
+    private IEnumerator SpawnRandomDungeonPart(GameObject place)
     {
         if (isBeingDestroyed || isSpawning) yield break;
         isSpawning = true;
@@ -159,7 +157,7 @@ public class DungeonPart : MonoBehaviour
                 Debug.Log("Spawn limit reached.");
             }
             else if (spawnableBlocks != null && spawnableBlocks.dungeonParts.Count > 0)
-                SpawnDungeonPart(place);
+                yield return SpawnDungeonPart(place);
             else
                 Debug.LogWarning("No spawnable dungeon parts available.");
         }
@@ -175,7 +173,6 @@ public class DungeonPart : MonoBehaviour
     /// <param name="place">The location where the wall should be spawned.</param>
     private void SpawnWall(GameObject place)
     {
-        if (isBeingDestroyed) return;
         DungeonPart newPart = Instantiate(spawnableBlocks.wall, place.transform.position, place.transform.rotation);
         InitializeNewPart(newPart, place, -1);
     }
@@ -184,29 +181,41 @@ public class DungeonPart : MonoBehaviour
     /// Spawns a dungeon part at the specified location.
     /// </summary>
     /// <param name="place">The location where the dungeon part should be spawned.</param>
-    private void SpawnDungeonPart(GameObject place)
+    public IEnumerator SpawnDungeonPart(GameObject place)
     {
-        if (isBeingDestroyed) return;
+        if (isBeingDestroyed) yield break;
         if (place == null)
         {
             Debug.LogError($"{gameObject.name}: No place defined");
-            return;
+            yield break;
         }
 
-        triedIndexes.Add(HardIndex);
-        int randomIndex = GetRandomIndex();
+        yield return null;
 
-        if (randomIndex == -1)
+        if (!isRoot && !triedIndexes.Contains(HardIndex)) triedIndexes.Add(HardIndex);
+        DungeonPart newPart;
+        int randomIndex = -1;
+        do
         {
-            SpawnWall(place);
-            Debug.Log("Tried every option, wall it is");
-            return;
-        }
-        else
-        {
-            DungeonPart newPart = Instantiate(spawnableBlocks.dungeonParts[randomIndex], place.transform.position, place.transform.rotation);
-            InitializeNewPart(newPart, place, randomIndex);
-        }
+            if (!triedIndexes.Contains(randomIndex)) triedIndexes.Add(randomIndex);
+            randomIndex = GetRandomIndex();
+
+            Debug.Log("Spawn atempt");
+
+            if (randomIndex == -1)
+            {
+                SpawnWall(place);
+                Debug.Log("Tried every option, wall it is");
+                yield break;
+            }
+            else
+            {
+                newPart = Instantiate(spawnableBlocks.dungeonParts[randomIndex], place.transform.position, place.transform.rotation);
+                newPart = InitializeNewPart(newPart, place, randomIndex);
+                yield return null;
+            }
+        } while (newPart == null);
+        adjacentBlocks.Add(newPart);
     }
 
     /// <summary>
@@ -233,22 +242,15 @@ public class DungeonPart : MonoBehaviour
     /// <param name="newPart">The new DungeonPart to initialize.</param>
     /// <param name="place">The location where the new DungeonPart was spawned.</param>
     /// <param name="randomIndex">The index of the spawned DungeonPart in the spawnable blocks.</param>
-    private void InitializeNewPart(DungeonPart newPart, GameObject place, int randomIndex)
+    private DungeonPart InitializeNewPart(DungeonPart newPart, GameObject place, int randomIndex)
     {
-        if (isBeingDestroyed) return;
         newPart.Parent = this; // Set the parent of the new DungeonPart
-        newPart.transform.parent = this.transform;
+        newPart.transform.parent = transform;
         newPart.Exit = place; // Set the exit of the new DungeonPart
         newPart.HardIndex = randomIndex;
         newPart.SpawnCount = spawnCount + 1;
         newPart.Initialize();
-
-        if (newPart != null)
-        {
-            adjacentBlocks.Add(newPart);
-            triedIndexes.Clear();
-            Debug.Log($"Spawned new DungeonPart: {newPart.name} at {place}");
-        }
+        return newPart;
     }
 
     /// <summary>
@@ -261,7 +263,7 @@ public class DungeonPart : MonoBehaviour
         isBeingDestroyed = true;
 
         if (Parent != null)
-            yield return Parent.SpawnRandomDungeonPart(Exit);
+            StartCoroutine(Parent.SpawnDungeonPart(Exit));
         triedIndexes.Clear();
         Destroy(gameObject);
     }
