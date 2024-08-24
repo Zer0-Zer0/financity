@@ -21,28 +21,11 @@ public class DungeonPart : MonoBehaviour
     private int hardIndex; // The location of the object in relation to the scriptable object
     private List<int> triedIndexes = new List<int>(); // List of indexes that have been tried for spawning
     private bool isBeingDestroyed = false;
+    private bool isSpawning = false; // Flag to manage coroutine execution
 
-    // Flag to manage coroutine execution
-    private bool isSpawning = false;
-
-    /// <summary>
-    /// Gets or sets the parent DungeonPart.
-    /// </summary>
     public DungeonPart Parent { get => parent; set => parent = value; }
-
-    /// <summary>
-    /// Gets or sets the exit GameObject of this DungeonPart.
-    /// </summary>
     public GameObject Exit { get => exit; set => exit = value; }
-
-    /// <summary>
-    /// Gets or sets the spawn count of this DungeonPart.
-    /// </summary>
     public int SpawnCount { get => spawnCount; set => spawnCount = value; }
-
-    /// <summary>
-    /// Gets or sets the hard index of this DungeonPart.
-    /// </summary>
     public int HardIndex { get => hardIndex; set => hardIndex = value; }
 
     private void OnEnable()
@@ -51,77 +34,57 @@ public class DungeonPart : MonoBehaviour
         if (isRoot) StartCoroutine(Initialize());
     }
 
-    /// <summary>
-    /// Initializes the DungeonPart by setting its index, validating its parent, checking for collisions, and checking exits to spawn new parts.
-    /// </summary>
     private IEnumerator Initialize()
     {
         if (isBeingDestroyed) yield break;
+
         SetIndexOnName();
-        yield return StartCoroutine(ValidateParent());
-        yield return StartCoroutine(CheckForCollisions());
-        yield return StartCoroutine(CheckExitsAndSpawn());
+        yield return ValidateParent();
+        yield return CheckForCollisions();
+        yield return CheckExitsAndSpawn();
     }
 
-    /// <summary>
-    /// Sets the index of the DungeonPart in its name for identification.
-    /// </summary>
-    private IEnumerator SetIndexOnName()
+    private void SetIndexOnName()
     {
-        if (isBeingDestroyed) yield break;
+        if (isBeingDestroyed) return;
         gameObject.name = $"{gameObject.name} - {System.Guid.NewGuid()}";
-        yield return null;
     }
 
-    /// <summary>
-    /// Validates that the DungeonPart has a parent if it is not a root part.
-    /// </summary>
     private IEnumerator ValidateParent()
     {
         if (isBeingDestroyed) yield break;
+
         if (Parent == null && !isRoot)
         {
             Debug.Log($"{gameObject.name}: has no parent, destroying");
-            yield return StartCoroutine(DestroyDungeonPart());
+            yield return DestroyDungeonPart();
         }
-        yield return null;
     }
 
-    /// <summary>
-    /// Checks for collisions with other colliders in the vicinity of the DungeonPart.
-    /// </summary>
     private IEnumerator CheckForCollisions()
     {
         if (isBeingDestroyed || blockSize == null) yield break;
 
         Collider[] colliders = Physics.OverlapBox(blockSize.bounds.center, blockSize.bounds.extents, Quaternion.identity);
         foreach (Collider collider in colliders)
-            yield return StartCoroutine(HandleCollision(collider));
+            yield return HandleCollision(collider);
     }
 
-    /// <summary>
-    /// Handles a collision with another collider, potentially destroying this DungeonPart if it collides with another DungeonPart.
-    /// </summary>
-    /// <param name="collider">The collider that this DungeonPart collided with.</param>
     private IEnumerator HandleCollision(Collider collider)
     {
         if (isBeingDestroyed) yield break;
+
         DungeonPart otherPart = collider.GetComponent<DungeonPart>();
         if (otherPart != null && otherPart != this && otherPart != Parent)
         {
             Debug.LogWarning($"{gameObject.name}: Collision detected with {otherPart.name}. Initiating destruction of this DungeonPart.");
-            yield return StartCoroutine(DestroyDungeonPart());
+            yield return DestroyDungeonPart();
         }
-        yield return null;
     }
 
-    /// <summary>
-    /// Checks the exits of this DungeonPart and spawns new parts if they are not already connected.
-    /// </summary>
     private IEnumerator CheckExitsAndSpawn()
     {
         if (isBeingDestroyed) yield break;
-        yield return null;
 
         foreach (GameObject exit in exits)
         {
@@ -131,25 +94,15 @@ public class DungeonPart : MonoBehaviour
                 continue;
             }
             if (!IsExitAlreadyConnected(exit))
-                yield return StartCoroutine(SpawnRandomDungeonPart(exit));
+                yield return SpawnRandomDungeonPart(exit);
         }
     }
 
-    /// <summary>
-    /// Checks if the specified exit is already connected to an adjacent DungeonPart.
-    /// </summary>
-    /// <param name="exit">The exit GameObject to check.</param>
-    /// <returns>True if the exit is already connected; otherwise, false.</returns>
     private bool IsExitAlreadyConnected(GameObject exit)
     {
         return adjacentBlocks.Any(adjacent => adjacent != null && adjacent.Exit == exit);
     }
 
-    /// <summary>
-    /// Spawns a random dungeon part at the specified location.
-    /// </summary>
-    /// <param name="place">The location where the new dungeon part should be spawned.</param>
-    /// <returns>An enumerator for coroutine execution.</returns>
     private IEnumerator SpawnRandomDungeonPart(GameObject place)
     {
         if (isBeingDestroyed || isSpawning) yield break;
@@ -157,13 +110,13 @@ public class DungeonPart : MonoBehaviour
 
         try
         {
-            if (SpawnCount >= 4)
+            if (SpawnCount >= 8)
             {
-                yield return StartCoroutine(SpawnWall(place));
+                yield return SpawnWall(place);
                 Debug.Log("Spawn limit reached.");
             }
             else if (spawnableBlocks != null && spawnableBlocks.dungeonParts.Count > 0)
-                yield return StartCoroutine(SpawnDungeonPart(place));
+                yield return SpawnDungeonPart(place);
             else
                 Debug.LogWarning("No spawnable dungeon parts available.");
         }
@@ -173,26 +126,19 @@ public class DungeonPart : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Spawns a wall at the specified location.
-    /// </summary>
-    /// <param name="place">The location where the wall should be spawned.</param>
     private IEnumerator SpawnWall(GameObject place)
     {
         if (isBeingDestroyed) yield break;
+
         DungeonPart newPart = Instantiate(spawnableBlocks.wall, place.transform.position, place.transform.rotation);
-        InitializeNewPart(newPart, place, -1);
-        yield return null;
+        yield return InitializeNewPart(newPart, place, -1);
     }
 
-    /// <summary>
-    /// Spawns a dungeon part at the specified location.
-    /// </summary>
-    /// <param name="place">The location where the dungeon part should be spawned.</param>
     public IEnumerator SpawnDungeonPart(GameObject place)
     {
         if (isBeingDestroyed) yield break;
-        if (place == null)
+
+        if (isBeingDestroyed || place == null)
         {
             Debug.LogError($"{gameObject.name}: No place defined");
             yield break;
@@ -203,33 +149,25 @@ public class DungeonPart : MonoBehaviour
         if (!isRoot && !triedIndexes.Contains(HardIndex)) triedIndexes.Add(HardIndex);
         DungeonPart newPart;
         int randomIndex = -1;
+
         do
         {
-            if (!triedIndexes.Contains(randomIndex)) triedIndexes.Add(randomIndex);
+            if (!triedIndexes.Contains(randomIndex))
+                triedIndexes.Add(randomIndex);
             randomIndex = GetRandomIndex();
-
-            Debug.Log("Spawn attempt");
-
             if (randomIndex == -1)
             {
-                yield return StartCoroutine(SpawnWall(place));
+                yield return SpawnWall(place);
                 Debug.Log("Tried every option, wall it is");
                 yield break;
             }
-            else
-            {
-                newPart = Instantiate(spawnableBlocks.dungeonParts[randomIndex], place.transform.position, place.transform.rotation);
-                newPart = InitializeNewPart(newPart, place, randomIndex);
-                yield return null;
-            }
+
+            newPart = Instantiate(spawnableBlocks.dungeonParts[randomIndex], place.transform.position, place.transform.rotation);
+            yield return InitializeNewPart(newPart, place, randomIndex);
         } while (newPart == null);
-        adjacentBlocks.Add(newPart);
+        if (newPart != null) adjacentBlocks.Add(newPart);
     }
 
-    /// <summary>
-    /// Gets a random index for spawning a dungeon part that has not been tried yet.
-    /// </summary>
-    /// <returns>A random index or -1 if all options have been tried.</returns>
     private int GetRandomIndex()
     {
         if (triedIndexes.Count >= spawnableBlocks.dungeonParts.Count)
@@ -237,49 +175,35 @@ public class DungeonPart : MonoBehaviour
 
         int randomIndex;
         do
-        {
             randomIndex = Random.Range(0, spawnableBlocks.dungeonParts.Count);
-        } while (triedIndexes.Contains(randomIndex));
+        while (triedIndexes.Contains(randomIndex));
 
         return randomIndex;
     }
 
-    /// <summary>
-    /// Initializes a newly spawned DungeonPart.
-    /// </summary>
-    /// <param name="newPart">The new DungeonPart to initialize.</param>
-    /// <param name="place">The location where the new DungeonPart was spawned.</param>
-    /// <param name="randomIndex">The index of the spawned DungeonPart in the spawnable blocks.</param>
-    private DungeonPart InitializeNewPart(DungeonPart newPart, GameObject place, int randomIndex)
+    private IEnumerator InitializeNewPart(DungeonPart newPart, GameObject place, int randomIndex)
     {
-        newPart.Parent = this; // Set the parent of the new DungeonPart
+        newPart.Parent = this;
         newPart.transform.parent = transform;
-        newPart.Exit = place; // Set the exit of the new DungeonPart
+        newPart.Exit = place;
         newPart.HardIndex = randomIndex;
         newPart.SpawnCount = spawnCount + 1;
         StartCoroutine(newPart.Initialize());
-        return newPart;
+        yield return null;
     }
 
-    /// <summary>
-    /// Destroys this DungeonPart and potentially spawns a new part in its parent.
-    /// </summary>
-    /// <returns>An enumerator for coroutine execution.</returns>
     private IEnumerator DestroyDungeonPart()
     {
         if (isBeingDestroyed) yield break;
         isBeingDestroyed = true;
 
         if (Parent != null)
-            yield return StartCoroutine(Parent.SpawnDungeonPart(Exit));
+            yield return Parent.SpawnDungeonPart(Exit);
+
         triedIndexes.Clear();
         Destroy(gameObject);
     }
 
-    /// <summary>
-    /// Returns a string representation of the DungeonPart, including its name, parent, exits, adjacent count, spawn count, and hard index.
-    /// </summary>
-    /// <returns>A string representation of the DungeonPart.</returns>
     public override string ToString()
     {
         string parentName = Parent != null ? Parent.gameObject.name : "None";
