@@ -22,6 +22,9 @@ public class DungeonPart : MonoBehaviour
     private List<int> triedIndexes = new List<int>(); // List of indexes that have been tried for spawning
     private bool isBeingDestroyed = false;
 
+    // Flag to manage coroutine execution
+    private bool isSpawning = false;
+
     /// <summary>
     /// Gets or sets the parent DungeonPart.
     /// </summary>
@@ -56,7 +59,7 @@ public class DungeonPart : MonoBehaviour
         SetIndexOnName();
         ValidateParent();
         CheckForCollisions();
-        CheckExitsAndSpawn();
+        StartCoroutine(CheckExitsAndSpawn());
     }
 
     /// <summary>
@@ -111,19 +114,20 @@ public class DungeonPart : MonoBehaviour
     /// <summary>
     /// Checks the exits of this DungeonPart and spawns new parts if they are not already connected.
     /// </summary>
-    private void CheckExitsAndSpawn()
+    private IEnumerator CheckExitsAndSpawn()
     {
-        if (isBeingDestroyed) return;
+        if (isBeingDestroyed) yield break;
+        yield return null;
 
         foreach (GameObject exit in exits)
         {
             if (exit == null)
             {
-                Debug.LogWarning($"{gameObject.name}: ERROR Exit is null, skipping.");
-                break;
+                Debug.LogWarning($"{gameObject.name}: Exit is null, skipping.");
+                continue;
             }
             if (!IsExitAlreadyConnected(exit))
-                StartCoroutine(SpawnRandomDungeonPart(exit));
+                yield return StartCoroutine(SpawnRandomDungeonPart(exit));
         }
     }
 
@@ -144,21 +148,24 @@ public class DungeonPart : MonoBehaviour
     /// <returns>An enumerator for coroutine execution.</returns>
     public IEnumerator SpawnRandomDungeonPart(GameObject place)
     {
-        if (isBeingDestroyed) yield break;
-        yield return null;
+        if (isBeingDestroyed || isSpawning) yield break;
+        isSpawning = true;
 
-        if (SpawnCount >= 4)
+        try
         {
-            SpawnWall(place);
-            Debug.LogWarning("Spawn limit reached.");
+            if (SpawnCount >= 4)
+            {
+                SpawnWall(place);
+                Debug.Log("Spawn limit reached.");
+            }
+            else if (spawnableBlocks != null && spawnableBlocks.dungeonParts.Count > 0)
+                SpawnDungeonPart(place);
+            else
+                Debug.LogWarning("No spawnable dungeon parts available.");
         }
-        else if (spawnableBlocks != null && spawnableBlocks.dungeonParts.Count > 0)
+        finally
         {
-            SpawnDungeonPart(place);
-        }
-        else
-        {
-            Debug.LogWarning("No spawnable dungeon parts available.");
+            isSpawning = false;
         }
     }
 
@@ -193,7 +200,7 @@ public class DungeonPart : MonoBehaviour
         {
             SpawnWall(place);
             Debug.Log("Tried every option, wall it is");
-            return; // Exit the method after spawning the wall
+            return;
         }
         else
         {
