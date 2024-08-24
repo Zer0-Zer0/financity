@@ -138,12 +138,11 @@ public class DungeonPart : MonoBehaviour
     {
         if (isBeingDestroyed) yield break;
 
-        if (isBeingDestroyed || place == null)
+        if (place == null)
         {
             Debug.LogError($"{gameObject.name}: No place defined");
             yield break;
         }
-
         yield return null;
 
         if (!isRoot && !triedIndexes.Contains(HardIndex)) triedIndexes.Add(HardIndex);
