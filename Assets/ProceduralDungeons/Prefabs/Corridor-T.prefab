@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: b486e594301cfce45a4d460de6129309, type: 3}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &269117298996829419
 Transform:
@@ -42,12 +42,13 @@ GameObject:
   - component: {fileID: 4421271217098665742}
   - component: {fileID: 9074497508703489217}
   - component: {fileID: 8869322537790893210}
+  - component: {fileID: 2804883958477191278}
   m_Layer: 0
   m_Name: Corridor-T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4421271217098665742
 Transform:
@@ -106,6 +107,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 9.01, y: 3.01, z: 6.01}
   m_Center: {x: 0, y: 0, z: 3}
+--- !u!114 &2804883958477191278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394886355329241076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 3
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_GenerateLinks: 1
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.06666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 265522dff43daa63bbe384d45c61b13a, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &2909150717578281072
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,12 +150,13 @@ GameObject:
   - component: {fileID: 1358616108430099468}
   - component: {fileID: 2076364588621447051}
   - component: {fileID: 7229471802968309551}
+  - component: {fileID: 6614970287073915060}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &757443470454405383
 Transform:
@@ -215,6 +248,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4772362843846858934, guid: 7f5dd8933060367c3873e17d3760d8f3, type: 3}
+--- !u!114 &6614970287073915060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2909150717578281072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &3379617659089135800
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +281,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: b486e594301cfce45a4d460de6129309, type: 3}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4412500404244718581
 Transform:
