@@ -35,7 +35,7 @@ public class DungeonPart : MonoBehaviour
         if (isRoot) StartCoroutine(Initialize());
     }
 
-    private IEnumerator Initialize()
+    public IEnumerator Initialize()
     {
         if (IsBeingDestroyed) yield break;
 
