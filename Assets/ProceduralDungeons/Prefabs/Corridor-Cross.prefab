@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 5133142998810998728}
   - component: {fileID: 2784463321773011293}
   - component: {fileID: 6003165794948922669}
+  - component: {fileID: 1189409288852027142}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8500086425646652217
 Transform:
@@ -62,7 +63,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 508409532d327b443871e81ac6231dda, type: 2}
+  - {fileID: 2100000, guid: 0c9b9f9e13cc07944b9ef378a9b50fa6, type: 2}
+  - {fileID: 2100000, guid: 981291a21ab82f84b92d256d36375787, type: 2}
+  - {fileID: 2100000, guid: 0c9b9f9e13cc07944b9ef378a9b50fa6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,6 +110,25 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2255920789794576144, guid: 7f5dd8933060367c3873e17d3760d8f3, type: 3}
+--- !u!114 &1189409288852027142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047707073202229801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &2567891741415294028
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +143,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: b486e594301cfce45a4d460de6129309, type: 3}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &478418013188551518
 Transform:
@@ -151,7 +174,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: b486e594301cfce45a4d460de6129309, type: 3}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2275429293233842381
 Transform:
@@ -179,12 +202,13 @@ GameObject:
   - component: {fileID: 7705941803109211927}
   - component: {fileID: 7328724903414212686}
   - component: {fileID: 7393616922857321115}
+  - component: {fileID: 5754399790841880737}
   m_Layer: 0
   m_Name: Corridor-Cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7705941803109211927
 Transform:
@@ -223,7 +247,7 @@ MonoBehaviour:
   - {fileID: 7268920205372114638}
   spawnableBlocks: {fileID: 11400000, guid: ffe68598ad1009a64a72c68a576403d0, type: 2}
   blockSize: {fileID: 7393616922857321115}
-  _isRoot: 0
+  isRoot: 0
 --- !u!65 &7393616922857321115
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -245,6 +269,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 9.01, y: 3.01, z: 9.01}
   m_Center: {x: 0, y: 0, z: 4.5}
+--- !u!114 &5754399790841880737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5348788948179316165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 3
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_GenerateLinks: 1
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.06666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: a51d9c83864a38e8ab37dadbdbdf8cb1, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &7268920205372114638
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +314,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: b486e594301cfce45a4d460de6129309, type: 3}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1538439374315491027
 Transform:
