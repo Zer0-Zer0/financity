@@ -74,9 +74,12 @@ public class DungeonPart : MonoBehaviour
     private IEnumerator HandleCollision(Collider collider)
     {
         if (IsBeingDestroyed) yield break;
+        if (collider == null) yield break;  
         DungeonPart otherPart = collider.GetComponent<DungeonPart>();
-        if (otherPart != null && otherPart != this && otherPart != Parent)
+        if (otherPart == null) yield break;
         if (otherPart.IsBeingDestroyed) yield break;
+
+        if (otherPart != this && otherPart != Parent)
         {
             Debug.LogWarning($"{gameObject.name}: Collision detected with {otherPart.name}. Initiating destruction of this DungeonPart.");
             yield return DestroyDungeonPart();
