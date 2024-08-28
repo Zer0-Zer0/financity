@@ -27,16 +27,17 @@ public class DungeonPart : MonoBehaviour
     public GameObject Exit { get => exit; set => exit = value; }
     public int SpawnCount { get => spawnCount; set => spawnCount = value; }
     public int HardIndex { get => hardIndex; set => hardIndex = value; }
+    public bool IsBeingDestroyed { get => isBeingDestroyed; private set => isBeingDestroyed = value; }
 
     private void OnEnable()
     {
-        if (isBeingDestroyed) return;
+        if (IsBeingDestroyed) return;
         if (isRoot) StartCoroutine(Initialize());
     }
 
     private IEnumerator Initialize()
     {
-        if (isBeingDestroyed) yield break;
+        if (IsBeingDestroyed) yield break;
 
         SetIndexOnName();
         yield return ValidateParent();
@@ -46,13 +47,13 @@ public class DungeonPart : MonoBehaviour
 
     private void SetIndexOnName()
     {
-        if (isBeingDestroyed) return;
+        if (IsBeingDestroyed) return;
         gameObject.name = $"{gameObject.name} - {System.Guid.NewGuid()}";
     }
 
     private IEnumerator ValidateParent()
     {
-        if (isBeingDestroyed) yield break;
+        if (IsBeingDestroyed) yield break;
 
         if (Parent == null && !isRoot)
         {
@@ -63,7 +64,7 @@ public class DungeonPart : MonoBehaviour
 
     private IEnumerator CheckForCollisions()
     {
-        if (isBeingDestroyed || blockSize == null) yield break;
+        if (IsBeingDestroyed || blockSize == null) yield break;
 
         Collider[] colliders = Physics.OverlapBox(blockSize.bounds.center, blockSize.bounds.extents, Quaternion.identity);
         foreach (Collider collider in colliders)
@@ -72,10 +73,10 @@ public class DungeonPart : MonoBehaviour
 
     private IEnumerator HandleCollision(Collider collider)
     {
-        if (isBeingDestroyed) yield break;
-
+        if (IsBeingDestroyed) yield break;
         DungeonPart otherPart = collider.GetComponent<DungeonPart>();
         if (otherPart != null && otherPart != this && otherPart != Parent)
+        if (otherPart.IsBeingDestroyed) yield break;
         {
             Debug.LogWarning($"{gameObject.name}: Collision detected with {otherPart.name}. Initiating destruction of this DungeonPart.");
             yield return DestroyDungeonPart();
@@ -84,7 +85,7 @@ public class DungeonPart : MonoBehaviour
 
     private IEnumerator CheckExitsAndSpawn()
     {
-        if (isBeingDestroyed) yield break;
+        if (IsBeingDestroyed) yield break;
 
         foreach (GameObject exit in exits)
         {
@@ -105,7 +106,7 @@ public class DungeonPart : MonoBehaviour
 
     private IEnumerator SpawnRandomDungeonPart(GameObject place)
     {
-        if (isBeingDestroyed || isSpawning) yield break;
+        if (IsBeingDestroyed || isSpawning) yield break;
         isSpawning = true;
 
         try
@@ -128,7 +129,7 @@ public class DungeonPart : MonoBehaviour
 
     private IEnumerator SpawnWall(GameObject place)
     {
-        if (isBeingDestroyed) yield break;
+        if (IsBeingDestroyed) yield break;
 
         DungeonPart newPart = Instantiate(spawnableBlocks.wall, place.transform.position, place.transform.rotation);
         yield return InitializeNewPart(newPart, place, -1);
@@ -136,7 +137,7 @@ public class DungeonPart : MonoBehaviour
 
     public IEnumerator SpawnDungeonPart(GameObject place)
     {
-        if (isBeingDestroyed) yield break;
+        if (IsBeingDestroyed) yield break;
 
         if (place == null)
         {
@@ -193,8 +194,8 @@ public class DungeonPart : MonoBehaviour
 
     private IEnumerator DestroyDungeonPart()
     {
-        if (isBeingDestroyed) yield break;
-        isBeingDestroyed = true;
+        if (IsBeingDestroyed) yield break;
+        IsBeingDestroyed = true;
 
         if (Parent != null)
             yield return Parent.SpawnDungeonPart(Exit);
