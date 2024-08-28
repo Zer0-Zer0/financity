@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9063008304931915176}
   - component: {fileID: 5583412978607450243}
   - component: {fileID: 7142148942467673399}
-  - component: {fileID: 8620624375611113514}
+  - component: {fileID: 7231012161114361276}
   m_Layer: 0
   m_Name: Corridor-Door
   m_TagString: Untagged
@@ -74,37 +74,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.01, y: 3.01, z: 3.01}
   m_Center: {x: 0, y: 0, z: 1.5}
---- !u!114 &8620624375611113514
-MonoBehaviour:
+--- !u!192 &7231012161114361276
+OcclusionArea:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4648779219506466710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 3
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 1
-  m_DefaultArea: 0
-  m_GenerateLinks: 1
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.06666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 5c2d243ec857d22d8ac0a47778d696e9, type: 2}
-  m_BuildHeightMesh: 0
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3, z: 3}
+  m_Center: {x: 0, y: 0, z: 1.5}
+  m_IsViewVolume: 1
 --- !u!1 &6307858088361414750
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +97,6 @@ GameObject:
   - component: {fileID: 7335660040935971511}
   - component: {fileID: 8305159390179725058}
   - component: {fileID: 8652906750415020239}
-  - component: {fileID: 5762487272395199804}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -215,25 +194,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5353267526512436935, guid: 7f5dd8933060367c3873e17d3760d8f3, type: 3}
---- !u!114 &5762487272395199804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6307858088361414750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 0
-  m_OverrideGenerateLinks: 0
-  m_GenerateLinks: 0
-  m_IgnoreFromBuild: 0
-  m_ApplyToChildren: 1
-  m_AffectedAgents: ffffffff
 --- !u!1 &8694207731775239994
 GameObject:
   m_ObjectHideFlags: 0

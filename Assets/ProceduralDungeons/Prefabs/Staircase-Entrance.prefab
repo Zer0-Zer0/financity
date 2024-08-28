@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 8096580138192827098}
   - component: {fileID: 3936378137891777810}
   - component: {fileID: 1461682850258133311}
+  - component: {fileID: 1875386451892324015}
   m_Layer: 0
   m_Name: Staircase-Entrance
   m_TagString: Untagged
@@ -104,6 +105,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.44, y: 8.41, z: 3.01}
   m_Center: {x: -2.7, y: -2.71, z: 0}
+--- !u!192 &1875386451892324015
+OcclusionArea:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6638947402062453634}
+  serializedVersion: 2
+  m_Size: {x: 5.44, y: 8.41, z: 3.01}
+  m_Center: {x: -2.7, y: -2.71, z: 0}
+  m_IsViewVolume: 1
 --- !u!1 &7485589950748313141
 GameObject:
   m_ObjectHideFlags: 0
