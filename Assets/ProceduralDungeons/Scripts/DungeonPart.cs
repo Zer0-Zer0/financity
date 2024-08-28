@@ -111,7 +111,7 @@ public class DungeonPart : MonoBehaviour
 
         try
         {
-            if (SpawnCount >= 8)
+            if (SpawnCount >= 12)
             {
                 yield return SpawnWall(place);
                 Debug.Log("Spawn limit reached.");
@@ -187,7 +187,7 @@ public class DungeonPart : MonoBehaviour
         newPart.transform.parent = transform;
         newPart.Exit = place;
         newPart.HardIndex = randomIndex;
-        newPart.SpawnCount = spawnCount + 1;
+        newPart.SpawnCount = SpawnCount + 1;
         StartCoroutine(newPart.Initialize());
         yield return null;
     }
