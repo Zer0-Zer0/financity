@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.2
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0, g: 0.17610072, b: 0.5283019, a: 1}
+  m_AmbientSkyColor: {r: 0, g: 0.002604127, b: 0.125, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -4107,6 +4107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6592648338644071436}
+  - component: {fileID: 6592648338644071437}
   m_Layer: 0
   m_Name: Corridor-L
   m_TagString: Untagged
@@ -4130,6 +4131,17 @@ Transform:
   - {fileID: 8128263760160181722}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!192 &6592648338644071437
+OcclusionArea:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5774020493905484894}
+  serializedVersion: 2
+  m_Size: {x: 6, y: 3, z: 6}
+  m_Center: {x: 1.5, y: 0, z: 3}
+  m_IsViewVolume: 1
 --- !u!4 &8128263760160181722
 Transform:
   m_ObjectHideFlags: 0
