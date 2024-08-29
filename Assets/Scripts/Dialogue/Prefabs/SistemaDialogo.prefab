@@ -49,8 +49,8 @@ GameObject:
   - component: {fileID: 6925977707084589088}
   - component: {fileID: 8514640344322287491}
   - component: {fileID: 5306435022737654709}
-  m_Layer: 5
-  m_Name: DialoguePanel
+  m_Layer: 6
+  m_Name: PainelDialogo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,8 +126,8 @@ GameObject:
   - component: {fileID: 225961740262327948}
   - component: {fileID: 2369915551752821820}
   - component: {fileID: 4965574618271740921}
-  m_Layer: 5
-  m_Name: SpeakerName
+  m_Layer: 6
+  m_Name: TextoNome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -421,8 +421,8 @@ GameObject:
   - component: {fileID: 2259709074338545456}
   - component: {fileID: 4785793871817433001}
   - component: {fileID: 7927377216098173980}
-  - component: {fileID: 2306792026997148318}
-  m_Layer: 5
+  - component: {fileID: 5711549265923524035}
+  m_Layer: 6
   m_Name: SistemaDialogo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,7 +438,7 @@ RectTransform:
   m_GameObject: {fileID: 7715463460456803140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3105796754683254517}
@@ -494,8 +494,8 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
---- !u!114 &2306792026997148318
+  m_PresetInfoIsWorld: 0
+--- !u!114 &5711549265923524035
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -504,14 +504,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7715463460456803140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 11500000, guid: 87960fa97730cadfbacb2c67fe54bb1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  _inputProximaFrase: 13
+  _textoDialogo: {fileID: 7480991608643743523}
+  _textoNome: {fileID: 2369915551752821820}
+  _caixaDialogo: {fileID: 1352934521922021013}
+  DialogoAcabou:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &9175799336115137207
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,8 +526,8 @@ GameObject:
   - component: {fileID: 5536905888937213038}
   - component: {fileID: 7279590209759924556}
   - component: {fileID: 7480991608643743523}
-  m_Layer: 5
-  m_Name: DialogueText
+  m_Layer: 6
+  m_Name: TextoDialogo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -662,7 +664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _normalDelay: 0.01
-  _fastDelay: 0.005
+  _fastDelay: 0
   TypingFinished:
     m_PersistentCalls:
       m_Calls: []
