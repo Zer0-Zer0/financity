@@ -28,10 +28,10 @@ public class SpawnRandomLoot : MonoBehaviour
         {
             int randomIndex = Random.Range(0, randomLoot.Length);
             GameObject loot = Instantiate(randomLoot[randomIndex], transform.position, transform.rotation);
+            loot.transform.parent = transform;
             hasSpawned = true;
-            
+
             Debug.Log($"Sucessfully spawned loot \"{loot.name}\"!");
-        }else
-            Debug.Log($"{gameObject.name}: Did not spawn any loot here!");
+        }
     }
 }
