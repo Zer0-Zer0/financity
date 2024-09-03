@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
+using Economy;
 
 namespace InventorySystem
 {
@@ -126,7 +127,9 @@ namespace InventorySystem
                 if (DataManager.playerData.GetCurrentBalance() >= _itemValue)
                 {
                     Inventory.AddItem(CurrentInventory, slot);
-                    DataManager.playerData.RemoveFromCurrentBalance(_itemValue);
+
+                    Transaction transaction = new Transaction(slot.CurrentItem.GetCurrentValue(), null, DataManager.playerData.GetCurrentWallet(), slot.CurrentItem.Name);
+                    DataManager.playerData.AddTransaction(transaction);
                 }
             }
             else

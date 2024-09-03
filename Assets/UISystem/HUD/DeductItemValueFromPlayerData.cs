@@ -15,7 +15,7 @@ public class DeductItemValueFromPlayerData : MonoBehaviour
     {
         if (data is InventorySlot slot)
         {
-            Transaction transaction = new Transaction(slot.CurrentItem.GetCurrentValue(), null, DataManager.playerData.GetCurrentWallet());
+            Transaction transaction = new Transaction(slot.CurrentItem.GetCurrentValue(), null, DataManager.playerData.GetCurrentWallet(), slot.CurrentItem.Name);
             playerDataEvents.AddTransaction(transaction);
         }
     }
