@@ -24,7 +24,8 @@ namespace UISystem
                     continue;
 
                 string text = ExpensesOfDay.GetText();
-                text = $"{text}\n{transaction.Name} : -{transaction.Value}";
+                string value = String.Format("{0:N2}BRL", transaction.Value);
+                text = $"{text}\n{transaction.Name} : -{value}";
                 ExpensesOfDay.SetText(text);
             }
         }
@@ -37,7 +38,8 @@ namespace UISystem
                     continue;
 
                 string text = ProfitsOfDay.GetText();
-                text = $"{text}\n{transaction.Name} : {transaction.Value}";
+                string value = String.Format("{0:N2}BRL", transaction.Value);
+                text = $"{text}\n{transaction.Name} : {value}";
                 ProfitsOfDay.SetText(text);
             }
         }
