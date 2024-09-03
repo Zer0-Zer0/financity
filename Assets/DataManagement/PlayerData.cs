@@ -110,7 +110,7 @@ public class PlayerData
 
     public void AddTransaction(TransactionSO transaction)
     {
-        AddTransaction(transaction.instance);
+        AddTransaction(transaction.Instance);
         CurrentBalanceChanged?.Invoke();
     }
 
