@@ -107,12 +107,27 @@ public class PlayerData
 
     public float GetCurrentBalance() => _walletData.CurrentMoney;
 
+
+    public void AddTransaction(TransactionSO transaction)
+    {
+        AddTransaction(transaction.instance);
+        CurrentBalanceChanged?.Invoke();
+    }
+
+    public void AddTransaction(Transaction transaction)
+    {
+        _walletData.Transactions.Add(transaction);
+        CurrentBalanceChanged?.Invoke();
+    }
+
     public void AddToCurrentBalance(float value)
     {
         if (value <= 0)
             throw new ArgumentException("Cannot add a non-positive amount to the balance.");
 
-        Transaction transaction = new Transaction(value, _walletData);
+        Debug.LogWarning("WARNING: This will be deprecated in favor of Add transaction");
+
+        Transaction transaction = new Transaction(value, _walletData, null, "Crédito");
         _walletData.Transactions.Add(transaction);
         CurrentBalanceChanged?.Invoke();
     }
@@ -125,7 +140,9 @@ public class PlayerData
         if (value > GetCurrentBalance())
             throw new InvalidOperationException("Cannot remove more than the current balance.");
 
-        Transaction transaction = new Transaction(value, null, _walletData);
+        Debug.LogWarning("WARNING: This will be deprecated in favor of Add transaction");
+
+        Transaction transaction = new Transaction(value, null, _walletData, "Transação");
         _walletData.Transactions.Add(transaction);
         CurrentBalanceChanged?.Invoke();
     }

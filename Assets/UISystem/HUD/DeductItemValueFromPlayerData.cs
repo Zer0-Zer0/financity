@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using InventorySystem;
 using UnityEngine;
+using Economy;
 
 [RequireComponent(typeof(PlayerDataEvents))]
 public class DeductItemValueFromPlayerData : MonoBehaviour
@@ -14,7 +15,8 @@ public class DeductItemValueFromPlayerData : MonoBehaviour
     {
         if (data is InventorySlot slot)
         {
-            playerDataEvents.RemoveFromCurrentBalance(slot.CurrentItem.GetCurrentValue());
+            Transaction transaction = new Transaction(slot.CurrentItem.GetCurrentValue(), null, DataManager.playerData.GetCurrentWallet());
+            playerDataEvents.AddTransaction(transaction);
         }
     }
 }

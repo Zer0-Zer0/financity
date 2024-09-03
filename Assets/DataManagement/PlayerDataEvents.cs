@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using InventorySystem;
+using Economy;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -86,6 +87,12 @@ public class PlayerDataEvents : MonoBehaviour
         if (data is InventoryItem item)
             SetTotalAmmo(TotalAmmo + (int)item.data);
     }
+
+    public void AddTransaction(TransactionSO transaction) =>
+        playerData.AddTransaction(transaction);
+
+    public void AddTransaction(Transaction transaction) =>
+        playerData.AddTransaction(transaction);
 
     public void AddToCurrentBalance(float value) =>
         playerData.AddToCurrentBalance(value);
