@@ -34,8 +34,11 @@ namespace UISystem
             textMeshProUGUI.fontSize = textData.size;
         }
 
-        public void SetText(string text){
+        public void SetText(string text)
+        {
             textMeshProUGUI.text = text;
         }
+
+        public string GetText() => textMeshProUGUI.text;
     }
 }
