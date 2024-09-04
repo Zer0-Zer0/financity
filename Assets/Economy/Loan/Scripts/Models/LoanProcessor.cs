@@ -70,7 +70,7 @@ namespace Economy
         private void ProcessInstallmentPayment(WalletData wallet)
         {
             Transaction transaction;
-            transaction = new Transaction(InstallmentValue, null, wallet);
+            transaction = new Transaction(InstallmentValue, null, wallet, "Parcela");
 
             remainingValue -= InstallmentValue;
             remainingInstallments--;
@@ -113,7 +113,9 @@ namespace Economy
         {
             Transaction transaction = new Transaction(
                 Loan.Principal,
-                wallet
+                wallet,
+                null,
+                "Emprestimo"
             );
             wallet.Transactions.Add(transaction);
             wallet.Loans.Add(this);
