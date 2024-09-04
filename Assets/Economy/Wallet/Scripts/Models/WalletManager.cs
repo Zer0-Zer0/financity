@@ -61,6 +61,15 @@ namespace Economy
             CleanupProcessedLoans(loansToRemove, currentWallet);
         }
 
+        public void PassDay()
+        {
+            var currentWallet = DataManager.playerData.GetCurrentWallet();
+            var value = currentWallet.CurrentMoney;
+            currentWallet.Transactions.Clear();
+            var transaction = new Transaction(value, currentWallet, null, "Saldo de ontem");
+            currentWallet.Transactions.Add(transaction);
+        }
+
         /// <summary>
         /// Processes the installment for a specific loan and checks if it has been fully paid off.
         /// If the loan is fully paid, it is marked for removal from the wallet.
