@@ -62,6 +62,9 @@ namespace Economy
             _sender = sender;
             _receiver = receiver;
 
+            if(name == "")
+                Debug.LogError("ERROR: Names for transactions are now mandatory");
+
             OnTransactionPending = new UnityEvent<Transaction>();
             OnTransactionAccepted = new UnityEvent<Transaction>();
             OnTransactionRefused = new UnityEvent<Transaction>();
