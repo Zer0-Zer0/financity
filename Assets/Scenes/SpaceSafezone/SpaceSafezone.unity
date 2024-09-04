@@ -11473,6 +11473,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3041805261624527271, guid: fc09c19fcbf07272e9c40a0e7e280d52, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3041805261624527271, guid: fc09c19fcbf07272e9c40a0e7e280d52, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3041805261624527271, guid: fc09c19fcbf07272e9c40a0e7e280d52, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3041805261624527271, guid: fc09c19fcbf07272e9c40a0e7e280d52, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3041805261624527271, guid: fc09c19fcbf07272e9c40a0e7e280d52, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3041805261624527271, guid: fc09c19fcbf07272e9c40a0e7e280d52, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3044890913616528594, guid: fc09c19fcbf07272e9c40a0e7e280d52, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -28169,17 +28193,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b39d34f9ee12e3d4f8a61720146b7939, type: 3}
---- !u!114 &2069210585 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2265823043609854281, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-  m_PrefabInstance: {fileID: 2450752749897917586}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b345375eedaae0f999cf881be0327bfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2077344291
 GameObject:
   m_ObjectHideFlags: 0
@@ -31478,90 +31491,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GunGal
       objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerInTrigger.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerOutOfTrigger.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerInTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerInTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 2450752749897917588}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerOutOfTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerOutOfTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerInTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerOutOfTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2069210585}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerOutOfTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 2450752749897917588}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerInTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerOutOfTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerOutOfTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerOutOfTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangeQuest
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerOutOfTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerInTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerInTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerOutOfTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: QuestChangeEmitter, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerOutOfTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerInTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerOutOfTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731304787910568255, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-      propertyPath: PlayerOutOfTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 9223244127067752555, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
       propertyPath: DialogoTerminou.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
@@ -31571,11 +31500,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
---- !u!1 &2450752749897917588 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1899103626453385483, guid: 9205b0a32576051d1aeb24da7e013d44, type: 3}
-  m_PrefabInstance: {fileID: 2450752749897917586}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2485044128892461393
 GameObject:
   m_ObjectHideFlags: 0
