@@ -12,6 +12,8 @@ namespace UISystem
         [SerializeField] Text ProfitsOfDay;
         [SerializeField] Text IncomeOfDay;
 
+        public GameObject FirstPanel;
+
         protected override void Setup() { }
 
         protected override void Configure() { }

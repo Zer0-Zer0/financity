@@ -9,6 +9,7 @@ public class EOTDViewModel : MonoBehaviour
 
     public void OnEndOfTheDayEvent(Component sender, object data)
     {
+        GetEOTDView.FirstPanel.SetActive(true);
         GetEOTDView.ClearText();
         GetEOTDView.SetData(DataManager.playerData.GetCurrentWallet());
     }
