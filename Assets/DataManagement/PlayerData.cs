@@ -164,7 +164,12 @@ public class PlayerData
 
     public float GetMaxHealth() => _maxHealth;
 
-    public void SetMaxHealth(float value) => _maxHealth = value;
+    public void SetMaxHealth(float value)
+    {
+        _maxHealth = value;
+        float newCurrentHealth = Mathf.Min(_maxHealth, _currentHealth);
+        SetCurrentHealth(newCurrentHealth);
+    }
 
     public Inventory GetCurrentInventory() => _inventory;
 
