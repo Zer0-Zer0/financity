@@ -112,6 +112,8 @@ public class PlayerDataEvents : MonoBehaviour
 
     public void RemoveFromCurrentHealth(float value) => SetCurrentHealth(CurrentHealth - value);
 
+    public void SetMaxHealth(float value) => playerData.SetMaxHealth(value);
+
     public void SetFirstTime(bool value) => playerData.SetFirstTime(value);
 
     public void CompleteMissionOne() => playerData.CompleteMissionOne();

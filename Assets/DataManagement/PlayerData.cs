@@ -30,7 +30,8 @@ public class PlayerData
     [SerializeField]
     float _currentHealth;
 
-    public const float MaxHealth = 10;
+    [SerializeField]
+    float _maxHealth;
 
     [SerializeField]
     Gênero _gênero;
@@ -55,7 +56,8 @@ public class PlayerData
         WalletData wallet = null,
         Inventory inventory = null,
         Gênero gênero = Gênero.Neutro,
-        float currentHealth = 5
+        float currentHealth = 5,
+        float maxHealth = 10
     )
     {
         _currentAmmo = currentAmmo;
@@ -76,6 +78,7 @@ public class PlayerData
         _firstTime = true;
         _missionOneCompleted = false;
         _currentHealth = currentHealth;
+        _maxHealth = maxHealth;
 
         // Initialize UnityEvents
         CurrentAmmoChanged = new UnityEvent();
@@ -155,9 +158,13 @@ public class PlayerData
 
     public void SetCurrentHealth(float value)
     {
-        _currentHealth = Math.Min(value, MaxHealth);
+        _currentHealth = Math.Min(value, GetMaxHealth());
         CurrentHealthChanged?.Invoke();
     }
+
+    public float GetMaxHealth() => _maxHealth;
+
+    public void SetMaxHealth(float value) => _maxHealth = value;
 
     public Inventory GetCurrentInventory() => _inventory;
 
