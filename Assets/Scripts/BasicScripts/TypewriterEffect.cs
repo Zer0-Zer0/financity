@@ -9,7 +9,6 @@ using UnityEngine.Events;
 public class TypewriterEffect : MonoBehaviour
 {
     [SerializeField] private float _normalDelay = 0.2f;
-    [SerializeField] private float _fastDelay = 0.05f;
     private TMP_Text _textComponent;
     private string _fullText;
     private int _visibleCharacterCount = 0;
@@ -32,7 +31,8 @@ public class TypewriterEffect : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.F))
         {
-            _currentDelay = _fastDelay;
+            _textComponent.maxVisibleCharacters = _textComponent.text.Length;
+            StopAllCoroutines();
         }
         else if (Input.GetKeyUp(KeyCode.F))
         {
@@ -65,7 +65,8 @@ public class TypewriterEffect : MonoBehaviour
         TypingFinished?.Invoke();
     }
 
-    public void ClearText(){
+    public void ClearText()
+    {
         _visibleCharacterCount = 0;
     }
 }
