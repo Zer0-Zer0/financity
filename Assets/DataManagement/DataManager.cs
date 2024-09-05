@@ -40,6 +40,11 @@ public static class DataManager
         string json = System.IO.File.ReadAllText(_playerDataPath);
         PlayerData loadedData = JsonUtility.FromJson<PlayerData>(json);
 
+        if (string.IsNullOrEmpty(json))
+        {
+            Debug.LogError("JSON data is empty or null.");
+            return new PlayerData();
+        }
         if (loadedData.GetCurrentHealth() <= 0)
         {
             Debug.Log("Creating new player data due to not having one in the saves");
