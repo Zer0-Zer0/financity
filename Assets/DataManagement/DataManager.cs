@@ -41,8 +41,14 @@ public static class DataManager
         PlayerData loadedData = JsonUtility.FromJson<PlayerData>(json);
 
         if (loadedData.GetCurrentHealth() <= 0)
+        {
+            Debug.Log("Creating new player data due to not having one in the saves");
             return new PlayerData();
+        }
         else
+        {
+            Debug.Log(loadedData);
             return loadedData;
+        }
     }
 }
