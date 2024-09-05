@@ -17,11 +17,14 @@ public class LoadSceneOnTrigger : MonoBehaviour
     void Update()
     {
         if (_isPlayerInRange && Input.GetKeyDown(KeyCode.E))
-        {
-            OnSceneLoad?.Invoke();
-            DataManager.SavePlayerData(DataManager.playerData);
-            SceneManager.LoadScene(_sceneName);
-        }
+            LoadSceneSequence();
+    }
+
+    private IEnumerator LoadSceneSequence()
+    {
+        OnSceneLoad?.Invoke();
+        yield return DataManager.SavePlayerData(DataManager.playerData);
+        SceneManager.LoadScene(_sceneName);
     }
 
     private void OnTriggerEnter(Collider other)

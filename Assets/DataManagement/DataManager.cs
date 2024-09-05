@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Security;
 using UnityEngine;
@@ -19,10 +21,11 @@ public static class DataManager
         set { _playerData = value; }
     }
 
-    public static void SavePlayerData(PlayerData data)
+    public static IEnumerator SavePlayerData(PlayerData data)
     {
         string json = JsonUtility.ToJson(data);
-        System.IO.File.WriteAllText(_playerDataPath, json);
+        File.WriteAllText(_playerDataPath, json);
+        yield return null;
     }
 
     public static void ClearPlayerData()

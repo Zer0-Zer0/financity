@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneOnCall : MonoBehaviour
 {
-    public void LoadSceneSave(string scene)
+    public IEnumerator LoadSceneSave(string scene)
     {
-        DataManager.SavePlayerData(DataManager.playerData);
+        yield return DataManager.SavePlayerData(DataManager.playerData);
+
         SceneManager.LoadScene(scene);
     }
 
