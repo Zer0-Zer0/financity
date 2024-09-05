@@ -28,14 +28,6 @@ namespace Economy
             set => _loans = value;
         }
 
-        [SerializeField]
-        string _walletName;
-        public string WalletName
-        {
-            get => _walletName;
-            private set => _walletName = value;
-        }
-
         public GameEvent UnableToPay;
 
         public float CurrentMoney => CalculateCurrentMoney();

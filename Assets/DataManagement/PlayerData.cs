@@ -33,9 +33,6 @@ public class PlayerData
     [SerializeField]
     float _maxHealth;
 
-    [SerializeField]
-    Gênero _gênero;
-
     #endregion
 
     #region Unity Events
@@ -55,7 +52,6 @@ public class PlayerData
         int totalAmmo = 120,
         WalletData wallet = null,
         Inventory inventory = null,
-        Gênero gênero = Gênero.Neutro,
         float currentHealth = 5,
         float maxHealth = 10
     )
@@ -72,8 +68,6 @@ public class PlayerData
             _inventory = new Inventory(12);
         else
             _inventory = inventory;
-
-        _gênero = gênero;
 
         _firstTime = true;
         _missionOneCompleted = false;
@@ -109,7 +103,6 @@ public class PlayerData
     }
 
     public float GetCurrentBalance() => _walletData.CurrentMoney;
-
 
     public void AddTransaction(TransactionSO transaction)
     {
@@ -182,8 +175,6 @@ public class PlayerData
         _firstTime = value;
         FirstTimeChanged?.Invoke();
     }
-
-    public Gênero getGender() => _gênero;
 
     public bool GetMissionOneStatus() => _missionOneCompleted;
 
