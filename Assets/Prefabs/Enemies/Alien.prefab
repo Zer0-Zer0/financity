@@ -811,6 +811,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36a1265430357104e813ede853bbd099, type: 3}
       insertIndex: -1
       addedObject: {fileID: -7089098179377488646}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36a1265430357104e813ede853bbd099, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 718249380073674556}
     - targetCorrespondingSourceObject: {fileID: 1082271958561512970, guid: 36a1265430357104e813ede853bbd099, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2500515376964427338}
@@ -4586,8 +4589,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 245.17969
-        y: 114.3125
+        x: 246.17969
+        y: 111.3125
         width: 100
         height: 16
       isBreakpoint: 0
@@ -4947,15 +4950,15 @@ MonoBehaviour:
       transitions: []
       actionData:
         actionNames:
-        - HutongGames.PlayMaker.Actions.FloatAdd
+        - HutongGames.PlayMaker.Actions.CallMethod
         - HutongGames.PlayMaker.Actions.ActivateGameObject
         customNames:
         - 
         - 
         actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000004000000
-        actionHashCodes: 2a6e8a00b2cf1000
+        actionIsOpen: 0100
+        actionStartIndex: 0000000007000000
+        actionHashCodes: ca51e900b2cf1000
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams:
@@ -4973,24 +4976,73 @@ MonoBehaviour:
         fsmEventTargetParams: []
         fsmPropertyParams: []
         layoutOptionParams: []
-        fsmStringParams: []
-        fsmObjectParams: []
-        fsmVarParams: []
-        fsmArrayParams: []
-        fsmEnumParams: []
-        fsmFloatParams:
-        - useVariable: 1
-          name: Player_Health
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          value: 0
+        fsmStringParams:
         - useVariable: 0
           name: 
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: -1
+          value: RemoveFromCurrentHealth
+        fsmObjectParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: PlayerDataEvents
+          value: {fileID: 718249380073674556}
+        fsmVarParams:
+        - variableName: 
+          objectType: UnityEngine.Object
+          useVariable: 0
+          type: 0
+          floatValue: 1
+          intValue: 0
+          boolValue: 0
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
+        - variableName: 
+          objectType: 
+          useVariable: 0
+          type: -1
+          floatValue: 0
+          intValue: 0
+          boolValue: 0
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams: []
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 0
@@ -5012,27 +5064,28 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams: []
         byteData: 00000000
-        arrayParamSizes: 
-        arrayParamTypes: []
+        arrayParamSizes: 01000000
+        arrayParamTypes:
+        - HutongGames.PlayMaker.FsmVar
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0f0000000f00000001000000010000001400000011000000110000000100000001000000
+        paramDataType: 18000000120000000c000000270000002700000001000000010000001400000011000000110000000100000001000000
         paramName:
-        - floatVariable
-        - add
+        - behaviour
+        - methodName
+        - parameters
+        - 
+        - storeResult
         - everyFrame
-        - perSecond
+        - manualUI
         - gameObject
         - activate
         - recursive
         - resetOnExit
         - everyFrame
-        paramDataPos: 000000000100000000000000010000000000000000000000010000000200000003000000
-        paramByteDataSize: 000000000000000001000000010000000000000000000000000000000100000001000000
+        paramDataPos: 000000000000000000000000000000000100000000000000010000000000000000000000010000000200000003000000
+        paramByteDataSize: 000000000000000000000000000000000000000001000000010000000000000000000000000000000100000001000000
     events:
-    - name: FINISHED
-      isSystemEvent: 1
-      isGlobal: 0
     - name: ATAQUEPAROU
       isSystemEvent: 0
       isGlobal: 0
@@ -5043,9 +5096,6 @@ MonoBehaviour:
       isSystemEvent: 0
       isGlobal: 0
     - name: DELAYDANOACABOU
-      isSystemEvent: 0
-      isGlobal: 0
-    - name: NaoAcertou
       isSystemEvent: 0
       isGlobal: 0
     - name: VERIFICARATAQUE
@@ -5119,9 +5169,9 @@ MonoBehaviour:
     handleCollisionEnter2D: 0
     handleCollisionExit2D: 0
     handleCollisionStay2D: 0
-    handleTriggerEnter: 1
+    handleTriggerEnter: 0
     handleTriggerExit: 0
-    handleTriggerStay: 1
+    handleTriggerStay: 0
     handleCollisionEnter: 0
     handleCollisionExit: 0
     handleCollisionStay: 0
@@ -5213,6 +5263,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetFSMs:
   - {fileID: 3735041755094641200}
+--- !u!114 &718249380073674556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783025548473620418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c102af5669f6c88778a684c46d542fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentAmmoChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  TotalAmmoChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  CurrentBalanceChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  FirstTimeChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  CurrentHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  MissionOneCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  IfIsFirstTime:
+    m_PersistentCalls:
+      m_Calls: []
+  IfNotFirstTime:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3188897627728439443 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6170625038081293824, guid: 36a1265430357104e813ede853bbd099, type: 3}
