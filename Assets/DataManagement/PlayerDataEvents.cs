@@ -132,6 +132,6 @@ public class PlayerDataEvents : MonoBehaviour
     #endregion
 
     #region Data Management
-    public void SaveData() => StartCoroutine(DataManager.SavePlayerData(playerData));
+    public void SaveData() => DataManager.SavePlayerData(playerData);
     #endregion
 }

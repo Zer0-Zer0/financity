@@ -20,10 +20,10 @@ public class LoadSceneOnTrigger : MonoBehaviour
             LoadSceneSequence();
     }
 
-    private IEnumerator LoadSceneSequence()
+    private void LoadSceneSequence()
     {
         OnSceneLoad?.Invoke();
-        yield return DataManager.SavePlayerData(DataManager.playerData);
+        DataManager.SavePlayerData(DataManager.playerData);
         SceneManager.LoadScene(_sceneName);
     }
 
