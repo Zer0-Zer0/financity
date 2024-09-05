@@ -190,7 +190,13 @@ public class PlayerData
 
     public override string ToString()
     {
-        return $"Current Ammo: {GetCurrentAmmo()}, Total Ammo: {GetTotalAmmo()}, Current Balance: {GetCurrentBalance()}, First Time: {GetFirstTime()}";
+        return $"Current Ammo: {GetCurrentAmmo()}, " +
+               $"Total Ammo: {GetTotalAmmo()}, " +
+               $"Current Balance: {GetCurrentBalance()}, " +
+               $"First Time: {GetFirstTime()}, " +
+               $"Current Health: {GetCurrentHealth()}, " +
+               $"Max Health: {GetMaxHealth()}, " +
+               $"Mission One Completed: {GetMissionOneStatus()}";
     }
 
     #endregion
