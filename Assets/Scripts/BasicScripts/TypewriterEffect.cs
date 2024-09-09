@@ -31,12 +31,8 @@ public class TypewriterEffect : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.F))
         {
-            _textComponent.maxVisibleCharacters = _textComponent.text.Length;
             StopAllCoroutines();
-        }
-        else if (Input.GetKeyUp(KeyCode.F))
-        {
-            _currentDelay = _normalDelay;
+            _textComponent.maxVisibleCharacters = _fullText.Length;
         }
     }
 
