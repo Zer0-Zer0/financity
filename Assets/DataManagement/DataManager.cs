@@ -21,17 +21,18 @@ public static class DataManager
         set { _playerData = value; }
     }
 
-    public static IEnumerator SavePlayerData(PlayerData data)
+    public static void SavePlayerData(PlayerData data)
     {
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(_playerDataPath, json);
-        yield return null;
     }
 
     public static void ClearPlayerData()
     {
         PlayerData EmptySave = new PlayerData();
-        SavePlayerData(EmptySave);
+        playerData = EmptySave;
+        SavePlayerData(EmptySave);  
+        Debug.Log("Save varrido");
     }
 
     public static PlayerData LoadPlayerData()
@@ -40,7 +41,7 @@ public static class DataManager
         if (!File.Exists(_playerDataPath))
             return new PlayerData();
 
-        string json = System.IO.File.ReadAllText(_playerDataPath);
+        string json = File.ReadAllText(_playerDataPath);
         PlayerData loadedData = JsonUtility.FromJson<PlayerData>(json);
 
         if (string.IsNullOrEmpty(json))
