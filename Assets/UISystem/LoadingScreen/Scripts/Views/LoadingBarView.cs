@@ -14,7 +14,8 @@ namespace UISystem
 
         public void StartGame()
         {
-            DataManager.ClearPlayerData();
+            DataManager.SavePlayerData(DataManager.playerData);
+            Debug.Log("Saved player data");
             StartCoroutine(LoadLevel());
             Canvas.SetActive(true);
             inspiringQuoteText.SetText(inspiringQuotes.GetRandomQuote());

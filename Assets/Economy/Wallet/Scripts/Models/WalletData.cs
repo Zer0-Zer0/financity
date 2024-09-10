@@ -36,8 +36,12 @@ namespace Economy
 
         private float CalculateCurrentMoney()
         {
+            if (Transactions.Count == 0) {
+                Debug.Log("Wallet is empty");
+                return 0f;
+            }
             float total = 0f;
-            if (Transactions.Count == 0) return total;
+
             foreach (var transaction in Transactions)
                 if (this == transaction.Receiver)
                     total += transaction.Value;
