@@ -6,12 +6,12 @@ using UnityEngine.Events;
 public class TitleScreenManager : MonoBehaviour
 {
     [SerializeField] UnityEvent OnAnyKeyPress;
-    [SerializeField] GameObject TitlePanel;
+    [SerializeField] Animator TitleScreenAnimator;
     void Update()
     {
         if (Input.anyKey)
         {
-            TitlePanel.SetActive(false);
+            TitleScreenAnimator.SetBool("Pressed", true);
             OnAnyKeyPress?.Invoke();
         }
     }
