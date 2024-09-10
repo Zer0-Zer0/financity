@@ -26,7 +26,7 @@ namespace UISystem
         {
             string _formatedPrincipal = $"{FormatMoney(data.Principal)}";
             string _formatedRate = $"{FormatPercentage(data.Rate)} ({FormatLoanType(data.LoanType)})";
-            string _formatedInstallments = $"dividido {data.Installments}X";
+            string _formatedInstallments = $"{data.Installments}pçs";
 
             _loanPrincipal.SetText(_formatedPrincipal);
             _loanRate.SetText(_formatedRate);
