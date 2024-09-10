@@ -346,9 +346,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 7203706335497325509}
-        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
-        m_MethodName: ChangeQuest
+      - m_Target: {fileID: 2596948337944204625}
+        m_TargetAssemblyTypeName: GameEventEmitter, Assembly-CSharp
+        m_MethodName: Invoke
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -385,9 +385,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 7053541682345568376}
-        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
-        m_MethodName: ChangeQuest
+      - m_Target: {fileID: 2380691813054021379}
+        m_TargetAssemblyTypeName: GameEventEmitter, Assembly-CSharp
+        m_MethodName: Invoke
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -412,9 +412,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2265823043609854281}
-        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
-        m_MethodName: ChangeQuest
+      - m_Target: {fileID: 714745735369156117}
+        m_TargetAssemblyTypeName: GameEventEmitter, Assembly-CSharp
+        m_MethodName: Invoke
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -464,9 +464,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 7889008054237463636}
-        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
-        m_MethodName: ChangeQuest
+      - m_Target: {fileID: 92736124613371275}
+        m_TargetAssemblyTypeName: GameEventEmitter, Assembly-CSharp
+        m_MethodName: Invoke
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -491,9 +491,9 @@ MonoBehaviour:
   PlayerInTrigger:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7053541682345568376}
-        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
-        m_MethodName: ChangeQuest
+      - m_Target: {fileID: 2380691813054021379}
+        m_TargetAssemblyTypeName: GameEventEmitter, Assembly-CSharp
+        m_MethodName: Invoke
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -518,9 +518,9 @@ MonoBehaviour:
   PlayerOutOfTrigger:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2265823043609854281}
-        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
-        m_MethodName: ChangeQuest
+      - m_Target: {fileID: 714745735369156117}
+        m_TargetAssemblyTypeName: GameEventEmitter, Assembly-CSharp
+        m_MethodName: Invoke
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -944,6 +944,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &2567446168897181227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 290543917995930071}
+  - component: {fileID: 714745735369156117}
+  m_Layer: 0
+  m_Name: StoreHider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &290543917995930071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2567446168897181227}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2482352791359865060}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &714745735369156117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2567446168897181227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 634a4eadb89d8382599204ce43e08fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 30cc5d9e83be1e6e09b43c3046697281, type: 2}
 --- !u!1 &2970341772083075678
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,9 +1000,6 @@ GameObject:
   - component: {fileID: 2482352791359865060}
   - component: {fileID: 9223244127067752555}
   - component: {fileID: 2041077483393102751}
-  - component: {fileID: 1922778792594967122}
-  - component: {fileID: 2827183526541059958}
-  - component: {fileID: 758176356958891140}
   m_Layer: 0
   m_Name: GunGal
   m_TagString: Untagged
@@ -983,7 +1025,9 @@ Transform:
   - {fileID: 6481913195332796293}
   - {fileID: 2736411536335120145}
   - {fileID: 8003019864198456809}
+  - {fileID: 137260468858592745}
   - {fileID: 9088884459605674720}
+  - {fileID: 290543917995930071}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 95.609, z: 0}
 --- !u!114 &9223244127067752555
@@ -1015,9 +1059,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 758176356958891140}
-        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
-        m_MethodName: ChangeQuest
+      - m_Target: {fileID: 2596948337944204625}
+        m_TargetAssemblyTypeName: GameEventEmitter, Assembly-CSharp
+        m_MethodName: Invoke
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1048,8 +1092,8 @@ MonoBehaviour:
     \xE9 claro."
   - "Eu sempre soube que eles eram reais ... o motivo deles n\xE3o terem me respondido
     nos anos 20 foi por eles serem NOSSOS INIMIGOS!"
-  - "De qualquer forma, vou desbloquear esse seu rifle para voc\xEA, te darei um
-    desconto dessa vez por voc\xEA ser verde."
+  - "De qualquer forma, vou desbloquear esse seu rifle para voc\xEA, farei de gra\xE7a
+    dessa vez por voc\xEA ser verde."
   - "[RIFLE DE ASSALTO] foi destravado. [LOJA] dispon\xEDvel."
   DialogoTerminou:
     m_PersistentCalls:
@@ -1066,21 +1110,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1922778792594967122}
-        m_TargetAssemblyTypeName: PlayerDataEvents, Assembly-CSharp
-        m_MethodName: AddTransaction
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 9984a50c317a8cc6c98f2b25b90952d5, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Economy.TransactionSO, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 499
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2827183526541059958}
-        m_TargetAssemblyTypeName: QuestChangeEmitter, Assembly-CSharp
-        m_MethodName: ChangeQuest
+      - m_Target: {fileID: 92736124613371275}
+        m_TargetAssemblyTypeName: GameEventEmitter, Assembly-CSharp
+        m_MethodName: Invoke
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1135,70 +1167,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1922778792594967122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2970341772083075678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c102af5669f6c88778a684c46d542fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentAmmoChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  TotalAmmoChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  CurrentBalanceChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  FirstTimeChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  CurrentHealthChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  MissionOneCompleted:
-    m_PersistentCalls:
-      m_Calls: []
-  IfIsFirstTime:
-    m_PersistentCalls:
-      m_Calls: []
-  IfNotFirstTime:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &2827183526541059958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2970341772083075678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b345375eedaae0f999cf881be0327bfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnQuestChanged: {fileID: 11400000, guid: e417c2b8d7c1b7f5488d253a63db5e3f, type: 2}
-  NewObjective: 
---- !u!114 &758176356958891140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2970341772083075678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b345375eedaae0f999cf881be0327bfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnQuestChanged: {fileID: 11400000, guid: 9845d8972c5ed756cae9c5a6d7bdd537, type: 2}
-  NewObjective: 
 --- !u!1 &3206293000515862310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1901,6 +1869,51 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &6010964748715166229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 137260468858592745}
+  - component: {fileID: 92736124613371275}
+  m_Layer: 0
+  m_Name: PlayerStarter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &137260468858592745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6010964748715166229}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2482352791359865060}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &92736124613371275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6010964748715166229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 634a4eadb89d8382599204ce43e08fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: e417c2b8d7c1b7f5488d253a63db5e3f, type: 2}
 --- !u!1 &6049912061635603977
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,8 +2091,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8003019864198456809}
-  - component: {fileID: 7889008054237463636}
-  - component: {fileID: 7203706335497325509}
+  - component: {fileID: 2596948337944204625}
   m_Layer: 0
   m_Name: PlayerStopper
   m_TagString: Untagged
@@ -2102,7 +2114,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2482352791359865060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7889008054237463636
+--- !u!114 &2596948337944204625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2111,25 +2123,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7697798083558258202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b345375eedaae0f999cf881be0327bfe, type: 3}
+  m_Script: {fileID: 11500000, guid: 634a4eadb89d8382599204ce43e08fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnQuestChanged: {fileID: 11400000, guid: e417c2b8d7c1b7f5488d253a63db5e3f, type: 2}
-  NewObjective: 
---- !u!114 &7203706335497325509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7697798083558258202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b345375eedaae0f999cf881be0327bfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnQuestChanged: {fileID: 11400000, guid: 9845d8972c5ed756cae9c5a6d7bdd537, type: 2}
-  NewObjective: 
+  Event: {fileID: 11400000, guid: 9845d8972c5ed756cae9c5a6d7bdd537, type: 2}
 --- !u!1 &7772394875321425322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2824,8 +2821,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9088884459605674720}
-  - component: {fileID: 7053541682345568376}
-  - component: {fileID: 2265823043609854281}
+  - component: {fileID: 2380691813054021379}
   m_Layer: 0
   m_Name: StoreShower
   m_TagString: Untagged
@@ -2848,7 +2844,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2482352791359865060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7053541682345568376
+--- !u!114 &2380691813054021379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2857,25 +2853,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9212582154932401827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b345375eedaae0f999cf881be0327bfe, type: 3}
+  m_Script: {fileID: 11500000, guid: 634a4eadb89d8382599204ce43e08fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnQuestChanged: {fileID: 11400000, guid: c190ed705bfa667e69fcc1c18c0d8a0d, type: 2}
-  NewObjective: 
---- !u!114 &2265823043609854281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9212582154932401827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b345375eedaae0f999cf881be0327bfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnQuestChanged: {fileID: 11400000, guid: 30cc5d9e83be1e6e09b43c3046697281, type: 2}
-  NewObjective: 
+  Event: {fileID: 11400000, guid: c190ed705bfa667e69fcc1c18c0d8a0d, type: 2}
 --- !u!1001 &2736411536335120143
 PrefabInstance:
   m_ObjectHideFlags: 0
