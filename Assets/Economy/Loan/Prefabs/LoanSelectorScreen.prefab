@@ -118,9 +118,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5813522625518631244}
   - component: {fileID: 4852616553437369849}
-  - component: {fileID: 3784027941091311384}
-  - component: {fileID: 6657773401275629706}
   - component: {fileID: 1942092477897818823}
+  - component: {fileID: 8689436774418510370}
   m_Layer: 5
   m_Name: Manager
   m_TagString: Untagged
@@ -166,46 +165,6 @@ MonoBehaviour:
   - {fileID: 8267429929209521040}
   - {fileID: 8595091860408463184}
   - {fileID: 8510287575866908996}
---- !u!114 &3784027941091311384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6857567993035998766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: ecb965ec6095c7849b86e04cc75d8ac8, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6657773401275629706}
-        m_TargetAssemblyTypeName: LoadSceneOnCall, Assembly-CSharp
-        m_MethodName: LoadSceneSave
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: SpaceSafezone
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &6657773401275629706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6857567993035998766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f972ade9ad799bed8f29bed0d3f760d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1942092477897818823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,6 +192,34 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &8689436774418510370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6857567993035998766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: ecb965ec6095c7849b86e04cc75d8ac8, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8806079802189075469}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &8806079802189075469
 GameObject:
