@@ -1093,6 +1093,8 @@ GameObject:
   - component: {fileID: 5005356687380992144}
   - component: {fileID: 5824193732774258088}
   - component: {fileID: 1931089578799629133}
+  - component: {fileID: 8193149187771328619}
+  - component: {fileID: 6082286719457393971}
   m_Layer: 0
   m_Name: ManagementStuff
   m_TagString: Untagged
@@ -1234,6 +1236,62 @@ MonoBehaviour:
       - m_Target: {fileID: 5824193732774258088}
         m_TargetAssemblyTypeName: MouseLockScript, Assembly-CSharp
         m_MethodName: HideMouse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8193149187771328619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7573804511041641438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 487c49243faf55e089aebd4757ea09bf, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5824193732774258088}
+        m_TargetAssemblyTypeName: MouseLockScript, Assembly-CSharp
+        m_MethodName: HideMouse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6082286719457393971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7573804511041641438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 457b4156340752cb9b4bfd18db6b208b, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5824193732774258088}
+        m_TargetAssemblyTypeName: MouseLockScript, Assembly-CSharp
+        m_MethodName: ShowMouse
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
