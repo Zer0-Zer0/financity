@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Economy;
 
 namespace UISystem
@@ -19,9 +18,6 @@ namespace UISystem
         Text _loanInstallments;
 
         [SerializeField]
-        Text _loanType;
-
-        [SerializeField]
         AcceptLoanButtonViewModel acceptLoanButtonViewModel;
         protected override void Setup() { }
         protected override void Configure() { }
@@ -29,14 +25,12 @@ namespace UISystem
         public void SetLoan(LoanData data)
         {
             string _formatedPrincipal = $"{FormatMoney(data.Principal)}";
-            string _formatedRate = $"{FormatPercentage(data.Rate)}(ao dia)";
-            string _formatedInstallments = $"{data.Installments} Parcelas";
-            string _formatedLoanType = $"{FormatLoanType(data.LoanType)}";
+            string _formatedRate = $"{FormatPercentage(data.Rate)} ({FormatLoanType(data.LoanType)})";
+            string _formatedInstallments = $"dividido {data.Installments}X";
 
             _loanPrincipal.SetText(_formatedPrincipal);
             _loanRate.SetText(_formatedRate);
             _loanInstallments.SetText(_formatedInstallments);
-            _loanType.SetText(_formatedLoanType);
 
             LoanProcessor loanProcessor = new LoanProcessor(data);
 
@@ -48,9 +42,9 @@ namespace UISystem
             switch (loanType)
             {
                 case LoanType.SimpleInterest:
-                    return "Juros Simples";
+                    return "Simples";
                 case LoanType.CompoundInterest:
-                    return "Juros Composto";
+                    return "Composto";
                 default:
                     throw new Exception("ERROR: Not implemented loan.");
             }
@@ -64,7 +58,8 @@ namespace UISystem
 
         private string FormatPercentage(float value)
         {
-            string result = value.ToString("P");
+            string percentage = (value * 100f).ToString("F2");
+            string result = $"{percentage}%";
             return result;
         }
     }
