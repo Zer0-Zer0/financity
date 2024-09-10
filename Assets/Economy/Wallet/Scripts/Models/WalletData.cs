@@ -37,6 +37,7 @@ namespace Economy
         private float CalculateCurrentMoney()
         {
             float total = 0f;
+            if (Transactions.Count == 0) return total;
             foreach (var transaction in Transactions)
                 if (this == transaction.Receiver)
                     total += transaction.Value;
@@ -50,6 +51,7 @@ namespace Economy
         private float CalculateCurrentDebt()
         {
             float totalDebt = 0f;
+            if (Loans.Count == 0) return totalDebt;
             foreach (var loan in Loans)
                 totalDebt += loan.TotalToPay;
             return totalDebt;
