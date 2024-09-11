@@ -17,11 +17,12 @@ namespace UISystem
 
         protected override void Setup() { }
 
-        protected override void Configure()
+        protected override void Configure() { }
+
+        void Start()
         {
             float _valor = DataManager.playerData.GetCurrentWallet().CurrentDebt;
             float _parcelas = GetInstallments();
-
             Titulo.SetText(SelectRandomPhrase());
             Valor.SetText(FormatMoney(_valor));
             Subtitulo.SetText(FormatSubtitle(_parcelas));

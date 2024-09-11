@@ -28,7 +28,16 @@ namespace Economy
 
         private float remainingValue;
         private int remainingInstallments;
-        public float InstallmentValue => remainingValue / remainingInstallments;
+        public float InstallmentValue
+        {
+            get
+            {
+                if (remainingInstallments != 0)
+                    return remainingValue / remainingInstallments;
+                else
+                    return 0f;
+            }
+        }
 
         /// <summary>
         /// Gets the total number of remaining installments, including penalties.

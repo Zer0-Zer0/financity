@@ -17,7 +17,9 @@ namespace UISystem
 
         protected override void Setup() { }
 
-        protected override void Configure()
+        protected override void Configure() { }
+
+        void Start()
         {
             float _valor = GetInstallmentValue();
             Debug.Log($"Valor: R${_valor}");
