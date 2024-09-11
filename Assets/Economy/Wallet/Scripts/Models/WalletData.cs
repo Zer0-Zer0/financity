@@ -35,7 +35,7 @@ namespace Economy
         public float CurrentMaxDebt => _currentMaxDebt;
 
         private float CalculateCurrentMoney()
-        {/*
+        {
             if (Transactions == null)
             {
                 Debug.Log("Transactions is null.");
@@ -45,7 +45,7 @@ namespace Economy
             {
                 Debug.Log("Transactions is empty.");
                 return 0f;
-            }//*/
+            }
 
             float total = 0f;
 
@@ -63,7 +63,16 @@ namespace Economy
         private float CalculateCurrentDebt()
         {
             float totalDebt = 0f;
-           // if (Loans.Count == 0) return totalDebt;
+            if (Loans == null)
+            {
+                Debug.Log("Loans is null.");
+                return 0f;
+            }
+            else if (Loans.Count == 0)
+            {
+                Debug.Log("Loans is empty.");
+                return 0f;
+            }
             foreach (var loan in Loans)
                 totalDebt += loan.TotalToPay;
             return totalDebt;
