@@ -14,16 +14,17 @@ namespace UISystem
 
         public void StartGame()
         {
+            Debug.Log($"Save da barra de carregando\n{DataManager.playerData}");
             DataManager.SavePlayerData(DataManager.playerData);
-            Debug.Log("Saved player data");
-            StartCoroutine(LoadLevel());
             Canvas.SetActive(true);
             inspiringQuoteText.SetText(inspiringQuotes.GetRandomQuote());
             Cursor.visible = false;
+            StartCoroutine(LoadLevel());
         }
 
         IEnumerator LoadLevel()
         {
+            yield return null;
             AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("SpaceSafezone");
             while (!asyncOperation.isDone)
             {

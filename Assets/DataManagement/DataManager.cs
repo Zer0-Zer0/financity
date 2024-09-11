@@ -25,14 +25,16 @@ public static class DataManager
     {
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(_playerDataPath, json);
+        playerData = data;
+        Debug.Log($"Save feito.\n{data}");
     }
 
     public static void ClearPlayerData()
     {
         PlayerData EmptySave = new PlayerData();
         playerData = EmptySave;
-        SavePlayerData(EmptySave);  
-        Debug.Log("Save varrido");
+        SavePlayerData(EmptySave);
+        Debug.Log($"Save varrido.\n{playerData}");
     }
 
     public static PlayerData LoadPlayerData()
@@ -51,12 +53,12 @@ public static class DataManager
         }
         if (loadedData.GetCurrentHealth() <= 0)
         {
-            Debug.Log("Creating new player data due to not having one in the saves");
+            Debug.Log("Creating new player data due to not having one in the saves.");
             return new PlayerData();
         }
         else
         {
-            Debug.Log(loadedData);
+            Debug.Log($"Loaded save.\n{loadedData}");
             return loadedData;
         }
     }
