@@ -40,6 +40,7 @@ public class MouseLockScript : MonoBehaviour
     {
         string objectName = gameObject.name;
         Debug.Log($"The {objectName} has MouseLockScript");
+        HideMouse();
     }
 
     private void Update() => InputLogic();
