@@ -4,22 +4,19 @@ using TMPro;
 using UnityEngine;
 using System.IO;
 using UnityEngine.Events;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(TMP_Text))]
 public class TypewriterEffect : MonoBehaviour
 {
-    [SerializeField] private float _normalDelay = 0.2f;
     private TMP_Text _textComponent;
     private string _fullText;
     private int _visibleCharacterCount = 0;
     public UnityEvent TypingFinished;
-    private float _currentDelay;
-
     void Awake()
     {
         _textComponent = GetComponent<TMP_Text>();
         _fullText = _textComponent.text;
-        _currentDelay = _normalDelay;
     }
 
     void Start()
@@ -52,10 +49,17 @@ public class TypewriterEffect : MonoBehaviour
 
         while (_visibleCharacterCount <= text.Length)
         {
+            if (Input.GetKey(KeyCode.F))
+            {
+                _textComponent.maxVisibleCharacters = _fullText.Length;
+                _textComponent.text = text;
+                yield break;
+            }
+
             _textComponent.maxVisibleCharacters = _visibleCharacterCount;
             _visibleCharacterCount++;
 
-            yield return new WaitForSeconds(_currentDelay);
+            yield return null;
         }
 
         TypingFinished?.Invoke();
