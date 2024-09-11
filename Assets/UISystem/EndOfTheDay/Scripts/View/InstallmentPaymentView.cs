@@ -19,7 +19,7 @@ namespace UISystem
 
         protected override void Configure() { }
 
-        void Start()
+        public void UpdateValues()
         {
             float _valor = GetInstallmentValue();
             Debug.Log($"Valor: R${_valor}");
