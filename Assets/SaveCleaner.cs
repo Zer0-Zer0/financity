@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SaveCleaner : MonoBehaviour
 {
-    void Start()
+    void OnEnable()
     {
         DataManager.ClearPlayerData();
     }
