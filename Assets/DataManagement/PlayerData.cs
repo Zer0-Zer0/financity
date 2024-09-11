@@ -49,7 +49,7 @@ public class PlayerData
     #region Constructor
     public PlayerData(
         int currentAmmo = 30,
-        int totalAmmo = 120,
+        int totalAmmo = 0,
         WalletData wallet = null,
         Inventory inventory = null,
         float currentHealth = 5,
