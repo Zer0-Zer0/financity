@@ -43,6 +43,7 @@ public class DungeonPart : MonoBehaviour
         yield return ValidateParent();
         yield return CheckForCollisions();
         yield return CheckExitsAndSpawn();
+        NavmeshBaker.Instance.BakeAfterTime();
     }
 
     private void SetIndexOnName()
