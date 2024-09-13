@@ -171,11 +171,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1962246407992554277}
         m_TargetAssemblyTypeName: PlayerDataEvents, Assembly-CSharp
-        m_MethodName: AddToCurrentBalance
-        m_Mode: 4
+        m_MethodName: AddTransaction
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 842d5061fd57465ed82c533d4638adb3, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Economy.TransactionSO, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 120
           m_StringArgument: 
