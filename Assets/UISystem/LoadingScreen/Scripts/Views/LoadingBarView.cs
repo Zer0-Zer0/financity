@@ -11,6 +11,7 @@ namespace UISystem
         [SerializeField] GameObject Canvas;
         [SerializeField] Slider LoadingBar;
         [SerializeField] InspiringQuotesSO inspiringQuotes;
+        [SerializeField] string Level = "SpaceSafezone";
 
         public void StartGame()
         {
@@ -25,7 +26,7 @@ namespace UISystem
         IEnumerator LoadLevel()
         {
             yield return null;
-            AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("SpaceSafezone");
+            AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(Level);
             while (!asyncOperation.isDone)
             {
                 LoadingBar.value = asyncOperation.progress;
