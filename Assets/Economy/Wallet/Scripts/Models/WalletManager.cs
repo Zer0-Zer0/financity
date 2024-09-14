@@ -66,7 +66,7 @@ namespace Economy
             var currentWallet = DataManager.playerData.GetCurrentWallet();
             var value = currentWallet.CurrentMoney;
             currentWallet.Transactions.Clear();
-            var transaction = new Transaction(value, currentWallet, null, "Saldo de ontem");
+            var transaction = new Transaction(value, TipoDeTransação.Adição, "Saldo de ontem");
             currentWallet.Transactions.Add(transaction);
         }
 

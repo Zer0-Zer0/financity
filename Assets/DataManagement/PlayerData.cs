@@ -123,7 +123,7 @@ public class PlayerData
 
         Debug.LogWarning("WARNING: This will be deprecated in favor of Add transaction");
 
-        Transaction transaction = new Transaction(value, _walletData, null, "Crédito");
+        Transaction transaction = new Transaction(value, TipoDeTransação.Adição, "Crédito");
         _walletData.Transactions.Add(transaction);
         CurrentBalanceChanged?.Invoke();
     }
@@ -138,7 +138,7 @@ public class PlayerData
 
         Debug.LogWarning("WARNING: This will be deprecated in favor of Add transaction");
 
-        Transaction transaction = new Transaction(value, null, _walletData, "Transação");
+        Transaction transaction = new Transaction(value, TipoDeTransação.Remoção, "Transação");
         _walletData.Transactions.Add(transaction);
         CurrentBalanceChanged?.Invoke();
     }

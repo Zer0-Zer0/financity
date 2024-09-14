@@ -22,7 +22,7 @@ namespace UISystem
         {
             foreach (var transaction in wallet.Transactions)
             {
-                if (transaction.Receiver == wallet)
+                if (transaction.transactionType == TipoDeTransação.Adição)
                     continue;
 
                 string text = ExpensesOfDay.GetText();
@@ -36,7 +36,7 @@ namespace UISystem
         {
             foreach (var transaction in wallet.Transactions)
             {
-                if (transaction.Sender == wallet)
+                if (transaction.transactionType == TipoDeTransação.Remoção)
                     continue;
 
                 string text = ProfitsOfDay.GetText();

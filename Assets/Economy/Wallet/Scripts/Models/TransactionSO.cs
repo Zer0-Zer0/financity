@@ -3,6 +3,12 @@ using UnityEngine;
 
 namespace Economy
 {
+    public enum TipoDeTransação
+    {
+        Adição,
+        Remoção
+    }
+
     [CreateAssetMenu(fileName = "TransactionSO", menuName = "Economy/TransactionSO", order = 0)]
     public class TransactionSO : ScriptableObject
     {
@@ -11,23 +17,6 @@ namespace Economy
 
         [SerializeField] TipoDeTransação tipoDeTransação;
 
-        public Transaction Instance
-        {
-            get
-            {
-                if (tipoDeTransação == TipoDeTransação.Adição)
-                    return new Transaction(valor, DataManager.playerData.GetCurrentWallet(), null, nome);
-                else if (tipoDeTransação == TipoDeTransação.Remoção)
-                    return new Transaction(valor, null, DataManager.playerData.GetCurrentWallet(), nome);
-                else
-                    throw new NotImplementedException("ERROR: uninplemented transaction type");
-            }
-        }
-
-        enum TipoDeTransação
-        {
-            Adição,
-            Remoção
-        }
+        public Transaction Instance => new Transaction(valor, tipoDeTransação, nome);
     }
 }

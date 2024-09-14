@@ -23,17 +23,9 @@ namespace Economy
         private float _value;
         public float Value => _value;
 
-        /// <summary>
-        /// The wallet data of the sender.
-        /// </summary>
-        private WalletData _sender;
-        public WalletData Sender => _sender;
-
-        /// <summary>
-        /// The wallet data of the receiver.
-        /// </summary>
-        private WalletData _receiver;
-        public WalletData Receiver => _receiver;
+        [SerializeField]
+        private TipoDeTransação _transactionType;
+        public TipoDeTransação transactionType => _transactionType;
 
         public UnityEvent<Transaction> OnTransactionPending { get; private set; }
         public UnityEvent<Transaction> OnTransactionAccepted { get; private set; }
@@ -49,9 +41,8 @@ namespace Economy
         /// <param name="transactionType">The type of the transaction (Physical or Digital).</param>
         public Transaction(
             float value,
-            WalletData receiver = null,
-            WalletData sender = null,
-            string name = ""
+            TipoDeTransação transactionType,
+            string name
         )
         {
             if (value < 0)
@@ -59,10 +50,9 @@ namespace Economy
 
             _name = name;
             _value = value;
-            _sender = sender;
-            _receiver = receiver;
+            _transactionType = transactionType;
 
-            if(name == "")
+            if (name == "")
                 Debug.LogError("ERROR: Names for transactions are now mandatory");
 
             OnTransactionPending = new UnityEvent<Transaction>();

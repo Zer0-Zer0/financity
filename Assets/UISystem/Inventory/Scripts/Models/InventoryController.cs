@@ -128,7 +128,7 @@ namespace InventorySystem
                 {
                     Inventory.AddItem(CurrentInventory, slot);
 
-                    Transaction transaction = new Transaction(slot.CurrentItem.GetCurrentValue(), null, DataManager.playerData.GetCurrentWallet(), slot.CurrentItem.Name);
+                    Transaction transaction = new Transaction(slot.CurrentItem.GetCurrentValue(), TipoDeTransação.Remoção, slot.CurrentItem.Name);
                     DataManager.playerData.AddTransaction(transaction);
                 }
             }

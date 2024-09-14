@@ -51,9 +51,9 @@ namespace Economy
 
             foreach (Transaction transaction in Transactions)
             {
-                if (this == transaction.Receiver)
+                if (transaction.transactionType == TipoDeTransação.Adição)
                     total += transaction.Value;
-                else if (this == transaction.Sender)
+                else if (transaction.transactionType == TipoDeTransação.Remoção)
                     total -= transaction.Value;
             }
 
