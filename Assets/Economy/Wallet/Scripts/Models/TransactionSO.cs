@@ -9,7 +9,7 @@ namespace Economy
         Remoção
     }
 
-    [CreateAssetMenu(fileName = "TransactionSO", menuName = "Economy/TransactionSO", order = 0)]
+    [CreateAssetMenu(fileName = "Transaction_", menuName = "ScriptableObjects/Economy/Transaction")]
     public class TransactionSO : ScriptableObject
     {
         [SerializeField] string nome;

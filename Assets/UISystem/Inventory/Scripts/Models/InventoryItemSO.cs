@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace InventorySystem
 {
-    [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
+    [CreateAssetMenu(fileName = "Item_", menuName = "ScriptableObjects/Inventory/Item")]
     public class InventoryItem : ScriptableObject
     {
         public Sprite Icon;

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace UISystem
 {
-    [CreateAssetMenu(fileName = "SliderSO", menuName = "UISystem/SliderSO", order = 0)]
+    [CreateAssetMenu(fileName = "Slider_", menuName = "ScriptableObjects/UISystem/Slider")]
     public class SliderSO : ScriptableObject
     {
         public bool interactable;

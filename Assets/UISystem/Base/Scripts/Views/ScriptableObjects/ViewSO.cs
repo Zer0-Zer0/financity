@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace UISystem
 {
-    [CreateAssetMenu(menuName = "UISystem/ViewSO", fileName = "ViewSO")]
+    [CreateAssetMenu(fileName = "View_", menuName = "ScriptableObjects/UISystem/View")]
     public class ViewSO : ScriptableObject
     {
         public PaddingSO paddingData;

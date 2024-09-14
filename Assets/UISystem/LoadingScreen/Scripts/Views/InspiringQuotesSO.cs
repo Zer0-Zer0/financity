@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace UISystem
 {
-    [CreateAssetMenu(fileName = "InspiringQuotes", menuName = "ScriptableObjects/InspiringQuotes", order = 1)]
+    [CreateAssetMenu(fileName = "Quotes_", menuName = "ScriptableObjects/InspiringQuotes")]
     public class InspiringQuotesSO : ScriptableObject
     {
         [SerializeField]

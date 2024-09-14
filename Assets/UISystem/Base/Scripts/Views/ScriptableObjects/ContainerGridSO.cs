@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace UISystem
 {
-    [CreateAssetMenu(fileName = "ContainerGridSO", menuName = "UISystem/ContainerGridSO", order = 0)]
+    [CreateAssetMenu(fileName = "ContainerGrid_", menuName = "ScriptableObjects/UISystem/ContainerGrid")]
     public class ContainerGridSO : ScriptableObject
     {
         public RectOffset padding;

@@ -6,9 +6,8 @@ using UnityEngine;
 namespace Economy
 {
     [CreateAssetMenu(
-        fileName = "DynamicSecuritySO",
-        menuName = "Economy/DynamicSecuritySO",
-        order = 0
+        fileName = "DynamicSecurity_",
+        menuName = "ScriptableObjects/Economy/DynamicSecurity"
     )]
     public class DynamicSecuritySO : ScriptableObject
     {
