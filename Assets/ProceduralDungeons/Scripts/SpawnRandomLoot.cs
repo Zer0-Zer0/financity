@@ -27,7 +27,8 @@ public class SpawnRandomLoot : MonoBehaviour
         if (spawnValue <= spawnChance)
         {
             int randomIndex = Random.Range(0, randomLoot.Length);
-            GameObject loot = Instantiate(randomLoot[randomIndex], transform.position, transform.rotation);
+            Quaternion randomRotation = Quaternion.Euler(0, Random.Range(-360f, 360f), 0);
+            GameObject loot = Instantiate(randomLoot[randomIndex], transform.position, randomRotation);
             loot.transform.parent = transform;
             hasSpawned = true;
 
