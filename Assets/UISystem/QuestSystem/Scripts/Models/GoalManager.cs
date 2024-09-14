@@ -9,6 +9,13 @@ namespace QuestSystem
         public bool Completed { get; private set; }
         int CurrentGoalAmount;
 
+        public GoalManager(QuestGoalSO goalSO)
+        {
+            goal = goalSO;
+            Completed = false;
+            CurrentGoalAmount = 0;
+        }
+
         public virtual void Initialize()
         {
             Completed = false;

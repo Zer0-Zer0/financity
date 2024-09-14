@@ -12,6 +12,13 @@ namespace QuestSystem
         public bool Completed { get; private set; }
         public List<GoalManager> goalManagers { get; private set; }
 
+        public QuestManager(QuestSO questSO)
+        {
+            quest = questSO;
+            foreach (var goal in quest.Goals)
+                goalManagers.Add(new GoalManager(goal));
+        }
+
         public virtual void Initialize()
         {
             Completed = false;
@@ -19,6 +26,14 @@ namespace QuestSystem
             {
                 goalManager.Initialize();
                 goalManager.goal.OnGoalCompletedEvent.AddListener(CheckGoals);
+            }
+        }
+
+        public virtual void UnInitialize()
+        {
+            foreach (var goalManager in goalManagers)
+            {
+                goalManager.goal.OnGoalCompletedEvent.RemoveListener(CheckGoals);
             }
         }
 
