@@ -3,12 +3,15 @@ using UnityEngine.Events;
 
 public class AlienNavmeshListener : MonoBehaviour
 {
-    public GameEvent gameEvent;
-
-    public CustomUnityEvent response;
-    private void OnEnable() => gameEvent.RegisterListener(this);
-
-    private void OnDisable() => gameEvent.UnregisterListener(this);
-
-    public void OnEventRaised(Component sender, object data) => response.Invoke(sender, data);
+    [SerializeField] GameEventListener gameEventListener;
+    private void OnEnable()
+    {
+        if (NavmeshBaker.Instance != null)
+            gameEventListener.enabled = true;
+        else
+        {
+            gameEventListener.enabled = false;
+            gameEventListener.gameEvent.Raise(this, null);
+        }
+    }
 }
