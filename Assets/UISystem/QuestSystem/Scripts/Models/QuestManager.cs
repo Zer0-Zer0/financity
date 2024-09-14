@@ -1,22 +1,29 @@
 //Fonte de inspiração
 //https://www.youtube.com/watch?v=-65u991cdtw
 
+using UnityEngine;
+using UnityEngine.Events;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace QuestSystem
 {
+    [Serializable]
     public class QuestManager
     {
         public QuestSO quest { get; private set; }
         public bool Completed { get; private set; }
         public List<GoalManager> goalManagers { get; private set; }
+        [HideInInspector]
+        public UnityEvent OnQuestCompletedEvent;
 
         public QuestManager(QuestSO questSO)
         {
             quest = questSO;
             foreach (var goal in quest.Goals)
                 goalManagers.Add(new GoalManager(goal));
+            OnQuestCompletedEvent = new UnityEvent();
         }
 
         public virtual void Initialize()
@@ -25,7 +32,7 @@ namespace QuestSystem
             foreach (var goalManager in goalManagers)
             {
                 goalManager.Initialize();
-                goalManager.goal.OnGoalCompletedEvent.AddListener(CheckGoals);
+                goalManager.OnGoalCompletedEvent?.AddListener(CheckGoals);
             }
         }
 
@@ -33,7 +40,7 @@ namespace QuestSystem
         {
             foreach (var goalManager in goalManagers)
             {
-                goalManager.goal.OnGoalCompletedEvent.RemoveListener(CheckGoals);
+                goalManager.OnGoalCompletedEvent?.RemoveListener(CheckGoals);
             }
         }
 
@@ -42,7 +49,7 @@ namespace QuestSystem
             Completed = goalManagers.All(g => g.Completed == true);
 
             if (Completed)
-                quest.OnQuestCompletedEvent?.Invoke();
+                OnQuestCompletedEvent?.Invoke();
         }
     }
 }

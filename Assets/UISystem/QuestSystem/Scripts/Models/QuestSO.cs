@@ -2,13 +2,13 @@
 //https://www.youtube.com/watch?v=-65u991cdtw
 
 using UnityEngine;
-using UnityEngine.Events;
 using System;
 using System.Collections.Generic;
 
 namespace QuestSystem
 {
     [CreateAssetMenu(fileName = "Quest_", menuName = "ScriptableObjects/Quest")]
+    [Serializable]
     public class QuestSO : ScriptableObject
     {
         [Serializable]
@@ -20,6 +20,7 @@ namespace QuestSystem
 
         [Header("Info")] public Info Information;
 
+        [Serializable]
         public struct Stat
         {
             public float Value;
@@ -28,7 +29,5 @@ namespace QuestSystem
         [Header("Reward")] public Stat Reward;
 
         public List<QuestGoalSO> Goals;
-
-        public UnityEvent OnQuestCompletedEvent;
     }
 }
