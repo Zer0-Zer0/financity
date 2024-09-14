@@ -22,6 +22,11 @@ public class MouseLockScript : MonoBehaviour
     public static MouseLockScript Instance { get; private set; }
 
     private bool tabbedIn = false;
+    public static bool tabbedInX = false;
+    public static bool tabbedInTab = false;
+
+    [SerializeField] bool StartVisible = false;
+    [SerializeField] bool InputLogicEnabled = true;
 
     private void Awake()
     {
@@ -34,16 +39,31 @@ public class MouseLockScript : MonoBehaviour
         Instance = this;
     }
 
-    private void Start() => MLSDebug();
+    private void Start()
+    {
+        MLSDebug();
+        StartingVisibilityChecker();
+    }
+
+    private void StartingVisibilityChecker()
+    {
+        if (StartVisible)
+            ShowMouse();
+        else
+            HideMouse();
+    }
 
     private void MLSDebug()
     {
         string objectName = gameObject.name;
         Debug.Log($"The {objectName} has MouseLockScript");
-        HideMouse();
     }
 
-    private void Update() => InputLogic();
+    private void Update()
+    {
+        if (InputLogicEnabled)
+            InputLogic();
+    }
 
     private void InputLogic()
     {
@@ -54,10 +74,16 @@ public class MouseLockScript : MonoBehaviour
 
         if (_hasClicked && !tabbedIn)
             Mouse.Hide();
-        else if (_hasOpenedStore)
+        else if (_hasOpenedStore && !tabbedInTab)
+        {
+            tabbedInX = !tabbedInX;
             TabLogic();
-        else if (_hasPressedTab)
+        }
+        else if (_hasPressedTab && !tabbedInX)
+        {
+            tabbedInTab = !tabbedInTab;
             TabLogic();
+        }
     }
 
     private void TabLogic()
