@@ -32,6 +32,7 @@ public class PlayerDataEvents : MonoBehaviour
     #region Unity Methods
     void Start()
     {
+        Debug.Log($"{gameObject.name}: has PlayerDataEvents");
         SubscribeEvents();
         FirstTimeChecker();
 
