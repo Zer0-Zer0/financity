@@ -8,6 +8,7 @@ public class DayEvents : MonoBehaviour
     [SerializeField] GameEvent ThirdDay;
     private void Start()
     {
+        Debug.Log("Quantia de dias: {DataManager.playerData.Days}");
         switch (DataManager.playerData.Days)
         {
             case 1:
@@ -20,5 +21,9 @@ public class DayEvents : MonoBehaviour
                 ThirdDay.Raise(this, DataManager.playerData.Days);
                 break;
         }
+    }
+
+    public void AddDay(){
+        DataManager.playerData.Days++;
     }
 }
