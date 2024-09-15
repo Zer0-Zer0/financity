@@ -79,6 +79,8 @@ public class PlayerData
 
         _firstTime = true;
         _missionOneCompleted = false;
+        _missionTwoCompleted = false;
+        
         _currentHealth = currentHealth;
         _maxHealth = maxHealth;
 
@@ -88,6 +90,7 @@ public class PlayerData
         CurrentBalanceChanged = new UnityEvent();
         FirstTimeChanged = new UnityEvent();
         MissionOneCompleted = new UnityEvent();
+        MissionTwoCompleted = new UnityEvent();
         CurrentHealthChanged = new UnityEvent();
     }
 
