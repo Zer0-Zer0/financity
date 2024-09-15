@@ -52,9 +52,7 @@ namespace HutongGames.PlayMakerEditor
             BuildTarget.StandaloneOSX,
 #endif
 
-            BuildTarget.StandaloneLinux,
-            BuildTarget.StandaloneLinux64,
-            BuildTarget.StandaloneLinuxUniversal,
+            BuildTarget.StandaloneLinux64, // Atualizado
             BuildTarget.StandaloneWindows,
             BuildTarget.StandaloneWindows64,
             BuildTarget.iOS

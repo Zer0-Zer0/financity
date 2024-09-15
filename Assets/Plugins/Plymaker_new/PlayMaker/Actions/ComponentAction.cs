@@ -1,5 +1,4 @@
-
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
 
 // Unity 5.1 introduced a new networking library. 
 // Unless we define PLAYMAKER_LEGACY_NETWORK old network actions are disabled
@@ -13,7 +12,7 @@
 #endif
 
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI; // Adicione este namespace
 
 namespace HutongGames.PlayMaker.Actions
 {
@@ -21,14 +20,14 @@ namespace HutongGames.PlayMaker.Actions
     // Caches the component for performance
     public abstract class ComponentAction<T> : FsmStateAction where T : Component
     {
-		/// <summary>
-		/// The cached GameObject. Call UpdateCache() first
-		/// </summary>
+        /// <summary>
+        /// The cached GameObject. Call UpdateCache() first
+        /// </summary>
         protected GameObject cachedGameObject;
 
-		/// <summary>
-		/// The cached component. Call UpdateCache() first
-		/// </summary>
+        /// <summary>
+        /// The cached component. Call UpdateCache() first
+        /// </summary>
         protected T cachedComponent;
 
         protected Rigidbody rigidbody
@@ -61,21 +60,15 @@ namespace HutongGames.PlayMaker.Actions
             get { return cachedComponent as Camera; }
         }
 
-		#if UNITY_2017_2_OR_NEWER
-		#pragma warning disable CS0618 
-        #endif
-        protected Text guiText
+        protected Text guiText // Substitua GUIText por Text
         {
             get { return cachedComponent as Text; }
         }
 
-        protected Texture guiTexture
+        protected RawImage guiTexture // Substitua GUITexture por RawImage
         {
-            get { return cachedComponent as Texture; }
+            get { return cachedComponent as RawImage; }
         }
-        #if UNITY_2017_2_OR_NEWER
-        #pragma warning restore CS0618 
-		#endif
 
         protected Light light
         {
