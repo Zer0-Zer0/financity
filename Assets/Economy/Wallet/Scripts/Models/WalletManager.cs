@@ -9,7 +9,7 @@ namespace Economy
         public GameEvent OnLoanUnpaid;
         public GameEvent OnLoanRepaid;
 
-        private void OnEnable() => DataManager.playerData.GetCurrentWallet().UnableToPay = OnLoanUnpaid;
+        private void Start() => DataManager.playerData.GetCurrentWallet().UnableToPay = OnLoanUnpaid;
 
         /// <summary>
         /// Handles the event triggered when a loan is received.

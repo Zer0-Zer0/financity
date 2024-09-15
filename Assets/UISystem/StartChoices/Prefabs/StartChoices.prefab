@@ -29,9 +29,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1807929471445401935}
   - {fileID: 9099206812944926017}
   - {fileID: 8328185846015629228}
+  - {fileID: 1807929471445401935}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2031127786505005033
@@ -148,11 +148,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8056568878461251076, guid: 01ac68c238c924fcca457236d4282eb9, type: 3}
+      propertyPath: onClickEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056568878461251076, guid: 01ac68c238c924fcca457236d4282eb9, type: 3}
+      propertyPath: onClickEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056568878461251076, guid: 01ac68c238c924fcca457236d4282eb9, type: 3}
+      propertyPath: onClickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7681459501288454863}
+    - target: {fileID: 8056568878461251076, guid: 01ac68c238c924fcca457236d4282eb9, type: 3}
+      propertyPath: onClickEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7251185734946647458}
+    - target: {fileID: 8056568878461251076, guid: 01ac68c238c924fcca457236d4282eb9, type: 3}
+      propertyPath: onClickEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056568878461251076, guid: 01ac68c238c924fcca457236d4282eb9, type: 3}
+      propertyPath: onClickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GenerateRandomLoans
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056568878461251076, guid: 01ac68c238c924fcca457236d4282eb9, type: 3}
+      propertyPath: onClickEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Invoke
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056568878461251076, guid: 01ac68c238c924fcca457236d4282eb9, type: 3}
+      propertyPath: onClickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Economy.LoanController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056568878461251076, guid: 01ac68c238c924fcca457236d4282eb9, type: 3}
+      propertyPath: onClickEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GameEventEmitter, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056568878461251076, guid: 01ac68c238c924fcca457236d4282eb9, type: 3}
+      propertyPath: onClickEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ac68c238c924fcca457236d4282eb9, type: 3}
+--- !u!114 &7251185734946647458 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4771945640242282463, guid: 01ac68c238c924fcca457236d4282eb9, type: 3}
+  m_PrefabInstance: {fileID: 2781034647725970045}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 634a4eadb89d8382599204ce43e08fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8328185846015629228 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6128150743207642577, guid: 01ac68c238c924fcca457236d4282eb9, type: 3}
@@ -206,6 +257,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4852616553437369849, guid: ae26bc90654adcbcfa15cfae52d7f40b, type: 3}
+      propertyPath: LoanCanvas
+      value: 
+      objectReference: {fileID: 6050737076082621243}
     - target: {fileID: 5104243216133420465, guid: ae26bc90654adcbcfa15cfae52d7f40b, type: 3}
       propertyPath: m_Name
       value: LoanSelectorScreen
@@ -220,3 +275,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3520405312894856825, guid: ae26bc90654adcbcfa15cfae52d7f40b, type: 3}
   m_PrefabInstance: {fileID: 3012331716305514294}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6050737076082621243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8806079802189075469, guid: ae26bc90654adcbcfa15cfae52d7f40b, type: 3}
+  m_PrefabInstance: {fileID: 3012331716305514294}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7681459501288454863 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4852616553437369849, guid: ae26bc90654adcbcfa15cfae52d7f40b, type: 3}
+  m_PrefabInstance: {fileID: 3012331716305514294}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9034e373f61b404ba659ad77e2e273a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
