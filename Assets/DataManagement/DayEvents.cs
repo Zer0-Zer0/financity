@@ -17,7 +17,7 @@ public class DayEvents : MonoBehaviour
             case 2:
                 SecondDay.Raise(this, DataManager.playerData.Days);
                 break;
-            case 3:
+            default:
                 ThirdDay.Raise(this, DataManager.playerData.Days);
                 break;
         }

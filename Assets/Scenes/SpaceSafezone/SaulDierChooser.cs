@@ -25,7 +25,7 @@ public class SaulDierChooser : MonoBehaviour
             MissionOneCompletedSaulDier.SetActive(false);
             MissionTwoGranterSaulDier.SetActive(true);
             MissionTwoCompletedSaulDier.SetActive(false);
-        }else if (DataManager.playerData.Days == 2 && DataManager.playerData.GetMissionTwoStatus() == true){
+        }else if (DataManager.playerData.GetMissionTwoStatus() == true){
             DefaultSaulDier.SetActive(false);
             MissionOneCompletedSaulDier.SetActive(false);
             MissionTwoGranterSaulDier.SetActive(false);
