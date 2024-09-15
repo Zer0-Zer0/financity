@@ -194,6 +194,35 @@ PrefabInstance:
     m_TransformParent: {fileID: 706893593}
     m_Modifications:
     - target: {fileID: 1881994849611891016, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: Mensagens.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881994849611891016, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: Mensagens.Array.data[0]
+      value: BOM DIA!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881994849611891016, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: Mensagens.Array.data[1]
+      value: "CREIO EU QUE VOC\xCA PRECISA DE UMA FONTE MAIS EST\xC1VEL DE RENDA"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881994849611891016, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: Mensagens.Array.data[2]
+      value: PARA ISSO, TE RECOMENDO UMA VISITA AOS COMPLEXOS ABANDONADOS
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881994849611891016, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: Mensagens.Array.data[3]
+      value: "ELES ERAM PONTOS DE CONTROLE E EST\xC3O ESPALHADOS PELO MUNDO AFORA"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881994849611891016, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: Mensagens.Array.data[4]
+      value: "ELES CAIRAM POR N\xC3O CONSEGUIREM CONTER O PERIGO QUE TEM NO LADO
+        DE FORA"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881994849611891016, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: Mensagens.Array.data[5]
+      value: "DE QUALQUER FORMA, VOC\xCA J\xC1 SABE O QUE FAZER"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1881994849611891016, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
       propertyPath: DialogoTerminou.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 1947810321}
@@ -14856,8 +14885,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1577553482252253524, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
       propertyPath: Mensagens.Array.data[3]
-      value: "(Mais miss\xF5es aparecer\xE3o no futuro, [Complexos abandonados] pode
-        ser visitado indefinidamente)"
+      value: "(Mais miss\xF5es ser\xE3o adicionadas no futuro, [Complexos abandonados]
+        pode ser visitado indefinidamente)"
       objectReference: {fileID: 0}
     - target: {fileID: 1577553482252253524, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
       propertyPath: DialogoTerminou.m_PersistentCalls.m_Calls.Array.size
@@ -14882,11 +14911,11 @@ PrefabInstance:
     - target: {fileID: 1577553482252253524, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
       propertyPath: DialogoTerminou.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1163464425}
+      objectReference: {fileID: 0}
     - target: {fileID: 1577553482252253524, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
       propertyPath: DialogoTerminou.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1163464425}
+      objectReference: {fileID: 0}
     - target: {fileID: 1577553482252253524, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
       propertyPath: DialogoTerminou.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartGame
@@ -14997,17 +15026,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8dafb3041c3a3a043ab6cf8f990aa35a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1163464425 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1577553482252253524, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
-  m_PrefabInstance: {fileID: 1163464422}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28d4b9f3fd7d1a0fd8ed5da72ce60b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1164831501
@@ -27148,9 +27166,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1577553482252253524, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
-    - {fileID: 5064506115981630230, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
