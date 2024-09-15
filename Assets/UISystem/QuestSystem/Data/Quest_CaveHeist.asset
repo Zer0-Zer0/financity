@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Quest_CaveHeist
   m_EditorClassIdentifier: 
   Information:
-    Name: 
-    Icon: {fileID: 0}
-    Description: 
-  Goals: []
-  OnQuestCompletedEvent:
-    m_PersistentCalls:
-      m_Calls: []
+    Name: "Investiga\xE7\xE3o de escolta"
+    Description: "Uma equipe de novatos foi ao lado de fora e n\xE3o voltou, voc\xEA
+      deve investigar"
+  Reward:
+    Value: 1500
+  Goals:
+  - {fileID: 11400000, guid: c6b44a80cfdda114899447b6cdc1bc53, type: 2}
+  - {fileID: 0}
