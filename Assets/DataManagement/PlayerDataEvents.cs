@@ -14,6 +14,7 @@ public class PlayerDataEvents : MonoBehaviour
     public UnityEvent FirstTimeChanged;
     public UnityEvent CurrentHealthChanged;
     public UnityEvent MissionOneCompleted;
+    public UnityEvent MissionTwoCompleted;
     public UnityEvent IfIsFirstTime;
     public UnityEvent IfNotFirstTime;
     #endregion
@@ -36,6 +37,9 @@ public class PlayerDataEvents : MonoBehaviour
 
         if (playerData.GetMissionOneStatus())
             MissionOneCompleted?.Invoke();
+        if (playerData.GetMissionTwoStatus())
+            MissionTwoCompleted?.Invoke();
+
     }
     #endregion
 
@@ -53,6 +57,7 @@ public class PlayerDataEvents : MonoBehaviour
     void OnFirstTimeChanged() => InvokeEvent(FirstTimeChanged);
 
     void OnMissionOneCompleted() => InvokeEvent(MissionOneCompleted);
+    void OnMissionTwoCompleted() => InvokeEvent(MissionTwoCompleted);
 
     void SubscribeEvents()
     {
@@ -62,6 +67,7 @@ public class PlayerDataEvents : MonoBehaviour
         playerData.CurrentHealthChanged.AddListener(OnCurrentHealthChanged);
         playerData.FirstTimeChanged.AddListener(OnFirstTimeChanged);
         playerData.MissionOneCompleted.AddListener(OnMissionOneCompleted);
+        playerData.MissionTwoCompleted.AddListener(OnMissionTwoCompleted);
     }
 
     void FirstTimeChecker()
@@ -117,6 +123,7 @@ public class PlayerDataEvents : MonoBehaviour
     public void SetFirstTime(bool value) => playerData.SetFirstTime(value);
 
     public void CompleteMissionOne() => playerData.CompleteMissionOne();
+    public void CompleteMissionTwo() => playerData.CompleteMissionTwo();
     #endregion
 
     #region Getters

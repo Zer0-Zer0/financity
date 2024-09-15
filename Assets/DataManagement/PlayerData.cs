@@ -28,6 +28,9 @@ public class PlayerData
     bool _missionOneCompleted;
 
     [SerializeField]
+    bool _missionTwoCompleted;
+
+    [SerializeField]
     float _currentHealth;
 
     [SerializeField]
@@ -43,6 +46,7 @@ public class PlayerData
     public UnityEvent FirstTimeChanged;
     public UnityEvent MissionOneCompleted;
     public UnityEvent CurrentHealthChanged;
+    public UnityEvent MissionTwoCompleted;
 
     #endregion
 
@@ -184,19 +188,28 @@ public class PlayerData
         MissionOneCompleted?.Invoke();
     }
 
+    public bool GetMissionTwoStatus() => _missionTwoCompleted;
+
+    public void CompleteMissionTwo()
+    {
+        _missionTwoCompleted = true;
+        MissionTwoCompleted?.Invoke();
+    }
+
     #endregion
 
     #region Overrides
 
     public override string ToString()
     {
-        return $"Current Ammo: {GetCurrentAmmo()}, " +
-               $"Total Ammo: {GetTotalAmmo()}, " +
-               $"Current Balance: {GetCurrentBalance()}, " +
-               $"First Time: {GetFirstTime()}, " +
-               $"Current Health: {GetCurrentHealth()}, " +
-               $"Max Health: {GetMaxHealth()}, " +
-               $"Mission One Completed: {GetMissionOneStatus()}";
+        return  $"Current Ammo: {GetCurrentAmmo()}, " +
+                $"Total Ammo: {GetTotalAmmo()}, " +
+                $"Current Balance: {GetCurrentBalance()}, " +
+                $"First Time: {GetFirstTime()}, " +
+                $"Current Health: {GetCurrentHealth()}, " +
+                $"Max Health: {GetMaxHealth()}, " +
+                $"Mission One Completed: {GetMissionOneStatus()}" +
+                $"Mission Two Completed: {GetMissionTwoStatus()}";
     }
 
     #endregion
