@@ -10,9 +10,14 @@ namespace QuestSystem
     [Serializable]
     public class GoalManager
     {
-        public QuestGoalSO goal { get; private set; }
-        public bool Completed { get; private set; }
+        private QuestGoalSO goal;
+        public QuestGoalSO Goal { get => goal; private set => goal = value; }
+
+        private bool completed;
+        public bool Completed { get => completed; private set => completed = value; }
+
         int CurrentGoalAmount;
+
         [HideInInspector]
         public UnityEvent OnGoalCompletedEvent;
 

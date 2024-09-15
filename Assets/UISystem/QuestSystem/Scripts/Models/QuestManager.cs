@@ -12,9 +12,15 @@ namespace QuestSystem
     [Serializable]
     public class QuestManager
     {
-        public QuestSO quest { get; private set; }
-        public bool Completed { get; private set; }
-        public List<GoalManager> goalManagers { get; private set; }
+        private QuestSO quest;
+        public QuestSO Quest { get => quest; private set => quest = value; }
+
+        private bool completed;
+        public bool Completed { get => completed; private set => completed = value; }
+
+        private List<GoalManager> goalManagers;
+        public List<GoalManager> GoalManagers { get => goalManagers; private set => goalManagers = value; }
+
         [HideInInspector]
         public UnityEvent OnQuestCompletedEvent;
 

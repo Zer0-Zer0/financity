@@ -11,8 +11,10 @@ namespace QuestSystem
     {
         [SerializeField]
         protected string Description;
+
         [SerializeField]
-        public int RequiredAmount { get; protected set; }
+        private int requiredAmount;
+        public int RequiredAmount { get => requiredAmount; private set => requiredAmount = value; }
 
         public virtual string GetDescription() => Description;
     }
