@@ -10,8 +10,8 @@ public class AlienNavmeshListener : MonoBehaviour
             gameEventListener.enabled = true;
         else
         {
+            Debug.Log($"{gameObject.name}: Enabling alien due to no navmesh listener");
             gameEventListener.gameEvent.Raise(this, null);
-            gameEventListener.enabled = false;
         }
     }
 }
