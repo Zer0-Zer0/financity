@@ -7119,6 +7119,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1396524829216753288}
+  - {fileID: 1163464423}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &706893594
@@ -7227,30 +7228,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 4516671854832107427}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -7262,18 +7239,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 43801531}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -7323,18 +7288,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: converse com [Mercenario]
-          m_BoolArgument: 1
-        m_CallState: 2
+  MissionTwoCompleted:
+    m_PersistentCalls:
+      m_Calls: []
   IfIsFirstTime:
     m_PersistentCalls:
       m_Calls: []
@@ -14712,6 +14668,68 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 339be524d088d4d47b39a72cd1315473, type: 3}
+--- !u!1001 &1163464422
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 706893593}
+    m_Modifications:
+    - target: {fileID: 2069384093708580162, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: m_Name
+      value: SaulDierIfMissionTwoCompleted
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090986831217945440, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090986831217945440, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.22127318
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090986831217945440, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090986831217945440, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9997258
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090986831217945440, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090986831217945440, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.023417693
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090986831217945440, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090986831217945440, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090986831217945440, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 2.684
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090986831217945440, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+--- !u!4 &1163464423 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2090986831217945440, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
+  m_PrefabInstance: {fileID: 1163464422}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1164831501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20056,6 +20074,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  MissionTwoCompleted:
+    m_PersistentCalls:
+      m_Calls: []
   IfIsFirstTime:
     m_PersistentCalls:
       m_Calls:
@@ -24036,6 +24057,9 @@ MonoBehaviour:
   MissionOneCompleted:
     m_PersistentCalls:
       m_Calls: []
+  MissionTwoCompleted:
+    m_PersistentCalls:
+      m_Calls: []
   IfIsFirstTime:
     m_PersistentCalls:
       m_Calls: []
@@ -24059,34 +24083,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 353ee85bee157fb7fa84a34923f3a763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonToPress: 101
-  EventToInvoke:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1947810323}
-        m_TargetAssemblyTypeName: PlayerDataEvents, Assembly-CSharp
-        m_MethodName: SetFirstTime
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1323563782}
-        m_TargetAssemblyTypeName: UISystem.LoadingBarView, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   PlayerInTrigger:
     m_PersistentCalls:
       m_Calls:
@@ -24109,6 +24105,34 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  ButtonToPress: 101
+  EventToInvoke:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1947810323}
+        m_TargetAssemblyTypeName: PlayerDataEvents, Assembly-CSharp
+        m_MethodName: SetFirstTime
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1323563782}
+        m_TargetAssemblyTypeName: UISystem.LoadingBarView, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -26793,14 +26817,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 706893593}
     m_Modifications:
     - target: {fileID: 1881994849611891016, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
-      propertyPath: DialogoIniciou.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1165761959}
-    - target: {fileID: 1881994849611891016, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
-      propertyPath: DialogoTerminou.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1165761960}
-    - target: {fileID: 1881994849611891016, guid: fbc135264b9f0b568b2ebfac79cfa618, type: 3}
       propertyPath: DialogoTerminou.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 1947810321}
@@ -28745,10 +28761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 353ee85bee157fb7fa84a34923f3a763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonToPress: 0
-  EventToInvoke:
-    m_PersistentCalls:
-      m_Calls: []
   PlayerInTrigger:
     m_PersistentCalls:
       m_Calls:
@@ -28779,6 +28791,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  ButtonToPress: 0
+  EventToInvoke:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!33 &2492208914701638434
 MeshFilter:
   m_ObjectHideFlags: 0
