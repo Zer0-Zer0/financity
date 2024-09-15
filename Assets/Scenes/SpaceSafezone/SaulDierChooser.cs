@@ -10,22 +10,29 @@ public class SaulDierChooser : MonoBehaviour
     [SerializeField] GameObject MissionTwoCompletedSaulDier;
     void Start()
     {
-        if(DataManager.playerData.Days == 1 && DataManager.playerData.GetMissionOneStatus() == false){
+        if (DataManager.playerData.Days == 1 && DataManager.playerData.GetMissionOneStatus() == false)
+        {
             DefaultSaulDier.SetActive(true);
             MissionOneCompletedSaulDier.SetActive(false);
             MissionTwoGranterSaulDier.SetActive(false);
             MissionTwoCompletedSaulDier.SetActive(false);
-        }else if (DataManager.playerData.Days == 1 && DataManager.playerData.GetMissionOneStatus() == true){
+        }
+        else if (DataManager.playerData.Days == 1 && DataManager.playerData.GetMissionOneStatus() == true)
+        {
             DefaultSaulDier.SetActive(false);
             MissionOneCompletedSaulDier.SetActive(true);
             MissionTwoGranterSaulDier.SetActive(false);
             MissionTwoCompletedSaulDier.SetActive(false);
-        }else if (DataManager.playerData.Days == 2 && DataManager.playerData.GetMissionTwoStatus() == false){
+        }
+        else if (DataManager.playerData.Days == 2)
+        {
             DefaultSaulDier.SetActive(false);
             MissionOneCompletedSaulDier.SetActive(false);
             MissionTwoGranterSaulDier.SetActive(true);
             MissionTwoCompletedSaulDier.SetActive(false);
-        }else if (DataManager.playerData.GetMissionTwoStatus() == true){
+        }
+        else
+        {
             DefaultSaulDier.SetActive(false);
             MissionOneCompletedSaulDier.SetActive(false);
             MissionTwoGranterSaulDier.SetActive(false);
