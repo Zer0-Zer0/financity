@@ -36,6 +36,9 @@ public class PlayerData
     [SerializeField]
     float _maxHealth;
 
+    int _days = 1;
+    public int Days { get => _days; set => _days = value; }
+
     #endregion
 
     #region Unity Events
@@ -47,6 +50,7 @@ public class PlayerData
     public UnityEvent MissionOneCompleted;
     public UnityEvent CurrentHealthChanged;
     public UnityEvent MissionTwoCompleted;
+
 
     #endregion
 
