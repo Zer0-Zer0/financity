@@ -7,6 +7,7 @@ namespace Economy
     public class WalletManager : MonoBehaviour
     {
         public GameEvent OnLoanUnpaid;
+        public GameEvent OnLoanRepaid;
 
         private void OnEnable() => DataManager.playerData.GetCurrentWallet().UnableToPay = OnLoanUnpaid;
 
@@ -86,7 +87,10 @@ namespace Economy
             loan.OnInstallmentArrival(currentWallet);
             // Check if the loan has no remaining installments
             if (loan.TotalRemainingInstallments == 0)
+            {
+                OnLoanRepaid.Raise(this, null);
                 loansToRemove.Add(loan);
+            }
         }
 
         /// <summary>
