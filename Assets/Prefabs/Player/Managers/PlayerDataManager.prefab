@@ -74,7 +74,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa5d70e058a6c2f17afa68b06fd93747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDataEvents: {fileID: 7174123949477185587}
 --- !u!114 &7174123949477185587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,7 +98,13 @@ MonoBehaviour:
   FirstTimeChanged:
     m_PersistentCalls:
       m_Calls: []
+  CurrentHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
   MissionOneCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  MissionTwoCompleted:
     m_PersistentCalls:
       m_Calls: []
   IfIsFirstTime:

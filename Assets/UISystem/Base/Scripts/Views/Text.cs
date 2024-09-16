@@ -17,7 +17,7 @@ namespace UISystem
         public TextSO textData;
         public Style style;
 
-        private TextMeshProUGUI textMeshProUGUI;
+        [SerializeField] TextMeshProUGUI textMeshProUGUI;
 
         protected override void Setup()
         {
