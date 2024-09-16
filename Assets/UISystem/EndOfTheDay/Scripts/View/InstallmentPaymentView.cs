@@ -21,11 +21,13 @@ namespace UISystem
 
         public void UpdateValues()
         {
-            float _valor = GetInstallmentValue();
-            Debug.Log($"Valor: R${_valor}");
-            float _parcelas = GetInstallments();
-
             Titulo.SetText(SelectRandomPhrase());
+        }
+
+        void Update()
+        {
+            float _valor = GetInstallmentValue();
+            float _parcelas = GetInstallments();
             Valor.SetText(FormatMoney(_valor));
             Subtitulo.SetText(FormatSubtitle(_parcelas));
         }

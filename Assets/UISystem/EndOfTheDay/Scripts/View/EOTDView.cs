@@ -14,9 +14,19 @@ namespace UISystem
 
         public GameObject FirstPanel;
 
+        bool dataSet = false;
+
         protected override void Setup() { }
 
         protected override void Configure() { }
+
+        void Update()
+        {
+            if (dataSet == false)
+                return;
+            SetData(DataManager.playerData.GetCurrentWallet());
+            dataSet = false;
+        }
 
         private void SetExpenses(WalletData wallet)
         {
@@ -64,6 +74,7 @@ namespace UISystem
             SetExpenses(wallet);
             SetProfits(wallet);
             SetIncome(wallet);
+            dataSet = true;
         }
     }
 }
