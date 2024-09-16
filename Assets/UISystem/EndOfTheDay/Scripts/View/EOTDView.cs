@@ -18,6 +18,8 @@ namespace UISystem
 
         protected override void Configure() { }
 
+        void Update() => SetData(DataManager.playerData.GetCurrentWallet());
+
         private void SetExpenses(WalletData wallet)
         {
             foreach (var transaction in wallet.Transactions)
