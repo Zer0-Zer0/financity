@@ -21,11 +21,6 @@ namespace UISystem
 
         public void UpdateValues()
         {
-            return;
-        }
-
-        void Update()
-        {
             float _valor = DataManager.playerData.GetCurrentWallet().CurrentDebt;
             float _parcelas = GetInstallments();
             Titulo.SetText(SelectRandomPhrase());
