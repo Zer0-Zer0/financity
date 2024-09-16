@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public class AlienNavmeshListener : MonoBehaviour
 {
     [SerializeField] GameEventListener gameEventListener;
-    private void OnEnable()
+    private void Start()
     {
         if (NavmeshBaker.Instance != null)
             gameEventListener.enabled = true;
