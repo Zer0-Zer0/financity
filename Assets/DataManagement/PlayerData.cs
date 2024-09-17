@@ -60,7 +60,7 @@ public class PlayerData
         int totalAmmo = 0,
         WalletData wallet = null,
         Inventory inventory = null,
-        float currentHealth = 5,
+        float currentHealth = 10,
         float maxHealth = 10
     )
     {
