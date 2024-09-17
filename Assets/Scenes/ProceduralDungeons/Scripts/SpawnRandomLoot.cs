@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnRandomLoot : MonoBehaviour
 {
     [SerializeField] GameObject[] randomLoot;
-    [SerializeField, Range(0f, 100f)] float spawnChance = 50f;
+    [SerializeField] [Range(0f, 100f)] float spawnChance = 50f;
     private bool hasSpawned;
 
     void OnEnable()
@@ -14,7 +14,7 @@ public class SpawnRandomLoot : MonoBehaviour
             SpawnRandomLootFromList();
     }
 
-    void SpawnRandomLootFromList()
+    protected void SpawnRandomLootFromList()
     {
         if (randomLoot.Length <= 0)
         {
