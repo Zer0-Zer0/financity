@@ -1,94 +1,66 @@
 using UnityEngine;
 using System.Collections;
-using System.Linq;
 
 public class RandomAudioPlayer : MonoBehaviour
 {
-    public AudioSource audioSource;      
-    public AudioClipVolume[] audioClips;       
-    public int numberOfAudiosToPlay = 3;   
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip[] audioClips;
 
-    public Transform objetoMovimento;     
+    [SerializeField] float minPauseDuration = 4f;
+    [SerializeField] float maxPauseDuration = 15f;
 
-    public float minPauseDuration = 4f;   
-    public float maxPauseDuration = 15f;   
-
-    private Vector3 lastPosition;          
-    private bool isPlaying = false;        
+    private Vector3 lastPosition;
+    private bool isPlaying = false;
 
     void Start()
     {
-        if (audioSource == null)
-        {
-            audioSource = GetComponent<AudioSource>();
-        }
-
-        if (audioSource != null)
-        {
-            audioSource.spatialBlend = 1f;  
-        }
-
-        if (objetoMovimento != null)
-        {
-            lastPosition = objetoMovimento.position;
-        }
+        audioSource = audioSource ?? GetComponent<AudioSource>();
+        if (audioSource != null) audioSource.spatialBlend = 1f;
+        StartCoroutine(TimedRandomAudio());
     }
 
     void Update()
     {
-        if (IsMoving())
+        if (isPlaying)
+            return;
+
+        if (!IsMoving())
         {
-            if (isPlaying)
-            {
-                StopAllCoroutines();
-                audioSource.Stop();
-                isPlaying = false;
-            }
-        }
-        else
-        {
-            if (!isPlaying)
-            {
-                StartCoroutine(PlayRandomAudios());
-                isPlaying = true;
-            }
+            isPlaying = true;
+            StartCoroutine(TimedRandomAudio());
         }
     }
 
-    IEnumerator PlayRandomAudios()
+    void PlayRandomAudio()
     {
-        var shuffledClips = audioClips.OrderBy(x => Random.value).Take(numberOfAudiosToPlay).ToArray();
-
-        foreach (var clipVolume in shuffledClips)
+        if (audioClips.Length == 0)
         {
-            if (clipVolume.clip != null)
-            {
-                audioSource.volume = clipVolume.volume;  
-                audioSource.PlayOneShot(clipVolume.clip);
-            }
-
-            float pauseDuration = Random.Range(minPauseDuration, maxPauseDuration);
-            yield return new WaitForSeconds(pauseDuration);
+            Debug.LogWarning("No audio clips assigned!");
+            return;
         }
 
+        AudioClip randomClip = audioClips[Random.Range(0, audioClips.Length)];
+
+        audioSource.pitch = Random.Range(0.5f, 1.5f);
+        audioSource.volume = Random.Range(0.5f, 0.75f);
+        audioSource.PlayOneShot(randomClip);
+    }
+
+    IEnumerator TimedRandomAudio()
+    {
+        PlayRandomAudio();
+        yield return new WaitForSeconds(Random.Range(minPauseDuration, maxPauseDuration));
         isPlaying = false;
     }
 
     bool IsMoving()
     {
-        if (objetoMovimento != null && (objetoMovimento.position != lastPosition))
+        if (transform != null && (transform.position != lastPosition))
         {
-            lastPosition = objetoMovimento.position;
+            lastPosition = transform.position;
             return true;
         }
 
         return false;
     }
-}
-
-[System.Serializable]
-public struct AudioClipVolume
-{
-    public AudioClip clip;  
-    public float volume;    
 }
