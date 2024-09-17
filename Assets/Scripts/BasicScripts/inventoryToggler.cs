@@ -10,7 +10,9 @@ public class inventoryToggler : MonoBehaviour
 
     [SerializeField]
     GameObject Inventory;
- 
+
+    [SerializeField] KeyCode AbrirInventario = KeyCode.Tab;
+
     public static bool canStoreAppear = false;
 
     void Start()
@@ -22,11 +24,11 @@ public class inventoryToggler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && !MouseLockScript.tabbedInX)
-            Inventory.SetActive(!Inventory.activeSelf);
-
-        if (Input.GetKeyDown(KeyCode.X) && !MouseLockScript.tabbedInTab && canStoreAppear)
-            ChangeStoreVisibility();
+        if (Input.GetKeyDown(AbrirInventario))
+            if (canStoreAppear)
+                ChangeStoreVisibility();
+            else
+                Inventory.SetActive(!Inventory.activeSelf);
     }
 
     private void ChangeStoreVisibility() => Store.SetActive(!Store.activeSelf);
