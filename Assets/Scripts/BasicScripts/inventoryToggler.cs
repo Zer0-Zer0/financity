@@ -21,14 +21,23 @@ public class inventoryToggler : MonoBehaviour
         Store.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(AbrirInventario))
+        {
             if (canStoreAppear)
+            {
                 ChangeStoreVisibility();
+                Inventory.SetActive(false);
+            }
             else
+            {
                 Inventory.SetActive(!Inventory.activeSelf);
+                Store.SetActive(false);
+            }
+        }
+    }
+
     }
 
     private void ChangeStoreVisibility() => Store.SetActive(!Store.activeSelf);
