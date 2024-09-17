@@ -9,6 +9,7 @@ using Unity.VisualScripting;
 [RequireComponent(typeof(TMP_Text))]
 public class TypewriterEffect : MonoBehaviour
 {
+    public KeyCode FastForward = KeyCode.E;
     private TMP_Text _textComponent;
     private string _fullText;
     private int _visibleCharacterCount = 0;
@@ -26,7 +27,7 @@ public class TypewriterEffect : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKey(FastForward))
         {
             StopAllCoroutines();
             _textComponent.maxVisibleCharacters = _fullText.Length;
@@ -49,7 +50,7 @@ public class TypewriterEffect : MonoBehaviour
 
         while (_visibleCharacterCount <= text.Length)
         {
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetKey(FastForward))
             {
                 _textComponent.maxVisibleCharacters = _fullText.Length;
                 _textComponent.text = text;

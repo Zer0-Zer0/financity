@@ -11,7 +11,8 @@ public class Dialogo : MonoBehaviour
         - Este script deve ser único na cena. Se houver mais de uma instância, um aviso será exibido no console.
     */
 
-    [SerializeField] KeyCode _inputProximaFrase = KeyCode.Return; // Tecla para avançar para a próxima frase
+    [SerializeField] KeyCode _inputProximaFrase = KeyCode.Mouse0; // Tecla para avançar para a próxima frase
+    [SerializeField] KeyCode FastForward = KeyCode.E; //Tecla para pular diálogo
     public static Dialogo Instance { get; private set; } // Instância única do Dialogo
 
     private int index; // Índice da frase atual
@@ -33,6 +34,7 @@ public class Dialogo : MonoBehaviour
         else
             Instance = this;
 
+        _textoDialogo.FastForward = FastForward;
         _caixaDialogo.SetActive(false); // Desativa a caixa de diálogo inicialmente
     }
 
