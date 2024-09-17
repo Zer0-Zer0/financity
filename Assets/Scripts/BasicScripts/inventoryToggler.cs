@@ -15,6 +15,9 @@ public class inventoryToggler : MonoBehaviour
 
     public static bool canStoreAppear = false;
 
+    [SerializeField] GameEvent TimeStop;
+    [SerializeField] GameEvent TimeStart;
+
     void Start()
     {
         Inventory.SetActive(false);
@@ -36,8 +39,22 @@ public class inventoryToggler : MonoBehaviour
                 Store.SetActive(false);
             }
         }
+
+        PauseCheck();
     }
 
+    private void PauseCheck()
+    {
+        if (Inventory.activeSelf || Store.activeSelf)
+        {
+            TimeStop.Raise(this, null);
+            Time.timeScale = 0f;
+        }
+        else if (Time.timeScale != 1f)
+        {
+            TimeStart.Raise(this, null);
+            Time.timeScale = 1f;
+        }
     }
 
     private void ChangeStoreVisibility() => Store.SetActive(!Store.activeSelf);

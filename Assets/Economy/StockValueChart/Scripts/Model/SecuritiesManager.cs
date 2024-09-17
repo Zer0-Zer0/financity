@@ -33,7 +33,7 @@ namespace Economy
 
         private void Update()
         {
-            updateTimer += Time.deltaTime;
+            updateTimer += Time.unscaledDeltaTime;
             if (updateTimer >= updateInterval)
             {
                 UpdateSecurities();
