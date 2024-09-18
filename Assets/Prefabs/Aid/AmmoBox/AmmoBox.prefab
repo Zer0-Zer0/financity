@@ -333,6 +333,7 @@ GameObject:
   - component: {fileID: 958434204917747797}
   - component: {fileID: 2502932970555107464}
   - component: {fileID: 3192418851455404206}
+  - component: {fileID: 3559198491216222074}
   m_Layer: 0
   m_Name: AmmoBox
   m_TagString: Untagged
@@ -390,6 +391,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 353ee85bee157fb7fa84a34923f3a763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerInTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1477966788216932713}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  PlayerOutOfTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1477966788216932713}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   ButtonToPress: 101
   EventToInvoke:
     m_PersistentCalls:
@@ -440,36 +471,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: -30
           m_StringArgument: AMMOSET
-          m_BoolArgument: 0
-        m_CallState: 2
-  PlayerInTrigger:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1477966788216932713}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  PlayerOutOfTrigger:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1477966788216932713}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &958434204917747797
@@ -763,9 +764,31 @@ MonoBehaviour:
   MissionOneCompleted:
     m_PersistentCalls:
       m_Calls: []
+  MissionTwoCompleted:
+    m_PersistentCalls:
+      m_Calls: []
   IfIsFirstTime:
     m_PersistentCalls:
       m_Calls: []
   IfNotFirstTime:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3559198491216222074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7766634689671769798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
