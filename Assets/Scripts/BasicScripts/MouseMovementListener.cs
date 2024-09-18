@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MouseMovementListener : MonoBehaviour
 {
-    [SerializeField] private float threshold = 50f;
+    [SerializeField] private float threshold = 75f;
     [SerializeField] private GameEvent OnMouseMove;
     private Vector2 lastMousePosition;
 
