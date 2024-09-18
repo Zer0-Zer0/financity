@@ -80,7 +80,7 @@ public class PlayerData
         _firstTime = true;
         _missionOneCompleted = false;
         _missionTwoCompleted = false;
-        
+
         _currentHealth = currentHealth;
         _maxHealth = maxHealth;
 
@@ -123,6 +123,11 @@ public class PlayerData
 
     public void AddTransaction(Transaction transaction)
     {
+        bool ÉRemoção = transaction.transactionType == TipoDeTransação.Remoção;
+        bool ValorInsuficiente = GetCurrentBalance() < transaction.Value;
+        if (ÉRemoção && ValorInsuficiente)
+            throw new ArgumentOutOfRangeException("Valor insuficiente na carteira");
+
         _walletData.Transactions.Add(transaction);
         CurrentBalanceChanged?.Invoke();
     }
@@ -209,7 +214,7 @@ public class PlayerData
 
     public override string ToString()
     {
-        return  $"Current Ammo: {GetCurrentAmmo()}, " +
+        return $"Current Ammo: {GetCurrentAmmo()}, " +
                 $"Total Ammo: {GetTotalAmmo()}, " +
                 $"Current Balance: {GetCurrentBalance()}, " +
                 $"First Time: {GetFirstTime()}, " +
