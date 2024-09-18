@@ -71,6 +71,7 @@ namespace UISystem
 
         public void SetData(WalletData wallet)
         {
+            ClearText();
             SetExpenses(wallet);
             SetProfits(wallet);
             SetIncome(wallet);
