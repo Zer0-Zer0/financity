@@ -23,6 +23,8 @@ public class Dialogo : MonoBehaviour
     [SerializeField] TypewriterEffect _textoDialogo; // Efeito de digitação
     [SerializeField] TMP_Text _textoNome; // Texto do nome do falante
     [SerializeField] GameObject _caixaDialogo; // Caixa de diálogo
+    [SerializeField] AudioSource SaidaVoz;
+[SerializeField] AudioClip[] _vozes;
 
     public UnityEvent DialogoAcabou; // Evento a ser chamado quando o diálogo termina
 
@@ -38,9 +40,10 @@ public class Dialogo : MonoBehaviour
         _caixaDialogo.SetActive(false); // Desativa a caixa de diálogo inicialmente
     }
 
-    public void InicializarDialogo(string[] frasesDialogo, string nomeFalante = "")
+    public void InicializarDialogo(string[] frasesDialogo, AudioClip[] vozes, string nomeFalante = "")
     {
         // Inicializa o diálogo com as frases e o nome do falante
+        _vozes = vozes;
         frases = frasesDialogo;
         index = 0;
         _textoNome.text = nomeFalante;
@@ -51,8 +54,10 @@ public class Dialogo : MonoBehaviour
     public IEnumerator TypeLine()
     {
         // Mostra a frase atual com efeito de digitação
+        SaidaVoz.PlayOneShot(_vozes?[index]);
         yield return _textoDialogo.ShowText(frases[index]);
         yield return Waiters.InputWaiter(_inputProximaFrase); // Espera pela entrada do usuário
+        SaidaVoz.Stop();
         ProximaFrase(); // Avança para a próxima frase
     }
 

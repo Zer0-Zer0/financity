@@ -20,6 +20,8 @@ public class InteracaoNPC : MonoBehaviour
     [TextArea]
     [SerializeField] string[] Mensagens;
 
+    [SerializeField] AudioClip[] Audios; 
+
     [SerializeField] UnityEvent DialogoTerminou;
 
     bool _interacaoPossivel = false;
@@ -33,7 +35,7 @@ public class InteracaoNPC : MonoBehaviour
             DialogoIniciou?.Invoke();
             ChecaMensagens();
             Dialogo.Instance.DialogoAcabou.AddListener(OnDialogoAcabou);
-            Dialogo.Instance.InicializarDialogo(Mensagens, nomeNPC);
+            Dialogo.Instance.InicializarDialogo(Mensagens, Audios, nomeNPC);
         }
     }
 
