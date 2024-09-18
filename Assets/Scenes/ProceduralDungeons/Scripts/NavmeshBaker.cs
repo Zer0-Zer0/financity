@@ -24,6 +24,8 @@ public class NavmeshBaker : MonoBehaviour
 
     [SerializeField] NavMeshSurface navMeshSurface;
     [SerializeField] GameEvent OnNavmeshBaked;
+
+    public bool IsBaked { get; private set; } = false;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -57,6 +59,7 @@ public class NavmeshBaker : MonoBehaviour
         if (navMeshSurface != null)
         {
             navMeshSurface.BuildNavMesh();
+            IsBaked = true;
             Debug.Log("Baking NavMesh...");
         }
         else

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4362912224683426596}
   - component: {fileID: 7070688460322172528}
+  - component: {fileID: 8510048389615712397}
   m_Layer: 0
   m_Name: RandomContinuousEnemyInstantiator
   m_TagString: Untagged
@@ -39,7 +40,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5555940802523426746}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d5519b8979b1b7fbaffe322315823a0, type: 3}
   m_Name: 
@@ -47,5 +48,34 @@ MonoBehaviour:
   randomLoot:
   - {fileID: 783025548473620418, guid: 675da5a8880d854cbbdef6ba4bf305ac, type: 3}
   spawnChance: 50
-  MinTime: 120
-  MaxTime: 240
+  MinTime: 300
+  MaxTime: 420
+  renderReference: {fileID: 0}
+--- !u!114 &8510048389615712397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5555940802523426746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 6133cc99962083932af039cebb5064d4, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7070688460322172528}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2

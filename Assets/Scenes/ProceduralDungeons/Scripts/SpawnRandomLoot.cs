@@ -8,7 +8,7 @@ public class SpawnRandomLoot : MonoBehaviour
     [SerializeField] [Range(0f, 100f)] float spawnChance = 50f;
     private bool hasSpawned;
 
-    void OnEnable()
+    protected virtual void OnEnable()
     {
         if (!hasSpawned)
             SpawnRandomLootFromList();
