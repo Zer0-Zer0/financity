@@ -12884,8 +12884,8 @@ MonoBehaviour:
         serializedVersion: 2
         x: 61
         y: 230
-        width: 101
-        height: 32
+        width: 146.66666
+        height: 48
       isBreakpoint: 0
       isSequence: 0
       hideUnused: 0
@@ -12898,6 +12898,14 @@ MonoBehaviour:
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
+      - fsmEvent:
+          name: "For\xE7arRecarga"
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: "For\xE7arRecarga"
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.CallMethod
@@ -12906,7 +12914,7 @@ MonoBehaviour:
         - 
         - 
         actionEnabled: 0101
-        actionIsOpen: 0101
+        actionIsOpen: 0001
         actionStartIndex: 0000000006000000
         actionHashCodes: ca51e90009faa102
         unityObjectParams: []
@@ -12981,8 +12989,8 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams:
-        - 
-        - 
+        - "For\xE7arRecarga"
+        - "For\xE7arRecarga"
         - PodeAtirar
         byteData: 010001
         arrayParamSizes: 00000000
@@ -13115,6 +13123,103 @@ MonoBehaviour:
         - storeResult
         paramDataPos: 0000000000000000000000000000000001000000010000000000000001000000050000000600000001000000
         paramByteDataSize: 0000000000000000000000000100000004000000000000000000000000000000010000000100000000000000
+    - name: "For\xE7arRecarga"
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 85.09375
+        y: 300.6953
+        width: 120.666664
+        height: 16
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions: []
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.SendEvent
+        customNames:
+        - 
+        actionEnabled: 01
+        actionIsOpen: 01
+        actionStartIndex: 00000000
+        actionHashCodes: 5e69bb04
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams: []
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams:
+        - target: 2
+          excludeSelf:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          gameObject:
+            ownerOption: 0
+            gameObject:
+              useVariable: 0
+              name: 
+              tooltip: 
+              showInInspector: 0
+              networkSync: 0
+              value: {fileID: 0}
+          fsmName:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: Reload
+          sendToChildren:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          fsmComponent: {fileID: 0}
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams: []
+        fsmObjectParams: []
+        fsmVarParams: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        fsmIntParams: []
+        fsmBoolParams: []
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams:
+        - RELOAD
+        byteData: 00
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1f000000170000000f00000001000000
+        paramName:
+        - eventTarget
+        - sendEvent
+        - delay
+        - everyFrame
+        paramDataPos: 00000000000000000000000000000000
+        paramByteDataSize: 00000000000000000000000001000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -13128,6 +13233,9 @@ MonoBehaviour:
     - name: Die
       isSystemEvent: 0
       isGlobal: 1
+    - name: "For\xE7arRecarga"
+      isSystemEvent: 0
+      isGlobal: 0
     - name: Headshot
       isSystemEvent: 0
       isGlobal: 0
@@ -13135,6 +13243,12 @@ MonoBehaviour:
       isSystemEvent: 0
       isGlobal: 1
     - name: PodeAtirar
+      isSystemEvent: 0
+      isGlobal: 0
+    - name: RELOAD
+      isSystemEvent: 0
+      isGlobal: 1
+    - name: TERMINOURELOAD
       isSystemEvent: 0
       isGlobal: 0
     - name: Tiro
@@ -13146,7 +13260,15 @@ MonoBehaviour:
     - name: realoaded
       isSystemEvent: 0
       isGlobal: 1
-    globalTransitions: []
+    globalTransitions:
+    - fsmEvent:
+        name: TERMINOURELOAD
+        isSystemEvent: 0
+        isGlobal: 0
+      toState: VerificaBala
+      linkStyle: 0
+      linkConstraint: 0
+      colorIndex: 0
     variables:
       floatVariables:
       - useVariable: 1
@@ -13283,7 +13405,7 @@ MonoBehaviour:
         serializedVersion: 2
         x: 508.4297
         y: 132.33594
-        width: 149
+        width: 153.33334
         height: 48
       isBreakpoint: 0
       isSequence: 0
@@ -13466,7 +13588,7 @@ MonoBehaviour:
         serializedVersion: 2
         x: 300.07812
         y: 131.64062
-        width: 126
+        width: 129.33334
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -13544,8 +13666,8 @@ MonoBehaviour:
         serializedVersion: 2
         x: 687.35156
         y: 137.61719
-        width: 137
-        height: 48
+        width: 153.33334
+        height: 64
       isBreakpoint: 0
       isSequence: 0
       hideUnused: 0
@@ -13566,17 +13688,27 @@ MonoBehaviour:
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
+      - fsmEvent:
+          name: NaoPodeRecarregar
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: PodeRecarregar
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.IntOperator
         - HutongGames.PlayMaker.Actions.IntCompare
+        - HutongGames.PlayMaker.Actions.IntCompare
         customNames:
         - 
         - 
-        actionEnabled: 0101
-        actionIsOpen: 0001
-        actionStartIndex: 0000000005000000
-        actionHashCodes: 1418090309faa102
+        - 
+        actionEnabled: 010101
+        actionIsOpen: 000101
+        actionStartIndex: 00000000050000000b000000
+        actionHashCodes: 1418090309faa10209faa102
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -13617,6 +13749,18 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 1
+          name: Total Ammunition
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         - useVariable: 1
           name: BalasFaltando
           tooltip: 
@@ -13630,15 +13774,18 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams:
+        - NaoPodeRecarregar
+        - NaoPodeRecarregar
+        - 
         - BalasSuficientes
         - BalasInsuficientes
         - BalasSuficientes
-        byteData: 010000000000
+        byteData: 01000000000000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 1000000010000000070000001000000001000000100000001000000017000000170000001700000001000000
+        paramDataType: 1000000010000000070000001000000001000000100000001000000017000000170000001700000001000000100000001000000017000000170000001700000001000000
         paramName:
         - integer1
         - integer2
@@ -13651,8 +13798,14 @@ MonoBehaviour:
         - lessThan
         - greaterThan
         - everyFrame
-        paramDataPos: 0000000001000000000000000200000004000000030000000400000000000000010000000200000005000000
-        paramByteDataSize: 0000000000000000040000000000000001000000000000000000000000000000000000000000000001000000
+        - integer1
+        - integer2
+        - equal
+        - lessThan
+        - greaterThan
+        - everyFrame
+        paramDataPos: 0000000001000000000000000200000004000000030000000400000000000000010000000200000005000000050000000600000003000000040000000500000006000000
+        paramByteDataSize: 0000000000000000040000000000000001000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000001000000
     - name: UsarRestosDasBalas
       description: 
       colorIndex: 0
@@ -13660,7 +13813,7 @@ MonoBehaviour:
         serializedVersion: 2
         x: 876.85156
         y: 159.01562
-        width: 154
+        width: 159.33333
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -13762,7 +13915,7 @@ MonoBehaviour:
         serializedVersion: 2
         x: 922.6797
         y: 104.640625
-        width: 104
+        width: 107.333336
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -14085,7 +14238,7 @@ MonoBehaviour:
         serializedVersion: 2
         x: 57.078125
         y: 126.72656
-        width: 101
+        width: 105.333336
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -14237,7 +14390,7 @@ MonoBehaviour:
         serializedVersion: 2
         x: 54.6875
         y: 239.39062
-        width: 143
+        width: 146.66666
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -14257,7 +14410,7 @@ MonoBehaviour:
         customNames:
         - 
         actionEnabled: 01
-        actionIsOpen: 00
+        actionIsOpen: 01
         actionStartIndex: 00000000
         actionHashCodes: 5f913504
         unityObjectParams: []
@@ -14333,6 +14486,9 @@ MonoBehaviour:
     - name: PodeRecarregar
       isSystemEvent: 0
       isGlobal: 0
+    - name: RELOAD
+      isSystemEvent: 0
+      isGlobal: 1
     - name: Recarregando
       isSystemEvent: 0
       isGlobal: 0
@@ -14345,6 +14501,14 @@ MonoBehaviour:
         isSystemEvent: 0
         isGlobal: 0
       toState: TerminouReload
+      linkStyle: 0
+      linkConstraint: 0
+      colorIndex: 0
+    - fsmEvent:
+        name: RELOAD
+        isSystemEvent: 0
+        isGlobal: 1
+      toState: ChecaSeBalaCheia
       linkStyle: 0
       linkConstraint: 0
       colorIndex: 0
