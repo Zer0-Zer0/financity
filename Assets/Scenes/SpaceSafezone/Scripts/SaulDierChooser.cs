@@ -31,12 +31,19 @@ public class SaulDierChooser : MonoBehaviour
             MissionTwoGranterSaulDier.SetActive(true);
             MissionTwoCompletedSaulDier.SetActive(false);
         }
-        else
+        else if (DataManager.playerData.Days == 3)
         {
             DefaultSaulDier.SetActive(false);
             MissionOneCompletedSaulDier.SetActive(false);
             MissionTwoGranterSaulDier.SetActive(false);
             MissionTwoCompletedSaulDier.SetActive(true);
+        }
+        else
+        {
+            DefaultSaulDier.SetActive(false);
+            MissionOneCompletedSaulDier.SetActive(false);
+            MissionTwoGranterSaulDier.SetActive(false);
+            MissionTwoCompletedSaulDier.SetActive(false);
         }
     }
 }
