@@ -135,7 +135,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &274921435671794372
 MonoBehaviour:
@@ -609,7 +609,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &440425083142302355
 PrefabInstance:
@@ -1361,14 +1361,14 @@ MonoBehaviour:
     dataVersion: 2
     usedInTemplate: {fileID: 0}
     name: Path Finding
-    startState: desistiu da busca
+    startState: Start
     states:
     - name: Mover
       description: 
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 434.76562
+        x: 66.765625
         y: 101.99219
         width: 100
         height: 32
@@ -1581,7 +1581,7 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 422.65625
+        x: 54.65625
         y: 248.96094
         width: 134
         height: 32
@@ -1844,6 +1844,89 @@ MonoBehaviour:
         - finishEvent
         paramDataPos: 00000000010000000000000000000000000000000000000002000000010000000000000004000000050000000300000001000000000000000100000001000000000000000200000001000000010000000400000002000000050000000200000002000000030000000300000002000000040000000300000002000000
         paramByteDataSize: 00000000000000000400000000000000000000000000000000000000000000000000000001000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    - name: Start
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 258.9505
+        y: 242.9078
+        width: 100
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FINISHED
+          isSystemEvent: 1
+          isGlobal: 0
+        toState: desistiu da busca
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.FindGameObject
+        customNames:
+        - 
+        actionEnabled: 01
+        actionIsOpen: 01
+        actionStartIndex: 00000000
+        actionHashCodes: 786b3902
+        unityObjectParams: []
+        fsmGameObjectParams:
+        - useVariable: 1
+          name: Player
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: {fileID: 0}
+        fsmOwnerDefaultParams: []
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: Player
+        fsmObjectParams: []
+        fsmVarParams: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams: []
+        fsmIntParams: []
+        fsmBoolParams: []
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams: []
+        byteData: 
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 120000001200000013000000
+        paramName:
+        - objectName
+        - withTag
+        - store
+        paramDataPos: 000000000100000000000000
+        paramByteDataSize: 000000000000000000000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -5879,6 +5962,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7aa5cdf4cbed7f44dbceef0ea68eff92, type: 3}
   - {fileID: 8300000, guid: 0968b54899aa3ae74bc392963c5334fb, type: 3}
   audioSource: {fileID: 4583766867238408208}
+  scripts: []
 --- !u!114 &3914506184280112537
 MonoBehaviour:
   m_ObjectHideFlags: 0
