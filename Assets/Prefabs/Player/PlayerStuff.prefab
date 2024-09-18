@@ -223,18 +223,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CamBase
       objectReference: {fileID: 0}
-    - target: {fileID: 1197746865087122271, guid: 66f3808da4ce5c04a92fdd25b945d66b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.292
-      objectReference: {fileID: 0}
-    - target: {fileID: 1197746865087122271, guid: 66f3808da4ce5c04a92fdd25b945d66b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.649
-      objectReference: {fileID: 0}
-    - target: {fileID: 1197746865087122271, guid: 66f3808da4ce5c04a92fdd25b945d66b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.367
-      objectReference: {fileID: 0}
     - target: {fileID: 6763301003901109351, guid: 66f3808da4ce5c04a92fdd25b945d66b, type: 3}
       propertyPath: fsm.variables.gameObjectVariables.Array.data[0].value
       value: 
@@ -363,6 +351,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 953587592646043845, guid: f1526d1782af15240820c59803292bed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.events.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.events.Array.data[4].name
+      value: StopShoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.events.Array.data[5].name
+      value: Vault
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.events.Array.data[6].name
+      value: Walk
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.events.Array.data[7].name
+      value: walkrifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.states.Array.data[6].actionData.stringParams.Array.data[3]
+      value: StopShoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.states.Array.data[6].transitions.Array.data[0].fsmEvent.name
+      value: StopShoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.states.Array.data[6].transitions.Array.data[0].fsmEvent.isSystemEvent
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
