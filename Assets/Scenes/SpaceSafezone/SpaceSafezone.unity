@@ -7035,6 +7035,57 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b39d34f9ee12e3d4f8a61720146b7939, type: 3}
+--- !u!1 &663372869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 663372871}
+  - component: {fileID: 663372870}
+  m_Layer: 0
+  m_Name: SafezoneQuestChooser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &663372870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663372869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667561d3ee309d94ebe4f4b5e0d9aa76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Quests:
+  - Converse com os habitantes locais
+  - "Converse com o mercen\xE1rio"
+  - "Converse com o mercen\xE1rio"
+  - "Converse com o mercen\xE1rio"
+  - "V\xE1 para os complexos abandonados"
+  QuestEvent: {fileID: 11400000, guid: c105409e0c34a0f1bbe44546036bc6ca, type: 2}
+--- !u!4 &663372871
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663372869}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &679742238 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 463750, guid: e68faaa5192b504429a181aad36d18c1, type: 3}
@@ -12304,6 +12355,10 @@ PrefabInstance:
     - target: {fileID: 6405239766199043552, guid: fc09c19fcbf07272e9c40a0e7e280d52, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6432086618684718301, guid: fc09c19fcbf07272e9c40a0e7e280d52, type: 3}
+      propertyPath: initialObjective
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6507995770235737755, guid: fc09c19fcbf07272e9c40a0e7e280d52, type: 3}
       propertyPath: m_AnchorMax.y
@@ -34047,3 +34102,4 @@ SceneRoots:
   - {fileID: 365057526}
   - {fileID: 985830570}
   - {fileID: 1377880758}
+  - {fileID: 663372871}
