@@ -354,38 +354,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
-      propertyPath: fsm.events.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
-      propertyPath: fsm.events.Array.data[4].name
-      value: StopShoot
-      objectReference: {fileID: 0}
-    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
-      propertyPath: fsm.events.Array.data[5].name
-      value: Vault
-      objectReference: {fileID: 0}
-    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
-      propertyPath: fsm.events.Array.data[6].name
-      value: Walk
-      objectReference: {fileID: 0}
-    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
-      propertyPath: fsm.events.Array.data[7].name
-      value: walkrifle
-      objectReference: {fileID: 0}
-    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
-      propertyPath: fsm.states.Array.data[6].actionData.stringParams.Array.data[3]
-      value: StopShoot
-      objectReference: {fileID: 0}
-    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
-      propertyPath: fsm.states.Array.data[6].transitions.Array.data[0].fsmEvent.name
-      value: StopShoot
-      objectReference: {fileID: 0}
-    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
-      propertyPath: fsm.states.Array.data[6].transitions.Array.data[0].fsmEvent.isSystemEvent
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
       propertyPath: fsm.states.Array.data[0].actionData.fsmGameObjectParams.Array.data[0].value
       value: 
       objectReference: {fileID: 2039205101505491160}
@@ -439,6 +407,14 @@ PrefabInstance:
       objectReference: {fileID: 2039205101505491160}
     - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
       propertyPath: fsm.states.Array.data[6].actionData.fsmOwnerDefaultParams.Array.data[5].gameObject.value
+      value: 
+      objectReference: {fileID: 2039205101505491160}
+    - target: {fileID: 8187579586731555466, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.variables.gameObjectVariables.Array.data[2].value
+      value: 
+      objectReference: {fileID: 2039205101505491160}
+    - target: {fileID: 8187579586731555466, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.states.Array.data[3].actionData.fsmOwnerDefaultParams.Array.data[0].gameObject.value
       value: 
       objectReference: {fileID: 2039205101505491160}
     m_RemovedComponents: []

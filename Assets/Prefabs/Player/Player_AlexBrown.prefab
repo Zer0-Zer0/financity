@@ -11010,8 +11010,8 @@ MonoBehaviour:
       hideUnused: 0
       transitions:
       - fsmEvent:
-          name: FINISHED
-          isSystemEvent: 1
+          name: StopShoot
+          isSystemEvent: 0
           isGlobal: 0
         toState: AimCheck
         linkStyle: 0
@@ -11402,7 +11402,7 @@ MonoBehaviour:
         - 
         - 
         - 
-        - FINISHED
+        - StopShoot
         - 
         byteData: 0000000000000000000100000000010000000000000000000001
         arrayParamSizes: 
@@ -11622,6 +11622,9 @@ MonoBehaviour:
       isSystemEvent: 0
       isGlobal: 0
     - name: Shoot
+      isSystemEvent: 0
+      isGlobal: 0
+    - name: StopShoot
       isSystemEvent: 0
       isGlobal: 0
     - name: Vault
@@ -12226,7 +12229,7 @@ MonoBehaviour:
             tooltip: 
             showInInspector: 1
             networkSync: 0
-            value: {fileID: 6281762852303236371}
+            value: {fileID: 0}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
@@ -13202,7 +13205,7 @@ MonoBehaviour:
         tooltip: 
         showInInspector: 1
         networkSync: 0
-        value: {fileID: 6281762852303236371}
+        value: {fileID: 0}
       objectVariables: []
       materialVariables: []
       textureVariables: []
