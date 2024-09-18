@@ -8,11 +8,9 @@ namespace ModularOptions {
 	public class SetCursorAttributesOnAwake : MonoBehaviour {
 
 		public bool visible = true;
-		public CursorLockMode lockState = CursorLockMode.Confined;
 
 		void Awake(){
 			Cursor.visible = visible;
-			Cursor.lockState = lockState;
 		}
 
 		/// <summary>
