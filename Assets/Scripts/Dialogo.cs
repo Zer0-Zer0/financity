@@ -24,7 +24,7 @@ public class Dialogo : MonoBehaviour
     [SerializeField] TMP_Text _textoNome; // Texto do nome do falante
     [SerializeField] GameObject _caixaDialogo; // Caixa de diálogo
     [SerializeField] AudioSource SaidaVoz;
-[SerializeField] AudioClip[] _vozes;
+    [SerializeField] AudioClip[] _vozes;
 
     public UnityEvent DialogoAcabou; // Evento a ser chamado quando o diálogo termina
 

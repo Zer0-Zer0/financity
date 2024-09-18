@@ -20,11 +20,6 @@ public class TypewriterEffect : MonoBehaviour
         _fullText = _textComponent.text;
     }
 
-    void Start()
-    {
-        StartCoroutine(ShowText());
-    }
-
     void Update()
     {
         if (Input.GetKey(FastForward))
