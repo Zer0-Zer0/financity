@@ -204,6 +204,34 @@ PrefabInstance:
       propertyPath: Checkboxes.Array.data[3]
       value: 
       objectReference: {fileID: 2139611709810035528}
+    - target: {fileID: 4328249073125201296, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
+      propertyPath: OnCardDone.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328249073125201296, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
+      propertyPath: OnCardDone.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328249073125201296, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
+      propertyPath: OnCardDone.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328249073125201296, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
+      propertyPath: OnCardDone.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328249073125201296, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
+      propertyPath: OnCardDone.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328249073125201296, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
+      propertyPath: OnCardDone.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4328249073125201296, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
+      propertyPath: OnCardDone.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4887896868224408269, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -234,7 +262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5617288857499723017, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
       propertyPath: m_Name
-      value: TutorialCard_Wasd+Shift Variant
+      value: TutorialCard_Wasd
       objectReference: {fileID: 0}
     - target: {fileID: 5744736843551630305, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
       propertyPath: m_Name
@@ -313,13 +341,33 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3450333555578569715, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1993754616142619380}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5617288857499723017, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3941875311732373490}
   m_SourcePrefab: {fileID: 100100000, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
 --- !u!224 &2888999463688220228 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3450333555578569715, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
   m_PrefabInstance: {fileID: 573581828035784119}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5332644410573637822 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5617288857499723017, guid: f2ebe636b279d15d8a20739377ff2dbe, type: 3}
+  m_PrefabInstance: {fileID: 573581828035784119}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3941875311732373490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5332644410573637822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 396ff859468ee8543951f3d08fe28608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4805260872962642656
 PrefabInstance:
   m_ObjectHideFlags: 0

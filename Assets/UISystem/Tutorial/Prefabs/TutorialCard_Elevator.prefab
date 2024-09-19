@@ -54,6 +54,10 @@ MonoBehaviour:
   Checkboxes:
   - {fileID: 8728785847432931263}
   - {fileID: 8709270753697970}
+  timeoutTime: 5
+  OnCardDone:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7882646904911304979
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b32c0744cdc5fb4a97bcaeea5656864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threshold: 100
+  threshold: 1
   OnMouseMove: {fileID: 11400000, guid: fd13612546e1417f9ac99bf362965f57, type: 2}
 --- !u!114 &8728785847432931263 stripped
 MonoBehaviour:
