@@ -39,7 +39,7 @@ public class PauseManager : MonoBehaviour
             if (isPaused)
             {
                 Cursor.visible = true;
-                Time.timeScale = 0f;
+                Time.timeScale = 0.01f;
                 pauseMenu.SetActive(true);
                 goalobjetive.SetActive(false);
                 
