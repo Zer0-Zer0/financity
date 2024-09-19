@@ -14,6 +14,9 @@ namespace UISystem
         [SerializeField] Text ObjectiveTextbox;
         [SerializeField] Image Checkbox;
 
+        [HideInInspector]
+        public bool completed = false;
+
         protected override void Setup() { }
 
         protected override void Configure()
@@ -24,6 +27,7 @@ namespace UISystem
 
         public void CompleteObjective()
         {
+            completed = true;
             Checkbox.gameObject.SetActive(true);
         }
 
