@@ -9,7 +9,7 @@ namespace UISystem
     {
         public CheckboxView[] Checkboxes;
         public float timeoutTime = 5f;
-
+        public UnityEvent OnCardDone = new UnityEvent();
         bool IsComplete = false;
 
         protected override void Setup() { }
@@ -29,6 +29,7 @@ namespace UISystem
         {
             IsComplete = true;
             yield return new WaitForSeconds(timeoutTime);
+            OnCardDone?.Invoke();
             gameObject.SetActive(false);
         }
 
