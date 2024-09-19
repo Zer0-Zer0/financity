@@ -8,7 +8,9 @@ public class PlayerEvents : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] List<AudioClip> Footsteps;
     [SerializeField] AudioSource audioSource;
-    public void IdlePlayer(){
+    [SerializeField] AudioClip Reload;
+    public void IdlePlayer()
+    {
         animator.SetBool("Run", false);
         animator.SetBool("Vault", false);
         animator.SetBool("RumJump", false);
@@ -18,8 +20,14 @@ public class PlayerEvents : MonoBehaviour
         animator.SetBool("Reload", false);
     }
 
-    public void PlayFootstepSound(){
-        AudioClip randomAudioClip = Footsteps[Random.Range(0,Footsteps.Count - 1)];
+    public void PlayFootstepSound()
+    {
+        AudioClip randomAudioClip = Footsteps[Random.Range(0, Footsteps.Count - 1)];
         audioSource.PlayOneShot(randomAudioClip);
+    }
+
+    public void PlayReloadSound()
+    {
+        audioSource.PlayOneShot(Reload);
     }
 }
