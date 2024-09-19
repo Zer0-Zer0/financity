@@ -53,10 +53,9 @@ public class Dialogo : MonoBehaviour
 
     public IEnumerator TypeLine()
     {
-        // Mostra a frase atual com efeito de digitação
-        yield return _textoDialogo.ShowText(frases[index]);
         if (index < _vozes.Length)
             SaidaVoz.PlayOneShot(_vozes[index]);
+        yield return _textoDialogo.ShowText(frases[index]);
         yield return Waiters.InputWaiter(_inputProximaFrase); // Espera pela entrada do usuário
         SaidaVoz.Stop();
         ProximaFrase(); // Avança para a próxima frase
