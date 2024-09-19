@@ -7,8 +7,8 @@ namespace UISystem
 {
     public class TutorialCardView : CustomUIComponent
     {
-        [SerializeField] CheckboxView[] Checkboxes;
-        [SerializeField] float timeoutTime = 5f;
+        public CheckboxView[] Checkboxes;
+        public float timeoutTime = 5f;
 
         bool IsComplete = false;
 
