@@ -28,7 +28,7 @@ namespace UISystem
         IEnumerator DisableAfterTimeout()
         {
             IsComplete = true;
-            yield return new WaitForSeconds(timeoutTime);
+            yield return new WaitForSecondsRealtime(timeoutTime);
             OnCardDone?.Invoke();
             gameObject.SetActive(false);
         }
