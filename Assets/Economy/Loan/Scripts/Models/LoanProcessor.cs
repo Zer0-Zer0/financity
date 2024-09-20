@@ -178,12 +178,12 @@ namespace Economy
         /// <returns>A new <see cref="LoanData"/> object with randomly generated principal, rate, installments, and type.</returns>
         public static LoanData GenerateRandomLoan(
             LoanType type,
-            float minPrincipal = 1000,
-            float maxPrincipal = 1500,
-            float minRate = 0.10f,
-            float maxRate = 0.30f,
-            int minInstallments = 4,
-            int maxInstallments = 7
+            float minPrincipal = 500,
+            float maxPrincipal = 750,
+            float minRate = 0.30f,
+            float maxRate = 0.60f,
+            int minInstallments = 3,
+            int maxInstallments = 4
         )
         {
             float principal = UnityEngine.Random.Range(minPrincipal, maxPrincipal);
