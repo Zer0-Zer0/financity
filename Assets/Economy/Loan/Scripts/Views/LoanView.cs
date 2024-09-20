@@ -25,8 +25,8 @@ namespace UISystem
         public void SetLoan(LoanData data)
         {
             string _formatedPrincipal = $"{FormatMoney(data.Principal)}";
-            string _formatedRate = $"{FormatPercentage(data.Rate)} ({FormatLoanType(data.LoanType)})";
-            string _formatedInstallments = $"{data.Installments}pçs";
+            string _formatedRate = $"{FormatPercentage(data.Rate)} a.d. ({FormatLoanType(data.LoanType)})";
+            string _formatedInstallments = $"{data.Installments} parcelas";
 
             _loanPrincipal.SetText(_formatedPrincipal);
             _loanRate.SetText(_formatedRate);
