@@ -8,7 +8,7 @@ public class MoveRawImage : MonoBehaviour
     public Vector3 endPosition;
     public float speed = 1f;
     public KeyCode activationKey = KeyCode.T;
-    //public MouseVisibilityToggle mouse;
+    public MouseVisibilityToggle mouse;
 
     private bool isMovingUp = false;
     private bool isMovingDown = true;

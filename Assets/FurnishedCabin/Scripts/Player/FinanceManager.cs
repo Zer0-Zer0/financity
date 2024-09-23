@@ -1,7 +1,7 @@
-/*using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
-public class FinanceManager : MonoBehaviour
+public class FinanceManager2 : MonoBehaviour
 {
     private float _currentBalance = 0f;
     private List<Transaction> transactions = new List<Transaction>();
@@ -56,4 +56,3 @@ public class FinanceManager : MonoBehaviour
         Credit
     }
 }
-*/

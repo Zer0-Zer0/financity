@@ -1,11 +1,11 @@
-/*using System;
+using System;
 using UnityEngine;
 
 public class CharacterDialogue : MonoBehaviour
 {
     public string characterName;
     public AudioClip[] audioClips;
-    public AudioSource secondAudioSource; 
+    public AudioSource secondAudioSource;
 
     public void Speak(int id)
     {
@@ -26,4 +26,4 @@ public class CharacterDialogue : MonoBehaviour
     {
         throw new NotImplementedException();
     }
-}*/
+}

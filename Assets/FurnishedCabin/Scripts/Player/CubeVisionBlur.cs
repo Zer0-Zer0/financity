@@ -46,7 +46,7 @@ public class CubeVisionBlur : MonoBehaviour
                     mapacam.gameObject.SetActive(true);
                     transição.StartFadeIn(0f);
                     player.position = new Vector3(6331.96f, 1.13f, -1892.36f);
-                    transição.StartCoroutine(DelayedFadeOut(4f, 3f));
+                    transição.StartCoroutine(DelayedFadeOut(6f, 3f));
                     tocasom.clip = cidadesound;
                     tocasom.Play();
                 }

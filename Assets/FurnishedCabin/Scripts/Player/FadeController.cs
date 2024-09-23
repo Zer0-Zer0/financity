@@ -11,14 +11,8 @@ public class FadeController : MonoBehaviour
 
     public PlayerMovement movimento;
 
-    public PostProcessVolume postProcessVolume;
-    private DepthOfField depthOfFieldLayer;
-    private Bloom bloomLayer;
-
     void Start()
     {
-        postProcessVolume.profile.TryGetSettings(out depthOfFieldLayer);
-        postProcessVolume.profile.TryGetSettings(out bloomLayer);
 
         fadeImageObject = new GameObject("FadeImage");
         fadeImageObject.transform.SetParent(transform, false);
@@ -68,8 +62,6 @@ public class FadeController : MonoBehaviour
 
     private IEnumerator FadeOut(float duration)
     {
-        depthOfFieldLayer.focusDistance.value = 4f;
-        bloomLayer.intensity.value = 5f;
         float elapsedTime = 0f;
         Color color = fadeImage.color;
         canvas.sortingOrder = 1000;
@@ -85,6 +77,7 @@ public class FadeController : MonoBehaviour
         color.a = 0f;
         fadeImage.color = color;
         movimento.move = true;
+        movimento.canMove = true;
         canvas.sortingOrder = -1;
         Destroy(fadeImageObject); 
     }

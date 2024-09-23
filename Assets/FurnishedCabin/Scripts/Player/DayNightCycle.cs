@@ -40,7 +40,7 @@ public class DayNightCycle : MonoBehaviour
 
     private List<InstallmentPayment> installmentPayments = new List<InstallmentPayment>();
 
-    //public MouseVisibilityToggle mouse;
+    public MouseVisibilityToggle mouse;
 
     void Start()
     {
@@ -231,7 +231,7 @@ public class DayNightCycle : MonoBehaviour
         );
 
         reportImage.gameObject.SetActive(true);
-        //mouse.ToggleMouse();
+        mouse.ToggleMouse();
     }
 
     public void HideReport()
@@ -243,7 +243,7 @@ public class DayNightCycle : MonoBehaviour
         reportImage.gameObject.SetActive(false);
         transactions.Clear();
         pendingBalanceChange = 0f;
-        //mouse.ToggleMouse();
+        mouse.ToggleMouse();
     }
 
     public void AddMoney(float amount)
