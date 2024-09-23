@@ -31,6 +31,7 @@ public class PlayerCollision : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
+        DataManager.ClearPlayerData();
         LoadingScreenEvent.Raise(this, null);
     }
 }
