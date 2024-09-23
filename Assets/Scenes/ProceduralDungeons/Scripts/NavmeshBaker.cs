@@ -49,7 +49,7 @@ public class NavmeshBaker : MonoBehaviour
 
     private IEnumerator BakeNavMeshAfterDelay(float time)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSecondsRealtime(time);
         BakeNavMesh();
         OnNavmeshBaked.Raise(this, null);
     }
