@@ -11,8 +11,12 @@ public class ContinuousSpawner : SpawnRandomLoot
 
     [SerializeField] Renderer renderReference;
     private bool isSpawning;
-    static protected int Amount;
+    static protected int Amount = 0;
     static protected int MaxAmount = 5;
+
+    protected override void OnEnable() {
+        enabled = false;
+    }
 
     void Update()
     {
