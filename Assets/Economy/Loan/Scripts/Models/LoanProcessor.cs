@@ -180,8 +180,8 @@ namespace Economy
             LoanType type,
             float minPrincipal = 500,
             float maxPrincipal = 750,
-            float minRate = 0.30f,
-            float maxRate = 0.60f,
+            float minRate = 0.60f,
+            float maxRate = 0.80f,
             int minInstallments = 3,
             int maxInstallments = 4
         )
