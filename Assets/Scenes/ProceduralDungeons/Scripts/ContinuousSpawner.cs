@@ -11,13 +11,23 @@ public class ContinuousSpawner : SpawnRandomLoot
 
     [SerializeField] Renderer renderReference;
     private bool isSpawning;
-
-    protected override void OnEnable() {}
+    static protected int Amount;
+    static protected int MaxAmount = 5;
 
     void Update()
     {
+        if (Amount >= MaxAmount)
+            return;
+
+        if (hasSpawned)
+        {
+            Amount++;
+            hasSpawned = false;
+        }
+
         if (isSpawning)
             return;
+
 
         StartCoroutine(TimedSpawn());
     }

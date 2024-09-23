@@ -6,7 +6,7 @@ public class SpawnRandomLoot : MonoBehaviour
 {
     [SerializeField] GameObject[] randomLoot;
     [SerializeField] [Range(0f, 100f)] float spawnChance = 50f;
-    private bool hasSpawned;
+    protected bool hasSpawned;
 
     protected virtual void OnEnable()
     {
