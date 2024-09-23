@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class PlayerSaver : MonoBehaviour
 {
-     Transform Player;
+    Transform Player;
     [SerializeField] Transform Spawnpoint;
-    void Start(){
+    void Start()
+    {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
     }
-    public void SavePlayer(){
+    public void SavePlayer()
+    {
         Player.position = Spawnpoint.position;
     }
 }
