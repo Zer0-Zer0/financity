@@ -54,8 +54,8 @@ MonoBehaviour:
   EventInvoked:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4035768291739750564}
-        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+      - m_Target: {fileID: 327468190566026924}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -95,8 +95,8 @@ MonoBehaviour:
   EventInvoked:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4035768291739750564}
-        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+      - m_Target: {fileID: 327468190566026924}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -409,16 +409,26 @@ PrefabInstance:
       propertyPath: fsm.states.Array.data[3].actionData.fsmOwnerDefaultParams.Array.data[0].gameObject.value
       value: 
       objectReference: {fileID: 2039205101505491160}
+    - target: {fileID: 8977294004799824328, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 2039205101505491160}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1526d1782af15240820c59803292bed, type: 3}
---- !u!143 &4035768291739750564 stripped
-CharacterController:
-  m_CorrespondingSourceObject: {fileID: 4620493252550016960, guid: f1526d1782af15240820c59803292bed, type: 3}
+--- !u!114 &327468190566026924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8977294004799824328, guid: f1526d1782af15240820c59803292bed, type: 3}
   m_PrefabInstance: {fileID: 8655539981185183588}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d567b54577e5dea3bce3c78632f4b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4092088999520723016 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4671537398491680556, guid: f1526d1782af15240820c59803292bed, type: 3}
