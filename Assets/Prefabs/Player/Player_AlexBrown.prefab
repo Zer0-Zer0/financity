@@ -9551,21 +9551,21 @@ MonoBehaviour:
         - 
         - 
         actionEnabled: 010101010101010101010101
-        actionIsOpen: 010101000001010000010101
+        actionIsOpen: 010001000001010000010101
         actionStartIndex: 00000000040000000b0000000e00000012000000180000001f000000280000002d00000032000000380000003b000000
         actionHashCodes: 34b46c04b691f7031012c10034b46c04f9cb7200fa0e5402f804e704b2cf1000b2cf1000dfd72a04bbee8e0333d61603
         unityObjectParams: []
         fsmGameObjectParams:
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: MainCamera
           tooltip: 
-          showInInspector: 0
+          showInInspector: 1
           networkSync: 0
           value: {fileID: 0}
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: NormalCameraPosition
           tooltip: 
-          showInInspector: 0
+          showInInspector: 1
           networkSync: 0
           value: {fileID: 0}
         fsmOwnerDefaultParams:
@@ -9579,10 +9579,10 @@ MonoBehaviour:
             value: {fileID: 0}
         - ownerOption: 1
           gameObject:
-            useVariable: 0
-            name: 
+            useVariable: 1
+            name: MainCamera
             tooltip: 
-            showInInspector: 0
+            showInInspector: 1
             networkSync: 0
             value: {fileID: 0}
         - ownerOption: 0
@@ -9662,13 +9662,13 @@ MonoBehaviour:
         - useVariable: 1
           name: Input mag
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: Input mag
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
@@ -9722,7 +9722,7 @@ MonoBehaviour:
         - useVariable: 1
           name: Input mag
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
@@ -9730,7 +9730,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 1
           networkSync: 0
-          value: 3
+          value: 2
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 1
@@ -9798,7 +9798,7 @@ MonoBehaviour:
         - useVariable: 1
           name: Input vector
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: {x: 0, y: 0, z: 0}
         - useVariable: 0
@@ -9806,11 +9806,11 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {x: -1.5384846e-10, y: -0.000000106316705, z: -0.00000021340139}
+          value: {x: 0, y: 0, z: 0}
         - useVariable: 1
           name: Input vector
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: {x: 0, y: 0, z: 0}
         - useVariable: 1
@@ -9983,21 +9983,21 @@ MonoBehaviour:
         - 
         - 
         actionEnabled: 01010101010101010101010101
-        actionIsOpen: 00000000000000000000010101
+        actionIsOpen: 01000000000000010000010101
         actionStartIndex: 00000000070000000a0000000e00000013000000180000001d000000260000002d00000032000000370000003d00000040000000
         actionHashCodes: b691f7031012c10034b46c045f9135045f9135045f913504f804e704fa0e5402b2cf1000b2cf1000dfd72a04bbee8e0333d61603
         unityObjectParams: []
         fsmGameObjectParams:
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: MainCamera
           tooltip: 
-          showInInspector: 0
+          showInInspector: 1
           networkSync: 0
           value: {fileID: 0}
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: NormalCameraPosition
           tooltip: 
-          showInInspector: 0
+          showInInspector: 1
           networkSync: 0
           value: {fileID: 0}
         fsmOwnerDefaultParams:
@@ -10035,10 +10035,10 @@ MonoBehaviour:
             value: {fileID: 0}
         - ownerOption: 1
           gameObject:
-            useVariable: 0
-            name: 
+            useVariable: 1
+            name: MainCamera
             tooltip: 
-            showInInspector: 0
+            showInInspector: 1
             networkSync: 0
             value: {fileID: 0}
         - ownerOption: 1
@@ -10122,7 +10122,7 @@ MonoBehaviour:
         - useVariable: 1
           name: Input mag
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 0
@@ -10170,7 +10170,7 @@ MonoBehaviour:
         - useVariable: 1
           name: Input mag
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
@@ -10178,7 +10178,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 1
           networkSync: 0
-          value: 6
+          value: 4
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 1
@@ -10258,13 +10258,13 @@ MonoBehaviour:
         - useVariable: 1
           name: Input vector
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: {x: 0, y: 0, z: 0}
         - useVariable: 1
           name: Input vector
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: {x: 0, y: 0, z: 0}
         - useVariable: 1
@@ -10278,7 +10278,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {x: -1.5384846e-10, y: -0.000000106316705, z: -0.00000021340139}
+          value: {x: 0, y: 0, z: 0}
         - useVariable: 1
           name: MoveVector3
           tooltip: 
@@ -10437,27 +10437,27 @@ MonoBehaviour:
         - 
         - 
         actionEnabled: 010101010101010101010101
-        actionIsOpen: 000000000000000000010101
+        actionIsOpen: 000100000000010000010101
         actionStartIndex: 00000000040000000b00000010000000160000001f000000260000002f00000034000000390000003f00000042000000
         actionHashCodes: 34b46c04b691f7035f913504f9cb7200f804e704fa0e54024e661301b2cf1000b2cf1000dfd72a04bbee8e0333d61603
         unityObjectParams: []
         fsmGameObjectParams:
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: MainCamera
           tooltip: 
-          showInInspector: 0
+          showInInspector: 1
           networkSync: 0
           value: {fileID: 0}
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: AimCameraPosition
           tooltip: 
-          showInInspector: 0
+          showInInspector: 1
           networkSync: 0
           value: {fileID: 0}
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: PlayerLookAtAim
           tooltip: 
-          showInInspector: 0
+          showInInspector: 1
           networkSync: 0
           value: {fileID: 0}
         fsmOwnerDefaultParams:
@@ -10487,10 +10487,10 @@ MonoBehaviour:
             value: {fileID: 0}
         - ownerOption: 1
           gameObject:
-            useVariable: 0
-            name: 
+            useVariable: 1
+            name: MainCamera
             tooltip: 
-            showInInspector: 0
+            showInInspector: 1
             networkSync: 0
             value: {fileID: 0}
         - ownerOption: 1
@@ -10570,13 +10570,13 @@ MonoBehaviour:
         - useVariable: 1
           name: Input mag
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: Input mag
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
@@ -10642,7 +10642,7 @@ MonoBehaviour:
         - useVariable: 1
           name: Input mag
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
@@ -10650,7 +10650,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 1
           networkSync: 0
-          value: 3
+          value: 2
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 1
@@ -10724,13 +10724,13 @@ MonoBehaviour:
         - useVariable: 1
           name: Input vector
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: {x: 0, y: 0, z: 0}
         - useVariable: 1
           name: Input vector
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: {x: 0, y: 0, z: 0}
         - useVariable: 1
@@ -10744,7 +10744,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {x: 0.000000029802322, y: 0.00000011274331, z: 0.00000027587458}
+          value: {x: 0, y: 0, z: 0}
         - useVariable: 1
           name: 
           tooltip: 
@@ -11124,27 +11124,27 @@ MonoBehaviour:
         - 
         - 
         actionEnabled: 01010101010101010101010101
-        actionIsOpen: 00000100000000000000010101
+        actionIsOpen: 00010100000101010000010101
         actionStartIndex: 00000000040000000b00000010000000160000001f000000260000002f000000380000003d00000042000000480000004b000000
         actionHashCodes: 34b46c04b691f7035f913504f9cb7200f804e704fa0e54024e6613014e661301b2cf1000b2cf1000dfd72a04bbee8e0333d61603
         unityObjectParams: []
         fsmGameObjectParams:
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: MainCamera
           tooltip: 
-          showInInspector: 0
+          showInInspector: 1
           networkSync: 0
           value: {fileID: 0}
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: AimCameraPosition
           tooltip: 
-          showInInspector: 0
+          showInInspector: 1
           networkSync: 0
           value: {fileID: 0}
-        - useVariable: 0
-          name: 
+        - useVariable: 1
+          name: PlayerLookAtAim
           tooltip: 
-          showInInspector: 0
+          showInInspector: 1
           networkSync: 0
           value: {fileID: 0}
         - useVariable: 0
@@ -11180,10 +11180,10 @@ MonoBehaviour:
             value: {fileID: 0}
         - ownerOption: 1
           gameObject:
-            useVariable: 0
-            name: 
+            useVariable: 1
+            name: MainCamera
             tooltip: 
-            showInInspector: 0
+            showInInspector: 1
             networkSync: 0
             value: {fileID: 0}
         - ownerOption: 1
@@ -11271,13 +11271,13 @@ MonoBehaviour:
         - useVariable: 1
           name: Input mag
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
           name: Input mag
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
@@ -11355,7 +11355,7 @@ MonoBehaviour:
         - useVariable: 1
           name: Input mag
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: 0
         - useVariable: 1
@@ -11363,7 +11363,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 1
           networkSync: 0
-          value: 3
+          value: 2
         fsmIntParams: []
         fsmBoolParams:
         - useVariable: 1
@@ -11449,13 +11449,13 @@ MonoBehaviour:
         - useVariable: 1
           name: Input vector
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: {x: 0, y: 0, z: 0}
         - useVariable: 1
           name: Input vector
           tooltip: 
-          showInInspector: 1
+          showInInspector: 0
           networkSync: 0
           value: {x: 0, y: 0, z: 0}
         - useVariable: 1
@@ -11469,26 +11469,26 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {x: 0.000000029802322, y: 0.00000011274331, z: 0.00000027587458}
-        - useVariable: 1
+          value: {x: 0, y: 0, z: 0}
+        - useVariable: 0
           name: 
           tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {x: 0, y: 0, z: 0}
-        - useVariable: 1
+        - useVariable: 0
           name: 
           tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {x: 0, y: 0, z: 0}
-        - useVariable: 1
+        - useVariable: 0
           name: 
           tooltip: 
           showInInspector: 0
           networkSync: 0
           value: {x: 0, y: 0, z: 0}
-        - useVariable: 1
+        - useVariable: 0
           name: 
           tooltip: 
           showInInspector: 0
@@ -11903,7 +11903,7 @@ MonoBehaviour:
       - useVariable: 1
         name: Input mag
         tooltip: 
-        showInInspector: 1
+        showInInspector: 0
         networkSync: 0
         value: 0
       - useVariable: 1
@@ -11911,13 +11911,13 @@ MonoBehaviour:
         tooltip: 
         showInInspector: 1
         networkSync: 0
-        value: 6
+        value: 4
       - useVariable: 1
         name: WalkSpeed
         tooltip: 
         showInInspector: 1
         networkSync: 0
-        value: 3
+        value: 2
       intVariables: []
       boolVariables:
       - useVariable: 1
@@ -11932,7 +11932,7 @@ MonoBehaviour:
       - useVariable: 1
         name: Input vector
         tooltip: 
-        showInInspector: 1
+        showInInspector: 0
         networkSync: 0
         value: {x: 0, y: 0, z: 0}
       - useVariable: 1
@@ -11946,7 +11946,25 @@ MonoBehaviour:
       quaternionVariables: []
       gameObjectVariables:
       - useVariable: 1
+        name: AimCameraPosition
+        tooltip: 
+        showInInspector: 1
+        networkSync: 0
+        value: {fileID: 0}
+      - useVariable: 1
         name: MainCamera
+        tooltip: 
+        showInInspector: 1
+        networkSync: 0
+        value: {fileID: 0}
+      - useVariable: 1
+        name: NormalCameraPosition
+        tooltip: 
+        showInInspector: 1
+        networkSync: 0
+        value: {fileID: 0}
+      - useVariable: 1
+        name: PlayerLookAtAim
         tooltip: 
         showInInspector: 1
         networkSync: 0
@@ -11958,7 +11976,7 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs: 00000000000000000000000000000000000000000000000000000000
+      variableCategoryIDs: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
     description: 
     docUrl: 
     showStateLabel: 0
