@@ -7,7 +7,7 @@ public class RumJump : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.Space))
         {
            heroiAnim.SetBool("RumJump", true);
         }
