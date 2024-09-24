@@ -54,18 +54,6 @@ MonoBehaviour:
   EventInvoked:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2577565079434501595}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_applyRootMotion
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 4035768291739750564}
         m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
         m_MethodName: set_enabled
@@ -107,18 +95,6 @@ MonoBehaviour:
   EventInvoked:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2577565079434501595}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: set_applyRootMotion
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 4035768291739750564}
         m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
         m_MethodName: set_enabled
@@ -144,7 +120,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 4092088999520723016}
-        m_TargetAssemblyTypeName: StopPlayer, Assembly-CSharp
+        m_TargetAssemblyTypeName: PlayerEvents, Assembly-CSharp
         m_MethodName: IdlePlayer
         m_Mode: 1
         m_Arguments:
@@ -222,6 +198,10 @@ PrefabInstance:
     - target: {fileID: 97810657821862858, guid: 66f3808da4ce5c04a92fdd25b945d66b, type: 3}
       propertyPath: m_Name
       value: CamBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 6763301003901109351, guid: 66f3808da4ce5c04a92fdd25b945d66b, type: 3}
+      propertyPath: fsm.preprocessed
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6763301003901109351, guid: 66f3808da4ce5c04a92fdd25b945d66b, type: 3}
       propertyPath: fsm.variables.gameObjectVariables.Array.data[0].value
@@ -354,6 +334,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.preprocessed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913993267220918150, guid: f1526d1782af15240820c59803292bed, type: 3}
       propertyPath: fsm.variables.gameObjectVariables.Array.data[0].value
       value: 
       objectReference: {fileID: 5496303073109090764}
@@ -429,6 +413,14 @@ PrefabInstance:
       propertyPath: fsm.states.Array.data[5].actionData.fsmOwnerDefaultParams.Array.data[5].gameObject.value
       value: 
       objectReference: {fileID: 2039205101505491160}
+    - target: {fileID: 7489898415797956910, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.preprocessed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8187579586731555466, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.preprocessed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8187579586731555466, guid: f1526d1782af15240820c59803292bed, type: 3}
       propertyPath: fsm.variables.gameObjectVariables.Array.data[2].value
       value: 
@@ -437,16 +429,15 @@ PrefabInstance:
       propertyPath: fsm.states.Array.data[3].actionData.fsmOwnerDefaultParams.Array.data[0].gameObject.value
       value: 
       objectReference: {fileID: 2039205101505491160}
+    - target: {fileID: 9058844327998133309, guid: f1526d1782af15240820c59803292bed, type: 3}
+      propertyPath: fsm.preprocessed
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1526d1782af15240820c59803292bed, type: 3}
---- !u!95 &2577565079434501595 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6619163389755060927, guid: f1526d1782af15240820c59803292bed, type: 3}
-  m_PrefabInstance: {fileID: 8655539981185183588}
-  m_PrefabAsset: {fileID: 0}
 --- !u!143 &4035768291739750564 stripped
 CharacterController:
   m_CorrespondingSourceObject: {fileID: 4620493252550016960, guid: f1526d1782af15240820c59803292bed, type: 3}
