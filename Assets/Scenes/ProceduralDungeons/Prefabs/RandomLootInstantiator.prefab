@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3936715770421305564}
   - component: {fileID: 4667556628499104450}
+  - component: {fileID: 1219460518772602388}
   m_Layer: 0
   m_Name: RandomLootInstantiator
   m_TagString: Untagged
@@ -39,7 +40,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5500910510985823633}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4df3acf65ce01b4bb334b37078bfaa3, type: 3}
   m_Name: 
@@ -52,3 +53,31 @@ MonoBehaviour:
   - {fileID: 7766634689671769798, guid: c40fc33156af87951906f7a49279b1a1, type: 3}
   - {fileID: 7480473517899681680, guid: af81bcec55d0ce243b9cd8616682854c, type: 3}
   spawnChance: 43.6
+--- !u!114 &1219460518772602388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5500910510985823633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dab21459fa7fe24cbc5e518fccff56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 6133cc99962083932af039cebb5064d4, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4667556628499104450}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
